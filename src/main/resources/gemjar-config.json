@@ -1,0 +1,16 @@
+{
+  "environment": "beta",
+  "project_name": "MIS_API",
+  "report_name": "ATS_API_Report",
+  "sub_id": "test_id",
+  "enter_point": "https://apis.gemecosystem.com/enter-point",
+  "jewel_user": "cgarg",
+  "jewel_bridge_token": "ecdd02db-4906-4514-aefc-a76e73aa532e1677670397883",
+  "glueCode": "com.qa.mis.stepdefinition",
+  "email_report": null,
+  "email_to": "",
+  "email_cc": "",
+  "beta": {
+
+  }
+}
