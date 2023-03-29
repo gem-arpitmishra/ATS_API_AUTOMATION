@@ -1,6 +1,6 @@
 {
   "environment": "beta",
-  "project_name": "MIS_API",
+  "project_name": "ATS_API",
   "report_name": "ATS_API_Report",
   "sub_id": "test_id",
   "enter_point": "https://apis.gemecosystem.com/enter-point",
@@ -11,6 +11,26 @@
   "email_to": "",
   "email_cc": "",
   "beta": {
+    "GetConstants": "atsJobSvc/job/all-constants",
+    "GetAllJobDetails":"atsJobSvc/job/all-job-details",
+    "FetchJobUsingSearchKeyword":"atsJobSvc/job/all-job-details/1/1/Developer",
+    "FetchJobDetails":"atsJobSvc/job/all-job-details/1/1",
+    "FetchJobUsingJobID":"atsJobSvc/job/by-job-id/192",
+    "FetchRecruiterDetailsUsingJobID":"atsJobSvc/job/emp-by-job-id/192",
+
+    "FetchApplicantUsingFilters": "atsApplicantSvc/applicant/pageNumber/1/pageSize/10?status=active&currentStageId=&jobId=102&experience=&recruiterPoc=",
+    "FetchApplicantWithId": "atsApplicantSvc/applicant/1731",
+    "FetchCurrentStageOfApplicant": "atsApplicantSvc/applicant/1731/current-stage",
+    "FetchApplicantOnSearchUsingPagesize": "atsApplicantSvc/applicant/search/Tripta/pageNumber/1/pageSize/1",
+    "FetchApplicantOnSearch":"atsApplicantSvc/applicant/search/Tripta",
+    "FetchResumeUsingApplicantId": "atsApplicantSvc/applicant/resume/1608",
+    "FetchApplicantPersonalDetails": "atsApplicantSvc/applicant/personal-detail/1608",
+    "FetchApplicantNotAlignedToJob": "atsApplicantSvc/applicant/notAlignedToJob",
+    "FetchJobOfApplicant": "atsApplicantSvc/applicant/job/1608",
+    "FetchListOfHR": "atsApplicantSvc/applicant/getHrSpoc",
+    "FetchApplicantConstants": "atsApplicantSvc/applicant/constants",
+    "FetchAllApplicantWithPaging": "atsApplicantSvc/applicant/pageNumber/1/pageSize/10?status=active&currentStageId=&jobId=102&experience=&recruiterPoc="
+
 
   }
 }

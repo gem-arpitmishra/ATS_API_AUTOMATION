@@ -19,6 +19,7 @@ public class Utils {
         try {
             Request request = new Request();
             String url = ProjectConfigData.getProperty(UrlNameFromConfig);
+            url = GlobalVariable.BASE_URL + url;
             System.out.println("URL - " + url);
             GemTestReporter.addTestStep("Url for " + method.toUpperCase() + " Request", url, STATUS.INFO);
             request.setURL(url);
