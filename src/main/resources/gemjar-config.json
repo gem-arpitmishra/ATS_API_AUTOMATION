@@ -28,8 +28,16 @@
     "getFeedbackListOnBasisOfDays": "atsInterviewSvc/feedback/3",
      "getListOfJobsAlongWithTheApplicantMappedToEachJobAndTheInterviewAlignedForThem": "atsDashboardSvc/dashboard",
     "getYearlyReportOfJobCount/ApplicantCount/OfferedCandidateCount": "atsDashboardSvc/dashboard/yearlyReport/2023",
-    "getNumberOfApplicantsBasedOnStage": "atsDashboardSvc/dashboard/applicantBasedOnStage"
-
+    "getNumberOfApplicantsBasedOnStage": "atsDashboardSvc/dashboard/applicantBasedOnStage",
+    "addNewInterview": "atsInterviewSvc/interview",
+    "sendFeedbackReminderToAll" : "atsInterviewSvc/interview/feedbackReminderToAll",
+    "sendFeedbackReminderBasedOnInterviewId" : "atsInterviewSvc/interview/feedbackReminder/168",
+    "sendManagementApprovalEmailWithCC": "atsInterviewSvc/interview/managementApproval/1215/nipun0499@gmail.com/tripta.sahni@geminisolutions.com,/Hi%20Nipun0499@gmail,%20Please%20review%20cumulative%20feedback%20of%20Applicant",
+    "sendManagementApprovalEmailWithoutCC": "atsInterviewSvc/interview/managementApproval/1215/nipun0499@gmail.com/Hi%20Nipun0499@gmail,%20Please%20review%20cumulative%20feedback%20of%20Applicant",
+    "deleteAnInterview":"atsInterviewSvc/interview/226",
+    "updateAnInterview": "atsInterviewSvc/interview" ,
+    "addNewFeedback" : "atsInterviewSvc/feedback",
+    "deleteFeedback": "atsInterviewSvc/feedback/222"
 
   }
 }
