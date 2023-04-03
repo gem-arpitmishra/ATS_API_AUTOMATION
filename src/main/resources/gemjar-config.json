@@ -6,7 +6,7 @@
   "enter_point": "https://apis.gemecosystem.com/enter-point",
   "jewel_user": "cgarg",
   "jewel_bridge_token": "ecdd02db-4906-4514-aefc-a76e73aa532e1677670397883",
-  "glueCode": "com.qa.mis.stepdefinition",
+  "glueCode": "com.qa.ats.stepdefinition",
   "email_report": null,
   "email_to": "",
   "email_cc": "",
@@ -17,7 +17,6 @@
     "FetchJobDetails":"atsJobSvc/job/all-job-details/1/1",
     "FetchJobUsingJobID":"atsJobSvc/job/by-job-id/192",
     "FetchRecruiterDetailsUsingJobID":"atsJobSvc/job/emp-by-job-id/192",
-
     "FetchApplicantUsingFilters": "atsApplicantSvc/applicant/pageNumber/1/pageSize/10?status=active&currentStageId=&jobId=102&experience=&recruiterPoc=",
     "FetchApplicantWithId": "atsApplicantSvc/applicant/1731",
     "FetchCurrentStageOfApplicant": "atsApplicantSvc/applicant/1731/current-stage",
@@ -29,8 +28,33 @@
     "FetchJobOfApplicant": "atsApplicantSvc/applicant/job/1608",
     "FetchListOfHR": "atsApplicantSvc/applicant/getHrSpoc",
     "FetchApplicantConstants": "atsApplicantSvc/applicant/constants",
-    "FetchAllApplicantWithPaging": "atsApplicantSvc/applicant/pageNumber/1/pageSize/10?status=active&currentStageId=&jobId=102&experience=&recruiterPoc="
-
-
+    "FetchAllApplicantWithPaging": "atsApplicantSvc/applicant/pageNumber/1/pageSize/10?status=active&currentStageId=&jobId=102&experience=&recruiterPoc=",
+    "getAllInterviews": "atsInterviewSvc/interview",
+    "interviewsForAParticularJob" : "atsInterviewSvc/interview/job/143",
+    "getAllEmployeesWhoCanBeAttendeeOrInterviewerForAnInterview" : "atsInterviewSvc/interview/employee",
+    "apiToGetInterviewByInterviewId": "atsInterviewSvc/interview/by-id/123",
+    "getInterviewsOnAParticularDate": "atsInterviewSvc/interview/by-date?date=2023-03-25",
+    "getAllInterviewsOfAnApplicantOnBasisOfApplicantId" : "atsInterviewSvc/interview/applicant/1725",
+    "getListOfAllInterviewsOnTheBasisOfDays": "atsInterviewSvc/interview/1/8/2",
+    "getListOfAllInterviews": "atsInterviewSvc/interview/1/8",
+    "getFeedbackForAllInterviewsForAInterview ": "",
+    "getListOfAllInterviewsOnTheBasisOfSearchedText": "atsInterviewSvc/interview/1/8/search/143",
+    "getFeedbackList" : "atsInterviewSvc/feedback",
+    "getFeedbackForAllInterviewsForAJob": "atsInterviewSvc/feedback/job/334",
+    "getFeedbackOfAnInterview": "atsInterviewSvc/feedback/by-id/65",
+    "getFeedbackListOfAllInterviewsOfAnApplicant": "atsInterviewSvc/feedback/applicant/1724",
+    "getFeedbackListOnBasisOfDays": "atsInterviewSvc/feedback/3",
+     "getListOfJobsAlongWithTheApplicantMappedAndInterview": "atsDashboardSvc/dashboard",
+    "getYearlyReportOfJobCount/ApplicantCount/OfferedCandidateCount": "atsDashboardSvc/dashboard/yearlyReport/2023",
+    "getNumberOfApplicantsBasedOnStage": "atsDashboardSvc/dashboard/applicantBasedOnStage",
+    "addNewInterview": "atsInterviewSvc/interview",
+    "sendFeedbackReminderToAll" : "atsInterviewSvc/interview/feedbackReminderToAll",
+    "sendFeedbackReminderBasedOnInterviewId" : "atsInterviewSvc/interview/feedbackReminder/168",
+    "sendManagementApprovalEmailWithCC": "atsInterviewSvc/interview/managementApproval/1215/nipun0499@gmail.com/tripta.sahni@geminisolutions.com,/Hi%20Nipun0499@gmail,%20Please%20review%20cumulative%20feedback%20of%20Applicant",
+    "sendManagementApprovalEmailWithoutCC": "atsInterviewSvc/interview/managementApproval/1215/nipun0499@gmail.com/Hi%20Nipun0499@gmail,%20Please%20review%20cumulative%20feedback%20of%20Applicant",
+    "deleteAnInterview":"atsInterviewSvc/interview/226",
+    "updateAnInterview": "atsInterviewSvc/interview" ,
+    "addNewFeedback" : "atsInterviewSvc/feedback",
+    "deleteFeedback": "atsInterviewSvc/feedback/222"
   }
 }
