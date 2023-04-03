@@ -6,7 +6,7 @@
   "enter_point": "https://apis.gemecosystem.com/enter-point",
   "jewel_user": "cgarg",
   "jewel_bridge_token": "ecdd02db-4906-4514-aefc-a76e73aa532e1677670397883",
-  "glueCode": "com.qa.mis.stepdefinition",
+  "glueCode": "com.qa.ats.stepdefinition",
   "email_report": null,
   "email_to": "",
   "email_cc": "",
@@ -26,7 +26,7 @@
     "getFeedbackOfAnInterview": "atsInterviewSvc/feedback/by-id/65",
     "getFeedbackListOfAllInterviewsOfAnApplicant": "atsInterviewSvc/feedback/applicant/1724",
     "getFeedbackListOnBasisOfDays": "atsInterviewSvc/feedback/3",
-     "getListOfJobsAlongWithTheApplicantMappedToEachJobAndTheInterviewAlignedForThem": "atsDashboardSvc/dashboard",
+     "getListOfJobsAlongWithTheApplicantMappedAndInterview": "atsDashboardSvc/dashboard",
     "getYearlyReportOfJobCount/ApplicantCount/OfferedCandidateCount": "atsDashboardSvc/dashboard/yearlyReport/2023",
     "getNumberOfApplicantsBasedOnStage": "atsDashboardSvc/dashboard/applicantBasedOnStage",
     "addNewInterview": "atsInterviewSvc/interview",
@@ -38,6 +38,7 @@
     "updateAnInterview": "atsInterviewSvc/interview" ,
     "addNewFeedback" : "atsInterviewSvc/feedback",
     "deleteFeedback": "atsInterviewSvc/feedback/222"
+
 
   }
 }

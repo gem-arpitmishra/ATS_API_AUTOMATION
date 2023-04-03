@@ -1,4 +1,4 @@
-package com.qa.ats.stepDefinition;
+package com.qa.ats.stepdefinition;
 
 import com.gemini.generic.reporting.GemTestReporter;
 import com.gemini.generic.reporting.STATUS;
@@ -8,13 +8,12 @@ import io.cucumber.java.en.Then;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import java.sql.DriverAction;
 import java.util.HashMap;
 
 public class InterviewStep {
     int status = 0;
 Logger logger = LoggerFactory.getLogger(InterviewStep.class);
-    @Given("^Set the Interview endpoint {string} and method {string}$")
+    @Given("^Set the Interview endpoint (.+) and method (.+)$")
     public void setThePolicyEndpointAndMethod(String url, String method) {
         HashMap<String, String> token = new HashMap<String, String>();
         token.put("X-REMOTE-USER-EMAIL", "tripta.sahni@geminisolutions.com");
@@ -28,13 +27,13 @@ Logger logger = LoggerFactory.getLogger(InterviewStep.class);
         }
     }
 
-    @Then("^Verify Interview status code {int}$")
+    @Then("^Verify Interview status code (.+)$")
     public void verifyPolicyStatusCodeExpectedStatus(Integer Expected)
     {
         Utils.VerifyStatusCode(Expected, status);
     }
 
-    @Given("^Set the Interview endpoint {string} , method {string} and payload {string}$")
+    @Given("^Set the Interview endpoint (.+) , method (.+) and payload (.+)$")
     public void setTheEndpointMethodAndPayload(String url , String method , String payload)
     {
         HashMap<String, String> token = new HashMap<String, String>();

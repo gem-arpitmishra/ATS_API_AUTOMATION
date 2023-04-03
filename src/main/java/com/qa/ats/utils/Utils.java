@@ -31,7 +31,6 @@ public class Utils {
             if (!step.isEmpty()) {
                 request.setStep(step);
             }
-
             response = ApiInvocation.handleRequest(request);
 //            GemTestReporter.addTestStep(method.toUpperCase() + " Request Verification ", method.toUpperCase() + " Request Executed Successfully", STATUS.PASS);
             GemTestReporter.addTestStep("Response Message", response.getResponseMessage(), STATUS.INFO);

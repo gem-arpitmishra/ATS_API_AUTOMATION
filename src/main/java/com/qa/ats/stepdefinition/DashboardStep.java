@@ -1,4 +1,4 @@
-package com.qa.ats.stepDefinition;
+package com.qa.ats.stepdefinition;
 
 import com.gemini.generic.reporting.GemTestReporter;
 import com.gemini.generic.reporting.STATUS;
@@ -13,7 +13,7 @@ import java.util.HashMap;
 public class DashboardStep {
     int status = 0;
     Logger logger = LoggerFactory.getLogger(InterviewStep.class);
-    @Given("^Set the Dashboard endpoint {string} and method {string}$")
+    @Given("^Set the Dashboard endpoint (.+) and method (.+)$")
     public void setThePolicyEndpointAndMethod(String url, String method) {
         HashMap<String, String> token = new HashMap<String, String>();
         token.put("X-REMOTE-USER-EMAIL", "tripta.sahni@geminisolutions.com");
@@ -27,12 +27,12 @@ public class DashboardStep {
         }
     }
 
-    @Then("^Verify Dashboard status code {int}$")
+    @Then("^Verify Dashboard status code (.+)$")
     public void verifyPolicyStatusCodeExpectedStatus(Integer Expected) {
         Utils.VerifyStatusCode(Expected, status);
     }
 
-    @Given("^Set the Dashboard endpoint {string} , method {string} and payload {string}$")
+    @Given("^Set the Dashboard endpoint (.+) , method (.+) and payload (.+)$")
     public void setTheEndpointMethodAndPayload(String url , String method , String payload)
     {
         HashMap<String, String> token = new HashMap<String, String>();
