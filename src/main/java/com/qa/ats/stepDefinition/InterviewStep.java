@@ -28,13 +28,13 @@ Logger logger = LoggerFactory.getLogger(InterviewStep.class);
         }
     }
 
-    @Then("Verify Interview status code {int}")
+    @Then("^Verify Interview status code {int}$")
     public void verifyPolicyStatusCodeExpectedStatus(Integer Expected)
     {
         Utils.VerifyStatusCode(Expected, status);
     }
 
-    @Given("Set the Interview endpoint {string} , method {string} and payload {string}")
+    @Given("^Set the Interview endpoint {string} , method {string} and payload {string}$")
     public void setTheEndpointMethodAndPayload(String url , String method , String payload)
     {
         HashMap<String, String> token = new HashMap<String, String>();
