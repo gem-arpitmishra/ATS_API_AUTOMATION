@@ -1,4 +1,4 @@
-package com.qa.ats.stepdefinition;
+package com.qa.ats.stepDefinition;
 
 import com.qa.ats.utils.Utils;
 import io.cucumber.java.en.Given;

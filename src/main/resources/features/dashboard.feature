@@ -1,6 +1,6 @@
 Feature: Dashboard
 
-  Scenario Outline: API to get List Of Dashboards Along With The Applicant Mapped To Each Dashboard And The Interview Aligned For Them
+  Scenario Outline: ATS, API to get List Of Dashboards Along With The Applicant Mapped To Each Dashboard And The Interview Aligned For Them
     Given Set the Dashboard endpoint "<endpoint>" and method "<method>"
     Then Verify Dashboard status code <expectedStatus>
     Examples:
