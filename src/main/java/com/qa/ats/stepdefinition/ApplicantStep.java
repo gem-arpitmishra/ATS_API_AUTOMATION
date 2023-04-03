@@ -1,28 +1,42 @@
 package com.qa.ats.stepdefinition;
 
+import com.gemini.generic.reporting.GemTestReporter;
+import com.gemini.generic.reporting.STATUS;
 import com.qa.ats.utils.Utils;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.util.HashMap;
 
 public class ApplicantStep {
     int status = 0;
+    Logger logger = LoggerFactory.getLogger(ApplicantStep.class);
 
+    //setting the endpoint and method for API
     @Given("Set the Applicant endpoint {string} and method {string}")
     public void setThePolicyEndpointAndMethod(String url, String method) {
         HashMap<String, String> token = new HashMap<String, String>();
-        //token.put("X-REMOTE-USER-EMAIL", "saru.goyal@geminisolutions.com");
         try {
-            status = Utils.APIwithoutPayloads(url, method, token, "").getStatus();
-        } catch (Exception e) {
-            throw new RuntimeException(e);
+            status = Utils.apiWithoutPayloads(url, method, token, "").getStatus();
+            GemTestReporter.addTestStep("Hit API", "User not able to hit the API", STATUS.PASS);
+        } catch (Exception exception) {
+            logger.info("Error - User not able to hit the API", exception);
+            GemTestReporter.addTestStep("Hit API", "User not able to hit the API", STATUS.FAIL);
         }
     }
 
+    //Verify the status
     @Then("Verify Applicant status code {int}")
     public void verifyPolicyStatusCodeExpectedStatus(Integer Expected) {
-        Utils.VerifyStatusCode(Expected, status);
+        try {
+            Utils.verifyStatusCode(Expected, status);
+            GemTestReporter.addTestStep("Status Check", "Verify the API status", STATUS.PASS);
+        } catch (Exception exception) {
+            logger.info("User not able verify thr API status", exception);
+            GemTestReporter.addTestStep("Status Check", "User not able verify thr API status", STATUS.FAIL);
+        }
     }
 
 }

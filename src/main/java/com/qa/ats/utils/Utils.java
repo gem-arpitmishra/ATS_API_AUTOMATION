@@ -7,14 +7,22 @@ import com.gemini.generic.api.utils.Response;
 import com.gemini.generic.reporting.GemTestReporter;
 import com.gemini.generic.reporting.STATUS;
 import com.gemini.generic.utils.ProjectConfigData;
-import org.apache.http.HttpStatus;
 
 import java.util.Map;
 
 public class Utils {
 
+    // check the response
+    public static void responseCheck(Response response) {
+        if ((response.getResponseBody()) != null) {
+            GemTestReporter.addTestStep("Response Body", response.getResponseBody(), STATUS.INFO);
+        } else {
+            GemTestReporter.addTestStep("Response Body", "No-Response", STATUS.INFO);
+        }
+    }
 
-    public static Response APIwithoutPayloads(String UrlNameFromConfig, String method, Map<String, String> headers, String step) throws Exception {
+    //send API without Payload
+    public static Response apiWithoutPayloads(String UrlNameFromConfig, String method, Map<String, String> headers, String step) throws Exception {
         Response response = new Response();
         try {
             Request request = new Request();
@@ -30,15 +38,9 @@ public class Utils {
             if (!step.isEmpty()) {
                 request.setStep(step);
             }
-
             response = ApiInvocation.handleRequest(request);
-//            GemTestReporter.addTestStep(method.toUpperCase() + " Request Verification ", method.toUpperCase() + " Request Executed Successfully", STATUS.PASS);
             GemTestReporter.addTestStep("Response Message", response.getResponseMessage(), STATUS.INFO);
-            if ((response.getResponseBody()) != null) {
-                GemTestReporter.addTestStep("Response Body", response.getResponseBody(), STATUS.INFO);
-            } else {
-                GemTestReporter.addTestStep("Response Body", "No-Response", STATUS.INFO);
-            }
+            responseCheck(response);
         } catch (Exception e) {
             GemTestReporter.addTestStep(method.toUpperCase() + " Request Verification ", method.toUpperCase() + " Request Did not Executed Successfully", STATUS.FAIL);
             GemTestReporter.addTestStep("Response Message", response.getResponseMessage(), STATUS.INFO);
@@ -46,7 +48,8 @@ public class Utils {
         return response;
     }
 
-    public static void VerifyStatusCode(int expected, int actual) {
+    //Verify status code
+    public static void verifyStatusCode(int expected, int actual) {
         if (expected == actual) {
             GemTestReporter.addTestStep("Status Verification", "Expected Status :" + expected + ",<br>Actual :" + actual, STATUS.PASS);
         } else {
@@ -54,7 +57,8 @@ public class Utils {
         }
     }
 
-    public static Response APIwithPayloads(String UrlNameFromConfig, String method, String payloadName, Map<String, String> headers, String step) throws Exception {
+    //send API with Payload
+    public static Response apiWithPayloads(String UrlNameFromConfig, String method, String payloadName, Map<String, String> headers, String step) throws Exception {
         Response response = new Response();
         try {
             Request request = new Request();
@@ -71,13 +75,8 @@ public class Utils {
             String payload = ProjectSampleJson.getSampleDataString(payloadName);
             request.setRequestPayload(payload);
             response = ApiInvocation.handleRequest(request);
-            // GemTestReporter.addTestStep(method.toUpperCase() + " Request Verification ", method.toUpperCase() + " Request Executed Successfully", STATUS.PASS);
             GemTestReporter.addTestStep("Response Message", response.getResponseMessage(), STATUS.INFO);
-            if ((response.getResponseBody()) != null) {
-                GemTestReporter.addTestStep("Response Body", response.getResponseBody(), STATUS.INFO);
-            } else {
-                GemTestReporter.addTestStep("Response Body", "No-Response", STATUS.INFO);
-            }
+            responseCheck(response);
         } catch (Exception e) {
             GemTestReporter.addTestStep(method.toUpperCase() + " Request Verification ", method.toUpperCase() + " Request Did not Executed Successfully", STATUS.FAIL);
             GemTestReporter.addTestStep("Response Message", response.getResponseMessage(), STATUS.INFO);
