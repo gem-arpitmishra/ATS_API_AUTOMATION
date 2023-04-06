@@ -1,16 +1,14 @@
 {
-  "interviewId": 224,
   "interviewType": "Telephonic",
-  "interviewerEmail": "nipun.jain@geminisolutions.com",
+  "interviewerEmail": "ankita.srivastava@geminisolutions.com",
   "attendees": [
     {
       "empCode": "GSI G 1290",
       "email": "saksham.khanna@geminisolutions.com"
     }
   ],
-  "applicantId": 1744,
-  "startTime": "2023-04-30T14:05:00.000+00:00",
-  "endTime": "2023-04-30T14:50:00.000+00:00",
+  "startTime": "2023-04-06T08:53:00.000+00:00",
+  "endTime": "2023-04-06T09:38:00.000+00:00",
   "resumeLink": "test11",
   "title": "test",
   "additionalDetails": "test1",

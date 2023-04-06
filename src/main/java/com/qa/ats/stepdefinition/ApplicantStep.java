@@ -8,6 +8,9 @@ import io.cucumber.java.en.Then;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+
+import java.util.HashMap;
+
 public class ApplicantStep {
     int status = 0;
     Logger logger = LoggerFactory.getLogger(ApplicantStep.class);
@@ -31,6 +34,18 @@ public class ApplicantStep {
         } catch (Exception exception) {
             logger.info("User not able verify thr API status", exception);
             GemTestReporter.addTestStep("Status Check", "User not able verify thr API status", STATUS.FAIL);
+        }
+    }
+
+    @Given("^Set the Applicant endpoint (\\w*) and method (\\w*) with header and stage (\\w*)$")
+    public void setTheApplicantEndpointEndpointAndMethodMethodWithHeader(String url,String method,String stage) {
+        HashMap<String, String> header = new HashMap<String, String>();
+        header.put("X-REMOTE-USER-EMAIL", "saru.goyal@geminisolutions.com");
+        try {
+            status = Utils.apiForUpdatingApplicantStage(url, method, header, stage,"").getStatus();
+        } catch (Exception exception) {
+            logger.info("Error - User not able to hit the API", exception);
+            GemTestReporter.addTestStep("Hit API", "User not able to hit the API", STATUS.FAIL);
         }
     }
 
