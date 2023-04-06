@@ -13,38 +13,25 @@ import java.util.HashMap;
 public class DashboardStep {
     int status = 0;
     Logger logger = LoggerFactory.getLogger(InterviewStep.class);
+
     @Given("^Set the Dashboard endpoint (.+) and method (.+)$")
     public void setThePolicyEndpointAndMethod(String url, String method) {
         HashMap<String, String> token = new HashMap<String, String>();
         token.put("X-REMOTE-USER-EMAIL", "tripta.sahni@geminisolutions.com");
-        token.put("X-REMOTE-USER-OBJECT-ID","24431885-d574-445a-b66e-42271b7ad459");
+        token.put("X-REMOTE-USER-OBJECT-ID", "24431885-d574-445a-b66e-42271b7ad459");
         try {
-            status = Utils.APIwithoutPayloads(url, method, token, "").getStatus();
-            GemTestReporter.addTestStep("Hit the "+url,"API was successfully triggered", STATUS.PASS);
+            status = Utils.apiWithoutPayloads(url, method, token, "").getStatus();
+            GemTestReporter.addTestStep("Hit the " + url, "API was  triggered", STATUS.INFO);
         } catch (Exception e) {
-            logger.info("API was not hit successfully",e);
-            GemTestReporter.addTestStep("Hit the "+url,"API was not successfully triggered", STATUS.FAIL);
+            logger.info("API was not hit successfully", e);
+            GemTestReporter.addTestStep("Hit the " + url, "API was not successfully triggered", STATUS.FAIL);
         }
     }
+
 
     @Then("^Verify Dashboard status code (.+)$")
     public void verifyPolicyStatusCodeExpectedStatus(Integer Expected) {
-        Utils.VerifyStatusCode(Expected, status);
+        Utils.verifyStatusCode(Expected, status);
     }
-
-    @Given("^Set the Dashboard endpoint (.+) , method (.+) and payload (.+)$")
-    public void setTheEndpointMethodAndPayload(String url , String method , String payload)
-    {
-        HashMap<String, String> token = new HashMap<String, String>();
-        token.put("X-REMOTE-USER-EMAIL", "tripta.sahni@geminisolutions.com");
-        token.put("X-REMOTE-USER-OBJECT-ID","24431885-d574-445a-b66e-42271b7ad459");
-        try {
-            status = Utils.APIwithPayloads(url, method, payload,token , "").getStatus();
-            GemTestReporter.addTestStep("Hit the "+url,"API was successfully triggered", STATUS.PASS);
-        } catch (Exception e) {
-            logger.info("API was not hit successfully",e);
-            GemTestReporter.addTestStep("Hit the "+url,"API was not successfully triggered", STATUS.FAIL);
-        }
-    }
-
 }
+
