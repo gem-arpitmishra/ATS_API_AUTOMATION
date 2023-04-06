@@ -12,6 +12,7 @@
   "email_cc": "",
   "beta": {
     "GetConstants": "atsJobSvc/job/all-constants",
+
     "GetAllJobDetails": "atsJobSvc/job/all-job-details",
     "FetchJobUsingSearchKeyword": "atsJobSvc/job/all-job-details/1/1/Developer",
     "FetchJobDetails": "atsJobSvc/job/all-job-details/1/1",
@@ -26,6 +27,7 @@
     "FetchApplicantPersonalDetails": "atsApplicantSvc/applicant/personal-detail/{applicantId}",
     "FetchApplicantNotAlignedToJob": "atsApplicantSvc/applicant/notAlignedToJob",
     "FetchJobOfApplicant": "atsApplicantSvc/applicant/job/{applicantId}",
+
     "FetchListOfHR": "atsApplicantSvc/applicant/getHrSpoc",
     "FetchApplicantConstants": "atsApplicantSvc/applicant/constants",
     "FetchAllApplicantWithPaging": "atsApplicantSvc/applicant/pageNumber/1/pageSize/10?status=active&currentStageId=&jobId=102&experience=&recruiterPoc=",
@@ -50,6 +52,7 @@
     "getYearlyReportOfJobCount/ApplicantCount/OfferedCandidateCount": "atsDashboardSvc/dashboard/yearlyReport/2023",
     "getNumberOfApplicantsBasedOnStage": "atsDashboardSvc/dashboard/applicantBasedOnStage",
     "addNewInterview": "atsInterviewSvc/interview",
+
     "sendFeedbackReminderToAll": "atsInterviewSvc/interview/feedbackReminderToAll",
     "sendFeedbackReminderBasedOnInterviewId": "atsInterviewSvc/interview/feedbackReminder/{interviewId}",
     "sendManagementApprovalEmailWithCC": "atsInterviewSvc/interview/managementApproval/{applicantId}/nipun0499@gmail.com/tripta.sahni@geminisolutions.com,/Hi%20Nipun0499@gmail,%20Please%20review%20cumulative%20feedback%20of%20Applicant",
@@ -67,5 +70,6 @@
     "UpdateApplicantDetails": "atsApplicantSvc/applicant",
     "deleteAnApplicant": "atsApplicantSvc/applicant/delete/{applicantId}",
     "deleteAJob": "atsJobSvc/job/{jobId}"
+
   }
 }

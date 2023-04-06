@@ -6,16 +6,16 @@ import com.gemini.generic.reporting.GemTestReporter;
 import com.gemini.generic.reporting.STATUS;
 import com.gemini.generic.utils.ProjectConfigData;
 
+
 import com.google.gson.*;
 import com.qa.ats.stepdefinition.ApplicantStep;
 import com.qa.ats.stepdefinition.InterviewStep;
 import com.qa.ats.stepdefinition.AtsHealthCheck;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
-
 import java.io.*;
 import java.util.List;
+
 import java.util.Map;
 
 import com.google.gson.JsonObject;
@@ -37,7 +37,6 @@ import com.gemini.generic.api.utils.ProjectSampleJson;
 public class Utils {
     static Logger logger = LoggerFactory.getLogger(ApplicantStep.class);
 
-
     public static void responseCheck(Response response) {
         if ((response.getResponseBody()) != null) {
             GemTestReporter.addTestStep("Response Body", response.getResponseBody(), STATUS.INFO);
@@ -52,6 +51,7 @@ public class Utils {
         try {
             Request request = new Request();
             String url = ProjectConfigData.getProperty(UrlNameFromConfig);
+
             if (url.contains("{jobId}"))
                 url = GlobalVariable.BASE_URL + url.replace("{jobId}", String.valueOf(AtsHealthCheck.jobId));
             else if (url.contains("{applicantId}"))
@@ -74,6 +74,7 @@ public class Utils {
             responseCheck(response);
         } catch (Exception exception) {
             logger.info("Request doesn't Executed Successfully ", exception);
+
             GemTestReporter.addTestStep(method.toUpperCase() + " Request Verification ", method.toUpperCase() + " Request Did not Executed Successfully", STATUS.FAIL);
         }
         return response;
@@ -136,6 +137,7 @@ public class Utils {
         } catch (Exception exception) {
             logger.info("Request doesn't Executed Successfully ", exception);
             GemTestReporter.addTestStep(method.toUpperCase() + " Request Verification ", method.toUpperCase() + " Request Did not Executed Successfully", STATUS.FAIL);
+
         }
         return response;
     }
@@ -148,6 +150,7 @@ public class Utils {
             GemTestReporter.addTestStep("Status Verification", "Expected Status :" + expected + ",<br>Actual :" + actual, STATUS.FAIL);
         }
     }
+
 
     public static String interviewApiWithPayloads(String UrlNameFromConfig, String method, String payloadName, Map<String, String> headers, String step) throws Exception {
         Response response = new Response();
@@ -183,6 +186,11 @@ public class Utils {
             }
             response = ApiInvocation.handleRequest(request);
             GemTestReporter.addTestStep("Response Message", response.getResponseMessage(), STATUS.INFO);
+
+            responseCheck(response);
+        } catch (Exception exception) {
+            logger.info("Request doesn't Executed Successfully ", exception);
+
             if ((response.getResponseBody()) != null) {
                 GemTestReporter.addTestStep("Response Body", response.getResponseBody(), STATUS.INFO);
             } else {
@@ -190,8 +198,8 @@ public class Utils {
             }
 
         } catch (Exception e) {
+
             GemTestReporter.addTestStep(method.toUpperCase() + " Request Verification ", method.toUpperCase() + " Request Did not Executed Successfully", STATUS.FAIL);
-            GemTestReporter.addTestStep("Response Message", response.getResponseMessage(), STATUS.INFO);
         }
         if (method.equals("post")) {
             return (response.getStatus() + "," + JsonParser.parseString(response.getResponseBody()).getAsJsonObject().get("object"));
@@ -199,6 +207,7 @@ public class Utils {
 
         return String.valueOf(response.getStatus());
     }
+
 
     public static String feedbackApiWithPayloads(String UrlNameFromConfig, String method, String payloadName, Map<String, String> headers, String step) throws Exception {
         Response response = new Response();
@@ -363,3 +372,5 @@ public class Utils {
             return String.valueOf(arr[0]);
     }
 }
+
+
