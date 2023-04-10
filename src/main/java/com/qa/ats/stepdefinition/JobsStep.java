@@ -2,6 +2,8 @@ package com.qa.ats.stepdefinition;
 
 import com.gemini.generic.reporting.GemTestReporter;
 import com.gemini.generic.reporting.STATUS;
+import com.gemini.generic.ui.utils.DriverAction;
+import com.qa.ats.utils.GlobalVariable;
 import com.qa.ats.utils.Utils;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
@@ -12,7 +14,8 @@ import java.util.HashMap;
 
 public class JobsStep {
     int status = 0;
-    public static int jobID = 0;
+   public static int jobID = 0;
+
     Logger logger = LoggerFactory.getLogger(ApplicantStep.class);
 
     //setting the endpoint and method for API
@@ -33,7 +36,7 @@ public class JobsStep {
     public void verifyPolicyStatusCodeExpectedStatus(Integer Expected) {
         try {
             Utils.verifyStatusCode(Expected, status);
-//            jobID=123;
+
         } catch (Exception exception) {
             logger.info("User not able verify thr API status", exception);
             GemTestReporter.addTestStep("Status Check", "User not able verify thr API status", STATUS.FAIL);
