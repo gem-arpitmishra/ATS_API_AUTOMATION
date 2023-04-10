@@ -1,15 +1,15 @@
 {
   "environment": "beta",
   "project_name": "ATS_API",
-  "report_name": "ATS_API_Report",
+  "report_name": "ATS_Health_Check",
   "sub_id": "test_id",
   "enter_point": "https://apis.gemecosystem.com/enter-point",
   "jewel_user": "cgarg",
   "jewel_bridge_token": "ecdd02db-4906-4514-aefc-a76e73aa532e1677670397883",
   "glueCode": "com.qa.ats.stepdefinition",
-  "email_report": null,
-  "email_to": "",
-  "email_cc": "",
+  "email_report": "y",
+  "email_to": "shruti.kukreja@geminisolutions.com,sajith.j@geminisolutions.com,richa.khatri@geminisolutions.com,harshita.gupta@geminisolutions.com,akshi.khattar@geminisolutions.com",
+   "email_cc": "charu.garg@geminisolutions.com,tripta.sahni@geminisolutions.com",
   "beta": {
     "GetConstants": "atsJobSvc/job/all-constants",
     "GetAllJobDetails": "atsJobSvc/job/all-job-details",
@@ -65,7 +65,11 @@
     "UpdateJob": "atsJobSvc/job",
     "UpdateJobUsingJobID": "atsJobSvc/job/update/{jobId}/1",
     "UpdateApplicantDetails": "atsApplicantSvc/applicant",
+    "updateApplicantJson": "atsApplicantSvc/applicant",
     "deleteAnApplicant": "atsApplicantSvc/applicant/delete/{applicantId}",
-    "deleteAJob": "atsJobSvc/job/{jobId}"
+    "deleteAJob": "atsJobSvc/job/{jobId}",
+    "updateJobStatus": "atsJobSvc/job/update/{jobId}/{jobStatus}",
+    "updateJobStatusUsingJobId": "atsJobSvc/job/update/order/1/{jobStatus}"
+
   }
 }

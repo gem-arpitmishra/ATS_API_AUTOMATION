@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
-<suite name="ATS_API">
-    <test verbose="2" preserve-order="true" name="ATS_API_Automation">
-        <classes/>
+<suite name="All TestCases" data-provider-thread-count="1">
+    <test verbose="2" name="ATS_API_Automation">
+        <classes>
+            <class name="com.gemini.generic.bdd.GemJarCucumberBase"/>
+        </classes>
     </test>
 </suite>

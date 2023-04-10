@@ -4,14 +4,14 @@ Feature: Dashboard
     Given Set the Dashboard endpoint <endpoint> and method <method>
     Then Verify Dashboard status code <expectedStatus>
     Examples:
-      | endpoint                                                                                   | method | expectedStatus |
+      | endpoint                                             | method | expectedStatus |
       | getListOfJobsAlongWithTheApplicantMappedAndInterview | get    | 200            |
 
   Scenario Outline:ATS, API to get Yearly Report Of DashboardCount / Applicant Count/ Offered Candidate Count
     Given Set the Dashboard endpoint <endpoint> and method <method>
     Then Verify Dashboard status code <expectedStatus>
     Examples:
-      | endpoint                                                             | method | expectedStatus |
+      | endpoint                                                       | method | expectedStatus |
       | getYearlyReportOfJobCount/ApplicantCount/OfferedCandidateCount | get    | 200            |
 
   Scenario Outline:ATS, API to get Number Of Applicants Based On Stage

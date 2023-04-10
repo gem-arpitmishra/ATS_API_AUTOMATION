@@ -52,6 +52,8 @@ public class Utils {
         try {
             Request request = new Request();
             String url = ProjectConfigData.getProperty(UrlNameFromConfig);
+            if (url.contains("jobStatus"))
+                url = url.replace("{jobStatus}", "1");
             if (url.contains("{jobId}"))
                 url = GlobalVariable.BASE_URL + url.replace("{jobId}", String.valueOf(AtsHealthCheck.jobId));
             else if (url.contains("{applicantId}"))
@@ -262,7 +264,12 @@ public class Utils {
                 newObject = (JsonObject) parser.parse(new FileReader("src/main/resources/" + values.get(i)));
                 if (url.contains("Job"))
                     newObject.addProperty("jobId", AtsHealthCheck.jobId);
-                else
+
+
+                else if (url.contains("updateApplicantJson")) {
+                    newObject.addProperty("email", "");
+                    newObject.addProperty("contactNumber", "");
+                } else
                     newObject.addProperty("applicantId", AtsHealthCheck.applicantId);
                 Gson gson = new Gson();
                 String jsonOutput = gson.toJson(newObject);
