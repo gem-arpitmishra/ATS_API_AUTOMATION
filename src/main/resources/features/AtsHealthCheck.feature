@@ -1,13 +1,22 @@
 Feature: ATS scenario
 
-  Scenario Outline: ATS , Create a new Job
+  Scenario Outline: ATS ,Job--> <name1>
     Given Set the Job endpoint <endpoint> method <method> payload <payload_key> <payload_value> and form data
     Then Verify scenario status code <expectedStatus>
     Examples:
-      | endpoint            | method | expectedStatus | payload_key | payload_value                 |
-      | PostNewJob          | post   | 201            | job,jdFile  | apiCheckJob1.json,sample1.txt |
-      | UpdateJob           | put    | 200            | job,jdFile  | apiJobUpdate.json,sample1.txt |
-      | UpdateJobUsingJobID | put    | 200            | job,jdFile  | apiJobUpdate.json,sample1.txt |
+      | endpoint            | method | expectedStatus | payload_key | payload_value                 | name1                     |
+      | PostNewJob          | post   | 201            | job,jdFile  | apiCheckJob1.json,sample1.txt | Create a job              |
+      | UpdateJob           | put    | 200            | job,jdFile  | apiJobUpdate.json,sample1.txt | Update a job              |
+      | UpdateJobUsingJobID | put    | 200            | job,jdFile  | apiJobUpdate.json,sample1.txt | Update a job using job ID |
+
+  Scenario Outline: ATS , Job---><name1>
+    Given Set the Job endpoint <endpoint> and method <method>
+    Then Verify Job status code <expectedStatus>
+    Examples:
+      | endpoint                  | method | expectedStatus | name1                            |
+      | updateJobStatus           | put    | 200            | Update Job Status                |
+      | updateJobStatusUsingJobId | put    | 200            | Update Job Status Using Order ID |
+
 
   Scenario Outline: ATS, HealthCheck of Jobs API - <name>
     Given Set the Job endpoint <endpoint> and method <method>
@@ -21,14 +30,13 @@ Feature: ATS scenario
       | FetchJobDetails                 | FetchJobDetails                 | get    | 200            |
       | FetchRecruiterDetailsUsingJobID | FetchRecruiterDetailsUsingJobID | get    | 200            |
 
-  Scenario Outline: ATS, Create an applicant
+  Scenario Outline: ATS, <name> an applicant
     Given Set the Applicant endpoint <endpoint> method <method> payload <payload_key> <payload_value> and form data
     Then Verify scenario status code <expectedStatus>
     Examples:
-      | endpoint               | method | expectedStatus | payload_key                | payload_value                             |
-      | SaveApplicantDetails   | post   | 201            | applicantData,resume,image | Applicant.json,Skribbl.pptx,Skribbl.pptx  |
-      | UpdateApplicantDetails | put    | 201            | applicantData,resume,image | Applicant.json, Skribbl.pptx,Skribbl.pptx |
-
+      | endpoint               | method | expectedStatus | payload_key                | payload_value                            | name   |
+      | SaveApplicantDetails   | post   | 201            | applicantData,resume,image | applicant.json,Skribbl.pptx,Skribbl.pptx | Create |
+      | UpdateApplicantDetails | put    | 201            | applicantData,resume,image | applicant.json,Skribbl.pptx,Skribbl.pptx | Update |
 
   Scenario Outline: ATS, Align the applicant to that job
 
@@ -120,6 +128,8 @@ Feature: ATS scenario
       | endpoint                                    | method | expectedStatus |
       | getFeedbackListOfAllInterviewsOfAnApplicant | get    | 200            |
 
+
+
 #TO WORK ON THIS SCENARIO
 #  Scenario Outline : ATS, API to update the interview
 #    Given Set the Interview endpoint <endpoint> , method <method> and payload <payload>
@@ -186,6 +196,15 @@ Feature: ATS scenario
       | sendManagementApprovalEmailWithCC | post   | 200            |
 
 
+#This API is removed from backend
+#  Scenario Outline: ATS, API to update reason of rejection
+#    Given Set the Applicant endpoint <endpoint> and method <method>
+#    Then Verify Applicant status code <expectedStatus>
+#    Examples:
+#      | endpoint                | method | expectedStatus |
+#      | updateReasonOfRejection | patch  | 200            |
+
+
   Scenario Outline:ATS, API to delete a feedback
     Given Set the Interview endpoint <endpoint> and method <method>
     Then Verify Interview status code <expectedStatus>
@@ -216,4 +235,13 @@ Feature: ATS scenario
       | endpoint   | method | expectedStatus |
       | deleteAJob | delete | 200            |
 
+#  Scenario Outline: ATS , API to update the Applicant json
+#    Given Set the Applicant endpoint <endpoint> method <method> payload <payload_key> <payload_value> and form data
+#    Then Verify scenario status code <expectedStatus>
+#    Examples:
+#      | endpoint            | method | expectedStatus | payload_key                | payload_value                            | name   |
+#
+#      | UpdateApplicantJson | put    | 201            | applicantData,resume,image | applicant.json,Skribbl.pptx,Skribbl.pptx | Update |
+##
+#
 

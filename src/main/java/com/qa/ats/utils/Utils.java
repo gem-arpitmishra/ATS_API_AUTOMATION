@@ -52,6 +52,9 @@ public class Utils {
             Request request = new Request();
             String url = ProjectConfigData.getProperty(UrlNameFromConfig);
 
+            if (url.contains("jobStatus"))
+                url = url.replace("{jobStatus}", "1");
+
             if (url.contains("{jobId}"))
                 url = GlobalVariable.BASE_URL + url.replace("{jobId}", String.valueOf(AtsHealthCheck.jobId));
             else if (url.contains("{applicantId}"))
@@ -197,10 +200,7 @@ public class Utils {
                 GemTestReporter.addTestStep("Response Body", "No-Response", STATUS.INFO);
             }
 
-        } catch (Exception e) {
-
-            GemTestReporter.addTestStep(method.toUpperCase() + " Request Verification ", method.toUpperCase() + " Request Did not Executed Successfully", STATUS.FAIL);
-        }
+        } 
         if (method.equals("post")) {
             return (response.getStatus() + "," + JsonParser.parseString(response.getResponseBody()).getAsJsonObject().get("object"));
         }
@@ -271,7 +271,12 @@ public class Utils {
                 newObject = (JsonObject) parser.parse(new FileReader("src/main/resources/" + values.get(i)));
                 if (url.contains("Job"))
                     newObject.addProperty("jobId", AtsHealthCheck.jobId);
-                else
+
+
+                else if (url.contains("updateApplicantJson")) {
+                    newObject.addProperty("email", "");
+                    newObject.addProperty("contactNumber", "");
+                } else
                     newObject.addProperty("applicantId", AtsHealthCheck.applicantId);
                 Gson gson = new Gson();
                 String jsonOutput = gson.toJson(newObject);
