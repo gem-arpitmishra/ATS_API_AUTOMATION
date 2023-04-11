@@ -1,0 +1,17 @@
+{
+  "interviewType": "Telephonic",
+  "interviewerEmail": "ankita.srivastava@geminisolutions.com",
+  "attendees": [
+    {
+      "empCode": "GSI G 1290",
+      "email": "saksham.khanna@geminisolutions.com"
+    }
+  ],
+  "startTime": "2023-04-07T08:53:00.000+00:00",
+  "endTime": "2023-04-07T09:38:00.000+00:00",
+  "resumeLink": "test11",
+  "title": "test",
+  "additionalDetails": "test1",
+  "location": "Noida",
+  "deleted": true
+}
