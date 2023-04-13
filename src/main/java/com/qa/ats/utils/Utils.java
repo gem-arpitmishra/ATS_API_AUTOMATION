@@ -6,16 +6,17 @@ import com.gemini.generic.reporting.GemTestReporter;
 import com.gemini.generic.reporting.STATUS;
 import com.gemini.generic.utils.ProjectConfigData;
 
-
 import com.google.gson.*;
 import com.qa.ats.stepdefinition.ApplicantStep;
+import com.qa.ats.stepdefinition.AtsRegression;
 import com.qa.ats.stepdefinition.InterviewStep;
 import com.qa.ats.stepdefinition.AtsHealthCheck;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
+
 import java.io.*;
 import java.util.List;
-
 import java.util.Map;
 
 import com.google.gson.JsonObject;
@@ -34,6 +35,9 @@ import org.apache.http.util.EntityUtils;
 
 import com.gemini.generic.api.utils.ProjectSampleJson;
 
+
+
+
 public class Utils {
     static Logger logger = LoggerFactory.getLogger(ApplicantStep.class);
 
@@ -51,18 +55,16 @@ public class Utils {
         try {
             Request request = new Request();
             String url = ProjectConfigData.getProperty(UrlNameFromConfig);
-
+            url = GlobalVariable.BASE_URL + url;
             if (url.contains("jobStatus"))
                 url = url.replace("{jobStatus}", "1");
-
             if (url.contains("{jobId}"))
-                url = GlobalVariable.BASE_URL + url.replace("{jobId}", String.valueOf(AtsHealthCheck.jobId));
+                url =  url.replace("{jobId}", String.valueOf(AtsHealthCheck.jobId));
             else if (url.contains("{applicantId}"))
-                url = GlobalVariable.BASE_URL + url.replace("{applicantId}", String.valueOf(AtsHealthCheck.applicantId));
+                url = url.replace("{applicantId}", String.valueOf(AtsHealthCheck.applicantId));
             else if (url.contains("{interviewId}"))
-                url = GlobalVariable.BASE_URL + url.replace("{interviewId}", String.valueOf(InterviewStep.interviewId));
-            else
-                url = GlobalVariable.BASE_URL + url;
+                url =  url.replace("{interviewId}", String.valueOf(InterviewStep.interviewId));
+
             GemTestReporter.addTestStep("Url for " + method.toUpperCase() + " Request", url, STATUS.INFO);
             request.setURL(url);
             request.setMethod(method);
@@ -88,12 +90,12 @@ public class Utils {
         try {
             Request request = new Request();
             String url = ProjectConfigData.getProperty(UrlNameFromConfig);
+            url = GlobalVariable.BASE_URL + url;
             if (url.contains("{applicantId"))
-                url = GlobalVariable.BASE_URL + url.replace("{applicantId}", String.valueOf(AtsHealthCheck.applicantId));
+                url =  url.replace("{applicantId}", String.valueOf(AtsHealthCheck.applicantId));
             else if (url.contains("{interviewId}"))
-                url = GlobalVariable.BASE_URL + url.replace("{interviewId}", String.valueOf(InterviewStep.interviewId));
-            else
-                url = GlobalVariable.BASE_URL + url;
+                url =  url.replace("{interviewId}", String.valueOf(InterviewStep.interviewId));
+
             GemTestReporter.addTestStep("Url for " + method.toUpperCase() + " Request", url, STATUS.INFO);
             request.setURL(url);
             request.setMethod(method);
@@ -125,6 +127,8 @@ public class Utils {
             else if (method.equals("patch")) {
 
             }
+            else
+                url = GlobalVariable.BASE_URL + url ;
             GemTestReporter.addTestStep("Url for " + method.toUpperCase() + " Request", url, STATUS.INFO);
             request.setURL(url);
             request.setMethod(method);
@@ -315,9 +319,10 @@ public class Utils {
             GemTestReporter.addTestStep("POST Request Verification", "POST request executed Successfully", STATUS.PASS);
             js = (JsonObject) JsonParser.parseString(EntityUtils.toString(httpresponse.getEntity()));
             GemTestReporter.addTestStep("Response Body", String.valueOf(js), STATUS.INFO);
+            if(String.valueOf(js).contains("400")==false)
             GemTestReporter.addTestStep("Response Message", js.get("message").getAsString(), STATUS.INFO);
             arr[0] = httpresponse.getStatusLine().getStatusCode();
-            if (method.equals("post")) {
+            if (method.equals("post")&&arr[0]>=200 && arr[0]<=201) {
                 arr[1] = Integer.parseInt(String.valueOf(js.get("object").getAsJsonObject().get("jobId")));
                 return (arr[0] + "," + arr[1]);
             } else
@@ -326,7 +331,7 @@ public class Utils {
             logger.info("Request doesn't Executed Successfully ", exception);
             GemTestReporter.addTestStep(method.toUpperCase() + " Request Verification ", method.toUpperCase() + " Request Did not Executed Successfully", STATUS.FAIL);
         }
-        if (method.equals("post")) {
+        if (method.equals("post")&&arr[0]>=200 && arr[0]<=201) {
             return (arr[0] + "," + arr[1]);
         } else
             return String.valueOf(arr[0]);
@@ -376,6 +381,7 @@ public class Utils {
         else
             return String.valueOf(arr[0]);
     }
+
 }
 
 

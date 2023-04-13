@@ -2,23 +2,21 @@
   "environment": "beta",
   "project_name": "ATS_API",
   "report_name": "ATS_Health_Check",
+  "tags": "@apiReg",
   "sub_id": "test_id",
   "enter_point": "https://apis.gemecosystem.com/enter-point",
   "jewel_user": "cgarg",
   "jewel_bridge_token": "ecdd02db-4906-4514-aefc-a76e73aa532e1677670397883",
   "glueCode": "com.qa.ats.stepdefinition",
-  "email_report": "y",
-  "email_to": "shruti.kukreja@geminisolutions.com,sajith.j@geminisolutions.com,richa.khatri@geminisolutions.com,harshita.gupta@geminisolutions.com,akshi.khattar@geminisolutions.com",
-   "email_cc": "charu.garg@geminisolutions.com,tripta.sahni@geminisolutions.com",
+
   "beta": {
     "GetConstants": "atsJobSvc/job/all-constants",
-
     "GetAllJobDetails": "atsJobSvc/job/all-job-details",
     "FetchJobUsingSearchKeyword": "atsJobSvc/job/all-job-details/1/1/Developer",
     "FetchJobDetails": "atsJobSvc/job/all-job-details/1/1",
     "FetchJobUsingJobID": "atsJobSvc/job/by-job-id/{jobId}",
     "FetchRecruiterDetailsUsingJobID": "atsJobSvc/job/emp-by-job-id/{jobId}",
-    "FetchApplicantUsingFilters": "atsApplicantSvc/applicant/pageNumber/1/pageSize/10?status=active&currentStageId=&jobId={jobId}&experience=&recruiterPoc=",
+    "FetchApplicantUsingFilters": "atsApplicantSvc/applicant/pageNumber/1/pageSize/100?isActive=true&currentStageId=&jobId=102&totalYearOfExperience=0-2&recruiterPoc=&source=",
     "FetchApplicantWithId": "atsApplicantSvc/applicant/{applicantId}",
     "FetchCurrentStageOfApplicant": "atsApplicantSvc/applicant/{applicantId}/current-stage",
     "FetchApplicantOnSearchUsingPagesize": "atsApplicantSvc/applicant/search/Tripta/pageNumber/1/pageSize/1",
@@ -27,10 +25,9 @@
     "FetchApplicantPersonalDetails": "atsApplicantSvc/applicant/personal-detail/{applicantId}",
     "FetchApplicantNotAlignedToJob": "atsApplicantSvc/applicant/notAlignedToJob",
     "FetchJobOfApplicant": "atsApplicantSvc/applicant/job/{applicantId}",
-
     "FetchListOfHR": "atsApplicantSvc/applicant/getHrSpoc",
     "FetchApplicantConstants": "atsApplicantSvc/applicant/constants",
-    "FetchAllApplicantWithPaging": "atsApplicantSvc/applicant/pageNumber/1/pageSize/10?status=active&currentStageId=&jobId=102&experience=&recruiterPoc=",
+    "FetchAllApplicantWithPaging": "atsApplicantSvc/applicant/search/saksham/pageNumber/1/pageSize/100?isActive=true&currentStageId=&jobId=&totalYearOfExperience=0-5&recruiterPoc=&source=",
     "getAllInterviews": "atsInterviewSvc/interview",
     "interviewsForAParticularJob": "atsInterviewSvc/interview/job/{jobId}",
     "getAllEmployeesWhoCanBeAttendeeOrInterviewerForAnInterview": "atsInterviewSvc/interview/employee",
@@ -52,7 +49,6 @@
     "getYearlyReportOfJobCount/ApplicantCount/OfferedCandidateCount": "atsDashboardSvc/dashboard/yearlyReport/2023",
     "getNumberOfApplicantsBasedOnStage": "atsDashboardSvc/dashboard/applicantBasedOnStage",
     "addNewInterview": "atsInterviewSvc/interview",
-
     "sendFeedbackReminderToAll": "atsInterviewSvc/interview/feedbackReminderToAll",
     "sendFeedbackReminderBasedOnInterviewId": "atsInterviewSvc/interview/feedbackReminder/{interviewId}",
     "sendManagementApprovalEmailWithCC": "atsInterviewSvc/interview/managementApproval/{applicantId}/nipun0499@gmail.com/tripta.sahni@geminisolutions.com,/Hi%20Nipun0499@gmail,%20Please%20review%20cumulative%20feedback%20of%20Applicant",
@@ -70,11 +66,9 @@
     "UpdateApplicantDetails": "atsApplicantSvc/applicant",
     "updateApplicantJson": "atsApplicantSvc/applicant",
     "deleteAnApplicant": "atsApplicantSvc/applicant/delete/{applicantId}",
-
     "deleteAJob": "atsJobSvc/job/{jobId}",
     "updateJobStatus": "atsJobSvc/job/update/{jobId}/{jobStatus}",
-    "updateJobStatusUsingJobId": "atsJobSvc/job/update/order/1/{jobStatus}"
-
-
+    "updateJobStatusUsingOrderId": "atsJobSvc/job/update/order/1/{jobStatus}",
+    "negativeTestingToUpdateApplicantStage": "atsApplicantSvc/applicant/{applicantId}/stage/2"
   }
 }

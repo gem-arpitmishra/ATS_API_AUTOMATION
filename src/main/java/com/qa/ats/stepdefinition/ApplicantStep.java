@@ -21,10 +21,7 @@ public class ApplicantStep {
         HashMap<String, String> token = new HashMap<String, String>();
         token.put("X-REMOTE-USER-EMAIL", "saru.goyal@geminisolutions.com");
         try {
-            if (method.equals("get"))
-                status = Utils.apiWithoutPayloads(url, method, token, "").getStatus();
-            else
-                status = Utils.apiToSendManagementApprovalEmails(url, method, token, "").getStatus();
+            status = Utils.apiWithoutPayloads(url, method, token, "").getStatus();
 
         } catch (Exception exception) {
             logger.info("Error - User not able to hit the API", exception);
@@ -48,7 +45,13 @@ public class ApplicantStep {
         HashMap<String, String> header = new HashMap<String, String>();
         header.put("X-REMOTE-USER-EMAIL", "saru.goyal@geminisolutions.com");
         try {
-            status = Utils.apiForUpdatingApplicantStage(url, method, header, stage,"").getStatus();
+            if (method.equals("put")||method.equals("post"))
+                status = Utils.apiForUpdatingApplicantStage(url, method, header, stage,"").getStatus();
+
+
+            else
+                status = Utils.apiWithoutPayloads(url, method, header, "").getStatus();
+
         } catch (Exception exception) {
             logger.info("Error - User not able to hit the API", exception);
             GemTestReporter.addTestStep("Hit API", "User not able to hit the API", STATUS.FAIL);
