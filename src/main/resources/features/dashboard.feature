@@ -1,3 +1,4 @@
+@hc
 Feature: Dashboard
 
   Scenario Outline: ATS, API to get List Of Jobs Along With The Applicant Mapped To Each Jobs And The Interview Aligned For Them

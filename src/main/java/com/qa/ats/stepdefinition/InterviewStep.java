@@ -23,11 +23,12 @@ public class InterviewStep {
         token.put("X-REMOTE-USER-EMAIL", "tripta.sahni@geminisolutions.com");
         token.put("X-REMOTE-USER-OBJECT-ID", "24431885-d574-445a-b66e-42271b7ad459");
         try {
-            if (method.equals("get"))
-                status = Utils.apiWithoutPayloads(url, method, token, "").getStatus();
-            else
+            if (method.equals("post"))
                 status = Utils.apiToSendManagementApprovalEmails(url, method, token, "").getStatus();
 
+
+            else
+                status = Utils.apiWithoutPayloads(url, method, token, "").getStatus();
             GemTestReporter.addTestStep("Hit the " + url, "API was triggered", STATUS.INFO);
         } catch (Exception e) {
             logger.info("API was not hit successfully", e);
