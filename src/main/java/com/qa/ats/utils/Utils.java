@@ -6,16 +6,16 @@ import com.gemini.generic.reporting.GemTestReporter;
 import com.gemini.generic.reporting.STATUS;
 import com.gemini.generic.utils.ProjectConfigData;
 
-
 import com.google.gson.*;
 import com.qa.ats.stepdefinition.ApplicantStep;
 import com.qa.ats.stepdefinition.InterviewStep;
 import com.qa.ats.stepdefinition.AtsHealthCheck;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
+
 import java.io.*;
 import java.util.List;
-
 import java.util.Map;
 
 import com.google.gson.JsonObject;
@@ -34,6 +34,9 @@ import org.apache.http.util.EntityUtils;
 
 import com.gemini.generic.api.utils.ProjectSampleJson;
 
+
+
+
 public class Utils {
     static Logger logger = LoggerFactory.getLogger(ApplicantStep.class);
 
@@ -51,18 +54,16 @@ public class Utils {
         try {
             Request request = new Request();
             String url = ProjectConfigData.getProperty(UrlNameFromConfig);
-
+            url = GlobalVariable.BASE_URL + url;
             if (url.contains("jobStatus"))
                 url = url.replace("{jobStatus}", "1");
-
             if (url.contains("{jobId}"))
-                url = GlobalVariable.BASE_URL + url.replace("{jobId}", String.valueOf(AtsHealthCheck.jobId));
+                url =  url.replace("{jobId}", String.valueOf(AtsHealthCheck.jobId));
             else if (url.contains("{applicantId}"))
-                url = GlobalVariable.BASE_URL + url.replace("{applicantId}", String.valueOf(AtsHealthCheck.applicantId));
+                url = url.replace("{applicantId}", String.valueOf(AtsHealthCheck.applicantId));
             else if (url.contains("{interviewId}"))
-                url = GlobalVariable.BASE_URL + url.replace("{interviewId}", String.valueOf(InterviewStep.interviewId));
-            else
-                url = GlobalVariable.BASE_URL + url;
+                url =  url.replace("{interviewId}", String.valueOf(InterviewStep.interviewId));
+
             GemTestReporter.addTestStep("Url for " + method.toUpperCase() + " Request", url, STATUS.INFO);
             request.setURL(url);
             request.setMethod(method);
@@ -88,12 +89,12 @@ public class Utils {
         try {
             Request request = new Request();
             String url = ProjectConfigData.getProperty(UrlNameFromConfig);
+            url = GlobalVariable.BASE_URL + url;
             if (url.contains("{applicantId"))
-                url = GlobalVariable.BASE_URL + url.replace("{applicantId}", String.valueOf(AtsHealthCheck.applicantId));
+                url =  url.replace("{applicantId}", String.valueOf(AtsHealthCheck.applicantId));
             else if (url.contains("{interviewId}"))
-                url = GlobalVariable.BASE_URL + url.replace("{interviewId}", String.valueOf(InterviewStep.interviewId));
-            else
-                url = GlobalVariable.BASE_URL + url;
+                url =  url.replace("{interviewId}", String.valueOf(InterviewStep.interviewId));
+
             GemTestReporter.addTestStep("Url for " + method.toUpperCase() + " Request", url, STATUS.INFO);
             request.setURL(url);
             request.setMethod(method);
@@ -125,6 +126,8 @@ public class Utils {
             else if (method.equals("patch")) {
 
             }
+            else
+                url = GlobalVariable.BASE_URL + url ;
             GemTestReporter.addTestStep("Url for " + method.toUpperCase() + " Request", url, STATUS.INFO);
             request.setURL(url);
             request.setMethod(method);

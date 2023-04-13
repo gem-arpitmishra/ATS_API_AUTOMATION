@@ -1,3 +1,4 @@
+@hc
 Feature: Interview
 
   Scenario Outline:ATS, API to get list of all interviews
