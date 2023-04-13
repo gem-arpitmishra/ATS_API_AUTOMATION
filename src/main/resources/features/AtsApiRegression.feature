@@ -184,7 +184,6 @@ Feature: ATS scenario
       | endpoint        | method | expectedStatus | payload    |
       | addNewInterview | delete | 405            | interview1 |
 
-
   Scenario Outline:ATS, Negative Testing of API to send feedback reminder to all using wrong Method
     Given Set the Interview endpoint <endpoint> and method <method>
     Then Verify Interview status code <expectedStatus>
@@ -205,7 +204,6 @@ Feature: ATS scenario
     Examples:
       | endpoint       | method | expectedStatus | payload   |
       | addNewFeedback | delete | 405            | feedback1 |
-
 
   Scenario Outline:ATS, Negative testing of API to update a feedback using wrong Method
     Given Set the Feedback endpoint <endpoint> , method <method> and payload <payload>
@@ -236,7 +234,6 @@ Feature: ATS scenario
       | endpoint       | method | expectedStatus |
       | deleteFeedback | put    | 405            |
 
-
   Scenario Outline: ATS,Negative testing of API to delete the applicant using wrong Method
     Given Set the Applicant endpoint <endpoint> and method <method>
     Then Verify Applicant status code <expectedStatus>
@@ -250,7 +247,6 @@ Feature: ATS scenario
     Examples:
       | endpoint   | method | expectedStatus |
       | deleteAJob | put    | 405            |
-
 
   Scenario Outline: ATS, Negative testing of API to get List Of Jobs Along With The Applicant Mapped To Each Jobs And The Interview Aligned For Them using wrong Method
     Given Set the Dashboard endpoint <endpoint> and method <method>
