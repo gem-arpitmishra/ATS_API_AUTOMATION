@@ -1,15 +1,37 @@
 
 {
-  "startTime": "2023-04-07 08:53:00",
-  "title": "Angular L1",
-  "interviewType": "Telephonic",
-  "attendees": [],
-  "duration": 45,
-  "additionalDetails": "",
-  "applicantName": "gauri shankar",
-  "interviewerName": "Ankita Srivastava",
-  "endTime": "2023-04-07 09:38:00",
-  "interviewerEmail": "ankita.srivastava@geminisolutions.com"
 
+  "interviewType":"Telephonic",
+
+  "interviewerEmail":"ankita.srivastava@geminisolutions.com",
+
+  "attendees":[
+
+    {
+
+      "empCode":"GSI G 1290",
+
+      "email":"saksham.khanna@geminisolutions.com"
+
+    }
+
+  ],
+
+  "applicantName":"gauri shankar",
+
+
+
+  "startTime":"2023-04-15 07:36",
+
+  "endTime":"2023-04-15 07:36",
+  "title":"test",
+
+  "additionalDetails":"test1",
+
+  "location":"Noida",
+
+  "status":"Pending",
+
+  "isDeleted":false
 
 }
