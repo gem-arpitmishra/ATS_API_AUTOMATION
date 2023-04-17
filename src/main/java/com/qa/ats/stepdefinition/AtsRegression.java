@@ -36,7 +36,7 @@ public class AtsRegression {
     int status = 0;
     public static int jobId = 0;
     public static int applicantId = 0;
-     Logger logger = LoggerFactory.getLogger(ApplicantStep.class);
+    Logger logger = LoggerFactory.getLogger(ApplicantStep.class);
 
     @Given("^Set the Applicant endpoint (.+) method (.+) payload (.+) (.+) and form data using wrong header$")
     public void setTheApplicantEndpointEndpointMethodMethodPayloadPayloadKeyPayloadValueAndFormData(String url,
