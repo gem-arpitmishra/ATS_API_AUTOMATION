@@ -433,3 +433,4 @@ Feature: ATS scenario
     Examples:
       | endpoint       | method | expectedStatus | payload   | name          |
       | addNewFeedback | put    | 500            | feedback6 | selectionType |
+

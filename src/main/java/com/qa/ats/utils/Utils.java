@@ -8,7 +8,9 @@ import com.gemini.generic.utils.ProjectConfigData;
 
 import com.google.gson.*;
 import com.qa.ats.stepdefinition.ApplicantStep;
-//import com.qa.ats.stepdefinition.AtsRegression;
+
+import com.qa.ats.stepdefinition.AtsRegression;
+
 import com.qa.ats.stepdefinition.InterviewStep;
 import com.qa.ats.stepdefinition.AtsHealthCheck;
 import org.slf4j.Logger;
