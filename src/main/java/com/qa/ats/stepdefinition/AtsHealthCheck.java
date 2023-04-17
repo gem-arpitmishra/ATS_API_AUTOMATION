@@ -28,7 +28,7 @@ public class AtsHealthCheck {
         String checkList[];
         try {
             String check = Utils.jobApiWithFormData(url, method, token, "", payload_keys, payload_values);
-            if (method.equals("post")) {
+            if (method.equals("post")&&check.contains(",")) {
                 checkList = check.split(",");
                 status = Integer.parseInt(checkList[0]);
                 jobId = Integer.parseInt(checkList[1]);
