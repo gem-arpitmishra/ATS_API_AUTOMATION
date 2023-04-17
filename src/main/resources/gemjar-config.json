@@ -72,6 +72,7 @@
     "deleteAJob": "atsJobSvc/job/{jobId}",
     "updateJobStatus": "atsJobSvc/job/update/{jobId}/{jobStatus}",
     "updateJobStatusUsingOrderId": "atsJobSvc/job/update/order/1/{jobStatus}",
-    "negativeTestingToUpdateApplicantStage": "atsApplicantSvc/applicant/{applicantId}/stage/2"
+    "negativeTestingToUpdateApplicantStage": "atsApplicantSvc/applicant/{applicantId}/stage/2",
+
   }
 }
