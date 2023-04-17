@@ -203,7 +203,7 @@ public class Utils {
 
         }
 
-        if (method.equals("post")&&response.getStatus()>=200&&response.getStatus()<=201) {
+        if (method.equals("post") && response.getStatus() >= 200 && response.getStatus() <= 201) {
 
             return (response.getStatus() + "," + JsonParser.parseString(response.getResponseBody()).getAsJsonObject().get("object"));
         }
@@ -257,7 +257,7 @@ public class Utils {
             GemTestReporter.addTestStep("Response Message", response.getResponseMessage(), STATUS.INFO);
         }
 
-        if  (method.equals("post")&&response.getStatus()>=200&&response.getStatus()<=201)
+        if (method.equals("post") && response.getStatus() >= 200 && response.getStatus() <= 201)
 
             return (response.getStatus() + "," + JsonParser.parseString(response.getResponseBody()).getAsJsonObject().get("object").getAsJsonObject().get("feedbackId").toString());
         else
@@ -297,23 +297,21 @@ public class Utils {
                 JsonParser parser = new JsonParser();
                 JsonObject newObject = new JsonObject();
                 newObject = (JsonObject) parser.parse(new FileReader("src/main/resources/" + values.get(i)));
-                if(newObject.has("email"))
-                newObject.remove("email");
-                if(newObject.has("contactNumber"))
-                newObject.remove("contactNumber");
+                if (newObject.has("email"))
+                    newObject.remove("email");
+                if (newObject.has("contactNumber"))
+                    newObject.remove("contactNumber");
                 newObject.addProperty("email", Utils.getSaltString() + "@gmail.com");
                 newObject.addProperty("contactNumber", Utils.generateRandom());
-                if(newObject.has("applicantId"))
-                newObject.remove("applicantId");
+                if (newObject.has("applicantId"))
+                    newObject.remove("applicantId");
                 Gson gson = new Gson();
                 String jsonOutput = gson.toJson(newObject);
                 FileWriter writer = new FileWriter("src/main/resources/" + values.get(i));
                 writer.write(jsonOutput);
                 writer.close();
 
-            }
-            else if (values.get(i).contains(".json") && method.equals("put") && (!url.contains("JobID")))
-            {
+            } else if (values.get(i).contains(".json") && method.equals("put") && (!url.contains("JobID"))) {
                 JsonParser parser = new JsonParser();
                 JsonObject newObject = new JsonObject();
                 newObject = (JsonObject) parser.parse(new FileReader("src/main/resources/" + values.get(i)));
@@ -357,10 +355,10 @@ public class Utils {
             GemTestReporter.addTestStep("POST Request Verification", "POST request executed Successfully", STATUS.PASS);
             js = (JsonObject) JsonParser.parseString(EntityUtils.toString(httpresponse.getEntity()));
             GemTestReporter.addTestStep("Response Body", String.valueOf(js), STATUS.INFO);
-            if(String.valueOf(js).contains("400")==false)
-            GemTestReporter.addTestStep("Response Message", js.get("message").getAsString(), STATUS.INFO);
+            if (String.valueOf(js).contains("400") == false)
+                GemTestReporter.addTestStep("Response Message", js.get("message").getAsString(), STATUS.INFO);
             arr[0] = httpresponse.getStatusLine().getStatusCode();
-            if (method.equals("post")&&arr[0]>=200 && arr[0]<=201) {
+            if (method.equals("post") && arr[0] >= 200 && arr[0] <= 201) {
                 arr[1] = Integer.parseInt(String.valueOf(js.get("object").getAsJsonObject().get("jobId")));
                 return (arr[0] + "," + arr[1]);
             } else
@@ -369,7 +367,7 @@ public class Utils {
             logger.info("Request doesn't Executed Successfully ", exception);
             GemTestReporter.addTestStep(method.toUpperCase() + " Request Verification ", method.toUpperCase() + " Request Did not Executed Successfully", STATUS.FAIL);
         }
-        if (method.equals("post")&&arr[0]>=200 && arr[0]<=201) {
+        if (method.equals("post") && arr[0] >= 200 && arr[0] <= 201) {
             return (arr[0] + "," + arr[1]);
         } else
             return String.valueOf(arr[0]);

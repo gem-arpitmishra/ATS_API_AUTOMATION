@@ -6,39 +6,38 @@ Feature: ATS scenario
     Then Verify Job status code <expectedStatus>
     Examples:
       | endpoint                        | method | expectedStatus | name                             |
-      | PostNewJob                      | get    | 405            | Create a job                     |
-
+      | postNewJob                      | get    | 405            | Create a job                     |
       | interviewsForAParticularJob     | post   | 405            | get Interviews for a job         |
-      | UpdateJob                       | get    | 405            | Update a job                     |
-      | UpdateJobUsingJobID             | get    | 405            | Update a job using job ID        |
+      | updateJob                       | get    | 405            | Update a job                     |
+      | updateJobUsingJobID             | get    | 405            | Update a job using job ID        |
       | updateJobStatus                 | get    | 405            | Update Job Status                |
       | updateJobStatusUsingOrderId     | get    | 405            | Update Job Status Using Order ID |
-      | FetchJobUsingSearchKeyword      | post   | 405            | FetchJobUsingSearchKeyword       |
-      | GetConstants                    | post   | 405            | GetConstants                     |
-      | GetAllJobDetails                | post   | 405            | GetAllJobDetails                 |
-      | FetchJobUsingJobID              | post   | 405            | FetchJobUsingJobID               |
-      | FetchJobDetails                 | post   | 405            | FetchJobDetails                  |
-      | FetchRecruiterDetailsUsingJobID | post   | 405            | FetchRecruiterDetailsUsingJobID  |
+      | fetchJobUsingSearchKeyword      | post   | 405            | FetchJobUsingSearchKeyword       |
+      | getConstants                    | post   | 405            | GetConstants                     |
+      | getAllJobDetails                | post   | 405            | GetAllJobDetails                 |
+      | fetchJobUsingJobID              | post   | 405            | FetchJobUsingJobID               |
+      | fetchJobDetails                 | post   | 405            | FetchJobDetails                  |
+      | fetchRecruiterDetailsUsingJobID | post   | 405            | FetchRecruiterDetailsUsingJobID  |
 
   Scenario Outline: ATS, Applicant using wrong method - <name>
     Given Set the Applicant endpoint <endpoint> and method <method>
     Then Verify Applicant status code <expectedStatus>
     Examples:
       | name                                | endpoint                            | method | expectedStatus |
-      | Create                              | SaveApplicantDetails                | delete | 405            |
-      | Update                              | UpdateApplicantDetails              | delete | 405            |
-      | AlignToNewJob                       | AlignToNewJob                       | delete | 405            |
-      | FetchApplicantUsingFilters          | FetchApplicantUsingFilters          | post   | 405            |
-      | FetchApplicantWithId                | FetchApplicantWithId                | post   | 405            |
-      | FetchCurrentStageOfApplicant        | FetchCurrentStageOfApplicant        | post   | 405            |
-      | FetchApplicantOnSearchUsingPagesize | FetchApplicantOnSearchUsingPagesize | post   | 405            |
-      | FetchApplicantOnSearch              | FetchApplicantOnSearch              | post   | 405            |
-      | FetchResumeUsingApplicantId         | FetchResumeUsingApplicantId         | post   | 405            |
-      | FetchApplicantPersonalDetails       | FetchApplicantPersonalDetails       | post   | 405            |
-      | FetchJobOfApplicant                 | FetchJobOfApplicant                 | post   | 405            |
-      | FetchListOfHR                       | FetchListOfHR                       | post   | 405            |
-      | FetchApplicantConstants             | FetchApplicantConstants             | post   | 405            |
-      | FetchAllApplicantWithPaging         | FetchAllApplicantWithPaging         | post   | 405            |
+      | Create                              | saveApplicantDetails                | delete | 405            |
+      | Update                              | updateApplicantDetails              | delete | 405            |
+      | AlignToNewJob                       | alignToNewJob                       | delete | 405            |
+      | FetchApplicantUsingFilters          | fetchApplicantUsingFilters          | post   | 405            |
+      | FetchApplicantWithId                | fetchApplicantWithId                | post   | 405            |
+      | FetchCurrentStageOfApplicant        | fetchCurrentStageOfApplicant        | post   | 405            |
+      | FetchApplicantOnSearchUsingPagesize | fetchApplicantOnSearchUsingPagesize | post   | 405            |
+      | FetchApplicantOnSearch              | fetchApplicantOnSearch              | post   | 405            |
+      | FetchResumeUsingApplicantId         | fetchResumeUsingApplicantId         | post   | 405            |
+      | FetchApplicantPersonalDetails       | fetchApplicantPersonalDetails       | post   | 405            |
+      | FetchJobOfApplicant                 | fetchJobOfApplicant                 | post   | 405            |
+      | FetchListOfHR                       | fetchListOfHR                       | post   | 405            |
+      | FetchApplicantConstants             | fetchApplicantConstants             | post   | 405            |
+      | FetchAllApplicantWithPaging         | fetchAllApplicantWithPaging         | post   | 405            |
 
   Scenario Outline:ATS, Negative Testing of API to get list of all interviews using wrong Method
     Given Set the Interview endpoint <endpoint> and method <method>
@@ -274,16 +273,16 @@ Feature: ATS scenario
     Then Verify scenario status code <expectedStatus>
     Examples:
       | endpoint   | method | expectedStatus | payload_key | payload_value              | name1        | field       |
-      | PostNewJob | post   | 400            | job,jdFile  | jobCheck1.json,sample1.txt | Create a job | MinExp      |
-      | PostNewJob | post   | 400            | job,jdFile  | jobCheck2.json,sample1.txt | Create a job | JobStatus   |
-      | PostNewJob | post   | 400            | job,jdFile  | jobCheck3.json,sample1.txt | Create a job | MaxExp      |
-      | PostNewJob | post   | 400            | job,jdFile  | jobCheck4.json,sample1.txt | Create a job | reqQuantity |
-      | PostNewJob | post   | 400            | job,jdFile  | jobCheck5.json,sample1.txt | Create a job | orderId     |
-      | UpdateJob  | put    | 400            | job,jdFile  | jobCheck1.json,sample1.txt | Update a job | MinExp      |
-      | UpdateJob  | put    | 400            | job,jdFile  | jobCheck2.json,sample1.txt | Update a job | JobStatus   |
-      | UpdateJob  | put    | 400            | job,jdFile  | jobCheck3.json,sample1.txt | Update a job | MaxExp      |
-      | UpdateJob  | put    | 400            | job,jdFile  | jobCheck4.json,sample1.txt | Update a job | reqQuantity |
-      | UpdateJob  | put    | 400            | job,jdFile  | jobCheck5.json,sample1.txt | Update a job | orderId     |
+      | postNewJob | post   | 400            | job,jdFile  | jobCheck1.json,sample1.txt | Create a job | MinExp      |
+      | postNewJob | post   | 400            | job,jdFile  | jobCheck2.json,sample1.txt | Create a job | JobStatus   |
+      | postNewJob | post   | 400            | job,jdFile  | jobCheck3.json,sample1.txt | Create a job | MaxExp      |
+      | postNewJob | post   | 400            | job,jdFile  | jobCheck4.json,sample1.txt | Create a job | reqQuantity |
+      | postNewJob | post   | 400            | job,jdFile  | jobCheck5.json,sample1.txt | Create a job | orderId     |
+      | updateJob  | put    | 400            | job,jdFile  | jobCheck1.json,sample1.txt | Update a job | MinExp      |
+      | updateJob  | put    | 400            | job,jdFile  | jobCheck2.json,sample1.txt | Update a job | JobStatus   |
+      | updateJob  | put    | 400            | job,jdFile  | jobCheck3.json,sample1.txt | Update a job | MaxExp      |
+      | updateJob  | put    | 400            | job,jdFile  | jobCheck4.json,sample1.txt | Update a job | reqQuantity |
+      | updateJob  | put    | 400            | job,jdFile  | jobCheck5.json,sample1.txt | Update a job | orderId     |
 
 
   Scenario Outline: ATS ,Job--> <name1>
@@ -291,9 +290,9 @@ Feature: ATS scenario
     Then Verify scenario status code <expectedStatus>
     Examples:
       | endpoint            | method | expectedStatus | payload_key | payload_value                 | name1                     |
-      | PostNewJob          | post   | 201            | job,jdFile  | apiCheckJob1.json,sample1.txt | Create a job              |
-      | UpdateJob           | put    | 200            | job,jdFile  | apiJobUpdate.json,sample1.txt | Update a job              |
-      | UpdateJobUsingJobID | put    | 200            | job,jdFile  | apiJobUpdate.json,sample1.txt | Update a job using job ID |
+      | postNewJob          | post   | 201            | job,jdFile  | apiCheckJob1.json,sample1.txt | Create a job              |
+      | updateJob           | put    | 200            | job,jdFile  | apiJobUpdate.json,sample1.txt | Update a job              |
+      | updateJobUsingJobID | put    | 200            | job,jdFile  | apiJobUpdate.json,sample1.txt | Update a job using job ID |
 
   Scenario Outline: ATS , Job---><name1>
     Given Set the Job endpoint <endpoint> and method <method>
@@ -321,8 +320,8 @@ Feature: ATS scenario
     Then Verify scenario status code <expectedStatus>
     Examples:
       | endpoint               | method | expectedStatus | payload_key                | payload_value                            | name   |
-      | SaveApplicantDetails   | post   | 201            | applicantData,resume,image | applicant.json,Skribbl.pptx,Skribbl.pptx | Create |
-      | UpdateApplicantDetails | put    | 201            | applicantData,resume,image | applicant.json,Skribbl.pptx,Skribbl.pptx | Update |
+      | saveApplicantDetails   | post   | 201            | applicantData,resume,image | applicant.json,Skribbl.pptx,Skribbl.pptx | Create |
+      | updateApplicantDetails | put    | 201            | applicantData,resume,image | applicant.json,Skribbl.pptx,Skribbl.pptx | Update |
 
   Scenario Outline: ATS, Align the applicant to that job
 
@@ -330,7 +329,7 @@ Feature: ATS scenario
     Then Verify Applicant status code <expectedStatus>
     Examples:
       | endpoint      | method | expectedStatus | stage |
-      | AlignToNewJob | post   | 201            |       |
+      | alignToNewJob | post   | 201            |       |
 
 #  Scenario Outline: ATS, HealthCheck of Applicants API - <name>
 #    Given Set the Applicant endpoint <endpoint> and method <method>
@@ -355,7 +354,7 @@ Feature: ATS scenario
     Then Verify Applicant status code <expectedStatus>
     Examples:
       | endpoint               | method | expectedStatus | stage |
-      | UpdateStageOfApplicant | put    | 201            | 2     |
+      | updateStageOfApplicant | put    | 201            | 2     |
 
 
   Scenario Outline:ATS, API to schedule interview for the same job and same applicant using wrong <key> field in the payload
@@ -475,16 +474,16 @@ Feature: ATS scenario
     Then Verify scenario status code <expectedStatus>
     Examples:
       | endpoint            | method | expectedStatus | payload_key | payload_value                 | name1                     |
-      | PostNewJob          | post   | 201            | job,jdFile  | apiCheckJob1.json,sample1.txt | Create a job              |
-      | UpdateJob           | put    | 200            | job,jdFile  | apiJobUpdate.json,sample1.txt | Update a job              |
-      | UpdateJobUsingJobID | put    | 200            | job,jdFile  | apiJobUpdate.json,sample1.txt | Update a job using job ID |
+      | postNewJob          | post   | 201            | job,jdFile  | apiCheckJob1.json,sample1.txt | Create a job              |
+      | updateJob           | put    | 200            | job,jdFile  | apiJobUpdate.json,sample1.txt | Update a job              |
+      | updateJobUsingJobID | put    | 200            | job,jdFile  | apiJobUpdate.json,sample1.txt | Update a job using job ID |
 
   Scenario Outline: ATS , Job---><name1>
     Given Set the Job endpoint <endpoint> and method <method>
     Then Verify Job status code <expectedStatus>
     Examples:
-      | endpoint                    | method | expectedStatus | name1                            |
-      | updateJobStatus             | put    | 200            | Update Job Status                |
+      | endpoint        | method | expectedStatus | name1             |
+      | updateJobStatus | put    | 200            | Update Job Status |
 #      | updateJobStatusUsingOrderId | put    | 200            | Update Job Status Using Order ID |
 
 
@@ -505,8 +504,8 @@ Feature: ATS scenario
     Then Verify scenario status code <expectedStatus>
     Examples:
       | endpoint               | method | expectedStatus | payload_key                | payload_value                            | name   |
-      | SaveApplicantDetails   | post   | 201            | applicantData,resume,image | applicant.json,Skribbl.pptx,Skribbl.pptx | Create |
-      | UpdateApplicantDetails | put    | 201            | applicantData,resume,image | applicant.json,Skribbl.pptx,Skribbl.pptx | Update |
+      | saveApplicantDetails   | post   | 201            | applicantData,resume,image | applicant.json,Skribbl.pptx,Skribbl.pptx | Create |
+      | updateApplicantDetails | put    | 201            | applicantData,resume,image | applicant.json,Skribbl.pptx,Skribbl.pptx | Update |
 
   Scenario Outline: ATS, Align the applicant to that job
 
@@ -514,7 +513,7 @@ Feature: ATS scenario
     Then Verify Applicant status code <expectedStatus>
     Examples:
       | endpoint      | method | expectedStatus | stage |
-      | AlignToNewJob | post   | 201            |       |
+      | alignToNewJob | post   | 201            |       |
 
 #  Scenario Outline: ATS, HealthCheck of Applicants API - <name>
 #    Given Set the Applicant endpoint <endpoint> and method <method>
@@ -539,33 +538,33 @@ Feature: ATS scenario
     Then Verify Applicant status code <expectedStatus>
     Examples:
       | endpoint               | method | expectedStatus | stage |
-      | UpdateStageOfApplicant | put    | 201            | 2     |
+      | updateStageOfApplicant | put    | 201            | 2     |
 
 
   Scenario Outline:ATS, API to schedule interview for the same job and same applicant using wrong <key> field in the payload
     Given Set the Interview endpoint <endpoint> , method <method> and payload <payload>
     Then Verify Interview status code <expectedStatus>
     Examples:
-      | endpoint        | method | expectedStatus | payload    | key|
-      | addNewInterview | post   | 400            | interview3 | startTime|
+      | endpoint        | method | expectedStatus | payload     | key       |
+      | addNewInterview | post   | 400            | interview3  | startTime |
 #      | addNewInterview | post   | 400            | interview4 |startTime |
 #      | addNewInterview | post   | 400            | interview6 |title |
 #      | addNewInterview | post   | 400            | interview7 |interviewType |
 #      | addNewInterview | post   | 400            | interview8 |interviewType |
-      | addNewInterview | post   | 400            | interview9 |attendees |
-      | addNewInterview | post   | 400            | interview10 |attendees  |
+      | addNewInterview | post   | 400            | interview9  | attendees |
+      | addNewInterview | post   | 400            | interview10 | attendees |
 #      | addNewInterview | post   | 400            | interview6 |startTime |
-      | addNewInterview | post   | 400            | interview11 |endTime  |
+      | addNewInterview | post   | 400            | interview11 | endTime   |
 #      | addNewInterview | post   | 500            | interview12 |endTime  |
 
   Scenario Outline:ATS, API to schedule interview for the same job and same applicant without using <key> field in the payload
     Given Set the Interview endpoint <endpoint> , method <method> and payload <payload>
     Then Verify Interview status code <expectedStatus>
     Examples:
-      | endpoint        | method | expectedStatus | payload    | key|
-      | addNewInterview | post   | 500            | interview4 | startTime|
-      | addNewInterview | post   | 500            | interview6 |interviewerEmail|
-      | addNewInterview | post   | 500            | interview7 |endTime  |
+      | endpoint        | method | expectedStatus | payload    | key              |
+      | addNewInterview | post   | 500            | interview4 | startTime        |
+      | addNewInterview | post   | 500            | interview6 | interviewerEmail |
+      | addNewInterview | post   | 500            | interview7 | endTime          |
 
   Scenario Outline:ATS, API to schedule interview for the same job and same applicant
     Given Set the Interview endpoint <endpoint> , method <method> and payload <payload>
@@ -578,22 +577,22 @@ Feature: ATS scenario
     Given Set the Feedback endpoint <endpoint> , method <method> and payload <payload>
     Then Verify Interview status code <expectedStatus>
     Examples:
-      | endpoint       | method | expectedStatus | payload   | name|
-      | addNewFeedback | post   | 400            | feedback3 |  selectionType   |
+      | endpoint       | method | expectedStatus | payload   | name          |
+      | addNewFeedback | post   | 400            | feedback3 | selectionType |
 
   Scenario Outline:ATS, API to update a feedback using wrong <name>field value in payload
     Given Set the Feedback endpoint <endpoint> , method <method> and payload <payload>
     Then Verify Interview status code <expectedStatus>
     Examples:
-      | endpoint       | method | expectedStatus | payload   |name|
-      | addNewFeedback | put    | 400            | feedback4 |selectionType|
+      | endpoint       | method | expectedStatus | payload   | name          |
+      | addNewFeedback | put    | 400            | feedback4 | selectionType |
 
   Scenario Outline:ATS, API to post a new feedback without using <name> field  in payload
     Given Set the Feedback endpoint <endpoint> , method <method> and payload <payload>
     Then Verify Interview status code <expectedStatus>
     Examples:
-      | endpoint       | method | expectedStatus | payload   | name|
-      | addNewFeedback | post   | 500            | feedback5|  selectionType   |
+      | endpoint       | method | expectedStatus | payload   | name          |
+      | addNewFeedback | post   | 500            | feedback5 | selectionType |
 
 
   Scenario Outline:ATS, API to post a new feedback
@@ -604,10 +603,9 @@ Feature: ATS scenario
       | addNewFeedback | post   | 200            | feedback1 |
 
 
-
   Scenario Outline:ATS, API to update a feedback using wrong <name>field value in payload
     Given Set the Feedback endpoint <endpoint> , method <method> and payload <payload>
     Then Verify Interview status code <expectedStatus>
     Examples:
-      | endpoint       | method | expectedStatus | payload   |name|
-      | addNewFeedback | put    | 500            | feedback6 |selectionType|
+      | endpoint       | method | expectedStatus | payload   | name          |
+      | addNewFeedback | put    | 500            | feedback6 | selectionType |
