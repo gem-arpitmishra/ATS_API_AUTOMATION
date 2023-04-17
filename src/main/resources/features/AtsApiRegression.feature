@@ -378,13 +378,13 @@ Feature: ATS scenario
     Then Verify Interview status code <expectedStatus>
     Examples:
       | endpoint        | method | expectedStatus | payload    | key              |
-      | addNewInterview | post   | 500            | interview4 | startTime        |
+      | addNewInterview | post   | 400            | interview4 | startTime        |
 #      | addNewInterview | post   | 400            | interview4 |startTime |
 #      | addNewInterview | post   | 400            | interview6 |title |
 #      | addNewInterview | post   | 400            | interview7 |interviewType |
 #      | addNewInterview | post   | 400            | interview8 |interviewType |
-      | addNewInterview | post   | 500            | interview6 | interviewerEmail |
-      | addNewInterview | post   | 500            | interview7 | endTime          |
+      | addNewInterview | post   | 400            | interview6 | interviewerEmail |
+      | addNewInterview | post   | 400            | interview7 | endTime          |
 #      | addNewInterview | post   | 400            | interview6 |startTime |
 
 #      | addNewInterview | post   | 500            | interview12 |endTime  |
