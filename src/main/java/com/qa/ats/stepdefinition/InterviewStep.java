@@ -48,7 +48,7 @@ public class InterviewStep {
         token.put("X-REMOTE-USER-OBJECT-ID", "24431885-d574-445a-b66e-42271b7ad459");
         try {
             String check = Utils.interviewApiWithPayloads(url, method, payload, token, "");
-            if (method.equals("post")) {
+            if (method.equals("post") && check.contains(",")) {
 
                 String checkList[] = check.split(",");
                 status = Integer.parseInt(checkList[0]);
@@ -72,7 +72,7 @@ public class InterviewStep {
         token.put("X-REMOTE-USER-OBJECT-ID", "24431885-d574-445a-b66e-42271b7ad459");
         try {
             String check = Utils.feedbackApiWithPayloads(url, method, payload, token, "");
-            if (method.equals("post")) {
+            if (method.equals("post")&&check.contains(",")) {
                 String checkList[] = check.split(",");
                 status = Integer.parseInt(checkList[0]);
                 feedbackId = Integer.parseInt(checkList[1]);

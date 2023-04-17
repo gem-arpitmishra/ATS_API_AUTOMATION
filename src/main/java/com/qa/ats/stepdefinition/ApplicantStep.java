@@ -47,8 +47,6 @@ public class ApplicantStep {
         try {
             if (method.equals("put")||method.equals("post"))
                 status = Utils.apiForUpdatingApplicantStage(url, method, header, stage,"").getStatus();
-
-
             else
                 status = Utils.apiWithoutPayloads(url, method, header, "").getStatus();
 
