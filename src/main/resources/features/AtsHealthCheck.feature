@@ -204,6 +204,7 @@ Feature: ATS scenario
       | deleteAnInterview | delete | 200            |
 
 
+
   Scenario Outline: ATS,API to delete the applicant
     Given Set the Applicant endpoint <endpoint> and method <method>
     Then Verify Applicant status code <expectedStatus>
