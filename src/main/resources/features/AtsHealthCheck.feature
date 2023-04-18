@@ -158,6 +158,20 @@ Feature: ATS scenario
       | endpoint               | method | expectedStatus | stage |
       | updateStageOfApplicant | put    | 201            | 3     |
 
+  Scenario Outline:ATS, API to send feedback reminder to all
+    Given Set the Interview endpoint <endpoint> and method <method>
+    Then Verify Interview status code <expectedStatus>
+    Examples:
+      | endpoint                  | method | expectedStatus |
+      | sendFeedbackReminderToAll | post   | 200            |
+
+  Scenario Outline:ATS, API to send feedback reminder on the basis of interview ID
+    Given Set the Interview endpoint <endpoint> and method <method>
+    Then Verify Interview status code <expectedStatus>
+    Examples:
+      | endpoint                               | method | expectedStatus |
+      | sendFeedbackReminderBasedOnInterviewId | post   | 200            |
+
   Scenario Outline:ATS, API to post a new feedback
     Given Set the Feedback endpoint <endpoint> , method <method> and payload <payload>
     Then Verify Interview status code <expectedStatus>

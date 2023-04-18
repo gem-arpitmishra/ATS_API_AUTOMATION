@@ -283,7 +283,7 @@ Feature: ATS scenario
       | updateJob  | put    | 400            | job,jdFile  | jobCheck3.json,sample1.txt | Update a job | MaxExp      |
       | updateJob  | put    | 400            | job,jdFile  | jobCheck4.json,sample1.txt | Update a job | reqQuantity |
       | updateJob  | put    | 400            | job,jdFile  | jobCheck5.json,sample1.txt | Update a job | orderId     |
-
+      
   Scenario Outline: ATS <name1>,Jobs API removing <field>
     Given Set the Job endpoint <endpoint> method <method> payload <payload_key> <payload_value> and form data
     Then Verify scenario status code <expectedStatus>
@@ -404,15 +404,14 @@ Feature: ATS scenario
     Then Verify Interview status code <expectedStatus>
     Examples:
       | endpoint        | method | expectedStatus | payload    | key              |
-      | addNewInterview | post   | 500            | interview4 | startTime        |
+      | addNewInterview | post   | 400            | interview4 | startTime        |
 #      | addNewInterview | post   | 400            | interview4 |startTime |
 #      | addNewInterview | post   | 400            | interview6 |title |
 #      | addNewInterview | post   | 400            | interview7 |interviewType |
 #      | addNewInterview | post   | 400            | interview8 |interviewType |
-      | addNewInterview | post   | 500            | interview6 | interviewerEmail |
-      | addNewInterview | post   | 500            | interview7 | endTime          |
+      | addNewInterview | post   | 400            | interview6 | interviewerEmail |
+      | addNewInterview | post   | 400            | interview7 | endTime          |
 #      | addNewInterview | post   | 400            | interview6 |startTime |
-
 #      | addNewInterview | post   | 500            | interview12 |endTime  |
 
   Scenario Outline:ATS, API to schedule interview for the same job and same applicant
