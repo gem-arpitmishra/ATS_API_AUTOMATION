@@ -6,16 +6,16 @@ Feature: ATS scenario
     Then Verify scenario status code <expectedStatus>
     Examples:
       | endpoint            | method | expectedStatus | payload_key | payload_value                 | name1                     |
-      | PostNewJob          | post   | 201            | job,jdFile  | apiCheckJob1.json,sample1.txt | Create a job              |
-      | UpdateJob           | put    | 200            | job,jdFile  | apiJobUpdate.json,sample1.txt | Update a job              |
-      | UpdateJobUsingJobID | put    | 200            | job,jdFile  | apiJobUpdate.json,sample1.txt | Update a job using job ID |
+      | postNewJob          | post   | 201            | job,jdFile  | apiCheckJob1.json,sample1.txt | Create a job              |
+      | updateJob           | put    | 200            | job,jdFile  | apiJobUpdate.json,sample1.txt | Update a job              |
+      | updateJobUsingJobID | put    | 200            | job,jdFile  | apiJobUpdate.json,sample1.txt | Update a job using job ID |
 
   Scenario Outline: ATS , Job---><name1>
     Given Set the Job endpoint <endpoint> and method <method>
     Then Verify Job status code <expectedStatus>
     Examples:
-      | endpoint                    | method | expectedStatus | name1                            |
-      | updateJobStatus             | put    | 200            | Update Job Status                |
+      | endpoint        | method | expectedStatus | name1             |
+      | updateJobStatus | put    | 200            | Update Job Status |
 #      | updateJobStatusUsingOrderId | put    | 200            | Update Job Status Using Order ID |
 
 
@@ -24,20 +24,20 @@ Feature: ATS scenario
     Then Verify Job status code <expectedStatus>
     Examples:
       | name                            | endpoint                        | method | expectedStatus |
-      | FetchJobUsingSearchKeyword      | FetchJobUsingSearchKeyword      | get    | 200            |
-      | GetConstants                    | GetConstants                    | get    | 200            |
-      | GetAllJobDetails                | GetAllJobDetails                | get    | 200            |
-      | FetchJobUsingJobID              | FetchJobUsingJobID              | get    | 200            |
-      | FetchJobDetails                 | FetchJobDetails                 | get    | 200            |
-      | FetchRecruiterDetailsUsingJobID | FetchRecruiterDetailsUsingJobID | get    | 200            |
+      | FetchJobUsingSearchKeyword      | fetchJobUsingSearchKeyword      | get    | 200            |
+      | GetConstants                    | getConstants                    | get    | 200            |
+      | GetAllJobDetails                | getAllJobDetails                | get    | 200            |
+      | FetchJobUsingJobID              | fetchJobUsingJobID              | get    | 200            |
+      | FetchJobDetails                 | fetchJobDetails                 | get    | 200            |
+      | FetchRecruiterDetailsUsingJobID | fetchRecruiterDetailsUsingJobID | get    | 200            |
 
   Scenario Outline: ATS, <name> an applicant
     Given Set the Applicant endpoint <endpoint> method <method> payload <payload_key> <payload_value> and form data
     Then Verify scenario status code <expectedStatus>
     Examples:
       | endpoint               | method | expectedStatus | payload_key                | payload_value                            | name   |
-      | SaveApplicantDetails   | post   | 201            | applicantData,resume,image | applicant.json,Skribbl.pptx,Skribbl.pptx | Create |
-      | UpdateApplicantDetails | put    | 201            | applicantData,resume,image | applicant.json,Skribbl.pptx,Skribbl.pptx | Update |
+      | saveApplicantDetails   | post   | 201            | applicantData,resume,image | applicant.json,Skribbl.pptx,Skribbl.pptx | Create |
+      | updateApplicantDetails | put    | 201            | applicantData,resume,image | applicant.json,Skribbl.pptx,Skribbl.pptx | Update |
 
   Scenario Outline: ATS, Align the applicant to that job
 
@@ -45,24 +45,24 @@ Feature: ATS scenario
     Then Verify Applicant status code <expectedStatus>
     Examples:
       | endpoint      | method | expectedStatus | stage |
-      | AlignToNewJob | post   | 201            |       |
+      | alignToNewJob | post   | 201            |       |
 
   Scenario Outline: ATS, HealthCheck of Applicants API - <name>
     Given Set the Applicant endpoint <endpoint> and method <method>
     Then Verify Applicant status code <expectedStatus>
     Examples:
       | name                                | endpoint                            | method | expectedStatus |
-      | FetchApplicantUsingFilters          | FetchApplicantUsingFilters          | get    | 200            |
-      | FetchApplicantWithId                | FetchApplicantWithId                | get    | 200            |
-      | FetchCurrentStageOfApplicant        | FetchCurrentStageOfApplicant        | get    | 200            |
-      | FetchApplicantOnSearchUsingPagesize | FetchApplicantOnSearchUsingPagesize | get    | 200            |
-      | FetchApplicantOnSearch              | FetchApplicantOnSearch              | get    | 200            |
-      | FetchResumeUsingApplicantId         | FetchResumeUsingApplicantId         | get    | 200            |
-      | FetchApplicantPersonalDetails       | FetchApplicantPersonalDetails       | get    | 200            |
-      | FetchJobOfApplicant                 | FetchJobOfApplicant                 | get    | 200            |
-      | FetchListOfHR                       | FetchListOfHR                       | get    | 200            |
-      | FetchApplicantConstants             | FetchApplicantConstants             | get    | 200            |
-      | FetchAllApplicantWithPaging         | FetchAllApplicantWithPaging         | get    | 200            |
+      | FetchApplicantUsingFilters          | fetchApplicantUsingFilters          | get    | 200            |
+      | FetchApplicantWithId                | fetchApplicantWithId                | get    | 200            |
+      | FetchCurrentStageOfApplicant        | fetchCurrentStageOfApplicant        | get    | 200            |
+      | FetchApplicantOnSearchUsingPagesize | fetchApplicantOnSearchUsingPagesize | get    | 200            |
+      | FetchApplicantOnSearch              | fetchApplicantOnSearch              | get    | 200            |
+      | FetchResumeUsingApplicantId         | fetchResumeUsingApplicantId         | get    | 200            |
+      | FetchApplicantPersonalDetails       | fetchApplicantPersonalDetails       | get    | 200            |
+      | FetchJobOfApplicant                 | fetchJobOfApplicant                 | get    | 200            |
+      | FetchListOfHR                       | fetchListOfHR                       | get    | 200            |
+      | FetchApplicantConstants             | fetchApplicantConstants             | get    | 200            |
+      | FetchAllApplicantWithPaging         | fetchAllApplicantWithPaging         | get    | 200            |
 
 
   Scenario Outline:ATS , Set the applicant stage to "Approved"
@@ -70,7 +70,7 @@ Feature: ATS scenario
     Then Verify Applicant status code <expectedStatus>
     Examples:
       | endpoint               | method | expectedStatus | stage |
-      | UpdateStageOfApplicant | put    | 201            | 2     |
+      | updateStageOfApplicant | put    | 201            | 2     |
 
 
   Scenario Outline:ATS, API to schedule interview for the same job and same applicant
@@ -79,6 +79,27 @@ Feature: ATS scenario
     Examples:
       | endpoint        | method | expectedStatus | payload    |
       | addNewInterview | post   | 201            | interview1 |
+
+  Scenario Outline:ATS, API to send feedback reminder to all
+    Given Set the Interview endpoint <endpoint> and method <method>
+    Then Verify Interview status code <expectedStatus>
+    Examples:
+      | endpoint                  | method | expectedStatus |
+      | sendFeedbackReminderToAll | post   | 200            |
+
+  Scenario Outline:ATS, API to send feedback reminder on the basis of interview ID
+    Given Set the Interview endpoint <endpoint> and method <method>
+    Then Verify Interview status code <expectedStatus>
+    Examples:
+      | endpoint                               | method | expectedStatus |
+      | sendFeedbackReminderBasedOnInterviewId | post   | 200            |
+
+  Scenario Outline:ATS, API to update interview
+    Given Set the Interview endpoint <endpoint> , method <method> and payload <payload>
+    Then Verify Interview status code <expectedStatus>
+    Examples:
+      | endpoint          | method | expectedStatus | payload    |
+      | updateAnInterview | put    | 200            | interview2 |
 
   Scenario Outline: ATS, API to get interviews for a particular job
     Given Set the Interview endpoint <endpoint> and method <method>
@@ -135,21 +156,7 @@ Feature: ATS scenario
     Then Verify Applicant status code <expectedStatus>
     Examples:
       | endpoint               | method | expectedStatus | stage |
-      | UpdateStageOfApplicant | put    | 201            | 3     |
-
-  Scenario Outline:ATS, API to send feedback reminder to all
-    Given Set the Interview endpoint <endpoint> and method <method>
-    Then Verify Interview status code <expectedStatus>
-    Examples:
-      | endpoint                  | method | expectedStatus |
-      | sendFeedbackReminderToAll | post   | 200            |
-
-  Scenario Outline:ATS, API to send feedback reminder on the basis of interview ID
-    Given Set the Interview endpoint <endpoint> and method <method>
-    Then Verify Interview status code <expectedStatus>
-    Examples:
-      | endpoint                               | method | expectedStatus |
-      | sendFeedbackReminderBasedOnInterviewId | post   | 200            |
+      | updateStageOfApplicant | put    | 201            | 3     |
 
   Scenario Outline:ATS, API to post a new feedback
     Given Set the Feedback endpoint <endpoint> , method <method> and payload <payload>
@@ -170,8 +177,21 @@ Feature: ATS scenario
     Then Verify Applicant status code <expectedStatus>
     Examples:
       | endpoint               | method | expectedStatus | stage |
-      | UpdateStageOfApplicant | put    | 201            | 4     |
+      | updateStageOfApplicant | put    | 201            | 4     |
 
+  Scenario Outline:ATS, API to send email without CC recipient
+    Given Set the Interview endpoint <endpoint> and method <method>
+    Then Verify Interview status code <expectedStatus>
+    Examples:
+      | endpoint   | method | expectedStatus |
+      | sendEmails | post   | 200            |
+
+  Scenario Outline:ATS, API to send email with CC recipient
+    Given Set the Interview endpoint <endpoint> and method <method>
+    Then Verify Interview status code <expectedStatus>
+    Examples:
+      | endpoint         | method | expectedStatus |
+      | sendEmailsWithCC | post   | 200            |
 
   Scenario Outline:ATS, API to send management approval email without CC recipient
     Given Set the Interview endpoint <endpoint> and method <method>

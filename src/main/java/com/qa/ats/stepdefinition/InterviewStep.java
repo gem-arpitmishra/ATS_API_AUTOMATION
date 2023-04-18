@@ -20,8 +20,8 @@ public class InterviewStep {
     @Given("^Set the Interview endpoint (.+) and method (.+)$")
     public void setThePolicyEndpointAndMethod(String url, String method) {
         HashMap<String, String> token = new HashMap<String, String>();
-        token.put("X-REMOTE-USER-EMAIL", "tripta.sahni@geminisolutions.com");
-        token.put("X-REMOTE-USER-OBJECT-ID", "24431885-d574-445a-b66e-42271b7ad459");
+        token.put("X-REMOTE-USER-EMAIL", "nipun.jain@geminisolutions.com");
+        token.put("X-REMOTE-USER-OBJECT-ID", "3760ebf6-6067-4439-91eb-6d87a1a8d88a");
         try {
             if (method.equals("post"))
                 status = Utils.apiToSendManagementApprovalEmails(url, method, token, "").getStatus();
@@ -44,11 +44,11 @@ public class InterviewStep {
     @Given("^Set the Interview endpoint (.+) , method (.+) and payload (.+)$")
     public void setTheEndpointMethodAndPayload(String url, String method, String payload) {
         HashMap<String, String> token = new HashMap<String, String>();
-        token.put("X-REMOTE-USER-EMAIL", "tripta.sahni@geminisolutions.com");
-        token.put("X-REMOTE-USER-OBJECT-ID", "24431885-d574-445a-b66e-42271b7ad459");
+        token.put("X-REMOTE-USER-EMAIL", "nipun.jain@geminisolutions.com");
+        token.put("X-REMOTE-USER-OBJECT-ID", "3760ebf6-6067-4439-91eb-6d87a1a8d88a");
         try {
             String check = Utils.interviewApiWithPayloads(url, method, payload, token, "");
-            if (method.equals("post")) {
+            if (method.equals("post") && check.contains(",")) {
 
                 String checkList[] = check.split(",");
                 status = Integer.parseInt(checkList[0]);
@@ -69,10 +69,10 @@ public class InterviewStep {
     public void setTheFeedbackEndpointMethodAndPayload(String url, String method, String payload) {
         HashMap<String, String> token = new HashMap<String, String>();
         token.put("X-REMOTE-USER-EMAIL", "tripta.sahni@geminisolutions.com");
-        token.put("X-REMOTE-USER-OBJECT-ID", "24431885-d574-445a-b66e-42271b7ad459");
+        token.put("X-REMOTE-USER-OBJECT-ID", "3760ebf6-6067-4439-91eb-6d87a1a8d88a");
         try {
             String check = Utils.feedbackApiWithPayloads(url, method, payload, token, "");
-            if (method.equals("post")) {
+            if (method.equals("post")&&check.contains(",")) {
                 String checkList[] = check.split(",");
                 status = Integer.parseInt(checkList[0]);
                 feedbackId = Integer.parseInt(checkList[1]);
@@ -86,7 +86,7 @@ public class InterviewStep {
         }
     }
 
-    @Given("^Set the Interview endpoint (.+) , wrong objectId (.+) and  method (.+)$")
+    @Given("^Set the Interview endpoint (.+) , wrong objectId (.+) and method (.+)$")
     public void setEndpointMethodAndWrongHeader(String url, String method, String header) {
         HashMap<String, String> token = new HashMap<String, String>();
         token.put("X-REMOTE-USER-EMAIL", "tripta.sahni@geminisolutions.com");
