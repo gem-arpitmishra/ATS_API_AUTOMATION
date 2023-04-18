@@ -56,6 +56,8 @@
     "sendFeedbackReminderBasedOnInterviewId": "atsInterviewSvc/interview/feedbackReminder/{interviewId}",
     "sendManagementApprovalEmailWithCC": "atsInterviewSvc/interview/managementApproval/{applicantId}/nipun0499@gmail.com/tripta.sahni@geminisolutions.com,/Hi%20Nipun0499@gmail,%20Please%20review%20cumulative%20feedback%20of%20Applicant",
     "sendManagementApprovalEmailWithoutCC": "atsInterviewSvc/interview/managementApproval/{applicantId}/nipun0499@gmail.com/Hi%20Nipun0499@gmail,%20Please%20review%20cumulative%20feedback%20of%20Applicant",
+    "sendEmails": "atsInterviewSvc/interview/sendEmail/tripta.sahni%40geminisolutions.com/hello%20tripta?emailBody=check%20send%20email%20api",
+    "sendEmailsWithCC": "atsInterviewSvc/interview/sendEmail/tripta.sahni%40geminisolutions.com/tripta.sahni%40geminisolutions.com/hello%20hello?emailBody=ncbdbc%2Csmd",
     "deleteAnInterview": "atsInterviewSvc/interview/{interviewId}",
     "updateAnInterview": "atsInterviewSvc/interview",
     "addNewFeedback": "atsInterviewSvc/feedback",

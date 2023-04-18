@@ -283,7 +283,33 @@ Feature: ATS scenario
       | updateJob  | put    | 400            | job,jdFile  | jobCheck3.json,sample1.txt | Update a job | MaxExp      |
       | updateJob  | put    | 400            | job,jdFile  | jobCheck4.json,sample1.txt | Update a job | reqQuantity |
       | updateJob  | put    | 400            | job,jdFile  | jobCheck5.json,sample1.txt | Update a job | orderId     |
+      
+  Scenario Outline: ATS <name1>,Jobs API removing <field>
+    Given Set the Job endpoint <endpoint> method <method> payload <payload_key> <payload_value> and form data
+    Then Verify scenario status code <expectedStatus>
+    Examples:
+      | endpoint  | method | expectedStatus | payload_key | payload_value              | name1        | field     |
+      | updateJob | put    | 500            | job,jdFile  | jobCheck7.json,sample1.txt | Update a job | JobId     |
+      | updateJob | put    | 500            | job,jdFile  | jobCheck6.json,test.pdf    | Update a job | JobStatus |
 
+  Scenario Outline: ATS <name1>,Applicants API removing <field>
+    Given Set the Job endpoint <endpoint> method <method> payload <payload_key> <payload_value> and form data
+    Then Verify scenario status code <expectedStatus>
+    Examples:
+      | endpoint               | method | expectedStatus | payload_key                      | payload_value                            | name1            | field            |
+      | saveApplicantDetails   | post   | 500            | applicantTest1.json,resume,image | applicant.json,Skribbl.pptx,Skribbl.pptx | Create Applicant | Email            |
+      | saveApplicantDetails   | post   | 500            | applicantTest2.json,resume,image | applicant.json,Skribbl.pptx,Skribbl.pptx | Create Applicant | Phone no         |
+      | saveApplicantDetails   | post   | 500            | applicantData.json               | applicant.json                           | Create Applicant | Resume and Image |
+      | updateApplicantDetails | put    | 400            | applicantData.json               | applicant.json                           | Update Applicant | Resume and Image |
+      | updateApplicantDetails | put    | 400            | applicantDatajson,resume,image   | applicant.json,Skribbl.pptx,Skribbl.pptx | Update Applicant | ApplicantId      |
+
+  Scenario Outline: ATS <name1>,Applicant API using invalid <field>
+    Given Set the Job endpoint <endpoint> method <method> payload <payload_key> <payload_value> and form data
+    Then Verify scenario status code <expectedStatus>
+    Examples:
+      | endpoint               | method | expectedStatus | payload_key                    | payload_value                                 | name1            | field                 |
+      | updateApplicantDetails | put    | 400            | applicantDatajson,resume,image | applicantTest3.json,Skribbl.pptx,Skribbl.pptx | Update Applicant | ApplicantId           |
+      | updateApplicantDetails | put    | 400            | applicantDatajson,resume,image | applicantTest3.json,Skribbl.pptx,Skribbl.pptx | Update Applicant | totalYearOfExperience |
 
   Scenario Outline: ATS ,Job--> <name1>
     Given Set the Job endpoint <endpoint> method <method> payload <payload_key> <payload_value> and form data
@@ -386,7 +412,6 @@ Feature: ATS scenario
       | addNewInterview | post   | 400            | interview6 | interviewerEmail |
       | addNewInterview | post   | 400            | interview7 | endTime          |
 #      | addNewInterview | post   | 400            | interview6 |startTime |
-
 #      | addNewInterview | post   | 500            | interview12 |endTime  |
 
   Scenario Outline:ATS, API to schedule interview for the same job and same applicant
@@ -432,6 +457,3 @@ Feature: ATS scenario
     Examples:
       | endpoint       | method | expectedStatus | payload   | name          |
       | addNewFeedback | put    | 500            | feedback6 | selectionType |
-
-
-

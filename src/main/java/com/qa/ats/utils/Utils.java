@@ -182,6 +182,7 @@ public class Utils {
                     pay.addProperty("applicantId", AtsHealthCheck.applicantId);
                 } else if (method.equals("put")) {
                     pay.addProperty("interviewId", InterviewStep.interviewId);
+                    pay.addProperty("jobId",  AtsHealthCheck.jobId);
                     pay.addProperty("applicantId", AtsHealthCheck.applicantId);
                 }
                 String payloads = String.valueOf(ApiHealthCheckUtils.result(pay));
