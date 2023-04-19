@@ -283,7 +283,7 @@ Feature: ATS scenario
       | updateJob  | put    | 400            | job,jdFile  | jobCheck3.json,sample1.txt | Update a job | MaxExp      |
       | updateJob  | put    | 400            | job,jdFile  | jobCheck4.json,sample1.txt | Update a job | reqQuantity |
       | updateJob  | put    | 400            | job,jdFile  | jobCheck5.json,sample1.txt | Update a job | orderId     |
-      
+
   Scenario Outline: ATS <name1>,Jobs API removing <field>
     Given Set the Job endpoint <endpoint> method <method> payload <payload_key> <payload_value> and form data
     Then Verify scenario status code <expectedStatus>
@@ -296,20 +296,30 @@ Feature: ATS scenario
     Given Set the Job endpoint <endpoint> method <method> payload <payload_key> <payload_value> and form data
     Then Verify scenario status code <expectedStatus>
     Examples:
-      | endpoint               | method | expectedStatus | payload_key                      | payload_value                            | name1            | field            |
-      | saveApplicantDetails   | post   | 500            | applicantTest1.json,resume,image | applicant.json,Skribbl.pptx,Skribbl.pptx | Create Applicant | Email            |
-      | saveApplicantDetails   | post   | 500            | applicantTest2.json,resume,image | applicant.json,Skribbl.pptx,Skribbl.pptx | Create Applicant | Phone no         |
-      | saveApplicantDetails   | post   | 500            | applicantData.json               | applicant.json                           | Create Applicant | Resume and Image |
-      | updateApplicantDetails | put    | 400            | applicantData.json               | applicant.json                           | Update Applicant | Resume and Image |
-      | updateApplicantDetails | put    | 400            | applicantDatajson,resume,image   | applicant.json,Skribbl.pptx,Skribbl.pptx | Update Applicant | ApplicantId      |
+      | endpoint               | method | expectedStatus | payload_key                | payload_value                                 | name1            | field            |
+      | saveApplicantDetails   | post   | 500            | applicantData,resume,image | applicantTest1.json,Skribbl.pptx,Skribbl.pptx | Create Applicant | Email            |
+      | saveApplicantDetails   | post   | 500            | applicantData,resume,image | applicantTest2.json,Skribbl.pptx,Skribbl.pptx | Create Applicant | Phone no         |
+      | saveApplicantDetails   | post   | 500            | applicantData              | applicant.json                                | Create Applicant | Resume and Image |
+      | updateApplicantDetails | put    | 400            | applicantData              | applicant.json                                | Update Applicant | Resume and Image |
+      | updateApplicantDetails | put    | 400            | applicantData,resume,image | applicant.json,Skribbl.pptx,Skribbl.pptx      | Update Applicant | ApplicantId      |
 
   Scenario Outline: ATS <name1>,Applicant API using invalid <field>
     Given Set the Job endpoint <endpoint> method <method> payload <payload_key> <payload_value> and form data
     Then Verify scenario status code <expectedStatus>
     Examples:
-      | endpoint               | method | expectedStatus | payload_key                    | payload_value                                 | name1            | field                 |
-      | updateApplicantDetails | put    | 400            | applicantDatajson,resume,image | applicantTest3.json,Skribbl.pptx,Skribbl.pptx | Update Applicant | ApplicantId           |
-      | updateApplicantDetails | put    | 400            | applicantDatajson,resume,image | applicantTest3.json,Skribbl.pptx,Skribbl.pptx | Update Applicant | totalYearOfExperience |
+      | endpoint               | method | expectedStatus | payload_key                | payload_value                                 | name1            | field                 |
+      | saveApplicantDetails   | post   | 400            | applicantData,resume,image | applicantTest4.json,Skribbl.pptx,Skribbl.pptx | Create Applicant | TotalYearOfExperience |
+      | saveApplicantDetails   | post   | 400            | applicantData,resume,image | applicantTest5.json,Skribbl.pptx,Skribbl.pptx | Create Applicant | RelevantExperience    |
+      | saveApplicantDetails   | post   | 400            | applicantData,resume,image | applicantTest6.json,Skribbl.pptx,Skribbl.pptx | Create Applicant | Percentage            |
+      | saveApplicantDetails   | post   | 400            | applicantData,resume,image | applicantTest8.json,Skribbl.pptx,Skribbl.pptx | Create Applicant | FromDate              |
+      | saveApplicantDetails   | post   | 400            | applicantData,resume,image | applicantTest9.json,Skribbl.pptx,Skribbl.pptx | Create Applicant | ToDate                |
+      | updateApplicantDetails | put    | 400            | applicantData,resume,image | applicantTest3.json,Skribbl.pptx,Skribbl.pptx | Update Applicant | ApplicantId           |
+      | updateApplicantDetails | put    | 400            | applicantData,resume,image | applicantTest4.json,Skribbl.pptx,Skribbl.pptx | Update Applicant | TotalYearOfExperience |
+      | updateApplicantDetails | put    | 400            | applicantData,resume,image | applicantTest5.json,Skribbl.pptx,Skribbl.pptx | Update Applicant | RelevantExperience    |
+      | updateApplicantDetails | put    | 400            | applicantData,resume,image | applicantTest6.json,Skribbl.pptx,Skribbl.pptx | Update Applicant | Percentage            |
+      | updateApplicantDetails | put    | 400            | applicantData,resume,image | applicantTest7.json,Skribbl.pptx,Skribbl.pptx | Update Applicant | Phone no              |
+      | updateApplicantDetails | put    | 400            | applicantData,resume,image | applicantTest8.json,Skribbl.pptx,Skribbl.pptx | Update Applicant | FromDate              |
+      | updateApplicantDetails | put    | 400            | applicantData,resume,image | applicantTest9.json,Skribbl.pptx,Skribbl.pptx | Update Applicant | ToDate                |
 
   Scenario Outline: ATS ,Job--> <name1>
     Given Set the Job endpoint <endpoint> method <method> payload <payload_key> <payload_value> and form data
