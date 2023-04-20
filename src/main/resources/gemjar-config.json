@@ -8,9 +8,7 @@
   "jewel_user": "cgarg",
   "jewel_bridge_token": "ecdd02db-4906-4514-aefc-a76e73aa532e1677670397883",
   "glueCode": "com.qa.ats.stepdefinition",
-  "email_report": "y",
-  "email_to": "shruti.kukreja@geminisolutions.com,sajith.j@geminisolutions.com,richa.khatri@geminisolutions.com,harshita.gupta@geminisolutions.com,akshi.khattar@geminisolutions.com,saksham.khanna@geminisolutions.com,nipun.jain@geminisolutions.com,ankita.srivastava@geminisolutions.com,ritika.jain@geminisolutions.com,saru.goyal@geminisolutions.com",
-  "email_cc": "charu.garg@geminisolutions.com,tripta.sahni@geminisolutions.com",
+
   "beta": {
     "getConstants": "atsJobSvc/job/all-constants",
     "getAllJobDetails": "atsJobSvc/job/all-job-details",
@@ -54,7 +52,7 @@
     "addNewInterview": "atsInterviewSvc/interview",
     "sendFeedbackReminderToAll": "atsInterviewSvc/interview/feedbackReminderToAll",
     "sendFeedbackReminderBasedOnInterviewId": "atsInterviewSvc/interview/feedbackReminder/{interviewId}",
-    "sendManagementApprovalEmailWithCC": "atsInterviewSvc/interview/managementApproval/{applicantId}/nipun0499@gmail.com/tripta.sahni@geminisolutions.com,/Hi%20Nipun0499@gmail,%20Please%20review%20cumulative%20feedback%20of%20Applicant",
+    "sendManagementApprovalEmailWithCC": "atsInterviewSvc/interview/managementApproval/{applicantId}/nipun0499@gmail.com/tripta.sahni@geminisolutions.com/Hi%20Nipun0499@gmail,%20Please%20review%20cumulative%20feedback%20of%20Applicant",
     "sendManagementApprovalEmailWithoutCC": "atsInterviewSvc/interview/managementApproval/{applicantId}/nipun0499@gmail.com/Hi%20Nipun0499@gmail,%20Please%20review%20cumulative%20feedback%20of%20Applicant",
     "sendEmails": "atsInterviewSvc/interview/sendEmail/tripta.sahni%40geminisolutions.com/hello%20tripta?emailBody=check%20send%20email%20api",
     "sendEmailsWithCC": "atsInterviewSvc/interview/sendEmail/tripta.sahni%40geminisolutions.com/tripta.sahni%40geminisolutions.com/hello%20hello?emailBody=ncbdbc%2Csmd",
