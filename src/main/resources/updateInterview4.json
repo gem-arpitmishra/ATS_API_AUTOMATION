@@ -1,21 +1,11 @@
 
 {
 
-  "interviewType":"Face To Face",
+  "interviewType":"Telephonic",
 
   "interviewerEmail":"ankita.srivastava@geminisolutions.com",
 
-  "attendees":[
-
-    {
-
-      "empCode":"GSI G 1290",
-
-      "email":"saksham.khanna@geminisolutions.com"
-
-    }
-
-  ],
+  "attendees":[],
 
   "applicantName":"gauri shankar",
 
@@ -23,7 +13,7 @@
 
   "startTime":"2023-04-15 07:36",
 
-  "endTime":"2023-04-15 07:36",
+  "endTime":"bjk",
   "title":"test",
 
   "additionalDetails":"test1",

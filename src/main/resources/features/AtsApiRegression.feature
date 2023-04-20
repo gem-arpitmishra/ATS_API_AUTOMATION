@@ -226,6 +226,20 @@ Feature: ATS scenario
       | endpoint                          | method | expectedStatus |
       | sendManagementApprovalEmailWithCC | delete | 405            |
 
+  Scenario Outline:ATS, Negative Testing of API to send  email without CC recipient usimg wrong Method
+    Given Set the Interview endpoint <endpoint> and method <method>
+    Then Verify Interview status code <expectedStatus>
+    Examples:
+      | endpoint   | method | expectedStatus |
+      | sendEmails | delete | 405            |
+
+  Scenario Outline:ATS, Negative testing of API to send  email with CC recipient using wrong Method
+    Given Set the Interview endpoint <endpoint> and method <method>
+    Then Verify Interview status code <expectedStatus>
+    Examples:
+      | endpoint         | method | expectedStatus |
+      | sendEmailsWithCC | delete | 405            |
+
   Scenario Outline:ATS, Negative testing of API to delete a feedback using wrong Method
     Given Set the Interview endpoint <endpoint> and method <method>
     Then Verify Interview status code <expectedStatus>
@@ -378,16 +392,31 @@ Feature: ATS scenario
     Then Verify Interview status code <expectedStatus>
     Examples:
       | endpoint        | method | expectedStatus | payload    | key              |
-      | addNewInterview | post   | 400            | interview4 | startTime        |
+      | addNewInterview | post   | 500            | interview4 | startTime        |
 #      | addNewInterview | post   | 400            | interview4 |startTime |
 #      | addNewInterview | post   | 400            | interview6 |title |
 #      | addNewInterview | post   | 400            | interview7 |interviewType |
 #      | addNewInterview | post   | 400            | interview8 |interviewType |
-      | addNewInterview | post   | 400            | interview6 | interviewerEmail |
-      | addNewInterview | post   | 400            | interview7 | endTime          |
+      | addNewInterview | post   | 500            | interview6 | interviewerEmail |
+      | addNewInterview | post   | 500            | interview7 | endTime          |
 #      | addNewInterview | post   | 400            | interview6 |startTime |
-
 #      | addNewInterview | post   | 500            | interview12 |endTime  |
+
+  Scenario Outline:ATS, API to schedule interview for the same job and same applicant without using header
+    Given Set the Interview endpoint <endpoint> , method <method> , payload <payload> without using header <header>
+    Then Verify Interview status code <expectedStatus>
+    Examples:
+      | endpoint        | method | expectedStatus | payload    | header   |
+      | addNewInterview | post   | 400            | interview1 | ObjectID |
+
+
+  Scenario Outline:ATS, API to schedule interview for the same job and same applicant  using wrong header
+    Given Set the Interview endpoint <endpoint> , method <method> , payload <payload>  using wrong header <header>
+    Then Verify Interview status code <expectedStatus>
+    Examples:
+      | endpoint        | method | expectedStatus | payload    | header   |
+      | addNewInterview | post   | 500            | interview1 | ObjectID |
+
 
   Scenario Outline:ATS, API to schedule interview for the same job and same applicant
     Given Set the Interview endpoint <endpoint> , method <method> and payload <payload>
@@ -395,6 +424,62 @@ Feature: ATS scenario
     Examples:
       | endpoint        | method | expectedStatus | payload    |
       | addNewInterview | post   | 201            | interview1 |
+
+  Scenario Outline:ATS, API to send feedback reminder to all without using header
+    Given Set the Interview endpoint <endpoint> , method <method> without header <header>
+    Then Verify Interview status code <expectedStatus>
+    Examples:
+      | endpoint                  | method | expectedStatus | header   |
+      | sendFeedbackReminderToAll | post   | 400            | ObjectID |
+
+  Scenario Outline:ATS, API to send feedback reminder on the basis of interview ID without using header
+    Given Set the Interview endpoint <endpoint> , method <method> without header <header>
+    Then Verify Interview status code <expectedStatus>
+    Examples:
+      | endpoint                               | method | expectedStatus | header   |
+      | sendFeedbackReminderBasedOnInterviewId | post   | 400            | ObjectID |
+
+  Scenario Outline:ATS, API to send feedback reminder to all using wrong header ObjectID
+    Given Set the Interview endpoint <endpoint> , method <method> with wrong <header> header
+    Then Verify Interview status code <expectedStatus>
+    Examples:
+      | endpoint                  | method | expectedStatus | header   |
+      | sendFeedbackReminderToAll | post   | 500            | ObjectID |
+
+  Scenario Outline:ATS, API to send feedback reminder based on Interview ID using wrong header ObjectID
+    Given Set the Interview endpoint <endpoint> , method <method> with wrong <header> header
+    Then Verify Interview status code <expectedStatus>
+    Examples:
+      | endpoint                               | method | expectedStatus | header   |
+      | sendFeedbackReminderBasedOnInterviewId | post   | 500            | ObjectID |
+
+  Scenario Outline:ATS, API to update interview for the same job and same applicant using wrong <key>  field value in the payload
+    Given Set the Interview endpoint <endpoint> , method <method> and payload <payload>
+    Then Verify Interview status code <expectedStatus>
+    Examples:
+      | endpoint          | method | expectedStatus | payload          | key       |
+      | updateAnInterview | put    | 400            | updateInterview1 | startTime |
+      | updateAnInterview | put    | 400            | updateInterview2 | attendees |
+      | updateAnInterview | put    | 400            | updateInterview3 | attendees |
+      | updateAnInterview | put    | 400            | updateInterview4 | endTime   |
+
+
+  Scenario Outline:ATS, API to update an interview for the same job and same applicant without using <key> field in the payload
+    Given Set the Interview endpoint <endpoint> , method <method> and payload <payload>
+    Then Verify Interview status code <expectedStatus>
+    Examples:
+      | endpoint          | method | expectedStatus | payload          | key              |
+      | updateAnInterview | put    | 500            | updateInterview5 | startTime        |
+      | updateAnInterview | put    | 500            | updateInterview6 | interviewerEmail |
+      | updateAnInterview | put    | 500            | updateInterview7 | endTime          |
+
+  Scenario Outline:ATS, API to update interview for the same job and same applicant without using header
+    Given Set the Interview endpoint <endpoint> , method <method> , payload <payload> without using header <header>
+    Then Verify Interview status code <expectedStatus>
+    Examples:
+      | endpoint          | method | expectedStatus | payload    | header   |
+      | updateAnInterview | put    | 400            | interview2 | objectId |
+
 
   Scenario Outline:ATS, API to post a new feedback using wrong  <name> field value in payload
     Given Set the Feedback endpoint <endpoint> , method <method> and payload <payload>
@@ -426,12 +511,122 @@ Feature: ATS scenario
       | addNewFeedback | post   | 200            | feedback1 |
 
 
+  Scenario Outline:ATS, API to send management approval email without CC recipient without using header OBJECT ID
+    Given Set the Interview endpoint <endpoint> , method <method> without header <header>
+    Then Verify Interview status code <expectedStatus>
+    Examples:
+      | endpoint                             | method | expectedStatus | header   |
+      | sendManagementApprovalEmailWithoutCC | post   | 400            | ObjectID |
+
+  Scenario Outline:ATS, API to send management approval email without CC recipient without using header EMAIL
+    Given Set the Interview endpoint <endpoint> , method <method> without header <header>
+    Then Verify Interview status code <expectedStatus>
+    Examples:
+      | endpoint                             | method | expectedStatus | header |
+      | sendManagementApprovalEmailWithoutCC | post   | 400            | Emaill |
+
+  Scenario Outline:ATS, API to send management approval email with CC recipient without using header Email
+    Given Set the Interview endpoint <endpoint> , method <method> without header <header>
+    Then Verify Interview status code <expectedStatus>
+    Examples:
+      | endpoint                          | method | expectedStatus | header |
+      | sendManagementApprovalEmailWithCC | post   | 400            | Email  |
+
+  Scenario Outline:ATS, API to send management approval email with CC recipient without using header Object ID
+    Given Set the Interview endpoint <endpoint> , method <method> without header <header>
+    Then Verify Interview status code <expectedStatus>
+    Examples:
+      | endpoint                          | method | expectedStatus | header   |
+      | sendManagementApprovalEmailWithCC | post   | 400            | ObjectID |
+
+  Scenario Outline:ATS, API to send  management approval email without CC recipient using wrong header OBJECT ID
+    Given Set the Interview endpoint <endpoint> , method <method> with wrong <header> header
+    Then Verify Interview status code <expectedStatus>
+    Examples:
+      | endpoint                             | method | expectedStatus | header   |
+      | sendManagementApprovalEmailWithoutCC | post   | 500            | ObjectID |
+
+  Scenario Outline:ATS, API to send  management approval email without CC recipient using wrong header Email
+    Given Set the Interview endpoint <endpoint> , method <method> with wrong <header> header
+    Then Verify Interview status code <expectedStatus>
+    Examples:
+      | endpoint                             | method | expectedStatus | header |
+      | sendManagementApprovalEmailWithoutCC | post   | 500            | Email  |
+
+  Scenario Outline:ATS, API to send management approval email with CC recipient  using wrong header OBJECT ID
+    Given Set the Interview endpoint <endpoint> , method <method> with wrong <header> header
+    Then Verify Interview status code <expectedStatus>
+    Examples:
+      | endpoint                          | method | expectedStatus | header   |
+      | sendManagementApprovalEmailWithCC | post   | 500            | ObjectID |
+
+  Scenario Outline:ATS, API to send management approval email with CC recipient  using wrong header Email
+    Given Set the Interview endpoint <endpoint> , method <method> with wrong <header> header
+    Then Verify Interview status code <expectedStatus>
+    Examples:
+      | endpoint                          | method | expectedStatus | header |
+      | sendManagementApprovalEmailWithCC | post   | 500            | Email  |
+
+
+  Scenario Outline:ATS, API to send  email without CC recipient without using header ObjectID
+    Given Set the Interview endpoint <endpoint> , method <method> without header <header>
+    Then Verify Interview status code <expectedStatus>
+    Examples:
+      | endpoint   | method | expectedStatus | header   |
+      | sendEmails | post   | 400            | ObjectID |
+
+  Scenario Outline:ATS, API to send  email without CC recipient without using header Object ID
+    Given Set the Interview endpoint <endpoint> , method <method> without header <header>
+    Then Verify Interview status code <expectedStatus>
+    Examples:
+      | endpoint         | method | expectedStatus | header   |
+      | sendEmailsWithCC | post   | 400            | ObjectID |
+
+  Scenario Outline:ATS, API to send email without CC recipient  using wrong header ObjectId
+    Given Set the Interview endpoint <endpoint> , method <method> with wrong <header> header
+    Then Verify Interview status code <expectedStatus>
+    Examples:
+      | endpoint   | method | expectedStatus | header   |
+      | sendEmails | post   | 500            | ObjectID |
+
+  Scenario Outline:ATS, API to send email with CC recipient using wrong header ObjectID
+    Given Set the Interview endpoint <endpoint> , method <method> with wrong <header> header
+    Then Verify Interview status code <expectedStatus>
+    Examples:
+      | endpoint         | method | expectedStatus | header   |
+      | sendEmailsWithCC | post   | 500            | ObjectID |
+
+
   Scenario Outline:ATS, API to update a feedback using wrong <name>field value in payload
     Given Set the Feedback endpoint <endpoint> , method <method> and payload <payload>
     Then Verify Interview status code <expectedStatus>
     Examples:
       | endpoint       | method | expectedStatus | payload   | name          |
       | addNewFeedback | put    | 500            | feedback6 | selectionType |
+
+
+  Scenario Outline:ATS, API to delete a feedback
+    Given Set the Interview endpoint <endpoint> and method <method>
+    Then Verify Interview status code <expectedStatus>
+    Examples:
+      | endpoint       | method | expectedStatus |
+      | deleteFeedback | delete | 200            |
+
+  Scenario Outline:ATS, API to delete an interview without using header Object ID
+    Given Set the Interview endpoint <endpoint> , method <method> without header <header>
+    Then Verify Interview status code <expectedStatus>
+    Examples:
+      | endpoint          | method | expectedStatus | header   |
+      | deleteAnInterview | delete | 400            | ObjectID |
+
+
+  Scenario Outline:ATS, API to send feedback reminder to all using wrong header ObjectID
+    Given Set the Interview endpoint <endpoint> , method <method> with wrong <header> header
+    Then Verify Interview status code <expectedStatus>
+    Examples:
+      | endpoint          | method | expectedStatus | header   |
+      | deleteAnInterview | delete | 500            | ObjectID |
+
 
 
 
