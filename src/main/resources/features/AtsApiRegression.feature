@@ -299,8 +299,6 @@ Feature: ATS scenario
       | endpoint               | method | expectedStatus | payload_key                | payload_value                                 | name1            | field            |
       | saveApplicantDetails   | post   | 500            | applicantData,resume,image | applicantTest1.json,Skribbl.pptx,Skribbl.pptx | Create Applicant | Email            |
       | saveApplicantDetails   | post   | 500            | applicantData,resume,image | applicantTest2.json,Skribbl.pptx,Skribbl.pptx | Create Applicant | Phone no         |
-      | saveApplicantDetails   | post   | 500            | applicantData              | applicant.json                                | Create Applicant | Resume and Image |
-      | updateApplicantDetails | put    | 400            | applicantData              | applicant.json                                | Update Applicant | Resume and Image |
       | updateApplicantDetails | put    | 400            | applicantData,resume,image | applicant.json,Skribbl.pptx,Skribbl.pptx      | Update Applicant | ApplicantId      |
 
   Scenario Outline: ATS <name1>,Applicant API using invalid <field>
@@ -460,10 +458,58 @@ Feature: ATS scenario
       | endpoint       | method | expectedStatus | payload   |
       | addNewFeedback | post   | 200            | feedback1 |
 
-
   Scenario Outline:ATS, API to update a feedback using wrong <name>field value in payload
     Given Set the Feedback endpoint <endpoint> , method <method> and payload <payload>
     Then Verify Interview status code <expectedStatus>
     Examples:
       | endpoint       | method | expectedStatus | payload   | name          |
       | addNewFeedback | put    | 500            | feedback6 | selectionType |
+
+  Scenario Outline: ATS , Job---><name1> for wrong header
+    Given Set the endpoint <endpoint> and method <method> for wrong header
+    Then Verify Job status code <expectedStatus>
+    Examples:
+      | endpoint        | method | expectedStatus | name1             |
+      | updateJobStatus | put    | 400            | Update Job Status |
+
+
+  Scenario Outline: ATS , Job---><name1> using wrong header
+    Given Set the endpoint <endpoint> and method <method> using wrong header
+    Then Verify Job status code <expectedStatus>
+    Examples:
+      | endpoint        | method | expectedStatus | name1             |
+      | updateJobStatus | put    | 400            | Update Job Status |
+
+  Scenario Outline: ATS, <name> an applicant
+    Given Set the Applicant endpoint <endpoint> method <method> payload <payload_key> <payload_value> and form data
+    Then Verify scenario status code <expectedStatus>
+    Examples:
+      | endpoint               | method | expectedStatus | payload_key                | payload_value                            | name   |
+      | saveApplicantDetails   | post   | 201            | applicantData,resume,image | applicant.json,Skribbl.pptx,Skribbl.pptx | Create |
+
+  Scenario Outline: ATS, HealthCheck of Applicants API - <name> with wrong header
+    Given Set the Applicant endpoint <endpoint> and method <method> with wrong header
+    Then Verify Applicant status code <expectedStatus>
+    Examples:
+      | name                                | endpoint                            | method | expectedStatus |
+      | FetchApplicantWithId                | fetchApplicantWithId                | get    | 400            |
+      | FetchCurrentStageOfApplicant        | fetchCurrentStageOfApplicant        | get    | 400            |
+      | FetchResumeUsingApplicantId         | fetchResumeUsingApplicantId         | get    | 400            |
+      | FetchApplicantPersonalDetails       | fetchApplicantPersonalDetails       | get    | 400            |
+
+  Scenario Outline: ATS, HealthCheck of Applicants API - <name> using wrong header
+    Given Set the Applicant endpoint <endpoint> and method <method> using wrong header
+    Then Verify Applicant status code <expectedStatus>
+    Examples:
+      | name                                | endpoint                            | method | expectedStatus |
+      | FetchApplicantWithId                | fetchApplicantWithId                | get    | 400            |
+      | FetchCurrentStageOfApplicant        | fetchCurrentStageOfApplicant        | get    | 400            |
+      | FetchResumeUsingApplicantId         | fetchResumeUsingApplicantId         | get    | 400            |
+      | FetchApplicantPersonalDetails       | fetchApplicantPersonalDetails       | get    | 400            |
+
+  Scenario Outline:ATS , Set the applicant stage to "Approved" with wrong header
+    Given Set the Applicant endpoint <endpoint> and method <method> with wrong header and stage <stage>
+    Then Verify Applicant status code <expectedStatus>
+    Examples:
+      | endpoint               | method | expectedStatus | stage |
+      | updateStageOfApplicant | put    | 400            | 2     |

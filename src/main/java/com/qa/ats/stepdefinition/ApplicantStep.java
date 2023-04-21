@@ -56,5 +56,43 @@ public class ApplicantStep {
         }
     }
 
+    @Given("^Set the Applicant endpoint (\\w*) and method (\\w*) with wrong header$")
+    public void setTheApplicantEndpointEndpointAndMethodMethodWithWrongHeader(String url,String method) {
+        HashMap<String, String> token = new HashMap<String, String>();
+        try {
+            status = Utils.apiWithoutPayloads(url, method, null, "").getStatus();
 
+        } catch (Exception exception) {
+            logger.info("Error - User not able to hit the API", exception);
+            GemTestReporter.addTestStep("Hit API", "User not able to hit the API", STATUS.FAIL);
+        }
+    }
+
+    @Given("^Set the Applicant endpoint (\\w*) and method (\\w*) using wrong header$")
+    public void setTheApplicantEndpointEndpointAndMethodMethodUsingWrongHeader(String url,String method) {
+        HashMap<String, String> token = new HashMap<String, String>();
+        try {
+            status = Utils.apiWithoutPayloads(url, method, null, "").getStatus();
+
+        } catch (Exception exception) {
+            logger.info("Error - User not able to hit the API", exception);
+            GemTestReporter.addTestStep("Hit API", "User not able to hit the API", STATUS.FAIL);
+        }
+    }
+
+    @Given("^Set the Applicant endpoint (\\w*) and method (\\w*) with wrong header and stage (\\w*)$")
+    public void setTheApplicantEndpointEndpointAndMethodMethodWithWrongHeaderAndStageStage(String url, String method,String stage) {
+        HashMap<String, String> header = new HashMap<String, String>();
+        header.put("X-REMOTE-USER-EMAIL", "saru.goyal@geminisolutions.com");
+        try {
+            if (method.equals("put")||method.equals("post"))
+                status = Utils.apiForUpdatingApplicantStage(url, method, header, stage,"").getStatus();
+            else
+                status = Utils.apiWithoutPayloads(url, method, header, "").getStatus();
+
+        } catch (Exception exception) {
+            logger.info("Error - User not able to hit the API", exception);
+            GemTestReporter.addTestStep("Hit API", "User not able to hit the API", STATUS.FAIL);
+        }
+    }
 }
