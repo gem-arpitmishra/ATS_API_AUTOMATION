@@ -5,7 +5,6 @@ import com.gemini.generic.reporting.STATUS;
 import com.qa.ats.utils.Utils;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
-import io.cucumber.java.sl.In;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -35,12 +34,83 @@ public class InterviewStep {
             GemTestReporter.addTestStep("Hit the " + url, "API was not successfully triggered", STATUS.FAIL);
         }
     }
+    @Given("^Set the Interview endpoint (.+) , method (.+) without header (.+)$")
+    public void setTheMethodWithoutHeader(String url, String method, String header) {
+        HashMap<String, String> token = new HashMap<String, String>();
+        if(header.equals("ObjectID"))
+        token.put("X-REMOTE-USER-EMAIL", "nipun.jain@geminisolutions.com");
+        else if(header.equals("Email"))
+            token.put("X-REMOTE-USER-OBJECT-ID", "3760ebf6-6067-4439-91eb-6d87a1a8d88a");
+        try {
+            if (method.equals("post"))
+                status = Utils.apiToSendManagementApprovalEmails(url, method, token, "").getStatus();
+
+
+            else
+                status = Utils.apiWithoutPayloads(url, method, token, "").getStatus();
+            GemTestReporter.addTestStep("Hit the " + url, "API was triggered", STATUS.INFO);
+        } catch (Exception e) {
+            logger.info("API was not hit successfully", e);
+            GemTestReporter.addTestStep("Hit the " + url, "API was not successfully triggered", STATUS.FAIL);
+        }
+    }
+
+    @Given("^Set the Interview endpoint (.+) , method (.+) with wrong (.+) header$")
+    public void setInterviewEndpointWithoutPayloadAndWrongHeader(String url,String method,String header)
+    {
+        HashMap<String, String> token = new HashMap<String, String>();
+        if(header.equals("ObjectID")) {
+            token.put("X-REMOTE-USER-EMAIL", "nipun.jain@geminisolutions.com");
+            token.put("X-REMOTE-USER-OBJECT-ID", "demo");
+        }
+        else if(header.equals("Email")) {
+        token.put("X-REMOTE-USER-OBJECT-ID", "3760ebf6-6067-4439-91eb-6d87a1a8d88a");
+        token.put("X-REMOTE-USER-EMAIL", "demo");
+    }
+        try {
+            if (method.equals("post"))
+                status = Utils.apiToSendManagementApprovalEmails(url, method, token, "").getStatus();
+
+
+            else
+                status = Utils.apiWithoutPayloads(url, method, token, "").getStatus();
+            GemTestReporter.addTestStep("Hit the " + url, "API was triggered", STATUS.INFO);
+        } catch (Exception e) {
+            logger.info("API was not hit successfully", e);
+            GemTestReporter.addTestStep("Hit the " + url, "API was not successfully triggered", STATUS.FAIL);
+        }
+    }
 
     @Then("^Verify Interview status code (.+)$")
     public void verifyPolicyStatusCodeExpectedStatus(Integer Expected) {
         Utils.verifyStatusCode(Expected, status);
     }
 
+
+    @Given("^Set the Interview endpoint (.+) , method (.+) , payload (.+) without using header (.+)$")
+    public void setTheInterviewEndpointWithoutUsingHeader(String url , String method , String payload ,String header)
+    {
+        HashMap<String, String> token = new HashMap<String, String>();
+        token.put("X-REMOTE-USER-EMAIL", "nipun.jain@geminisolutions.com");
+
+        try {
+            String check = Utils.interviewApiWithPayloads(url, method, payload, token, "");
+            if (method.equals("post") && check.contains(",")) {
+
+                String checkList[] = check.split(",");
+                status = Integer.parseInt(checkList[0]);
+                String str = checkList[1].split(":")[1];
+                interviewId = Integer.parseInt((str).substring(0, str.length() - 1));
+            } else {
+                status = Integer.parseInt(check);
+            }
+
+            GemTestReporter.addTestStep("Hit the " + url, "API was triggered", STATUS.INFO);
+        } catch (Exception e) {
+            logger.info("API was not hit successfully", e);
+            GemTestReporter.addTestStep("Hit the " + url, "API was not successfully triggered", STATUS.FAIL);
+        }
+    }
     @Given("^Set the Interview endpoint (.+) , method (.+) and payload (.+)$")
     public void setTheEndpointMethodAndPayload(String url, String method, String payload) {
         HashMap<String, String> token = new HashMap<String, String>();
@@ -86,20 +156,36 @@ public class InterviewStep {
         }
     }
 
-    @Given("^Set the Interview endpoint (.+) , wrong objectId (.+) and method (.+)$")
-    public void setEndpointMethodAndWrongHeader(String url, String method, String header) {
+
+    @Given("^Set the Interview endpoint (.+) , method (.+) , payload (.+)  using wrong header (.+)$")
+    public void set_the_interview_endpoint_add_new_interview_method_post_payload_interview1_using_wrong_header_object_id(String url,String method, String payload,String header) {
         HashMap<String, String> token = new HashMap<String, String>();
-        token.put("X-REMOTE-USER-EMAIL", "tripta.sahni@geminisolutions.com");
-        token.put("X-REMOTE-USER-OBJECT-ID", header);
+        if(header.equals("ObjectID")) {
+            token.put("X-REMOTE-USER-EMAIL", "nipun.jain@geminisolutions.com");
+            token.put("X-REMOTE-USER-OBJECT-ID", "demo");
+        }
+        else {
+            token.put("X-REMOTE-USER-EMAIL", "demo");
+            token.put("X-REMOTE-USER-OBJECT-ID", "3760ebf6-6067-4439-91eb-6d87a1a8d88a");
+        }
         try {
-            status = Utils.apiWithoutPayloads(url, method, token, "").getStatus();
+            String check = Utils.interviewApiWithPayloads(url, method, payload, token, "");
+            if (method.equals("post") && check.contains(",")) {
+
+                String checkList[] = check.split(",");
+                status = Integer.parseInt(checkList[0]);
+                String str = checkList[1].split(":")[1];
+                interviewId = Integer.parseInt((str).substring(0, str.length() - 1));
+            } else {
+                status = Integer.parseInt(check);
+            }
 
             GemTestReporter.addTestStep("Hit the " + url, "API was triggered", STATUS.INFO);
         } catch (Exception e) {
             logger.info("API was not hit successfully", e);
             GemTestReporter.addTestStep("Hit the " + url, "API was not successfully triggered", STATUS.FAIL);
         }
+
+
     }
-
-
 }
