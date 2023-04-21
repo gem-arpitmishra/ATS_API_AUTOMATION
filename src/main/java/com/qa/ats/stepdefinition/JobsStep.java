@@ -40,5 +40,26 @@ public class JobsStep {
         }
     }
 
+    @Given("^Set the endpoint (\\w*) and method (\\w*) for wrong header$")
+    public void setTheEndpointEndpointAndMethodMethodForWrongHeader(String url,String method) {
+        HashMap<String, String> header = new HashMap<String, String>();
+        try {
+            status = Utils.apiWithoutPayloads(url, method,null, "").getStatus();
+        } catch (Exception exception) {
+            logger.info("Error - User not able to hit the API", exception);
+            GemTestReporter.addTestStep("Hit API", "User not able to hit the API", STATUS.FAIL);
+        }
+    }
 
+    @Given("^Set the endpoint (\\w*) and method (\\w*) using wrong header$")
+    public void setTheEndpointEndpointAndMethodMethodUsingWrongHeader(String url,String method) {
+        HashMap<String, String> header = new HashMap<String, String>();
+        header.put("X-REMOTE-USER", "saru.goyal@geminisolutions.com");
+        try {
+            status = Utils.apiWithoutPayloads(url, method, header, "").getStatus();
+        } catch (Exception exception) {
+            logger.info("Error - User not able to hit the API", exception);
+            GemTestReporter.addTestStep("Hit API", "User not able to hit the API", STATUS.FAIL);
+        }
+    }
 }

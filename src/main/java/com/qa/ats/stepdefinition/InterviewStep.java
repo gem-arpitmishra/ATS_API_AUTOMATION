@@ -123,7 +123,7 @@ public class InterviewStep {
                 String checkList[] = check.split(",");
                 status = Integer.parseInt(checkList[0]);
                 String str = checkList[1].split(":")[1];
-                interviewId = Integer.parseInt((str).substring(0, str.length() - 1));
+                interviewId=Integer.parseInt((str).substring(0, str.length() - 1).trim());
             } else {
                 status = Integer.parseInt(check);
             }
