@@ -1,5 +1,5 @@
 {
-  "interviewType": "Telephonic",
+  "interviewType": "Vetting",
   "interviewerEmail": "vaibhav.oberoi@geminisolutions.com",
   "attendees": [
     {
@@ -7,11 +7,12 @@
       "email": "nipun.jain@geminisolutions.com"
     }
   ],
-  "startTime": "2023-04-07 08:53:00.000+00:00",
-  "endTime": "2023-04-07 09:38:00.000+00:00",
-  "resumeLink": "test11",
+  "applicantName": "gauri shankar",
+  "startTime": "2023-04-15 07:36",
+  "endTime": "2023-04-15 07:36",
   "title": "test",
   "additionalDetails": "test1",
   "location": "Noida",
-  "deleted": true
+  "status": "Pending",
+  "isDeleted": false
 }

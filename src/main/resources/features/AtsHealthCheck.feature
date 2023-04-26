@@ -39,6 +39,13 @@ Feature: ATS scenario
       | saveApplicantDetails   | post   | 201            | applicantData,resume,image | applicant.json,Skribbl.pptx,Skribbl.pptx | Create |
       | updateApplicantDetails | put    | 201            | applicantData,resume,image | applicant.json,Skribbl.pptx,Skribbl.pptx | Update |
 
+  Scenario Outline:ATS , Set the applicant stage to "New"
+    Given Set the Applicant endpoint <endpoint> and method <method> with header and stage <stage>
+    Then Verify Applicant status code <expectedStatus>
+    Examples:
+      | endpoint               | method | expectedStatus | stage |
+      | updateStageOfApplicant | put    | 200            | 9     |
+
   Scenario Outline: ATS, Align the applicant to that job
 
     Given Set the Applicant endpoint <endpoint> and method <method> with header and stage <stage>
@@ -46,6 +53,13 @@ Feature: ATS scenario
     Examples:
       | endpoint      | method | expectedStatus | stage |
       | alignToNewJob | post   | 201            |       |
+
+  Scenario Outline:ATS , Set the applicant stage to "In-Review"
+    Given Set the Applicant endpoint <endpoint> and method <method> with header and stage <stage>
+    Then Verify Applicant status code <expectedStatus>
+    Examples:
+      | endpoint               | method | expectedStatus | stage |
+      | updateStageOfApplicant | put    | 200            | 1     |
 
   Scenario Outline: ATS, HealthCheck of Applicants API - <name>
     Given Set the Applicant endpoint <endpoint> and method <method>
@@ -64,14 +78,19 @@ Feature: ATS scenario
       | FetchApplicantConstants             | fetchApplicantConstants             | get    | 200            |
       | FetchAllApplicantWithPaging         | fetchAllApplicantWithPaging         | get    | 200            |
 
-
-  Scenario Outline:ATS , Set the applicant stage to "Approved"
-    Given Set the Applicant endpoint <endpoint> and method <method> with header and stage <stage>
-    Then Verify Applicant status code <expectedStatus>
+  Scenario Outline:ATS, API to schedule interview for the same job and same applicant
+    Given Set the Interview endpoint <endpoint> , method <method> and payload <payload>
+    Then Verify Interview status code <expectedStatus>
     Examples:
-      | endpoint               | method | expectedStatus | stage |
-      | updateStageOfApplicant | put    | 201            | 2     |
+      | endpoint        | method | expectedStatus | payload   |
+      | addNewInterview | post   | 200            | interview |
 
+  Scenario Outline:ATS, API to post a new feedback
+    Given Set the Feedback endpoint <endpoint> , method <method> and payload <payload>
+    Then Verify Interview status code <expectedStatus>
+    Examples:
+      | endpoint              | method | expectedStatus | payload   |
+      | addFeedbackForVetting | post   | 200            | feedback1 |
 
   Scenario Outline:ATS, API to schedule interview for the same job and same applicant
     Given Set the Interview endpoint <endpoint> , method <method> and payload <payload>
@@ -156,7 +175,7 @@ Feature: ATS scenario
     Then Verify Applicant status code <expectedStatus>
     Examples:
       | endpoint               | method | expectedStatus | stage |
-      | updateStageOfApplicant | put    | 201            | 3     |
+      | updateStageOfApplicant | put    | 200            | 3     |
 
   Scenario Outline:ATS, API to send feedback reminder to all
     Given Set the Interview endpoint <endpoint> and method <method>
@@ -191,7 +210,7 @@ Feature: ATS scenario
     Then Verify Applicant status code <expectedStatus>
     Examples:
       | endpoint               | method | expectedStatus | stage |
-      | updateStageOfApplicant | put    | 201            | 4     |
+      | updateStageOfApplicant | put    | 200            | 4     |
 
   Scenario Outline:ATS, API to send email without CC recipient
     Given Set the Interview endpoint <endpoint> and method <method>
