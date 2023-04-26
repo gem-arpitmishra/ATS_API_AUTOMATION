@@ -1,7 +1,7 @@
 @hc
 Feature: ATS scenario
 
-    Scenario Outline: ATS ,Job--> <name1>
+  Scenario Outline: ATS ,Job--> <name1>
     Given Set the Job endpoint <endpoint> method <method> payload <payload_key> <payload_value> and form data
     Then Verify scenario status code <expectedStatus>
     Examples:
@@ -85,7 +85,15 @@ Feature: ATS scenario
       | endpoint        | method | expectedStatus | payload   |
       | addNewInterview | post   | 200            | interview |
 
-  Scenario Outline:ATS, API to post a new feedback
+  Scenario Outline: ATS, API to fetch interviews for Vetting for a particular email ID
+    Given Set the Interview endpoint <endpoint> and method <method>
+    Then Verify Interview status code <expectedStatus>
+    Examples:
+      | endpoint                                        | method | expectedStatus |
+      | apiToGetInterviewsForVettingForAParticularEmail | get    | 200            |
+
+
+  Scenario Outline:ATS, API to post a new feedback for vetting
     Given Set the Feedback endpoint <endpoint> , method <method> and payload <payload>
     Then Verify Interview status code <expectedStatus>
     Examples:
@@ -177,8 +185,6 @@ Feature: ATS scenario
     Examples:
       | endpoint               | method | expectedStatus | stage |
       | updateStageOfApplicant | put    | 200            | 3     |
-
-
 
   Scenario Outline:ATS, API to post a new feedback
     Given Set the Feedback endpoint <endpoint> , method <method> and payload <payload>

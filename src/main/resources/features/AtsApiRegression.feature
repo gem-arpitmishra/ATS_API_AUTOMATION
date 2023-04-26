@@ -310,10 +310,12 @@ Feature: ATS scenario
     Given Set the Job endpoint <endpoint> method <method> payload <payload_key> <payload_value> and form data
     Then Verify scenario status code <expectedStatus>
     Examples:
+
       | endpoint               | method | expectedStatus | payload_key                | payload_value                                 | name1            | field            |
       | saveApplicantDetails   | post   | 500            | applicantData,resume,image | applicantTest1.json,Skribbl.pptx,Skribbl.pptx | Create Applicant | Email            |
       | saveApplicantDetails   | post   | 500            | applicantData,resume,image | applicantTest2.json,Skribbl.pptx,Skribbl.pptx | Create Applicant | Phone no         |
       | updateApplicantDetails | put    | 400            | applicantData,resume,image | applicant.json,Skribbl.pptx,Skribbl.pptx      | Update Applicant | ApplicantId      |
+
 
   Scenario Outline: ATS <name1>,Applicant API using invalid <field>
     Given Set the Job endpoint <endpoint> method <method> payload <payload_key> <payload_value> and form data
@@ -371,6 +373,13 @@ Feature: ATS scenario
       | saveApplicantDetails   | post   | 201            | applicantData,resume,image | applicant.json,Skribbl.pptx,Skribbl.pptx | Create |
       | updateApplicantDetails | put    | 201            | applicantData,resume,image | applicant.json,Skribbl.pptx,Skribbl.pptx | Update |
 
+  Scenario Outline:ATS , Set the applicant stage to "New"
+    Given Set the Applicant endpoint <endpoint> and method <method> with header and stage <stage>
+    Then Verify Applicant status code <expectedStatus>
+    Examples:
+      | endpoint               | method | expectedStatus | stage |
+      | updateStageOfApplicant | put    | 200            | 9     |
+
   Scenario Outline: ATS, Align the applicant to that job
 
     Given Set the Applicant endpoint <endpoint> and method <method> with header and stage <stage>
@@ -396,14 +405,70 @@ Feature: ATS scenario
 #      | FetchApplicantConstants             | FetchApplicantConstants             | get    | 200            |
 #      | FetchAllApplicantWithPaging         | FetchAllApplicantWithPaging         | get    | 200            |
 
-
-  Scenario Outline:ATS , Set the applicant stage to "Approved"
+  Scenario Outline:ATS , Set the applicant stage to "In-Review"
     Given Set the Applicant endpoint <endpoint> and method <method> with header and stage <stage>
     Then Verify Applicant status code <expectedStatus>
     Examples:
       | endpoint               | method | expectedStatus | stage |
-      | updateStageOfApplicant | put    | 201            | 2     |
+      | updateStageOfApplicant | put    | 200            | 1     |
 
+
+#  Scenario Outline:ATS , Set the applicant stage to "Approved"
+#    Given Set the Applicant endpoint <endpoint> and method <method> with header and stage <stage>
+#    Then Verify Applicant status code <expectedStatus>
+#    Examples:
+#      | endpoint               | method | expectedStatus | stage |
+#      | updateStageOfApplicant | put    | 201            | 2     |
+
+  Scenario Outline:ATS, API to schedule interview for the same job and same applicant for vetting
+    Given Set the Interview endpoint <endpoint> , method <method> and payload <payload>
+    Then Verify Interview status code <expectedStatus>
+    Examples:
+      | endpoint        | method | expectedStatus | payload   |
+      | addNewInterview | post   | 200            | interview |
+
+  Scenario Outline: ATS, API to fetch interviews for Vetting for a particular email ID using wrong method
+    Given Set the Interview endpoint <endpoint> and method <method>
+    Then Verify Interview status code <expectedStatus>
+    Examples:
+      | endpoint                                        | method | expectedStatus |
+      | apiToGetInterviewsForVettingForAParticularEmail | delete | 405            |
+
+  Scenario Outline:ATS, API to post a new feedback for vetting
+    Given Set the Feedback endpoint <endpoint> , method <method> and payload <payload>
+    Then Verify Interview status code <expectedStatus>
+    Examples:
+      | endpoint              | method | expectedStatus | payload   |
+      | addFeedbackForVetting | post   | 200            | feedback1 |
+
+  Scenario Outline:ATS, Negative testing of API to post a new feedback using wrong method for vetting
+    Given Set the Feedback endpoint <endpoint> , method <method> and payload <payload>
+    Then Verify Interview status code <expectedStatus>
+    Examples:
+      | endpoint              | method | expectedStatus | payload   |
+      | addFeedbackForVetting | delete | 405            | feedback1 |
+
+
+  Scenario Outline:ATS, API to post a new feedback using wrong  <name> field value in payload for vetting
+    Given Set the Feedback endpoint <endpoint> , method <method> and payload <payload>
+    Then Verify Interview status code <expectedStatus>
+    Examples:
+      | endpoint              | method | expectedStatus | payload   | name          |
+      | addFeedbackForVetting | post   | 400            | feedback3 | selectionType |
+
+  Scenario Outline:ATS, API to post a new feedback without using <name> field  in payload for vetting
+    Given Set the Feedback endpoint <endpoint> , method <method> and payload <payload>
+    Then Verify Interview status code <expectedStatus>
+    Examples:
+      | endpoint              | method | expectedStatus | payload   | name          |
+      | addFeedbackForVetting | post   | 400            | feedback5 | selectionType |
+
+#  Scenario Outline:ATS, API to post a new feedback for vetting
+#    Given Set the Feedback endpoint <endpoint> , method <method> and payload <payload>
+#    Then Verify Interview status code <expectedStatus>
+#    Examples:
+#      | endpoint              | method | expectedStatus | payload   |
+#      | addFeedbackForVetting | post   | 200            | feedback1 |
 
   Scenario Outline:ATS, API to schedule interview for the same job and same applicant using wrong <key> field in the payload
     Given Set the Interview endpoint <endpoint> , method <method> and payload <payload>
