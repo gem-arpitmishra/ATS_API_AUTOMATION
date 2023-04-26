@@ -1,37 +1,18 @@
-
 {
-
-  "interviewType":"Face To Face",
-
-  "interviewerEmail":"ankita.srivastava@geminisolutions.com",
-
-  "attendees":[
-
+  "interviewType": "Telephonic",
+  "interviewerEmail": "vaibhav.oberoi@geminisolutions.com",
+  "attendees": [
     {
-
-      "empCode":"GSI G 1290",
-
-      "email":"saksham.khanna@geminisolutions.com"
-
+      "empCode": "GSI G 1290",
+      "email": "nipun.jain@geminisolutions.com"
     }
-
   ],
-
-  "applicantName":"gauri shankar",
-
-
-
-  "startTime":"2023-04-15 07:36",
-
-  "endTime":"2023-04-15 07:36",
-  "title":"test",
-
-  "additionalDetails":"test1",
-
-  "location":"Noida",
-
-  "status":"Pending",
-
-  "isDeleted":false
-
+  "applicantName": "gauri shankar",
+  "startTime": "2023-04-15 07:36",
+  "endTime": "2023-04-15 07:36",
+  "title": "test",
+  "additionalDetails": "test1",
+  "location": "Noida",
+  "status": "Pending",
+  "isDeleted": false
 }

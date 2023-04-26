@@ -1,10 +1,10 @@
 {
-  "interviewType":"Telephonic",
-  "interviewerEmail":"vaibhav.oberoi@geminisolutions.com",
-  "attendees":[
+  "interviewType": "Vetting",
+  "interviewerEmail": "vaibhav.oberoi@geminisolutions.com",
+  "attendees": [
     {
-      "empCode":"GSI G 1290",
-      "email":"nipun.jain@geminisolutions.com"
+      "empCode": "GSI G 1290",
+      "email": "nipun.jain@geminisolutions.com"
     }
   ],
   "applicantName": "gauri shankar",
