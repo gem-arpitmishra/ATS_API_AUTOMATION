@@ -1,7 +1,7 @@
 @hc
 Feature: ATS scenario
 
-  Scenario Outline: ATS ,Job--> <name1>
+    Scenario Outline: ATS ,Job--> <name1>
     Given Set the Job endpoint <endpoint> method <method> payload <payload_key> <payload_value> and form data
     Then Verify scenario status code <expectedStatus>
     Examples:
@@ -120,6 +120,7 @@ Feature: ATS scenario
       | endpoint          | method | expectedStatus | payload    |
       | updateAnInterview | put    | 200            | interview2 |
 
+
   Scenario Outline: ATS, API to get interviews for a particular job
     Given Set the Interview endpoint <endpoint> and method <method>
     Then Verify Interview status code <expectedStatus>
@@ -177,19 +178,7 @@ Feature: ATS scenario
       | endpoint               | method | expectedStatus | stage |
       | updateStageOfApplicant | put    | 200            | 3     |
 
-  Scenario Outline:ATS, API to send feedback reminder to all
-    Given Set the Interview endpoint <endpoint> and method <method>
-    Then Verify Interview status code <expectedStatus>
-    Examples:
-      | endpoint                  | method | expectedStatus |
-      | sendFeedbackReminderToAll | post   | 200            |
 
-  Scenario Outline:ATS, API to send feedback reminder on the basis of interview ID
-    Given Set the Interview endpoint <endpoint> and method <method>
-    Then Verify Interview status code <expectedStatus>
-    Examples:
-      | endpoint                               | method | expectedStatus |
-      | sendFeedbackReminderBasedOnInterviewId | post   | 200            |
 
   Scenario Outline:ATS, API to post a new feedback
     Given Set the Feedback endpoint <endpoint> , method <method> and payload <payload>
@@ -220,6 +209,20 @@ Feature: ATS scenario
       | sendEmails | post   | 200            |
 
   Scenario Outline:ATS, API to send email with CC recipient
+    Given Set the Interview endpoint <endpoint> and method <method>
+    Then Verify Interview status code <expectedStatus>
+    Examples:
+      | endpoint         | method | expectedStatus |
+      | sendEmailsWithCC | post   | 200            |
+
+  Scenario Outline:ATS, API to send  email without CC recipient
+    Given Set the Interview endpoint <endpoint> and method <method>
+    Then Verify Interview status code <expectedStatus>
+    Examples:
+      | endpoint   | method | expectedStatus |
+      | sendEmails | post   | 200            |
+
+  Scenario Outline:ATS, API to send  email with CC recipient
     Given Set the Interview endpoint <endpoint> and method <method>
     Then Verify Interview status code <expectedStatus>
     Examples:

@@ -1,0 +1,37 @@
+
+{
+
+  "interviewType":"Telephonic",
+
+  "interviewerEmail":"ankita.srivastava@geminisolutions.com",
+
+  "attendees":[
+
+    {
+
+      "empCode":"GSI G 1290",
+
+      "email":"saksham.khanna@geminisolutions.com"
+
+    }
+
+  ],
+
+  "applicantName":"gauri shankar",
+
+
+
+  "startTime":"a",
+
+  "endTime":"2023-04-15 07:36",
+  "title":"test",
+
+  "additionalDetails":"test1",
+
+  "location":"Noida",
+
+  "status":"Pending",
+
+  "isDeleted":false
+
+}

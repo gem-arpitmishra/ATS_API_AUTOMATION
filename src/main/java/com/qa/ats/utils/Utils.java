@@ -90,6 +90,7 @@ public class Utils {
             Request request = new Request();
             String url = ProjectConfigData.getProperty(UrlNameFromConfig);
             url = GlobalVariable.BASE_URL + url;
+
             if (url.contains("{applicantId"))
                 url = url.replace("{applicantId}", String.valueOf(AtsHealthCheck.applicantId));
             else if (url.contains("{interviewId}"))
@@ -184,6 +185,7 @@ public class Utils {
                     pay.addProperty("interviewId", InterviewStep.interviewId);
                     pay.addProperty("jobId",  AtsHealthCheck.jobId);
                     pay.addProperty("applicantId", AtsHealthCheck.applicantId);
+//                    pay.addProperty("jobId", AtsHealthCheck.jobId);
                 }
                 String payloads = String.valueOf(ApiHealthCheckUtils.result(pay));
                 request.setRequestPayload(payloads);
