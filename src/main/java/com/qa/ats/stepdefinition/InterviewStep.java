@@ -124,7 +124,7 @@ public class InterviewStep {
                 String str = checkList[1].split(":")[1];
                 if(check1==false) {
                     str=str.trim();
-                      interviewId=Integer.parseInt(str);
+                    interviewId=Integer.parseInt(str);
                     check1=true;
                 }
                 else
