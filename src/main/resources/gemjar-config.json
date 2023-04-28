@@ -62,6 +62,7 @@
     "updateAnInterview": "atsInterviewSvc/interview",
     "addFeedbackForVetting": "atsInterviewSvc/feedback/resumeVetting/{applicantId}",
     "addNewFeedback": "atsInterviewSvc/feedback",
+    "addFeedbackForVetting": "atsInterviewSvc/feedback/resumeVetting/{applicantId}",
     "deleteFeedback": "atsInterviewSvc/feedback/{interviewId}",
     "postNewJob": "atsJobSvc/job",
     "saveApplicantDetails": "atsApplicantSvc/applicant",

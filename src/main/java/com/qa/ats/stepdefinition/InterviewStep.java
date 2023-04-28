@@ -136,12 +136,21 @@ public class InterviewStep {
                 String checkList[] = check.split(",");
                 status = Integer.parseInt(checkList[0]);
                 String str = checkList[1].split(":")[1];
+<<<<<<< HEAD
 //                if(check1==false) {
 //                    str=str.trim();
 //                      interviewId=Integer.parseInt(str);
 //                    check1=true;
 //                }
 //                else
+=======
+                if(check1==false) {
+                    str=str.trim();
+                    interviewId=Integer.parseInt(str);
+                    check1=true;
+                }
+                else
+>>>>>>> 5b94c0edf049b36efb2b9988b620b7c97646bf12
                     interviewId=Integer.parseInt((str).substring(0, str.length() - 1).trim());
             } else {
                 status = Integer.parseInt(check);

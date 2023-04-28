@@ -46,7 +46,6 @@ Feature: ATS scenario
       | endpoint               | method | expectedStatus | stage |
       | updateStageOfApplicant | put    | 200            | 9     |
 
-
   Scenario Outline: ATS, Align the applicant to that job
 
     Given Set the Applicant endpoint <endpoint> and method <method> with header and stage <stage>
@@ -61,7 +60,6 @@ Feature: ATS scenario
     Examples:
       | endpoint               | method | expectedStatus | stage |
       | updateStageOfApplicant | put    | 200            | 1     |
-
 
   Scenario Outline: ATS, HealthCheck of Applicants API - <name>
     Given Set the Applicant endpoint <endpoint> and method <method>
@@ -209,7 +207,6 @@ Feature: ATS scenario
     Examples:
       | endpoint               | method | expectedStatus | stage |
       | updateStageOfApplicant | put    | 200            | 3     |
-
 
   Scenario Outline:ATS, API to post a new feedback
     Given Set the Feedback endpoint <endpoint> , method <method> and payload <payload>
