@@ -16,7 +16,21 @@ public class InterviewStep {
     public static int feedbackId = 0;
     Logger logger = LoggerFactory.getLogger(InterviewStep.class);
     public static boolean check1=false;
-
+  @Given("^Setting the Interview endpoint (.+) and method (.+) , for getting applicants in Vetting$")
+      public void getApplicantsInVetting(String url , String method) {
+      HashMap<String, String> token = new HashMap<String, String>();
+      token.put("X-REMOTE-USER-EMAIL", "aditya.shrivastava@geminisolutions.com");
+      try {
+          if (method.equals("post"))
+              status = Utils.apiToSendManagementApprovalEmails(url, method, token, "").getStatus();
+          else
+              status = Utils.apiWithoutPayloads(url, method, token, "").getStatus();
+          GemTestReporter.addTestStep("Hit the " + url, "API was triggered", STATUS.INFO);
+      } catch (Exception e) {
+          logger.info("API was not hit successfully", e);
+          GemTestReporter.addTestStep("Hit the " + url, "API was not successfully triggered", STATUS.FAIL);
+      }
+  }
     @Given("^Set the Interview endpoint (.+) and method (.+)$")
     public void setThePolicyEndpointAndMethod(String url, String method) {
         HashMap<String, String> token = new HashMap<String, String>();
@@ -122,12 +136,21 @@ public class InterviewStep {
                 String checkList[] = check.split(",");
                 status = Integer.parseInt(checkList[0]);
                 String str = checkList[1].split(":")[1];
+<<<<<<< HEAD
+//                if(check1==false) {
+//                    str=str.trim();
+//                      interviewId=Integer.parseInt(str);
+//                    check1=true;
+//                }
+//                else
+=======
                 if(check1==false) {
                     str=str.trim();
                     interviewId=Integer.parseInt(str);
                     check1=true;
                 }
                 else
+>>>>>>> 5b94c0edf049b36efb2b9988b620b7c97646bf12
                     interviewId=Integer.parseInt((str).substring(0, str.length() - 1).trim());
             } else {
                 status = Integer.parseInt(check);

@@ -9,7 +9,9 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 
+import java.util.Arrays;
 import java.util.HashMap;
+import java.util.List;
 
 public class ApplicantStep {
     int status = 0;
@@ -62,6 +64,9 @@ public class ApplicantStep {
         try {
             status = Utils.apiWithoutPayloads(url, method, null, "").getStatus();
 
+<<<<<<< HEAD
+
+=======
         } catch (Exception exception) {
             logger.info("Error - User not able to hit the API", exception);
             GemTestReporter.addTestStep("Hit API", "User not able to hit the API", STATUS.FAIL);
@@ -95,4 +100,6 @@ public class ApplicantStep {
             GemTestReporter.addTestStep("Hit API", "User not able to hit the API", STATUS.FAIL);
         }
     }
+>>>>>>> 5b94c0edf049b36efb2b9988b620b7c97646bf12
 }
+

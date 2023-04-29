@@ -78,19 +78,26 @@ Feature: ATS scenario
       | FetchApplicantConstants             | fetchApplicantConstants             | get    | 200            |
       | FetchAllApplicantWithPaging         | fetchAllApplicantWithPaging         | get    | 200            |
 
-  Scenario Outline:ATS, API to schedule interview for the same job and same applicant
-    Given Set the Interview endpoint <endpoint> , method <method> and payload <payload>
-    Then Verify Interview status code <expectedStatus>
-    Examples:
-      | endpoint        | method | expectedStatus | payload   |
-      | addNewInterview | post   | 200            | interview |
+#  Scenario Outline:ATS , Set the applicant stage to "Vetting"
+#    Given Set the Applicant endpoint <endpoint> and method <method> with header and stage <stage>
+#    Then Verify Applicant status code <expectedStatus>
+#    Examples:
+#      | endpoint               | method | expectedStatus | stage |
+#      | updateStageOfApplicant | put    | 200            | 10     |
 
-  Scenario Outline: ATS, API to fetch interviews for Vetting for a particular email ID
-    Given Set the Interview endpoint <endpoint> and method <method>
+  Scenario Outline: ATS, API to get applicants in Vetting State
+    Given Setting the Interview endpoint <endpoint> and method <method> , for getting applicants in Vetting
     Then Verify Interview status code <expectedStatus>
     Examples:
-      | endpoint                                        | method | expectedStatus |
-      | apiToGetInterviewsForVettingForAParticularEmail | get    | 200            |
+      | endpoint                    | method | expectedStatus |
+      | apiToGetApplicantsInVetting | get    | 200            |
+
+  Scenario Outline: ATS, <name> an applicant
+    Given Setting the Applicant endpoint <endpoint> method <method> payload <payload> for vetting
+    Then Verify scenario status code <expectedStatus>
+    Examples:
+      | endpoint                 | method | expectedStatus |payload  | name   |
+      | sendApplicantsForVetting | post   | 200           | applicantVetting.json | Create |
 
 
   Scenario Outline:ATS, API to post a new feedback for vetting
@@ -100,6 +107,21 @@ Feature: ATS scenario
       | endpoint              | method | expectedStatus | payload   |
       | addFeedbackForVetting | post   | 200            | feedback1 |
 
+#  Scenario Outline:ATS, API to schedule interview for the same job and same applicant for vetting
+#    Given Set the Interview endpoint <endpoint> , method <method> and payload <payload>
+#    Then Verify Interview status code <expectedStatus>
+#    Examples:
+#      | endpoint        | method | expectedStatus | payload   |
+#      | addNewInterview | post   | 200            | interview |
+
+  Scenario Outline: ATS, API to fetch interviews for Vetting for a particular email ID
+    Given Set the Interview endpoint <endpoint> and method <method>
+    Then Verify Interview status code <expectedStatus>
+    Examples:
+      | endpoint                                        | method | expectedStatus |
+      | apiToGetInterviewsForVettingForAParticularEmail | get    | 200            |
+
+
   Scenario Outline:ATS, API to schedule interview for the same job and same applicant
     Given Set the Interview endpoint <endpoint> , method <method> and payload <payload>
     Then Verify Interview status code <expectedStatus>
@@ -107,12 +129,12 @@ Feature: ATS scenario
       | endpoint        | method | expectedStatus | payload    |
       | addNewInterview | post   | 201            | interview1 |
 
-  Scenario Outline:ATS, API to send feedback reminder to all
-    Given Set the Interview endpoint <endpoint> and method <method>
-    Then Verify Interview status code <expectedStatus>
-    Examples:
-      | endpoint                  | method | expectedStatus |
-      | sendFeedbackReminderToAll | post   | 200            |
+#  Scenario Outline:ATS, API to send feedback reminder to all
+#    Given Set the Interview endpoint <endpoint> and method <method>
+#    Then Verify Interview status code <expectedStatus>
+#    Examples:
+#      | endpoint                  | method | expectedStatus |
+#      | sendFeedbackReminderToAll | post   | 200            |
 
   Scenario Outline:ATS, API to send feedback reminder on the basis of interview ID
     Given Set the Interview endpoint <endpoint> and method <method>
@@ -140,7 +162,7 @@ Feature: ATS scenario
     Given Set the Interview endpoint <endpoint> and method <method>
     Then Verify Interview status code <expectedStatus>
     Examples:
-      | endpoint                       | method | expectedStatus |
+      | endpoint     g                  | method | expectedStatus |
       | apiToGetInterviewByInterviewId | get    | 200            |
 
   Scenario Outline: ATS, API to fetch all the employees who can be attendee or interviewer for an interview
@@ -206,20 +228,6 @@ Feature: ATS scenario
     Examples:
       | endpoint               | method | expectedStatus | stage |
       | updateStageOfApplicant | put    | 200            | 4     |
-
-  Scenario Outline:ATS, API to send email without CC recipient
-    Given Set the Interview endpoint <endpoint> and method <method>
-    Then Verify Interview status code <expectedStatus>
-    Examples:
-      | endpoint   | method | expectedStatus |
-      | sendEmails | post   | 200            |
-
-  Scenario Outline:ATS, API to send email with CC recipient
-    Given Set the Interview endpoint <endpoint> and method <method>
-    Then Verify Interview status code <expectedStatus>
-    Examples:
-      | endpoint         | method | expectedStatus |
-      | sendEmailsWithCC | post   | 200            |
 
   Scenario Outline:ATS, API to send  email without CC recipient
     Given Set the Interview endpoint <endpoint> and method <method>
