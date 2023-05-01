@@ -296,7 +296,6 @@ Feature: ATS scenario
       | saveApplicantDetails   | post   | 500            | applicantData,resume,image | applicantTest2.json,Skribbl.pptx,Skribbl.pptx | Create Applicant | Phone no    |
       | updateApplicantDetails | put    | 400            | applicantData,resume,image | applicant.json,Skribbl.pptx,Skribbl.pptx      | Update Applicant | ApplicantId |
 
-
   Scenario Outline: ATS <name1>,Applicant API using invalid <field>
     Given Set the Job endpoint <endpoint> method <method> payload <payload_key> <payload_value> and form data
     Then Verify scenario status code <expectedStatus>
@@ -375,7 +374,7 @@ Feature: ATS scenario
       | endpoint                                        | method | expectedStatus |
       | apiToGetInterviewsForVettingForAParticularEmail | delete | 405            |
 
-  Scenario Outline:ATS, Negative testing of API to post a new feedback using wrong method for vetting
+Scenario Outline:ATS, Negative testing of API to post a new feedback using wrong method for vetting
     Given Set the Feedback endpoint <endpoint> , method <method> and payload <payload>
     Then Verify Interview status code <expectedStatus>
     Examples:
@@ -402,7 +401,7 @@ Feature: ATS scenario
     Examples:
       | endpoint              | method | expectedStatus | payload   |
       | addFeedbackForVetting | post   | 200            | feedback1 |
-
+  
   Scenario Outline:ATS, API to schedule interview for the same job and same applicant using wrong <key> field in the payload
     Given Set the Interview endpoint <endpoint> , method <method> and payload <payload>
     Then Verify Interview status code <expectedStatus>

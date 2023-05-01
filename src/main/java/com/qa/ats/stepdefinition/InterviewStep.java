@@ -60,8 +60,6 @@ public class InterviewStep {
         try {
             if (method.equals("post"))
                 status = Utils.apiToSendManagementApprovalEmails(url, method, token, "").getStatus();
-
-
             else
                 status = Utils.apiWithoutPayloads(url, method, token, "").getStatus();
             GemTestReporter.addTestStep("Hit the " + url, "API was triggered", STATUS.INFO);
@@ -81,11 +79,13 @@ public class InterviewStep {
             token.put("X-REMOTE-USER-OBJECT-ID", "e82f1905-3695-49a6-977e-9712d7f1ece1");
             token.put("X-REMOTE-USER-EMAIL", "demo");
         }
+        else if(header.equals("Email")) {
+            token.put("X-REMOTE-USER-OBJECT-ID", "e82f1905-3695-49a6-977e-9712d7f1ece1");
+            token.put("X-REMOTE-USER-EMAIL", "demo");
+        }
         try {
             if (method.equals("post"))
                 status = Utils.apiToSendManagementApprovalEmails(url, method, token, "").getStatus();
-
-
             else
                 status = Utils.apiWithoutPayloads(url, method, token, "").getStatus();
             GemTestReporter.addTestStep("Hit the " + url, "API was triggered", STATUS.INFO);
@@ -113,11 +113,10 @@ public class InterviewStep {
                 String checkList[] = check.split(",");
                 status = Integer.parseInt(checkList[0]);
                 String str = checkList[1].split(":")[1];
-                interviewId = Integer.parseInt((str).substring(0, str.length() - 1).trim());
+                interviewId=Integer.parseInt((str).substring(0, str.length() - 1).trim());
             } else {
                 status = Integer.parseInt(check);
             }
-
             GemTestReporter.addTestStep("Hit the " + url, "API was triggered", STATUS.INFO);
         } catch (Exception e) {
             logger.info("API was not hit successfully", e);

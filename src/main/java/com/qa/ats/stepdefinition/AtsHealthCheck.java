@@ -73,11 +73,11 @@ public class AtsHealthCheck {
             GemTestReporter.addTestStep("Form-data", "User not able verify the form-data", STATUS.FAIL);
         }
     }
-
+    
     @Given("^Setting the Applicant endpoint (.+) method (.+) payload (.+) for vetting$")
-    public void settingTheApplicantEndpointEndpointMethodMethodForVetting(String url, String method, String payload) {
+    public void settingTheApplicantEndpointEndpointMethodMethodForVetting(String url,String method,String payload){
 
-        HashMap<String, String> token = new HashMap<String, String>();
+ HashMap<String, String> token = new HashMap<String, String>();
         token.put("X-REMOTE-USER-EMAIL", "nipun.jain@geminisolutions.com");
         token.put("X-REMOTE-USER-OBJECT-ID", "e82f1905-3695-49a6-977e-9712d7f1ece1");
         String checkList[];
@@ -92,6 +92,5 @@ public class AtsHealthCheck {
             GemTestReporter.addTestStep("Hit the " + url, "API was not successfully triggered", STATUS.FAIL);
         }
     }
-
 }
-
+         
