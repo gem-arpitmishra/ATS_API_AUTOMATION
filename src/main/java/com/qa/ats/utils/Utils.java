@@ -183,7 +183,7 @@ public class Utils {
                     pay.addProperty("applicantId", AtsHealthCheck.applicantId);
                 } else if (method.equals("put")) {
                     pay.addProperty("interviewId", InterviewStep.interviewId);
-                    pay.addProperty("jobId",  AtsHealthCheck.jobId);
+                    pay.addProperty("jobId", AtsHealthCheck.jobId);
                     pay.addProperty("applicantId", AtsHealthCheck.applicantId);
 //                    pay.addProperty("jobId", AtsHealthCheck.jobId);
                 }
@@ -214,14 +214,81 @@ public class Utils {
         return String.valueOf(response.getStatus());
     }
 
-
-    public static String feedbackApiWithPayloads(String UrlNameFromConfig, String method, String payloadName, Map<String, String> headers, String step) throws Exception {
+    public static String applicantApiForVetting(String UrlNameFromConfig, String method, String payloadName, Map<String, String> headers, String step) throws Exception {
         Response response = new Response();
         try {
             Request request = new Request();
             String url = ProjectConfigData.getProperty(UrlNameFromConfig);
-            if(url.contains("{applicantId}"))
-                url=url.replace("{applicantId}",String.valueOf(AtsHealthCheck.applicantId));
+            url = GlobalVariable.BASE_URL + url;
+            GemTestReporter.addTestStep("Url for " + method.toUpperCase() + " Request", url, STATUS.INFO);
+            request.setURL(url);
+            request.setMethod(method);
+            if (!headers.isEmpty()) {
+                request.setHeaders(headers);
+            }
+            if (!step.isEmpty()) {
+                request.setStep(step);
+            }
+
+            if (!payloadName.equals(null)) {
+                JsonArray newObject = new JsonArray();
+                JsonParser parser = new JsonParser();
+                newObject = (JsonArray) parser.parse(new FileReader("src/main/resources/" + payloadName));
+                if (newObject.get(0).getAsJsonObject().has("applicantId")) {
+                    newObject.get(0).getAsJsonObject().remove("applicantId");
+                    newObject.get(0).getAsJsonObject().addProperty("applicantId", AtsHealthCheck.applicantId);
+                }
+                if (newObject.get(0).getAsJsonObject().has("currentStageId")) {
+                    newObject.get(0).getAsJsonObject().remove("currentStageId");
+                    newObject.get(0).getAsJsonObject().addProperty("currentStageId", 1);
+                }
+                if (newObject.get(0).getAsJsonObject().has("jobId")) {
+                    newObject.get(0).getAsJsonObject().remove("jobId");
+                    newObject.get(0).getAsJsonObject().addProperty("jobId", AtsHealthCheck.jobId);
+                }
+
+
+                Gson gson = new Gson();
+                String jsonOutput = gson.toJson(newObject);
+                FileWriter writer = new FileWriter("src/main/resources/" + payloadName);
+                writer.write(jsonOutput);
+                writer.close();
+
+                request.setRequestPayload(jsonOutput);
+                GemTestReporter.addTestStep("Payload ", jsonOutput, STATUS.INFO);
+            }
+            response = ApiInvocation.handleRequest(request);
+            GemTestReporter.addTestStep("Response Message", response.getResponseMessage(), STATUS.INFO);
+
+            responseCheck(response);
+        } catch (Exception exception) {
+            logger.info("Request doesn't Executed Successfully ", exception);
+
+            if ((response.getResponseBody()) != null) {
+                GemTestReporter.addTestStep("Response Body", response.getResponseBody(), STATUS.INFO);
+            } else {
+                GemTestReporter.addTestStep("Response Body", "No-Response", STATUS.INFO);
+            }
+
+        }
+
+        if (method.equals("post") && response.getStatus() >= 200 && response.getStatus() <= 201) {
+
+            return (response.getStatus() + "," + JsonParser.parseString(response.getResponseBody()).getAsJsonObject().get("object"));
+        }
+
+        return String.valueOf(response.getStatus());
+    }
+
+
+    public static String feedbackApiWithPayloads(String UrlNameFromConfig, String method, String payloadName, Map<String, String> headers, String step) throws Exception {
+        Response response = new Response();
+        try {
+
+            Request request = new Request();
+            String url = ProjectConfigData.getProperty(UrlNameFromConfig);
+            if (url.contains("{applicantId}"))
+                url = url.replace("{applicantId}", String.valueOf(AtsHealthCheck.applicantId));
             url = GlobalVariable.BASE_URL + url;
             GemTestReporter.addTestStep("Url for " + method.toUpperCase() + " Request", url, STATUS.INFO);
             request.setURL(url);
@@ -261,7 +328,8 @@ public class Utils {
             GemTestReporter.addTestStep(method.toUpperCase() + " Request Verification ", method.toUpperCase() + " Request Did not Executed Successfully", STATUS.FAIL);
             GemTestReporter.addTestStep("Response Message", response.getResponseMessage(), STATUS.INFO);
         }
-
+        if (method.equals("post") && UrlNameFromConfig.contains("Vetting"))
+            return String.valueOf((response.getStatus()));
         if (method.equals("post") && response.getStatus() >= 200 && response.getStatus() <= 201)
 
             return (response.getStatus() + "," + JsonParser.parseString(response.getResponseBody()).getAsJsonObject().get("object").getAsJsonObject().get("feedbackId").toString());
@@ -298,7 +366,7 @@ public class Utils {
         MultipartEntityBuilder entitybuilder = MultipartEntityBuilder.create();
         entitybuilder.setMode(HttpMultipartMode.BROWSER_COMPATIBLE);
         for (int i = 0; i < keys.size(); i++) {
-            if (values.get(i).contains("applicant.json") && method.equals("post")) {
+            if (values.get(i).contains("applicant.json") && method.equals("post") && url.contains("sendApplicantsForVetting") == false) {
                 JsonParser parser = new JsonParser();
                 JsonObject newObject = new JsonObject();
                 newObject = (JsonObject) parser.parse(new FileReader("src/main/resources/" + values.get(i)));
@@ -312,6 +380,21 @@ public class Utils {
                     newObject.remove("applicantId");
                 Gson gson = new Gson();
                 String jsonOutput = gson.toJson(newObject);
+                FileWriter writer = new FileWriter("src/main/resources/" + values.get(i));
+                writer.write(jsonOutput);
+                writer.close();
+
+            } else if (values.get(i).contains("applicantVetting.json") && method.equals("post")) {
+                JsonArray newObject = new JsonArray();
+                JsonParser parser = new JsonParser();
+                newObject = (JsonArray) parser.parse(new FileReader("src/main/resources/" + values.get(i)));
+                newObject.get(0).getAsJsonObject().addProperty("applicantId", AtsHealthCheck.applicantId);
+                newObject.get(0).getAsJsonObject().addProperty("currentStageId", 1);
+                newObject.get(0).getAsJsonObject().addProperty("jobId", AtsHealthCheck.jobId);
+
+                Gson gson = new Gson();
+                String jsonOutput = gson.toJson(newObject);
+//                jsonOutput="["+jsonOutput+"]";
                 FileWriter writer = new FileWriter("src/main/resources/" + values.get(i));
                 writer.write(jsonOutput);
                 writer.close();
@@ -330,6 +413,7 @@ public class Utils {
                 writer.write(jsonOutput);
                 writer.close();
             }
+
             entitybuilder.addBinaryBody(keys.get(i), new File("src/main/resources/" + values.get(i)));
         }
         return entitybuilder;

@@ -1,7 +1,7 @@
 {
   "environment": "beta",
   "project_name": "ATS_API",
-  "report_name": "ATS_Health_Check",
+  "report_name": "ATS_API_Regression",
   "tags": "@hc",
   "sub_id": "test_id",
   "enter_point": "https://apis.gemecosystem.com/enter-point",
@@ -60,6 +60,7 @@
     "sendEmailsWithCC": "atsInterviewSvc/interview/sendEmail/tripta.sahni%40geminisolutions.com/tripta.sahni%40geminisolutions.com/hello%20hello?emailBody=ncbdbc%2Csmd",
     "deleteAnInterview": "atsInterviewSvc/interview/{interviewId}",
     "updateAnInterview": "atsInterviewSvc/interview",
+    "addFeedbackForVetting": "atsInterviewSvc/feedback/resumeVetting/{applicantId}",
     "addNewFeedback": "atsInterviewSvc/feedback",
     "addFeedbackForVetting": "atsInterviewSvc/feedback/resumeVetting/{applicantId}",
     "deleteFeedback": "atsInterviewSvc/feedback/{interviewId}",
@@ -75,6 +76,9 @@
     "deleteAJob": "atsJobSvc/job/{jobId}",
     "updateJobStatus": "atsJobSvc/job/update/{jobId}/{jobStatus}",
     "updateJobStatusUsingOrderId": "atsJobSvc/job/update/order/1/{jobStatus}",
-    "negativeTestingToUpdateApplicantStage": "atsApplicantSvc/applicant/{applicantId}/stage/2"
+    "negativeTestingToUpdateApplicantStage": "atsApplicantSvc/applicant/{applicantId}/stage/2",
+    "apiToGetInterviewsForVettingForAParticularEmail": "atsInterviewSvc/interview/getApplicantIdForEmail/vaibhav.oberoi@geminisolutions.com",
+    "apiToGetApplicantsInVetting": "atsApplicantSvc/applicant/applicantsVettingList",
+    "sendApplicantsForVetting": "atsApplicantSvc/applicant/sendApplicantsForVetting"
   }
 }
