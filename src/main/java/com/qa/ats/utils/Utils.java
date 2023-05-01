@@ -185,7 +185,6 @@ public class Utils {
                     pay.addProperty("interviewId", InterviewStep.interviewId);
                     pay.addProperty("jobId", AtsHealthCheck.jobId);
                     pay.addProperty("applicantId", AtsHealthCheck.applicantId);
-//                    pay.addProperty("jobId", AtsHealthCheck.jobId);
                 }
                 String payloads = String.valueOf(ApiHealthCheckUtils.result(pay));
                 request.setRequestPayload(payloads);
@@ -394,7 +393,6 @@ public class Utils {
 
                 Gson gson = new Gson();
                 String jsonOutput = gson.toJson(newObject);
-//                jsonOutput="["+jsonOutput+"]";
                 FileWriter writer = new FileWriter("src/main/resources/" + values.get(i));
                 writer.write(jsonOutput);
                 writer.close();
