@@ -1,7 +1,7 @@
 {
   "environment": "beta",
   "project_name": "ATS_API",
-  "report_name": "ATS_API_Regression",
+  "report_name": "ATS_HealthCheck",
   "tags": "@hc",
   "sub_id": "test_id",
   "enter_point": "https://apis.gemecosystem.com/enter-point",
