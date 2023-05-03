@@ -185,7 +185,6 @@ public class Utils {
                     pay.addProperty("interviewId", InterviewStep.interviewId);
                     pay.addProperty("jobId", AtsHealthCheck.jobId);
                     pay.addProperty("applicantId", AtsHealthCheck.applicantId);
-//                    pay.addProperty("jobId", AtsHealthCheck.jobId);
                 }
                 String payloads = String.valueOf(ApiHealthCheckUtils.result(pay));
                 request.setRequestPayload(payloads);
@@ -282,11 +281,7 @@ public class Utils {
         }
 
             return String.valueOf(response.getStatus());
-
-
-
-    }
-
+        }
 
     public static String feedbackApiWithPayloads(String UrlNameFromConfig, String method, String payloadName, Map<String, String> headers, String step) throws Exception {
         Response response = new Response();
@@ -337,9 +332,9 @@ public class Utils {
         }
         if (method.equals("post") && UrlNameFromConfig.contains("Vetting"))
             return String.valueOf((response.getStatus()));
-        else if (method.equals("post") && response.getStatus() >= 200 && response.getStatus() <= 201)
 
-            return (response.getStatus() + "," + JsonParser.parseString(response.getResponseBody()).getAsJsonObject().get("object").getAsJsonObject().get("feedbackId").toString());
+        else if (method.equals("post") && response.getStatus() >= 200 && response.getStatus() <= 201)
+          return (response.getStatus() + "," + JsonParser.parseString(response.getResponseBody()).getAsJsonObject().get("object").getAsJsonObject().get("feedbackId").toString());
         else
             return String.valueOf(response.getStatus());
     }
@@ -389,19 +384,16 @@ public class Utils {
                 String jsonOutput = gson.toJson(newObject);
                 FileWriter writer = new FileWriter("src/main/resources/" + values.get(i));
                 writer.write(jsonOutput);
-                writer.close();
-
-            } else if (values.get(i).contains("applicantVetting.json") && method.equals("post")) {
+                writer.close()
+                } else if (values.get(i).contains("applicantVetting.json") && method.equals("post")) {
                 JsonArray newObject = new JsonArray();
                 JsonParser parser = new JsonParser();
                 newObject = (JsonArray) parser.parse(new FileReader("src/main/resources/" + values.get(i)));
                 newObject.get(0).getAsJsonObject().addProperty("applicantId", AtsHealthCheck.applicantId);
                 newObject.get(0).getAsJsonObject().addProperty("currentStageId", 1);
                 newObject.get(0).getAsJsonObject().addProperty("jobId", AtsHealthCheck.jobId);
-
                 Gson gson = new Gson();
                 String jsonOutput = gson.toJson(newObject);
-//                jsonOutput="["+jsonOutput+"]";
                 FileWriter writer = new FileWriter("src/main/resources/" + values.get(i));
                 writer.write(jsonOutput);
                 writer.close();
