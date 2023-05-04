@@ -83,7 +83,7 @@ Feature: ATS scenario
       | endpoint                    | method | expectedStatus |
       | apiToGetApplicantsInVetting | get    | 200            |
 
-  Scenario Outline: ATS, <name> an applicant
+  Scenario Outline: ATS, <name> an applicant and send him for vetting
     Given Setting the Applicant endpoint <endpoint> method <method> payload <payload> for vetting
     Then Verify scenario status code <expectedStatus>
     Examples:
@@ -136,7 +136,8 @@ Feature: ATS scenario
     Given Set the Interview endpoint <endpoint> and method <method>
     Then Verify Interview status code <expectedStatus>
     Examples:
-      | endpoint                      | method | expectedStatus |
+
+      | endpoint                       | method | expectedStatus |
       | apiToGetInterviewByInterviewId | get    | 200            |
 
   Scenario Outline: ATS, API to fetch all the employees who can be attendee or interviewer for an interview
