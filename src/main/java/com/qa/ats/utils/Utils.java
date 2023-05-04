@@ -265,7 +265,8 @@ public class Utils {
 
             if ((response.getResponseBody()) != null) {
                 GemTestReporter.addTestStep("Response Body", response.getResponseBody(), STATUS.INFO);
-            } else {
+            }
+            else{
                 GemTestReporter.addTestStep("Response Body", "No-Response", STATUS.INFO);
             }
 
