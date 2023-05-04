@@ -73,7 +73,34 @@ public class AtsHealthCheck {
             GemTestReporter.addTestStep("Form-data", "User not able verify the form-data", STATUS.FAIL);
         }
     }
-    
+
+    @Given("^Setting the Applicant endpoint (.+) method (.+) payload (.+) for vetting using wrong header (.+)$")
+    public void settingWrongHeaderForVeeting(String url,String method,String payload,String header)
+    {
+        HashMap<String, String> token = new HashMap<String, String>();
+        if(header.equals("ObjectID")) {
+            token.put("X-REMOTE-USER-EMAIL", "nipun.jain@geminisolutions.com");
+            token.put("X-REMOTE-USER-OBJECT-ID", "hsgdhg");
+        }
+        else {
+            token.put("X-REMOTE-USER-EMAIL", "nhjk");
+            token.put("X-REMOTE-USER-OBJECT-ID", "e82f1905-3695-49a6-977e-9712d7f1ece1");
+        }
+        String checkList[];
+        try {
+            String check = Utils.applicantApiForVetting(url, method, payload,token, "" );
+            if (method.equals("post") && check.contains(",")) {
+                checkList = check.split(",");
+                status = Integer.parseInt(checkList[0]);
+
+
+            }
+        }  catch (Exception e) {
+            logger.info("API was not hit successfully", e);
+            GemTestReporter.addTestStep("Hit the " + url, "API was not successfully triggered", STATUS.FAIL);
+        }
+    }
+
     @Given("^Setting the Applicant endpoint (.+) method (.+) payload (.+) for vetting$")
     public void settingTheApplicantEndpointEndpointMethodMethodForVetting(String url,String method,String payload){
 
@@ -87,10 +114,12 @@ public class AtsHealthCheck {
                 checkList = check.split(",");
                 status = Integer.parseInt(checkList[0]);
             }
-        } catch (Exception e) {
-            logger.info("API was not hit successfully", e);
-            GemTestReporter.addTestStep("Hit the " + url, "API was not successfully triggered", STATUS.FAIL);
-        }
+            else
+                status=Integer.parseInt(check);
+        }  catch (Exception e) {
+        logger.info("API was not hit successfully", e);
+        GemTestReporter.addTestStep("Hit the " + url, "API was not successfully triggered", STATUS.FAIL);
+
     }
 }
          
