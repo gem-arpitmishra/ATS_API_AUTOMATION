@@ -276,12 +276,12 @@ public class Utils {
 
             return (response.getStatus() + "," + JsonParser.parseString(response.getResponseBody()).getAsJsonObject().get("object"));
         }
-        if(response.getStatus()!=200 && response.getStatus()!=201) {
+        if (response.getStatus() != 200 && response.getStatus() != 201) {
             return String.valueOf(response.getStatus());
         }
 
-            return String.valueOf(response.getStatus());
-        }
+        return String.valueOf(response.getStatus());
+    }
 
     public static String feedbackApiWithPayloads(String UrlNameFromConfig, String method, String payloadName, Map<String, String> headers, String step) throws Exception {
         Response response = new Response();
@@ -384,7 +384,7 @@ public class Utils {
                 String jsonOutput = gson.toJson(newObject);
                 FileWriter writer = new FileWriter("src/main/resources/" + values.get(i));
                 writer.write(jsonOutput);
-                writer.close()
+                writer.close();
                 } else if (values.get(i).contains("applicantVetting.json") && method.equals("post")) {
                 JsonArray newObject = new JsonArray();
                 JsonParser parser = new JsonParser();

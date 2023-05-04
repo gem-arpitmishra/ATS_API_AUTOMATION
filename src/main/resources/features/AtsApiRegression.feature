@@ -360,13 +360,19 @@ Feature: ATS scenario
       | endpoint               | method | expectedStatus | stage |
       | updateStageOfApplicant | put    | 200            | 1     |
 
-  Scenario Outline: ATS, send applicant for vetting using wrong method get
+  Scenario Outline: ATS, send applicant for vetting using wrong method put
     Given Setting the Applicant endpoint <endpoint> method <method> payload <payload> for vetting
     Then Verify scenario status code <expectedStatus>
     Examples:
       | endpoint                 | method | expectedStatus | payload               |
-      | sendApplicantsForVetting | put   | 405            | applicantVetting.json |
+      | sendApplicantsForVetting | put    | 405            | applicantVetting.json |
 
+  Scenario Outline: ATS, send applicant for vetting using wrong method delete
+    Given Setting the Applicant endpoint <endpoint> method <method> payload <payload> for vetting
+    Then Verify scenario status code <expectedStatus>
+    Examples:
+      | endpoint                 | method | expectedStatus | payload               |
+      | sendApplicantsForVetting | delete | 405            | applicantVetting.json |
 
   Scenario Outline: ATS, <name> an applicant and send him for vetting
     Given Setting the Applicant endpoint <endpoint> method <method> payload <payload> for vetting
@@ -375,15 +381,6 @@ Feature: ATS scenario
       | endpoint                 | method | expectedStatus | payload               | name   |
       | sendApplicantsForVetting | post   | 200            | applicantVetting.json | Create |
 
-
-
-#  Scenario Outline:ATS, API to schedule interview for the same job and same applicant for vetting
-#    Given Set the Interview endpoint <endpoint> , method <method> and payload <payload>
-#    Then Verify Interview status code <expectedStatus>
-#    Examples:
-#      | endpoint        | method | expectedStatus | payload   |
-#      | addNewInterview | post   | 200            | interview |
-
   Scenario Outline: ATS, API to fetch interviews for Vetting for a particular email ID using wrong method
     Given Set the Interview endpoint <endpoint> and method <method>
     Then Verify Interview status code <expectedStatus>
@@ -391,9 +388,7 @@ Feature: ATS scenario
       | endpoint                                        | method | expectedStatus |
       | apiToGetInterviewsForVettingForAParticularEmail | delete | 405            |
 
-
-Scenario Outline:ATS, Negative testing of API to post a new feedback using wrong method for vetting
-
+  Scenario Outline:ATS, Negative testing of API to post a new feedback using wrong method for vetting
     Given Set the Feedback endpoint <endpoint> , method <method> and payload <payload>
     Then Verify Interview status code <expectedStatus>
     Examples:
