@@ -388,7 +388,7 @@ public class Utils {
                 FileWriter writer = new FileWriter("src/main/resources/" + values.get(i));
                 writer.write(jsonOutput);
                 writer.close();
-            } else if (values.get(i).contains("applicantVetting.json") && method.equals("post")) {
+                } else if (values.get(i).contains("applicantVetting.json") && method.equals("post")) {
                 JsonArray newObject = new JsonArray();
                 JsonParser parser = new JsonParser();
                 newObject = (JsonArray) parser.parse(new FileReader("src/main/resources/" + values.get(i)));
