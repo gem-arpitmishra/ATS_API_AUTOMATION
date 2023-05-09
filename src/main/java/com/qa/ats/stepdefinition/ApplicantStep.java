@@ -63,7 +63,6 @@ public class ApplicantStep {
         HashMap<String, String> token = new HashMap<String, String>();
         try {
             status = Utils.apiWithoutPayloads(url, method, null, "").getStatus();
-
         } catch (Exception exception) {
             logger.info("Error - User not able to hit the API", exception);
             GemTestReporter.addTestStep("Hit API", "User not able to hit the API", STATUS.FAIL);
@@ -97,6 +96,5 @@ public class ApplicantStep {
             GemTestReporter.addTestStep("Hit API", "User not able to hit the API", STATUS.FAIL);
         }
     }
-
 }
 

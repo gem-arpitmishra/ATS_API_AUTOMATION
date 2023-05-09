@@ -391,7 +391,9 @@ Feature: ATS scenario
       | endpoint                                        | method | expectedStatus |
       | apiToGetInterviewsForVettingForAParticularEmail | delete | 405            |
 
-  Scenario Outline:ATS, Negative testing of API to post a new feedback using wrong method for vetting
+
+Scenario Outline:ATS, Negative testing of API to post a new feedback using wrong method for vetting
+
     Given Set the Feedback endpoint <endpoint> , method <method> and payload <payload>
     Then Verify Interview status code <expectedStatus>
     Examples:
@@ -429,7 +431,6 @@ Feature: ATS scenario
       | addNewInterview | post   | 400            | interview10 | attendees |
       | addNewInterview | post   | 400            | interview11 | endTime   |
 
-
   Scenario Outline:ATS, API to schedule interview for the same job and same applicant without using <key> field in the payload
     Given Set the Interview endpoint <endpoint> , method <method> and payload <payload>
     Then Verify Interview status code <expectedStatus>
@@ -445,7 +446,6 @@ Feature: ATS scenario
     Examples:
       | endpoint        | method | expectedStatus | payload    | header   |
       | addNewInterview | post   | 400            | interview1 | ObjectID |
-
 
   Scenario Outline:ATS, API to schedule interview for the same job and same applicant  using wrong header
     Given Set the Interview endpoint <endpoint> , method <method> , payload <payload>  using wrong header <header>
@@ -634,7 +634,6 @@ Feature: ATS scenario
       | endpoint          | method | expectedStatus | header   |
       | deleteAnInterview | delete | 400            | ObjectID |
 
-
   Scenario Outline:ATS, API to delete an interview using wrong header ObjectID
     Given Set the Interview endpoint <endpoint> , method <method> with wrong <header> header
     Then Verify Interview status code <expectedStatus>
@@ -655,3 +654,4 @@ Feature: ATS scenario
     Examples:
       | endpoint                    | method | expectedStatus |
       | apiToGetApplicantsInVetting | put    | 405            |
+
