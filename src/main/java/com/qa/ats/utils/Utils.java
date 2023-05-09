@@ -124,7 +124,6 @@ public class Utils {
                 url = GlobalVariable.BASE_URL + url + AtsHealthCheck.applicantId + "/stage/" + stage;
             else if (method.equals("post"))
                 url = GlobalVariable.BASE_URL + url + AtsHealthCheck.applicantId + "/align-job/10"+ "?jobTitle=QA";
-//                url = GlobalVariable.BASE_URL + url + AtsHealthCheck.applicantId + "/align-job/" + AtsHealthCheck.jobId + "?jobTitle=DemoCreated";
             else if (method.equals("patch")) {
 
             } else
@@ -181,12 +180,10 @@ public class Utils {
                 JsonParser parser = new JsonParser();
                 JsonObject pay = (JsonObject) parser.parse(payload);
                 if (method.equals("post")) {
-//                    pay.addProperty("jobId", AtsHealthCheck.jobId);
                     pay.addProperty("jobId", 10);
                     pay.addProperty("applicantId", AtsHealthCheck.applicantId);
                 } else if (method.equals("put")) {
                     pay.addProperty("interviewId", InterviewStep.interviewId);
-//                    pay.addProperty("jobId", AtsHealthCheck.jobId);
                     pay.addProperty("jobId", 10);
                     pay.addProperty("applicantId", AtsHealthCheck.applicantId);
                 }
