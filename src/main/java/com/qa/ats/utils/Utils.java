@@ -123,7 +123,7 @@ public class Utils {
             if (method.equals("put"))
                 url = GlobalVariable.BASE_URL + url + AtsHealthCheck.applicantId + "/stage/" + stage;
             else if (method.equals("post"))
-                url = GlobalVariable.BASE_URL + url + AtsHealthCheck.applicantId + "/align-job/" + AtsHealthCheck.jobId + "?jobTitle=DemoCreated";
+                url = GlobalVariable.BASE_URL + url + AtsHealthCheck.applicantId + "/align-job/10"+ "?jobTitle=QA";
             else if (method.equals("patch")) {
 
             } else
@@ -137,6 +137,7 @@ public class Utils {
             if (!step.isEmpty()) {
                 request.setStep(step);
             }
+
             response = ApiInvocation.handleRequest(request);
             GemTestReporter.addTestStep("Response Message", response.getResponseMessage(), STATUS.INFO);
             responseCheck(response);
@@ -179,11 +180,11 @@ public class Utils {
                 JsonParser parser = new JsonParser();
                 JsonObject pay = (JsonObject) parser.parse(payload);
                 if (method.equals("post")) {
-                    pay.addProperty("jobId", AtsHealthCheck.jobId);
+                    pay.addProperty("jobId", 10);
                     pay.addProperty("applicantId", AtsHealthCheck.applicantId);
                 } else if (method.equals("put")) {
                     pay.addProperty("interviewId", InterviewStep.interviewId);
-                    pay.addProperty("jobId", AtsHealthCheck.jobId);
+                    pay.addProperty("jobId", 10);
                     pay.addProperty("applicantId", AtsHealthCheck.applicantId);
                 }
                 String payloads = String.valueOf(ApiHealthCheckUtils.result(pay));
@@ -334,7 +335,7 @@ public class Utils {
             return String.valueOf((response.getStatus()));
 
         else if (method.equals("post") && response.getStatus() >= 200 && response.getStatus() <= 201)
-          return (response.getStatus() + "," + JsonParser.parseString(response.getResponseBody()).getAsJsonObject().get("object").getAsJsonObject().get("feedbackId").toString());
+            return (response.getStatus() + "," + JsonParser.parseString(response.getResponseBody()).getAsJsonObject().get("object").getAsJsonObject().get("feedbackId").toString());
         else
             return String.valueOf(response.getStatus());
     }

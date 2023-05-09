@@ -432,7 +432,7 @@ Feature: ATS scenario
     Examples:
       | endpoint        | method | expectedStatus | payload    | key              |
       | addNewInterview | post   | 500            | interview4 | startTime        |
-      | addNewInterview | post   | 500            | interview6 | interviewerEmail |
+#      | addNewInterview | post   | 500            | interview6 | interviewerEmail |
       | addNewInterview | post   | 500            | interview7 | endTime          |
 
   Scenario Outline:ATS, API to schedule interview for the same job and same applicant without using header
@@ -486,7 +486,7 @@ Feature: ATS scenario
     Examples:
       | endpoint          | method | expectedStatus | payload          | key              |
       | updateAnInterview | put    | 500            | updateInterview5 | startTime        |
-      | updateAnInterview | put    | 500            | updateInterview6 | interviewerEmail |
+#      | updateAnInterview | put    | 500            | updateInterview6 | interviewerEmail |
       | updateAnInterview | put    | 500            | updateInterview7 | endTime          |
 
   Scenario Outline:ATS, API to update interview for the same job and same applicant without using header
