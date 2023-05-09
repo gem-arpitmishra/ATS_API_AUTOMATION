@@ -360,7 +360,7 @@ Feature: ATS scenario
       | endpoint               | method | expectedStatus | stage |
       | updateStageOfApplicant | put    | 200            | 1     |
 
-  Scenario Outline: ATS, send applicant for vetting using wrong method get
+  Scenario Outline: ATS, send applicant for vetting using wrong method put
     Given Setting the Applicant endpoint <endpoint> method <method> payload <payload> for vetting
     Then Verify scenario status code <expectedStatus>
     Examples:

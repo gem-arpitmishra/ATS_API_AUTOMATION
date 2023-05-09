@@ -28,14 +28,12 @@ public class AtsHealthCheck {
         String checkList[];
         try {
             String check = Utils.jobApiWithFormData(url, method, token, "", payload_keys, payload_values);
-            if (method.equals("post")&&check.contains(",")) {
+            if (method.equals("post") && check.contains(",")) {
                 checkList = check.split(",");
                 status = Integer.parseInt(checkList[0]);
                 jobId = Integer.parseInt(checkList[1]);
-
             } else {
                 status = Integer.parseInt(check);
-
             }
         } catch (Exception exception) {
             logger.info("User not able set the form data", exception);
@@ -47,8 +45,6 @@ public class AtsHealthCheck {
     public void verifyScenarioStatusCodeExpectedStatus(int Expected) {
         try {
             Utils.verifyStatusCode(Expected, status);
-
-
         } catch (Exception exception) {
             logger.info("User not able verify thr API status", exception);
             GemTestReporter.addTestStep("Status Check", "User not able verify thr API status", STATUS.FAIL);
@@ -69,10 +65,8 @@ public class AtsHealthCheck {
                 checkList = check.split(",");
                 status = Integer.parseInt(checkList[0]);
                 applicantId = Integer.parseInt(checkList[1]);
-
             } else {
                 status = Integer.parseInt(check);
-
             }
         } catch (Exception exception) {
             logger.info("User not able set the form data", exception);
@@ -109,8 +103,7 @@ public class AtsHealthCheck {
 
     @Given("^Setting the Applicant endpoint (.+) method (.+) payload (.+) for vetting$")
     public void settingTheApplicantEndpointEndpointMethodMethodForVetting(String url,String method,String payload){
-
- HashMap<String, String> token = new HashMap<String, String>();
+        HashMap<String, String> token = new HashMap<String, String>();
         token.put("X-REMOTE-USER-EMAIL", "nipun.jain@geminisolutions.com");
         token.put("X-REMOTE-USER-OBJECT-ID", "e82f1905-3695-49a6-977e-9712d7f1ece1");
         String checkList[];
@@ -124,11 +117,10 @@ public class AtsHealthCheck {
             }
             else
                 status=Integer.parseInt(check);
-        }  catch (Exception e) {
-        logger.info("API was not hit successfully", e);
-        GemTestReporter.addTestStep("Hit the " + url, "API was not successfully triggered", STATUS.FAIL);
+        } catch (Exception e) {
+            logger.info("API was not hit successfully", e);
+            GemTestReporter.addTestStep("Hit the " + url, "API was not successfully triggered", STATUS.FAIL);
+        }
     }
-}
-
 }
 
