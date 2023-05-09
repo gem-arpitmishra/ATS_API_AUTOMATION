@@ -60,7 +60,6 @@
     "sendEmailsWithCC": "atsInterviewSvc/interview/sendEmail/tripta.sahni%40geminisolutions.com/tripta.sahni%40geminisolutions.com/hello%20hello?emailBody=ncbdbc%2Csmd",
     "deleteAnInterview": "atsInterviewSvc/interview/{interviewId}",
     "updateAnInterview": "atsInterviewSvc/interview",
-    "addFeedbackForVetting": "atsInterviewSvc/feedback/resumeVetting/{applicantId}",
     "addNewFeedback": "atsInterviewSvc/feedback",
     "deleteFeedback": "atsInterviewSvc/feedback/{interviewId}",
     "postNewJob": "atsJobSvc/job",
