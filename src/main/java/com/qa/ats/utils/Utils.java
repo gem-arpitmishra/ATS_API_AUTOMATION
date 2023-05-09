@@ -138,6 +138,7 @@ public class Utils {
             if (!step.isEmpty()) {
                 request.setStep(step);
             }
+
             response = ApiInvocation.handleRequest(request);
             GemTestReporter.addTestStep("Response Message", response.getResponseMessage(), STATUS.INFO);
             responseCheck(response);
