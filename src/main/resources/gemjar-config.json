@@ -5,8 +5,8 @@
   "tags": "@hc",
   "sub_id": "test_id",
   "enter_point": "https://apis.gemecosystem.com/enter-point",
-  "jewel_user": "cgarg",
-  "jewel_bridge_token": "ecdd02db-4906-4514-aefc-a76e73aa532e1677670397883",
+  "jewel_user": "t.sahni",
+  "jewel_bridge_token": "936f4fca-e61d-41f8-97fb-4757be7697aa1683889851251",
   "glueCode": "com.qa.ats.stepdefinition",
   "email_report": "y",
   "email_to":"shruti.kukreja@geminisolutions.com,sajith.j@geminisolutions.com,richa.khatri@geminisolutions.com,harshita.gupta@geminisolutions.com,akshi.khattar@geminisolutions.com,saksham.khanna@geminisolutions.com,nipun.jain@geminisolutions.com,ankita.srivastava@geminisolutions.com,saru.goyal@geminisolutions.com,ritika.jain@geminisolutions.com,vaibhav.oberoi@geminisolutions.com,sumit.parashar@geminisolutions.com,anjali.tripathi@geminisolutions.com",
@@ -78,6 +78,6 @@
     "negativeTestingToUpdateApplicantStage": "atsApplicantSvc/applicant/{applicantId}/stage/2",
     "apiToGetInterviewsForVettingForAParticularEmail": "atsInterviewSvc/interview/getApplicantIdForEmail/vaibhav.oberoi@geminisolutions.com",
     "apiToGetApplicantsInVetting": "atsApplicantSvc/applicant/applicantsVettingList",
-    "sendApplicantsForVetting": "atsApplicantSvc/applicant/sendApplicantsForVetting"
+    "sendApplicantsForVetting": "atsInterviewSvc/interview/sendApplicantsForVetting"
   }
 }
