@@ -45,7 +45,7 @@ public class AtsRegression {
         List<String> payload_values = Arrays.asList(values.split(","));
         HashMap<String, String> token = new HashMap<String, String>();
         token.put("X-REMOTE-USER", "saru.goyal@geminisolutions.com");
-        String checkList[];
+        String[] checkList;
         try {
             String check = Utils.applicantApiWithFormDataWrongHeader(url, method, token, "", payload_keys, payload_values);
             if (method.equals("post")) {
@@ -62,19 +62,5 @@ public class AtsRegression {
             GemTestReporter.addTestStep("Form-data", "User not able verify the form-data", STATUS.FAIL);
         }
     }
-
-
-    @Then("^Verify Negative scenario status code (.+)$")
-    public void verifyScenarioStatusCodeExpectedStatus(int Expected) {
-        try {
-            Utils.verifyStatusCode(Expected, status);
-
-
-        } catch (Exception exception) {
-            logger.info("User not able verify thr API status", exception);
-            GemTestReporter.addTestStep("Status Check", "User not able verify thr API status", STATUS.FAIL);
-        }
-    }
-
 
 }
