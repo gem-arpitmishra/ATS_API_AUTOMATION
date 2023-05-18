@@ -21,13 +21,13 @@ public class AtsHealthCheck {
     @Given("^Set the Job endpoint (\\w*) method (\\w*) payload (.*) (.*) and form data$")
     public void setTheJobEndpointEndpointMethodMethodPayloadPayloadKeyPayloadValueAndFormData(String url,
                                                                                               String method, String keys, String values) {
-        List<String> payload_keys = Arrays.asList(keys.split(","));
-        List<String> payload_values = Arrays.asList(values.split(","));
+        List<String> payloadKeys = Arrays.asList(keys.split(","));
+        List<String> payloadValues = Arrays.asList(values.split(","));
         HashMap<String, String> token = new HashMap<String, String>();
         token.put("X-REMOTE-USER-EMAIL", "saru.goyal@geminisolutions.com");
         String checkList[];
         try {
-            String check = Utils.jobApiWithFormData(url, method, token, "", payload_keys, payload_values);
+            String check = Utils.jobApiWithFormData(url, method, token, "", payloadKeys, payloadValues);
             if (method.equals("post") && check.contains(",")) {
                 checkList = check.split(",");
                 status = Integer.parseInt(checkList[0]);
@@ -53,13 +53,13 @@ public class AtsHealthCheck {
 
     @Given("^Set the Applicant endpoint (\\w*) method (\\w*) payload (.*) (.*) and form data$")
     public void setTheApplicantEndpointEndpointMethodMethodPayloadPayloadKeyPayloadValueAndFormData(String url, String method, String keys, String values) {
-        List<String> payload_keys = Arrays.asList(keys.split(","));
-        List<String> payload_values = Arrays.asList(values.split(","));
+        List<String> payloadKeys = Arrays.asList(keys.split(","));
+        List<String> payloadValues = Arrays.asList(values.split(","));
         HashMap<String, String> token = new HashMap<String, String>();
         token.put("X-REMOTE-USER-EMAIL", "saru.goyal@geminisolutions.com");
         String checkList[];
         try {
-            String check = Utils.applicantApiWithFormData(url, method, token, "", payload_keys, payload_values);
+            String check = Utils.applicantApiWithFormData(url, method, token, "", payloadKeys, payloadValues);
             if (method.equals("post") && check.contains(",")) {
                 checkList = check.split(",");
                 status = Integer.parseInt(checkList[0]);
