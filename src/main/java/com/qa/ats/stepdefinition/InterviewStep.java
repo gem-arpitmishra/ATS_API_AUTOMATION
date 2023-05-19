@@ -96,9 +96,8 @@ public class InterviewStep {
 
     @Then("^Verify Interview status code (.+)$")
     public void verifyPolicyStatusCodeExpectedStatus(Integer Expected) {
-        Utils.verifyStatusCode(Expected, status);
+      Utils.verifyStatusCode(Expected, status);
     }
-
 
     @Given("^Set the Interview endpoint (.+) , method (.+) , payload (.+) without using header (.+)$")
     public void setTheInterviewEndpointWithoutUsingHeader(String url, String method, String payload, String header) {
@@ -109,7 +108,7 @@ public class InterviewStep {
             String check = Utils.interviewApiWithPayloads(url, method, payload, token, "");
             if (method.equals("post") && check.contains(",")) {
 
-                String checkList[] = check.split(",");
+                String[] checkList = check.split(",");
                 status = Integer.parseInt(checkList[0]);
                 String str = checkList[1].split(":")[1];
                 interviewId=Integer.parseInt((str).substring(0, str.length() - 1).trim());
@@ -169,9 +168,8 @@ public class InterviewStep {
         }
     }
 
-
     @Given("^Set the Interview endpoint (.+) , method (.+) , payload (.+)  using wrong header (.+)$")
-    public void set_the_interview_endpoint_add_new_interview_method_post_payload_interview1_using_wrong_header_object_id(String url, String method, String payload, String header) {
+    public void setTheInterviewEndpointAddNewInterviewMethodPostPayloadInterview1UsingWrongHeaderObjectId(String url, String method, String payload, String header) {
         HashMap<String, String> token = new HashMap<String, String>();
         if (header.equals("ObjectID")) {
             token.put("X-REMOTE-USER-EMAIL", "nipun.jain@geminisolutions.com");
@@ -197,7 +195,5 @@ public class InterviewStep {
             logger.info("API was not hit successfully", e);
             GemTestReporter.addTestStep("Hit the " + url, "API was not successfully triggered", STATUS.FAIL);
         }
-
-
     }
 }
