@@ -542,7 +542,7 @@ public class Utils {
         }
         return entityBuilder;
     }
-  
+
     public static MultipartEntityBuilder entitybuilderFileParserForMultipleApplicants(List<String> keys, List<String> values, String method, String url) throws IOException {
         MultipartEntityBuilder entitybuilder = MultipartEntityBuilder.create();
         entitybuilder.setMode(HttpMultipartMode.BROWSER_COMPATIBLE);
@@ -569,9 +569,8 @@ public class Utils {
             }
             entitybuilder.addBinaryBody(keys.get(i), new File("src/main/resources/" + values.get(i)));
         }
-        return entityBuilder;
+        return entitybuilder;
     }
-
 
 
        public static String addMultipleApplicants(String url, String method, Map<String, String> headers, List<String> keys, List<String> values) {
