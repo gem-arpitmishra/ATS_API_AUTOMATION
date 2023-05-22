@@ -90,6 +90,13 @@ Feature: ATS scenario
       | endpoint                 | method | expectedStatus | payload               | name   |
       | sendApplicantsForVetting | post   | 200            | applicantVetting.json | Create |
 
+  Scenario Outline: ATS, Get the Vetter Names for Applicants
+    Given Set the Interview endpoint <endpoint> method <method> payload <payload> for getting vetter names
+    Then Verify Interview status code <expectedStatus>
+    Examples:
+      | endpoint       | method | expectedStatus | payload     |
+      | getVetterNames | post   | 200            | Vetter.json |
+
   Scenario Outline:ATS, API to post a new feedback for vetting
     Given Set the Feedback endpoint <endpoint> , method <method> and payload <payload>
     Then Verify Interview status code <expectedStatus>
@@ -110,7 +117,7 @@ Feature: ATS scenario
     Examples:
       | endpoint        | method | expectedStatus | payload    |
       | addNewInterview | post   | 201            | interview1 |
-      
+
   Scenario Outline:ATS, API to send feedback reminder on the basis of interview ID
     Given Set the Interview endpoint <endpoint> and method <method>
     Then Verify Interview status code <expectedStatus>
@@ -260,3 +267,9 @@ Feature: ATS scenario
       | endpoint   | method | expectedStatus |
       | deleteAJob | delete | 200            |
 
+  Scenario Outline: API to add multiple Applicants
+    Given Set the Applicant endpoint <endpoint> and method <method> and keys <payload_keys> , values <payload_values> to add multiple applicants
+    Then  Verify Applicant status code <expectedStatus>
+    Examples:
+      | endpoint              | method | expectedStatus | payload_keys                  | payload_values                       |
+      | addMultipleApplicants | post   | 201            | applicantList,resumes,resumes | applicantList.json,test.pdf,test.pdf |
