@@ -10,7 +10,7 @@
   "glueCode": "com.qa.ats.stepdefinition",
   "email_report": "y",
   "email_to":"shruti.kukreja@geminisolutions.com,sajith.j@geminisolutions.com,richa.khatri@geminisolutions.com,harshita.gupta@geminisolutions.com,akshi.khattar@geminisolutions.com,saksham.khanna@geminisolutions.com,nipun.jain@geminisolutions.com,ankita.srivastava@geminisolutions.com,saru.goyal@geminisolutions.com,ritika.jain@geminisolutions.com,vaibhav.oberoi@geminisolutions.com,sumit.parashar@geminisolutions.com,anjali.tripathi@geminisolutions.com",
-  "email_cc":"charu.garg@geminisolutions.com,tripta.sahni@geminisolutions.com,shruti.singh@geminisolutions.com",
+  "email_cc":"charu.garg@geminisolutions.com,tripta.sahni@geminisolutions.com",
   "beta": {
     "getConstants": "atsJobSvc/job/all-constants",
     "getAllJobDetails": "atsJobSvc/job/all-job-details",
@@ -83,5 +83,8 @@
     "getApplicantWithPaging": "atsApplicantSvc/applicant",
     "getApplicantWithPagingWithDaysFilter": "atsApplicantSvc/applicant/days/3",
     "getApplicantWithPagingWithPageSize": "atsApplicantSvc/applicant/pageNumber/1/pageSize/1"
+    "addMultipleApplicants": "atsApplicantSvc/applicant/bulkSave",
+    "updateReasonOfRejection": "atsApplicantSvc/applicant/{applicantId}/addReasonOfRejection?reasonOfRejection=nothingPrepared",
+    "getVetterNames": "atsInterviewSvc/interview/getVetterNameForApplicants"
   }
 }

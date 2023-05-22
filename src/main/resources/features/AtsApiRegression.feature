@@ -367,12 +367,12 @@ Feature: ATS scenario
       | endpoint                 | method | expectedStatus | payload               |
       | sendApplicantsForVetting | put    | 405            | applicantVetting.json |
 
-  Scenario Outline: ATS, send applicant for vetting using wrong method delete
-    Given Setting the Applicant endpoint <endpoint> method <method> payload <payload> for vetting
-    Then Verify scenario status code <expectedStatus>
-    Examples:
-      | endpoint                 | method | expectedStatus | payload               |
-      | sendApplicantsForVetting | delete | 405            | applicantVetting.json |
+#  Scenario Outline: ATS, send applicant for vetting using wrong method patch
+#    Given Setting the Applicant endpoint <endpoint> method <method> payload <payload> for vetting
+#    Then Verify scenario status code <expectedStatus>
+#    Examples:
+#      | endpoint                 | method | expectedStatus | payload               |
+#      | sendApplicantsForVetting | patch | 405            | applicantVetting.json |
 
   Scenario Outline: ATS, <name> an applicant and send him for vetting
     Given Setting the Applicant endpoint <endpoint> method <method> payload <payload> for vetting

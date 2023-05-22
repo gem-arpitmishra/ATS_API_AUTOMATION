@@ -542,7 +542,7 @@ public class Utils {
         }
         return entityBuilder;
     }
-
+  
     public static MultipartEntityBuilder entitybuilderFileParserForMultipleApplicants(List<String> keys, List<String> values, String method, String url) throws IOException {
         MultipartEntityBuilder entitybuilder = MultipartEntityBuilder.create();
         entitybuilder.setMode(HttpMultipartMode.BROWSER_COMPATIBLE);
@@ -604,13 +604,12 @@ public class Utils {
         return String.valueOf(arr[0]);
     }
 
-    public static int apiForPatch(String url, String method, Map<String, String> token, String step) {
+        public static int apiForPatch(String url, String method, Map<String, String> token, String step) {
         url = ProjectConfigData.getProperty(url);
         String endpoint = url.replace("{applicantId}", String.valueOf(AtsHealthCheck.applicantId));
         String newUrl = GlobalVariable.BASE_URL + endpoint;
         GemTestReporter.addTestStep("Url of the test case for PATCH request", newUrl, STATUS.INFO);
         return given().contentType(ContentType.JSON).header("X-REMOTE-USER-EMAIL", "saru.goyal@geminisolutions.com").patch(newUrl).statusCode();
-
     }
 
     public static String getVetterNames(String UrlNameFromConfig, String method, String payloadName, Map<String, String> headers, String step) {
