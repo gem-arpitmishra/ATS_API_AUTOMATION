@@ -590,12 +590,12 @@ public class Utils {
             reqBuilder.setEntity(multiPartHttpEntity);
             HttpUriRequest multipartRequest = reqBuilder.build();
             multipartRequest.setHeader(new BasicHeader("X-REMOTE-USER-EMAIL", "nipun.jain@geminisolutions.com"));
-            HttpResponse httpresponse = httpclient.execute(multipartRequest);
+            HttpResponse httpResponse = httpclient.execute(multipartRequest);
             GemTestReporter.addTestStep("POST Request Verification", "POST request executed Successfully", STATUS.PASS);
-            JsonObject js = (JsonObject) JsonParser.parseString(EntityUtils.toString(httpresponse.getEntity()));
+            JsonObject js = (JsonObject) JsonParser.parseString(EntityUtils.toString(httpResponse.getEntity()));
             GemTestReporter.addTestStep("Response Body", String.valueOf(js), STATUS.INFO);
             GemTestReporter.addTestStep("Response Message", js.get("message").getAsString(), STATUS.INFO);
-            arr[0] = httpresponse.getStatusLine().getStatusCode();
+            arr[0] = httpResponse.getStatusLine().getStatusCode();
             return String.valueOf(arr[0]);
         } catch (Exception exception) {
             logger.info("Request doesn't Executed Successfully ", exception);
