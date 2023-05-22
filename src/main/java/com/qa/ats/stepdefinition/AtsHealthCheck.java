@@ -21,13 +21,13 @@ public class AtsHealthCheck {
     @Given("^Set the Job endpoint (\\w*) method (\\w*) payload (.*) (.*) and form data$")
     public void setTheJobEndpointEndpointMethodMethodPayloadPayloadKeyPayloadValueAndFormData(String url,
                                                                                               String method, String keys, String values) {
-        List<String> payload_keys = Arrays.asList(keys.split(","));
-        List<String> payload_values = Arrays.asList(values.split(","));
+        List<String> payloadKeys = Arrays.asList(keys.split(","));
+        List<String> payloadValues = Arrays.asList(values.split(","));
         HashMap<String, String> token = new HashMap<String, String>();
         token.put("X-REMOTE-USER-EMAIL", "saru.goyal@geminisolutions.com");
         String checkList[];
         try {
-            String check = Utils.jobApiWithFormData(url, method, token, "", payload_keys, payload_values);
+            String check = Utils.jobApiWithFormData(url, method, token, "", payloadKeys, payloadValues);
             if (method.equals("post") && check.contains(",")) {
                 checkList = check.split(",");
                 status = Integer.parseInt(checkList[0]);
@@ -52,15 +52,14 @@ public class AtsHealthCheck {
     }
 
     @Given("^Set the Applicant endpoint (\\w*) method (\\w*) payload (.*) (.*) and form data$")
-    public void setTheApplicantEndpointEndpointMethodMethodPayloadPayloadKeyPayloadValueAndFormData(String url,
-                                                                                                    String method, String keys, String values) {
-        List<String> payload_keys = Arrays.asList(keys.split(","));
-        List<String> payload_values = Arrays.asList(values.split(","));
+    public void setTheApplicantEndpointEndpointMethodMethodPayloadPayloadKeyPayloadValueAndFormData(String url, String method, String keys, String values) {
+        List<String> payloadKeys = Arrays.asList(keys.split(","));
+        List<String> payloadValues = Arrays.asList(values.split(","));
         HashMap<String, String> token = new HashMap<String, String>();
         token.put("X-REMOTE-USER-EMAIL", "saru.goyal@geminisolutions.com");
         String checkList[];
         try {
-            String check = Utils.applicantApiWithFormData(url, method, token, "", payload_keys, payload_values);
+            String check = Utils.applicantApiWithFormData(url, method, token, "", payloadKeys, payloadValues);
             if (method.equals("post") && check.contains(",")) {
                 checkList = check.split(",");
                 status = Integer.parseInt(checkList[0]);
@@ -84,14 +83,12 @@ public class AtsHealthCheck {
             token.put("X-REMOTE-USER-EMAIL", "nhjk");
             token.put("X-REMOTE-USER-OBJECT-ID", "e82f1905-3695-49a6-977e-9712d7f1ece1");
         }
-        String checkList[];
+        String[] checkList;
         try {
             String check = Utils.applicantApiForVetting(url, method, payload, token, "");
             if (method.equals("post") && check.contains(",")) {
                 checkList = check.split(",");
                 status = Integer.parseInt(checkList[0]);
-
-
             }
         } catch (Exception e) {
             logger.info("API was not hit successfully", e);
@@ -101,20 +98,18 @@ public class AtsHealthCheck {
     }
 
     @Given("^Setting the Applicant endpoint (.+) method (.+) payload (.+) for vetting$")
-
-    public void settingTheApplicantEndpointEndpointMethodMethodForVetting(String url,String method,String payload){
+    public void settingTheApplicantEndpointEndpointMethodMethodForVetting(String url, String method, String payload) {
         HashMap<String, String> token = new HashMap<String, String>();
         token.put("X-REMOTE-USER-EMAIL", "nipun.jain@geminisolutions.com");
         token.put("X-REMOTE-USER-OBJECT-ID", "e82f1905-3695-49a6-977e-9712d7f1ece1");
-        String checkList[];
+        String[] checkList;
         try {
-            String check = Utils.applicantApiForVetting(url, method, payload,token, "" );
+            String check = Utils.applicantApiForVetting(url, method, payload, token, "");
             if (method.equals("post") && check.contains(",")) {
                 checkList = check.split(",");
                 status = Integer.parseInt(checkList[0]);
             } else
                 status = Integer.parseInt(check);
-
         } catch (Exception e) {
             logger.info("API was not hit successfully", e);
             GemTestReporter.addTestStep("Hit the " + url, "API was not successfully triggered", STATUS.FAIL);

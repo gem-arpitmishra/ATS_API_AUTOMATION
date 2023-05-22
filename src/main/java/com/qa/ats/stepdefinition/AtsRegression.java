@@ -41,13 +41,13 @@ public class AtsRegression {
     @Given("^Set the Applicant endpoint (.+) method (.+) payload (.+) (.+) and form data using wrong header$")
     public void setTheApplicantEndpointEndpointMethodMethodPayloadPayloadKeyPayloadValueAndFormData(String url,
                                                                                                     String method, String keys, String values) {
-        List<String> payload_keys = Arrays.asList(keys.split(","));
-        List<String> payload_values = Arrays.asList(values.split(","));
+        List<String> payloadKeys = Arrays.asList(keys.split(","));
+        List<String> payloadValues = Arrays.asList(values.split(","));
         HashMap<String, String> token = new HashMap<String, String>();
         token.put("X-REMOTE-USER", "saru.goyal@geminisolutions.com");
-        String checkList[];
+        String[] checkList;
         try {
-            String check = Utils.applicantApiWithFormDataWrongHeader(url, method, token, "", payload_keys, payload_values);
+            String check = Utils.applicantApiWithFormDataWrongHeader(url, method, token, "", payloadKeys, payloadValues);
             if (method.equals("post")) {
                 checkList = check.split(",");
                 status = Integer.parseInt(checkList[0]);
@@ -62,19 +62,5 @@ public class AtsRegression {
             GemTestReporter.addTestStep("Form-data", "User not able verify the form-data", STATUS.FAIL);
         }
     }
-
-
-    @Then("^Verify Negative scenario status code (.+)$")
-    public void verifyScenarioStatusCodeExpectedStatus(int Expected) {
-        try {
-            Utils.verifyStatusCode(Expected, status);
-
-
-        } catch (Exception exception) {
-            logger.info("User not able verify thr API status", exception);
-            GemTestReporter.addTestStep("Status Check", "User not able verify thr API status", STATUS.FAIL);
-        }
-    }
-
 
 }
