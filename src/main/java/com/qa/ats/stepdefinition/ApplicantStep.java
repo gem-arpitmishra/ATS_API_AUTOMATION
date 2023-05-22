@@ -30,6 +30,19 @@ public class ApplicantStep {
             GemTestReporter.addTestStep("Hit API", "User not able to hit the API", STATUS.FAIL);
         }
     }
+    @Given(("^Set the Applicant endpoint (\\w*) and method (\\w*) for Patch$"))
+    public void setApiForPatch(String url , String method)
+    {
+        HashMap<String, String> token = new HashMap<String, String>();
+        token.put("X-REMOTE-USER-EMAIL", "saru.goyal@geminisolutions.com");
+        try {
+            status = Utils.apiForPatch(url, method, token, "");
+
+        } catch (Exception exception) {
+            logger.info("Error - User not able to hit the API", exception);
+            GemTestReporter.addTestStep("Hit API", "User not able to hit the API", STATUS.FAIL);
+        }
+    }
 
     //Verify the status
     @Then("^Verify Applicant status code (\\d+)$")
@@ -43,12 +56,12 @@ public class ApplicantStep {
     }
 
     @Given("^Set the Applicant endpoint (\\w*) and method (\\w*) with header and stage (\\w*)$")
-    public void setTheApplicantEndpointEndpointAndMethodMethodWithHeader(String url, String method, String stage) {
+    public void setTheApplicantEndpointEndpointAndMethodMethodWithHeader(String url,String method,String stage) {
         HashMap<String, String> header = new HashMap<String, String>();
         header.put("X-REMOTE-USER-EMAIL", "saru.goyal@geminisolutions.com");
         try {
-            if (method.equals("put") || method.equals("post"))
-                status = Utils.apiForUpdatingApplicantStage(url, method, header, stage, "").getStatus();
+            if (method.equals("put")||method.equals("post"))
+                status = Utils.apiForUpdatingApplicantStage(url, method, header, stage,"").getStatus();
             else
                 status = Utils.apiWithoutPayloads(url, method, header, "").getStatus();
 
@@ -57,44 +70,26 @@ public class ApplicantStep {
             GemTestReporter.addTestStep("Hit API", "User not able to hit the API", STATUS.FAIL);
         }
     }
-
-    @Given("^Set the Applicant endpoint (\\w*) and method (\\w*) with wrong header$")
-    public void setTheApplicantEndpointEndpointAndMethodMethodWithWrongHeader(String url, String method) {
+    @Given("^Set the Applicant endpoint (.+) and method (.+) and keys (.+) , values (.+) to add multiple applicants$")
+    public void setTheApplicantEndpointEndpointAndMethodMethodToAddMultipleApplicants(String url , String method, String keys,String values) {
+        List<String> payload_keys = Arrays.asList(keys.split(","));
+        List<String> payload_values = Arrays.asList(values.split(","));
         HashMap<String, String> token = new HashMap<String, String>();
+        token.put("X-REMOTE-USER-EMAIL", "nipun.jain@geminisolutions.com");
+        String checkList[];
         try {
-            status = Utils.apiWithoutPayloads(url, method, null, "").getStatus();
-        } catch (Exception exception) {
-            logger.info("Error - User not able to hit the API", exception);
-            GemTestReporter.addTestStep("Hit API", "User not able to hit the API", STATUS.FAIL);
+            String check = Utils.addMultipleApplicants(url, method,token, payload_keys,payload_values);
+            if (method.equals("post") && check.contains(",")) {
+                checkList = check.split(",");
+                status = Integer.parseInt(checkList[0]);
+            } else
+                status = Integer.parseInt(check);
+
+        } catch (Exception e) {
+            logger.info("API was not hit successfully", e);
+            GemTestReporter.addTestStep("Hit the " + url, "API was not successfully triggered", STATUS.FAIL);
+
         }
     }
 
-    @Given("^Set the Applicant endpoint (\\w*) and method (\\w*) using wrong header$")
-    public void setTheApplicantEndpointEndpointAndMethodMethodUsingWrongHeader(String url, String method) {
-        HashMap<String, String> token = new HashMap<String, String>();
-        try {
-            status = Utils.apiWithoutPayloads(url, method, null, "").getStatus();
-
-        } catch (Exception exception) {
-            logger.info("Error - User not able to hit the API", exception);
-            GemTestReporter.addTestStep("Hit API", "User not able to hit the API", STATUS.FAIL);
-        }
-    }
-
-    @Given("^Set the Applicant endpoint (\\w*) and method (\\w*) with wrong header and stage (\\w*)$")
-    public void setTheApplicantEndpointEndpointAndMethodMethodWithWrongHeaderAndStageStage(String url, String method, String stage) {
-        HashMap<String, String> header = new HashMap<String, String>();
-        header.put("X-REMOTE-USER-EMAIL", "saru.goyal@geminisolutions.com");
-        try {
-            if (method.equals("put") || method.equals("post"))
-                status = Utils.apiForUpdatingApplicantStage(url, method, header, stage, "").getStatus();
-            else
-                status = Utils.apiWithoutPayloads(url, method, header, "").getStatus();
-
-        } catch (Exception exception) {
-            logger.info("Error - User not able to hit the API", exception);
-            GemTestReporter.addTestStep("Hit API", "User not able to hit the API", STATUS.FAIL);
-        }
-    }
 }
-
