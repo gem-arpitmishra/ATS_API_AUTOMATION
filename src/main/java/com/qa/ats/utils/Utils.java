@@ -542,10 +542,10 @@ public class Utils {
         }
         return entityBuilder;
     }
-  
-    public static MultipartEntityBuilder entitybuilderFileParserForMultipleApplicants(List<String> keys, List<String> values, String method, String url) throws IOException {
-        MultipartEntityBuilder entitybuilder = MultipartEntityBuilder.create();
-        entitybuilder.setMode(HttpMultipartMode.BROWSER_COMPATIBLE);
+
+    public static MultipartEntityBuilder entityBuilderFileParserForMultipleApplicants(List<String> keys, List<String> values, String method, String url) throws IOException {
+        MultipartEntityBuilder entityBuilder = MultipartEntityBuilder.create();
+        entityBuilder.setMode(HttpMultipartMode.BROWSER_COMPATIBLE);
         for (int i = 0; i < keys.size(); i++) {
             if (values.get(i).contains(".json")) {
                 JsonParser parser = new JsonParser();
@@ -567,37 +567,35 @@ public class Utils {
                 writer.write(jsonOutput);
                 writer.close();
             }
-            entitybuilder.addBinaryBody(keys.get(i), new File("src/main/resources/" + values.get(i)));
+            entityBuilder.addBinaryBody(keys.get(i), new File("src/main/resources/" + values.get(i)));
         }
         return entityBuilder;
     }
 
-
-
        public static String addMultipleApplicants(String url, String method, Map<String, String> headers, List<String> keys, List<String> values) {
-        int arr[] = new int[2];
+        int[] arr = new int[2];
         try {
             String u = "";
             u = GlobalVariable.BASE_URL + ProjectConfigData.getProperty(url);
             GemTestReporter.addTestStep("Url of the test case", u, STATUS.INFO);
             CloseableHttpClient httpclient = HttpClients.createDefault();
-            MultipartEntityBuilder entitybuilder = entitybuilderFileParserForMultipleApplicants(keys, values, method, url);
-            HttpEntity mutiPartHttpEntity = entitybuilder.build();
-            RequestBuilder reqbuilder = null;
+            MultipartEntityBuilder entityBuilder = entityBuilderFileParserForMultipleApplicants(keys, values, method, url);
+            HttpEntity multiPartHttpEntity = entityBuilder.build();
+            RequestBuilder reqBuilder = null;
             if (method.equalsIgnoreCase("post")) {
-                reqbuilder = RequestBuilder.post(u);
+                reqBuilder = RequestBuilder.post(u);
             } else if (method.equalsIgnoreCase("put")) {
-                reqbuilder = RequestBuilder.put(u);
+                reqBuilder = RequestBuilder.put(u);
             }
-            reqbuilder.setEntity(mutiPartHttpEntity);
-            HttpUriRequest multipartRequest = reqbuilder.build();
+            reqBuilder.setEntity(multiPartHttpEntity);
+            HttpUriRequest multipartRequest = reqBuilder.build();
             multipartRequest.setHeader(new BasicHeader("X-REMOTE-USER-EMAIL", "nipun.jain@geminisolutions.com"));
-            HttpResponse httpresponse = httpclient.execute(multipartRequest);
+            HttpResponse httpResponse = httpclient.execute(multipartRequest);
             GemTestReporter.addTestStep("POST Request Verification", "POST request executed Successfully", STATUS.PASS);
-            JsonObject js = (JsonObject) JsonParser.parseString(EntityUtils.toString(httpresponse.getEntity()));
+            JsonObject js = (JsonObject) JsonParser.parseString(EntityUtils.toString(httpResponse.getEntity()));
             GemTestReporter.addTestStep("Response Body", String.valueOf(js), STATUS.INFO);
             GemTestReporter.addTestStep("Response Message", js.get("message").getAsString(), STATUS.INFO);
-            arr[0] = httpresponse.getStatusLine().getStatusCode();
+            arr[0] = httpResponse.getStatusLine().getStatusCode();
             return String.valueOf(arr[0]);
         } catch (Exception exception) {
             logger.info("Request doesn't Executed Successfully ", exception);
@@ -606,13 +604,12 @@ public class Utils {
         return String.valueOf(arr[0]);
     }
 
-    public static int apiForPatch(String url, String method, Map<String, String> token, String step) {
+        public static int apiForPatch(String url, String method, Map<String, String> token, String step) {
         url = ProjectConfigData.getProperty(url);
         String endpoint = url.replace("{applicantId}", String.valueOf(AtsHealthCheck.applicantId));
         String newUrl = GlobalVariable.BASE_URL + endpoint;
         GemTestReporter.addTestStep("Url of the test case for PATCH request", newUrl, STATUS.INFO);
         return given().contentType(ContentType.JSON).header("X-REMOTE-USER-EMAIL", "saru.goyal@geminisolutions.com").patch(newUrl).statusCode();
-
     }
 
     public static String getVetterNames(String UrlNameFromConfig, String method, String payloadName, Map<String, String> headers, String step) {
@@ -630,7 +627,6 @@ public class Utils {
             if (!step.isEmpty()) {
                 request.setStep(step);
             }
-
             if (!payloadName.equals(null)) {
                 JsonArray newObject = new JsonArray();
                 JsonParser parser = new JsonParser();

@@ -273,3 +273,25 @@ Feature: ATS scenario
     Examples:
       | endpoint              | method | expectedStatus | payload_keys                  | payload_values                       |
       | addMultipleApplicants | post   | 201            | applicantList,resumes,resumes | applicantList.json,test.pdf,test.pdf |
+
+  Scenario Outline: ATS, HealthCheck of Jobs API - <name>
+    Given Set the Job endpoint <endpoint> and method <method>
+    Then Verify Job status code <expectedStatus>
+    Examples:
+      | name             | endpoint         | method | expectedStatus |
+      | GetJobAllDetails | getJobAllDetails | get    | 200            |
+
+  Scenario Outline: ATS, HealthCheck of Applicants Paging API - <name>
+    Given Set the Applicant endpoint <endpoint> and method <method>
+    Then Verify Applicant status code <expectedStatus>
+    Examples:
+      | name                                 | endpoint                             | method | expectedStatus |
+      | GetApplicantWithPaging               | getApplicantWithPaging               | get    | 200            |
+      | GetApplicantWithPagingWithDaysFilter | getApplicantWithPagingWithDaysFilter | get    | 200            |
+
+  Scenario Outline: ATS, HealthCheck of Applicants Paging API - <name>
+    Given Set the Applicant endpoint <endpoint> and method <method>
+    Then Verify Applicant status code <expectedStatus>
+    Examples:
+      | name                               | endpoint                           | method | expectedStatus |
+      | GetApplicantWithPagingWithPageSize | getApplicantWithPagingWithPageSize | get    | 200            |
