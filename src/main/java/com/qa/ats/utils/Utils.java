@@ -573,7 +573,7 @@ public class Utils {
     }
 
        public static String addMultipleApplicants(String url, String method, Map<String, String> headers, List<String> keys, List<String> values) {
-        int arr[] = new int[2];
+        int[] arr = new int[2];
         try {
             String u = "";
             u = GlobalVariable.BASE_URL + ProjectConfigData.getProperty(url);
@@ -604,7 +604,7 @@ public class Utils {
         return String.valueOf(arr[0]);
     }
 
-    public static int apiForPatch(String url, String method, Map<String, String> token, String step) {
+        public static int apiForPatch(String url, String method, Map<String, String> token, String step) {
         url = ProjectConfigData.getProperty(url);
         String endpoint = url.replace("{applicantId}", String.valueOf(AtsHealthCheck.applicantId));
         String newUrl = GlobalVariable.BASE_URL + endpoint;
