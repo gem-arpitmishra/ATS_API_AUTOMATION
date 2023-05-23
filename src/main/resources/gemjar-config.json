@@ -27,6 +27,7 @@
     "fetchResumeUsingApplicantId": "atsApplicantSvc/applicant/resume/{applicantId}",
     "fetchApplicantPersonalDetails": "atsApplicantSvc/applicant/personal-detail/{applicantId}",
     "fetchApplicantNotAlignedToJob": "atsApplicantSvc/applicant/notAlignedToJob",
+
     "fetchJobOfApplicant": "atsApplicantSvc/applicant/job/{applicantId}",
     "fetchListOfHR": "atsApplicantSvc/applicant/getHrSpoc",
     "fetchApplicantConstants": "atsApplicantSvc/applicant/constants",
