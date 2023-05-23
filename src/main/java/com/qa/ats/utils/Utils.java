@@ -542,9 +542,9 @@ public class Utils {
         }
         return entityBuilder;
     }
-    public static MultipartEntityBuilder entitybuilderFileParserForMultipleApplicants(List<String> keys, List<String> values, String method, String url) throws IOException {
-        MultipartEntityBuilder entitybuilder = MultipartEntityBuilder.create();
-        entitybuilder.setMode(HttpMultipartMode.BROWSER_COMPATIBLE);
+    public static MultipartEntityBuilder entityBuilderFileParserForMultipleApplicants(List<String> keys, List<String> values, String method, String url) throws IOException {
+        MultipartEntityBuilder entityBuilder = MultipartEntityBuilder.create();
+        entityBuilder.setMode(HttpMultipartMode.BROWSER_COMPATIBLE);
         for (int i = 0; i < keys.size(); i++) {
             if (values.get(i).contains(".json")) {
                 JsonParser parser = new JsonParser();
@@ -568,9 +568,9 @@ public class Utils {
             }
             entityBuilder.addBinaryBody(keys.get(i), new File("src/main/resources/" + values.get(i)));
         }
-        return entitybuilder;
+        return entityBuilder;
     }
-    public static MultipartEntityBuilder entitybuilderFileParserForMultipleApplicantsForWrongHeader(List<String> keys, List<String> values, String method, String url,String name) throws IOException {
+    public static MultipartEntityBuilder entityBuilderFileParserForMultipleApplicantsForWrongHeader(List<String> keys, List<String> values, String method, String url,String name) throws IOException {
         MultipartEntityBuilder entitybuilder = MultipartEntityBuilder.create();
         entitybuilder.setMode(HttpMultipartMode.BROWSER_COMPATIBLE);
         for (int i = 0; i < keys.size(); i++) {
@@ -609,7 +609,7 @@ public class Utils {
             u = GlobalVariable.BASE_URL + ProjectConfigData.getProperty(url);
             GemTestReporter.addTestStep("Url of the test case", u, STATUS.INFO);
             CloseableHttpClient httpclient = HttpClients.createDefault();
-            MultipartEntityBuilder entitybuilder = entitybuilderFileParserForMultipleApplicantsForWrongHeader(keys, values, method, url,name);
+            MultipartEntityBuilder entitybuilder = entityBuilderFileParserForMultipleApplicantsForWrongHeader(keys, values, method, url,name);
             HttpEntity mutiPartHttpEntity = entitybuilder.build();
             RequestBuilder reqbuilder = null;
             if (method.equalsIgnoreCase("post")) {
@@ -636,7 +636,7 @@ public class Utils {
         }
         return String.valueOf(arr[0]);
     }
-        public static String addMultipleApplicants(String url, String method, Map<String, String> headers, List<String> keys, List<String> values) {
+    public static String addMultipleApplicants(String url, String method, Map<String, String> headers, List<String> keys, List<String> values) {
         int arr[] = new int[2];
         try {
             String u = "";
@@ -652,17 +652,17 @@ public class Utils {
                 reqBuilder = RequestBuilder.put(u);
             }
             else if (method.equalsIgnoreCase("delete"))
-                reqbuilder=RequestBuilder.delete(u);
-            reqbuilder.setEntity(mutiPartHttpEntity);
-            HttpUriRequest multipartRequest = reqbuilder.build();
+                reqBuilder=RequestBuilder.delete(u);
+            reqBuilder.setEntity(multiPartHttpEntity);
+            HttpUriRequest multipartRequest = reqBuilder.build();
             multipartRequest.setHeader(new BasicHeader("X-REMOTE-USER-EMAIL", "nipun.jain@geminisolutions.com"));
-            HttpResponse httpresponse = httpclient.execute(multipartRequest);
-            arr[0] = httpresponse.getStatusLine().getStatusCode();
+            HttpResponse httpResponse = httpclient.execute(multipartRequest);
+            arr[0] = httpResponse.getStatusLine().getStatusCode();
             GemTestReporter.addTestStep("POST Request Verification", "POST request executed Successfully", STATUS.PASS);
             JsonObject js = (JsonObject) JsonParser.parseString(EntityUtils.toString(httpResponse.getEntity()));
             GemTestReporter.addTestStep("Response Body", String.valueOf(js), STATUS.INFO);
             if(arr[0]==200 || arr[0]==201)
-            GemTestReporter.addTestStep("Response Message", js.get("message").getAsString(), STATUS.INFO);
+                GemTestReporter.addTestStep("Response Message", js.get("message").getAsString(), STATUS.INFO);
             arr[0] = httpResponse.getStatusLine().getStatusCode();
             return String.valueOf(arr[0]);
         } catch (Exception exception) {
