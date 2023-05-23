@@ -381,6 +381,28 @@ Feature: ATS scenario
       | endpoint                 | method | expectedStatus | payload               | name   |
       | sendApplicantsForVetting | post   | 200            | applicantVetting.json | Create |
 
+  Scenario Outline: ATS, Get the Vetter Names for Applicants using wrong method Get
+    Given Set the Interview endpoint <endpoint> method <method> payload <payload> for getting vetter names
+    Then Verify Interview status code <expectedStatus>
+    Examples:
+      | endpoint       | method | expectedStatus | payload     |
+      | getVetterNames | get    | 405            | Vetter.json |
+
+  Scenario Outline: ATS, Get the Vetter Names for Applicants using wrong method Put
+    Given Set the Interview endpoint <endpoint> method <method> payload <payload> for getting vetter names
+    Then Verify Interview status code <expectedStatus>
+    Examples:
+      | endpoint       | method | expectedStatus | payload     |
+      | getVetterNames | put    | 405            | Vetter.json |
+
+  Scenario Outline: ATS, Get the Vetter Names for Applicants using wrong payload
+    Given Set the Interview endpoint <endpoint> method <method> payload <payload> for getting vetter names using wrong payload
+    Then Verify Interview status code <expectedStatus>
+    Examples:
+      | endpoint       | method | expectedStatus | payload      |
+      | getVetterNames | post   | 400            | Vetter1.json |
+
+
   Scenario Outline: ATS, API to fetch interviews for Vetting for a particular email ID using wrong method
     Given Set the Interview endpoint <endpoint> and method <method>
     Then Verify Interview status code <expectedStatus>
@@ -430,10 +452,10 @@ Feature: ATS scenario
     Given Set the Interview endpoint <endpoint> , method <method> and payload <payload>
     Then Verify Interview status code <expectedStatus>
     Examples:
-      | endpoint        | method | expectedStatus | payload    | key              |
-      | addNewInterview | post   | 500            | interview4 | startTime        |
+      | endpoint        | method | expectedStatus | payload    | key       |
+      | addNewInterview | post   | 500            | interview4 | startTime |
 #      | addNewInterview | post   | 500            | interview6 | interviewerEmail |
-      | addNewInterview | post   | 500            | interview7 | endTime          |
+      | addNewInterview | post   | 500            | interview7 | endTime   |
 
   Scenario Outline:ATS, API to schedule interview for the same job and same applicant without using header
     Given Set the Interview endpoint <endpoint> , method <method> , payload <payload> without using header <header>
@@ -484,10 +506,10 @@ Feature: ATS scenario
     Given Set the Interview endpoint <endpoint> , method <method> and payload <payload>
     Then Verify Interview status code <expectedStatus>
     Examples:
-      | endpoint          | method | expectedStatus | payload          | key              |
-      | updateAnInterview | put    | 500            | updateInterview5 | startTime        |
+      | endpoint          | method | expectedStatus | payload          | key       |
+      | updateAnInterview | put    | 500            | updateInterview5 | startTime |
 #      | updateAnInterview | put    | 500            | updateInterview6 | interviewerEmail |
-      | updateAnInterview | put    | 500            | updateInterview7 | endTime          |
+      | updateAnInterview | put    | 500            | updateInterview7 | endTime   |
 
   Scenario Outline:ATS, API to update interview for the same job and same applicant without using header
     Given Set the Interview endpoint <endpoint> , method <method> , payload <payload> without using header <header>
@@ -650,6 +672,35 @@ Feature: ATS scenario
       | endpoint                    | method | expectedStatus |
       | apiToGetApplicantsInVetting | put    | 405            |
 
+  Scenario Outline: API to add multiple Applicants using wrong method put
+    Given Set the Applicant endpoint <endpoint> and method <method> and keys <payload_keys> , values <payload_values> to add multiple applicants
+    Then  Verify Applicant status code <expectedStatus>
+    Examples:
+      | endpoint              | method | expectedStatus | payload_keys                  | payload_values                       |
+      | addMultipleApplicants | put    | 405            | applicantList,resumes,resumes | applicantList.json,test.pdf,test.pdf |
+
+  Scenario Outline: API to add multiple Applicants using wrong method delete
+    Given Set the Applicant endpoint <endpoint> and method <method> and keys <payload_keys> , values <payload_values> to add multiple applicants
+    Then  Verify Applicant status code <expectedStatus>
+    Examples:
+      | endpoint              | method | expectedStatus | payload_keys                  | payload_values                       |
+      | addMultipleApplicants | delete | 405            | applicantList,resumes,resumes | applicantList.json,test.pdf,test.pdf |
+
+  Scenario Outline: API to add multiple Applicants without <name>
+    Given Set the Applicant endpoint <endpoint> and method <method> and keys <payload_keys> , values <payload_values> to add multiple applicants without <name>
+    Then  Verify Applicant status code <expectedStatus>
+    Examples:
+      | endpoint              | method | expectedStatus | payload_keys                  | payload_values                        | name          |
+      | addMultipleApplicants | post   | 500            | applicantList,resumes,resumes | applicantList1.json,test.pdf,test.pdf | email         |
+      | addMultipleApplicants | post   | 500            | applicantList,resumes,resumes | applicantList2.json,test.pdf,test.pdf | contactNumber |
+
+  Scenario Outline: API to add multiple Applicants using wrong JobId
+    Given Set the Applicant endpoint <endpoint> and method <method> and keys <payload_keys> , values <payload_values> to add multiple applicants
+    Then  Verify Applicant status code <expectedStatus>
+    Examples:
+      | endpoint              | method | expectedStatus | payload_keys                  | payload_values                        |
+      | addMultipleApplicants | post   | 400            | applicantList,resumes,resumes | applicantList3.json,test.pdf,test.pdf |
+
   Scenario Outline: ATS , Job using wrong method---><name>
     Given Set the Job endpoint <endpoint> and method <method>
     Then Verify Job status code <expectedStatus>
@@ -677,5 +728,4 @@ Feature: ATS scenario
       | GetApplicantWithPagingWithPageSize | getApplicantWithPagingWithPageSize | post   | 405            |
       | GetApplicantWithPagingWithPageSize | getApplicantWithPagingWithPageSize | put    | 405            |
       | GetApplicantWithPagingWithPageSize | getApplicantWithPagingWithPageSize | delete | 405            |
-
 
