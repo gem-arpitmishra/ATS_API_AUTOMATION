@@ -77,6 +77,10 @@
     "apiToGetInterviewsForVettingForAParticularEmail": "atsInterviewSvc/interview/getApplicantIdForEmail/vaibhav.oberoi@geminisolutions.com",
     "apiToGetApplicantsInVetting": "atsApplicantSvc/applicant/applicantsVettingList",
     "sendApplicantsForVetting": "atsInterviewSvc/interview/sendApplicantsForVetting",
+    "getJobAllDetails": "atsJobSvc/job/all-job-details/Developer",
+    "getApplicantWithPaging": "atsApplicantSvc/applicant",
+    "getApplicantWithPagingWithDaysFilter": "atsApplicantSvc/applicant/days/3",
+    "getApplicantWithPagingWithPageSize": "atsApplicantSvc/applicant/pageNumber/1/pageSize/1",
     "addMultipleApplicants": "atsApplicantSvc/applicant/bulkSave",
     "updateReasonOfRejection": "atsApplicantSvc/applicant/{applicantId}/addReasonOfRejection?reasonOfRejection=nothingPrepared",
     "getVetterNames": "atsInterviewSvc/interview/getVetterNameForApplicants"
