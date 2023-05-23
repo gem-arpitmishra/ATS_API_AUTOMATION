@@ -650,3 +650,32 @@ Feature: ATS scenario
       | endpoint                    | method | expectedStatus |
       | apiToGetApplicantsInVetting | put    | 405            |
 
+  Scenario Outline: ATS , Job using wrong method---><name>
+    Given Set the Job endpoint <endpoint> and method <method>
+    Then Verify Job status code <expectedStatus>
+    Examples:
+      | endpoint         | method | expectedStatus | name         |
+      | getJobAllDetails | post   | 405            | Create a job |
+      | getJobAllDetails | put    | 405            | Create a job |
+      | getJobAllDetails | delete | 405            | Create a job |
+
+  Scenario Outline: ATS, Applicant WithPaging using wrong method - <name>
+    Given Set the Applicant endpoint <endpoint> and method <method>
+    Then Verify Applicant status code <expectedStatus>
+    Examples:
+      | name                                 | endpoint                             | method | expectedStatus |
+      | GetApplicantWithPagingWithDaysFilter | getApplicantWithPagingWithDaysFilter | post   | 405            |
+      | GetApplicantWithPagingWithDaysFilter | getApplicantWithPagingWithDaysFilter | put    | 405            |
+      | GetApplicantWithPagingWithDaysFilter | getApplicantWithPagingWithDaysFilter | delete | 405            |
+
+
+  Scenario Outline: ATS, Applicant WithPagingWithPageSize using wrong method - <name>
+    Given Set the Applicant endpoint <endpoint> and method <method>
+    Then Verify Applicant status code <expectedStatus>
+    Examples:
+      | name                               | endpoint                           | method | expectedStatus |
+      | GetApplicantWithPagingWithPageSize | getApplicantWithPagingWithPageSize | post   | 405            |
+      | GetApplicantWithPagingWithPageSize | getApplicantWithPagingWithPageSize | put    | 405            |
+      | GetApplicantWithPagingWithPageSize | getApplicantWithPagingWithPageSize | delete | 405            |
+
+
