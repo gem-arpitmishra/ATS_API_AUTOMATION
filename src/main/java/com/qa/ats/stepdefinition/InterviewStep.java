@@ -21,9 +21,11 @@ public class InterviewStep {
     @Given("^Setting the Interview endpoint (.+) and method (.+) , for getting applicants in Vetting$")
     public void getApplicantsInVetting(String url, String method) {
         HashMap<String, String> token = new HashMap<String, String>();
-        token.put("X-REMOTE-USER-EMAIL", "nipun.jain@geminisolutions.com");
+        token.put("X-REMOTE-USER-EMAIL", "aditya.shrivastava@geminisolutions.com");
         try {
+
             if (method.equals("post"))
+
                 status = Utils.apiToSendManagementApprovalEmails(url, method, token, "").getStatus();
             else
                 status = Utils.apiWithoutPayloads(url, method, token, "").getStatus();
