@@ -63,7 +63,6 @@ public class Utils {
                 url = url.replace("{applicantId}", String.valueOf(AtsHealthCheck.applicantId));
             else if (url.contains("{interviewId}"))
                 url = url.replace("{interviewId}", String.valueOf(InterviewStep.interviewId));
-
             GemTestReporter.addTestStep("Url for " + method.toUpperCase() + " Request", url, STATUS.INFO);
             request.setURL(url);
             request.setMethod(method);
