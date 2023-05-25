@@ -570,8 +570,8 @@ public class Utils {
         return entityBuilder;
     }
     public static MultipartEntityBuilder entityBuilderFileParserForMultipleApplicantsForWrongHeader(List<String> keys, List<String> values, String method, String url,String name) throws IOException {
-        MultipartEntityBuilder entitybuilder = MultipartEntityBuilder.create();
-        entitybuilder.setMode(HttpMultipartMode.BROWSER_COMPATIBLE);
+        MultipartEntityBuilder entityBuilder = MultipartEntityBuilder.create();
+        entityBuilder.setMode(HttpMultipartMode.BROWSER_COMPATIBLE);
         for (int i = 0; i < keys.size(); i++) {
             if (values.get(i).contains(".json")) {
                 JsonParser parser = new JsonParser();
@@ -597,10 +597,11 @@ public class Utils {
                 writer.write(jsonOutput);
                 writer.close();
             }
-            entitybuilder.addBinaryBody(keys.get(i), new File("src/main/resources/" + values.get(i)));
+            entityBuilder.addBinaryBody(keys.get(i), new File("src/main/resources/" + values.get(i)));
         }
-        return entitybuilder;
+        return entityBuilder;
     }
+   
     public static String addMultipleApplicantsWithWrongPayload(String url, String method, Map<String, String> headers, List<String> keys, List<String> values,String name) {
         int arr[] = new int[2];
         try {
@@ -641,7 +642,41 @@ public class Utils {
             String u = "";
             u = GlobalVariable.BASE_URL + ProjectConfigData.getProperty(url);
             GemTestReporter.addTestStep("Url of the test case", u, STATUS.INFO);
-            CloseableHttpClient httpclient = HttpClients.createDefault();
+            CloseableHttpClient httpClient = HttpClients.createDefault();
+            MultipartEntityBuilder entityBuilder = entityBuilderFileParserForMultipleApplicantsForWrongHeader(keys, values, method, url,name);
+            HttpEntity multiPartHttpEntity = entityBuilder.build();
+            RequestBuilder reqbuilder = null;
+            if (method.equalsIgnoreCase("post")) {
+                reqbuilder = RequestBuilder.post(u);
+            } else if (method.equalsIgnoreCase("put")) {
+                reqbuilder = RequestBuilder.put(u);
+            }
+            else if (method.equalsIgnoreCase("delete"))
+                reqbuilder=RequestBuilder.delete(u);
+            reqbuilder.setEntity(multiPartHttpEntity);
+            HttpUriRequest multipartRequest = reqbuilder.build();
+            multipartRequest.setHeader(new BasicHeader("X-REMOTE-USER-EMAIL", "nipun.jain@geminisolutions.com"));
+            HttpResponse httpresponse = httpClient.execute(multipartRequest);
+            arr[0] = httpresponse.getStatusLine().getStatusCode();
+            GemTestReporter.addTestStep("POST Request Verification", "POST request executed Successfully", STATUS.PASS);
+            JsonObject js = (JsonObject) JsonParser.parseString(EntityUtils.toString(httpresponse.getEntity()));
+            GemTestReporter.addTestStep("Response Body", String.valueOf(js), STATUS.INFO);
+            if(arr[0]==200 || arr[0]==201)
+                GemTestReporter.addTestStep("Response Message", js.get("message").getAsString(), STATUS.INFO);
+            return String.valueOf(arr[0]);
+        } catch (Exception exception) {
+            logger.info("Request doesn't Executed Successfully ", exception);
+            GemTestReporter.addTestStep(method.toUpperCase() + " Request Verification ", method.toUpperCase() + " Request Did not Executed Successfully", STATUS.FAIL);
+        }
+        return String.valueOf(arr[0]);
+    }
+    public static String addMultipleApplicants(String url, String method, Map<String, String> headers, List<String> keys, List<String> values) {
+        int[] arr = new int[2];
+        try {
+            String u = "";
+            u = GlobalVariable.BASE_URL + ProjectConfigData.getProperty(url);
+            GemTestReporter.addTestStep("Url of the test case", u, STATUS.INFO);
+            CloseableHttpClient httpClient = HttpClients.createDefault();
             MultipartEntityBuilder entityBuilder = entityBuilderFileParserForMultipleApplicants(keys, values, method, url);
             HttpEntity multiPartHttpEntity = entityBuilder.build();
             RequestBuilder reqBuilder = null;
