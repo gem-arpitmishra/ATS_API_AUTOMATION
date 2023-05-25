@@ -601,8 +601,43 @@ public class Utils {
         }
         return entityBuilder;
     }
+   
     public static String addMultipleApplicantsWithWrongPayload(String url, String method, Map<String, String> headers, List<String> keys, List<String> values,String name) {
-        int[] arr = new int[2];
+        int arr[] = new int[2];
+        try {
+            String u = "";
+            u = GlobalVariable.BASE_URL + ProjectConfigData.getProperty(url);
+            GemTestReporter.addTestStep("Url of the test case", u, STATUS.INFO);
+            CloseableHttpClient httpclient = HttpClients.createDefault();
+            MultipartEntityBuilder entitybuilder = entityBuilderFileParserForMultipleApplicantsForWrongHeader(keys, values, method, url,name);
+            HttpEntity mutiPartHttpEntity = entitybuilder.build();
+            RequestBuilder reqbuilder = null;
+            if (method.equalsIgnoreCase("post")) {
+                reqbuilder = RequestBuilder.post(u);
+            } else if (method.equalsIgnoreCase("put")) {
+                reqbuilder = RequestBuilder.put(u);
+            }
+            else if (method.equalsIgnoreCase("delete"))
+                reqbuilder=RequestBuilder.delete(u);
+            reqbuilder.setEntity(mutiPartHttpEntity);
+            HttpUriRequest multipartRequest = reqbuilder.build();
+            multipartRequest.setHeader(new BasicHeader("X-REMOTE-USER-EMAIL", "nipun.jain@geminisolutions.com"));
+            HttpResponse httpresponse = httpclient.execute(multipartRequest);
+            arr[0] = httpresponse.getStatusLine().getStatusCode();
+            GemTestReporter.addTestStep("POST Request Verification", "POST request executed Successfully", STATUS.PASS);
+            JsonObject js = (JsonObject) JsonParser.parseString(EntityUtils.toString(httpresponse.getEntity()));
+            GemTestReporter.addTestStep("Response Body", String.valueOf(js), STATUS.INFO);
+            if(arr[0]==200 || arr[0]==201)
+                GemTestReporter.addTestStep("Response Message", js.get("message").getAsString(), STATUS.INFO);
+            return String.valueOf(arr[0]);
+        } catch (Exception exception) {
+            logger.info("Request doesn't Executed Successfully ", exception);
+            GemTestReporter.addTestStep(method.toUpperCase() + " Request Verification ", method.toUpperCase() + " Request Did not Executed Successfully", STATUS.FAIL);
+        }
+        return String.valueOf(arr[0]);
+    }
+    public static String addMultipleApplicants(String url, String method, Map<String, String> headers, List<String> keys, List<String> values) {
+        int arr[] = new int[2];
         try {
             String u = "";
             u = GlobalVariable.BASE_URL + ProjectConfigData.getProperty(url);
@@ -655,7 +690,7 @@ public class Utils {
             reqBuilder.setEntity(multiPartHttpEntity);
             HttpUriRequest multipartRequest = reqBuilder.build();
             multipartRequest.setHeader(new BasicHeader("X-REMOTE-USER-EMAIL", "nipun.jain@geminisolutions.com"));
-            HttpResponse httpResponse = httpClient.execute(multipartRequest);
+            HttpResponse httpResponse = httpclient.execute(multipartRequest);
             arr[0] = httpResponse.getStatusLine().getStatusCode();
             GemTestReporter.addTestStep("POST Request Verification", "POST request executed Successfully", STATUS.PASS);
             JsonObject js = (JsonObject) JsonParser.parseString(EntityUtils.toString(httpResponse.getEntity()));
