@@ -16,22 +16,26 @@ public class InterviewStep {
     public static int feedbackId = 0;
     Logger logger = LoggerFactory.getLogger(InterviewStep.class);
 
-    public static boolean check1=false;
-  @Given("^Setting the Interview endpoint (.+) and method (.+) , for getting applicants in Vetting$")
-      public void getApplicantsInVetting(String url , String method) {
-      HashMap<String, String> token = new HashMap<String, String>();
-      token.put("X-REMOTE-USER-EMAIL", "nipun.jain@geminisolutions.com");
-      try {
-          if (method.equals("post"))
-              status = Utils.apiToSendManagementApprovalEmails(url, method, token, "").getStatus();
-          else
-              status = Utils.apiWithoutPayloads(url, method, token, "").getStatus();
-          GemTestReporter.addTestStep("Hit the " + url, "API was triggered", STATUS.INFO);
-      } catch (Exception e) {
-          logger.info("API was not hit successfully", e);
-          GemTestReporter.addTestStep("Hit the " + url, "API was not successfully triggered", STATUS.FAIL);
-      }
-  }
+    public static boolean check1 = false;
+
+    @Given("^Setting the Interview endpoint (.+) and method (.+) , for getting applicants in Vetting$")
+    public void getApplicantsInVetting(String url, String method) {
+        HashMap<String, String> token = new HashMap<String, String>();
+        token.put("X-REMOTE-USER-EMAIL", "aditya.shrivastava@geminisolutions.com");
+        try {
+
+            if (method.equals("post"))
+
+                status = Utils.apiToSendManagementApprovalEmails(url, method, token, "").getStatus();
+            else
+                status = Utils.apiWithoutPayloads(url, method, token, "").getStatus();
+            GemTestReporter.addTestStep("Hit the " + url, "API was triggered", STATUS.INFO);
+        } catch (Exception e) {
+            logger.info("API was not hit successfully", e);
+            GemTestReporter.addTestStep("Hit the " + url, "API was not successfully triggered", STATUS.FAIL);
+        }
+    }
+
     @Given("^Set the Interview endpoint (.+) and method (.+)$")
     public void setThePolicyEndpointAndMethod(String url, String method) {
         HashMap<String, String> token = new HashMap<String, String>();
@@ -77,8 +81,7 @@ public class InterviewStep {
         } else if (header.equals("Email")) {
             token.put("X-REMOTE-USER-OBJECT-ID", "e82f1905-3695-49a6-977e-9712d7f1ece1");
             token.put("X-REMOTE-USER-EMAIL", "demo");
-        }
-        else if(header.equals("Email")) {
+        } else if (header.equals("Email")) {
             token.put("X-REMOTE-USER-OBJECT-ID", "e82f1905-3695-49a6-977e-9712d7f1ece1");
             token.put("X-REMOTE-USER-EMAIL", "demo");
         }
@@ -96,7 +99,7 @@ public class InterviewStep {
 
     @Then("^Verify Interview status code (.+)$")
     public void verifyPolicyStatusCodeExpectedStatus(Integer Expected) {
-      Utils.verifyStatusCode(Expected, status);
+        Utils.verifyStatusCode(Expected, status);
     }
 
     @Given("^Set the Interview endpoint (.+) , method (.+) , payload (.+) without using header (.+)$")
@@ -111,7 +114,7 @@ public class InterviewStep {
                 String[] checkList = check.split(",");
                 status = Integer.parseInt(checkList[0]);
                 String str = checkList[1].split(":")[1];
-                interviewId=Integer.parseInt((str).substring(0, str.length() - 1).trim());
+                interviewId = Integer.parseInt((str).substring(0, str.length() - 1).trim());
             } else {
                 status = Integer.parseInt(check);
             }
@@ -197,14 +200,35 @@ public class InterviewStep {
         }
     }
 
-    @Given("^Set the Interview endpoint (.+) method (.+) payload (.+) for getting vetter names")
-    public void setTheInterviewEndpointEndpointMethodMethodPayloadPayloadForGettingVetterNames(String url, String method,String payload) {
+    @Given("^Set the Interview endpoint (.+) method (.+) payload (.+) for getting vetter names$")
+    public void setTheInterviewEndpointEndpointMethodMethodPayloadPayloadForGettingVetterNames(String url, String method, String payload) {
         HashMap<String, String> token = new HashMap<String, String>();
         token.put("X-REMOTE-USER-EMAIL", "nipun.jain@geminisolutions.com");
         token.put("X-REMOTE-USER-OBJECT-ID", "e82f1905-3695-49a6-977e-9712d7f1ece1");
         String checkList[];
         try {
-            String check = Utils.getVetterNames(url, method, payload,token, "" );
+            String check = Utils.getVetterNames(url, method, payload, token, "");
+            if (method.equals("post") && check.contains(",")) {
+                checkList = check.split(",");
+                status = Integer.parseInt(checkList[0]);
+            } else
+                status = Integer.parseInt(check);
+
+        } catch (Exception e) {
+            logger.info("API was not hit successfully", e);
+            GemTestReporter.addTestStep("Hit the " + url, "API was not successfully triggered", STATUS.FAIL);
+
+        }
+    }
+
+    @Given("^Set the Interview endpoint (.+) method (.+) payload (.+) for getting vetter names using wrong payload$")
+    public void setTheInterviewEndpointEndpointMethodForWrongVetterPayload(String url, String method, String payload) {
+        HashMap<String, String> token = new HashMap<String, String>();
+        token.put("X-REMOTE-USER-EMAIL", "nipun.jain@geminisolutions.com");
+        token.put("X-REMOTE-USER-OBJECT-ID", "e82f1905-3695-49a6-977e-9712d7f1ece1");
+        String checkList[];
+        try {
+            String check = Utils.getVetterNamesForWrongPayload(url, method, payload, token, "");
             if (method.equals("post") && check.contains(",")) {
                 checkList = check.split(",");
                 status = Integer.parseInt(checkList[0]);

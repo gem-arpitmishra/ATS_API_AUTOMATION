@@ -43,7 +43,19 @@ public class ApplicantStep {
             GemTestReporter.addTestStep("Hit API", "User not able to hit the API", STATUS.FAIL);
         }
     }
+    @Given(("^Set the Applicant endpoint (\\w*) and method (\\w*) for wrong methods$"))
+    public void setApiForWrongMethods(String url , String method)
+    {
+        HashMap<String, String> token = new HashMap<String, String>();
+        token.put("X-REMOTE-USER-EMAIL", "saru.goyal@geminisolutions.com");
+        try {
+            status = Utils.apiForWrongMethods(url, method, token, "");
 
+        } catch (Exception exception) {
+            logger.info("Error - User not able to hit the API", exception);
+            GemTestReporter.addTestStep("Hit API", "User not able to hit the API", STATUS.FAIL);
+        }
+    }
     //Verify the status
     @Then("^Verify Applicant status code (\\d+)$")
     public void verifyPolicyStatusCodeExpectedStatus(Integer Expected) {
@@ -92,4 +104,28 @@ public class ApplicantStep {
         }
     }
 
+
+    @Given("^Set the Applicant endpoint (.+) and method (.+) and keys (.+) , values (.+) to add multiple applicants without (.+)$")
+    public void setTheApplicantEndpointEndpointAndMethodMethodToAddMultipleApplicantsForWrongPayload(String url , String method, String keys,String values,String name) {
+        List<String> payload_keys = Arrays.asList(keys.split(","));
+        List<String> payload_values = Arrays.asList(values.split(","));
+        HashMap<String, String> token = new HashMap<String, String>();
+        token.put("X-REMOTE-USER-EMAIL", "nipun.jain@geminisolutions.com");
+        String checkList[];
+        try {
+            String check = Utils.addMultipleApplicantsWithWrongPayload(url, method,token, payload_keys,payload_values,name);
+            if (method.equals("post") && check.contains(",")) {
+                checkList = check.split(",");
+                status = Integer.parseInt(checkList[0]);
+            } else
+                status = Integer.parseInt(check);
+
+        } catch (Exception e) {
+            logger.info("API was not hit successfully", e);
+            GemTestReporter.addTestStep("Hit the " + url, "API was not successfully triggered", STATUS.FAIL);
+
+        }
+    }
+
 }
+
