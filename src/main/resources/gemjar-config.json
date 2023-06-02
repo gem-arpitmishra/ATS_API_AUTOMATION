@@ -5,6 +5,8 @@
   "tags": "@hc",
   "sub_id": "test_id",
   "enter_point": "https://apis.gemecosystem.com/enter-point",
+  "jewel_user": "t.sahni",
+  "jewel_bridge_token": "",
   "glueCode": "com.qa.ats.stepdefinition",
 
 
@@ -24,7 +26,6 @@
     "fetchResumeUsingApplicantId": "atsApplicantSvc/applicant/resume/{applicantId}",
     "fetchApplicantPersonalDetails": "atsApplicantSvc/applicant/personal-detail/{applicantId}",
     "fetchApplicantNotAlignedToJob": "atsApplicantSvc/applicant/notAlignedToJob",
-
     "fetchJobOfApplicant": "atsApplicantSvc/applicant/job/{applicantId}",
     "fetchListOfHR": "atsApplicantSvc/applicant/getHrSpoc",
     "fetchApplicantConstants": "atsApplicantSvc/applicant/constants",
