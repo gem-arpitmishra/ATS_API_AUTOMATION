@@ -1,6 +1,15 @@
 @hc
 Feature: ATS scenario
 
+  Scenario Outline: ATS, Run the API to generate access token
+    Given Set the url to generate access token <method> method and url <url>
+    Then Verify scenario status code <expectedStatus>
+    Examples:
+      | method | url         | expectedStatus |
+      | post   | accessToken | 200            |
+
+
+
   Scenario Outline: ATS ,Job--> <name1>
     Given Set the Job endpoint <endpoint> method <method> payload <payload_key> <payload_value> and form data
     Then Verify scenario status code <expectedStatus>
@@ -33,7 +42,7 @@ Feature: ATS scenario
     Given Set the Applicant endpoint <endpoint> method <method> payload <payload_key> <payload_value> and form data
     Then Verify scenario status code <expectedStatus>
     Examples:
-      | endpoint               | method | expectedStatus | payload_key                | payload_value                            | name   |
+      | endpoint               | method | expectedStatus | payload_key                | payload_value                    | name   |
       | saveApplicantDetails   | post   | 201            | applicantData,resume,image | applicant.json,test.pdf,test.pdf | Create |
       | updateApplicantDetails | put    | 201            | applicantData,resume,image | applicant.json,test.pdf,test.pdf | Update |
 

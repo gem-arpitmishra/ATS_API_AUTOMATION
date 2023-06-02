@@ -1,6 +1,15 @@
 @apiReg
 Feature: ATS scenario
 
+  Scenario Outline: ATS, Run the API to generate access token
+    Given Set the url to generate access token <method> method and url <url>
+    Then Verify scenario status code <expectedStatus>
+    Examples:
+      | method | url         | expectedStatus |
+      | post   | accessToken | 200            |
+
+
+
   Scenario Outline: ATS , Job using wrong method---><name>
     Given Set the Job endpoint <endpoint> and method <method>
     Then Verify Job status code <expectedStatus>
