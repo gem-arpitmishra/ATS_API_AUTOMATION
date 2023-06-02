@@ -6,7 +6,7 @@ Feature: Rejection of an Applicant
     Then Verify scenario status code <expectedStatus>
     Examples:
       | endpoint             | method | expectedStatus | payload_key                | payload_value                            | name   |
-      | saveApplicantDetails | post   | 201            | applicantData,resume,image | applicant.json,Skribbl.pptx,Skribbl.pptx | Create |
+      | saveApplicantDetails | post   | 201            | applicantData,resume,image | applicant.json,test.pdf,test.pdf | Create |
 
   Scenario Outline:ATS , Set the applicant stage to "New"
     Given Set the Applicant endpoint <endpoint> and method <method> with header and stage <stage>

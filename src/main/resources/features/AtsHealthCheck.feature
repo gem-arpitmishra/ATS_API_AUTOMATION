@@ -34,8 +34,8 @@ Feature: ATS scenario
     Then Verify scenario status code <expectedStatus>
     Examples:
       | endpoint               | method | expectedStatus | payload_key                | payload_value                            | name   |
-      | saveApplicantDetails   | post   | 201            | applicantData,resume,image | applicant.json,Skribbl.pptx,Skribbl.pptx | Create |
-      | updateApplicantDetails | put    | 201            | applicantData,resume,image | applicant.json,Skribbl.pptx,Skribbl.pptx | Update |
+      | saveApplicantDetails   | post   | 201            | applicantData,resume,image | applicant.json,test.pdf,test.pdf | Create |
+      | updateApplicantDetails | put    | 201            | applicantData,resume,image | applicant.json,test.pdf,test.pdf | Update |
 
   Scenario Outline:ATS , Set the applicant stage to "New"
     Given Set the Applicant endpoint <endpoint> and method <method> with header and stage <stage>
