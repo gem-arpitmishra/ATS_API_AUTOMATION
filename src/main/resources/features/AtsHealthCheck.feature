@@ -8,6 +8,8 @@ Feature: ATS scenario
       | method | url         | expectedStatus |
       | post   | accessToken | 200            |
 
+
+
   Scenario Outline: ATS ,Job--> <name1>
     Given Set the Job endpoint <endpoint> method <method> payload <payload_key> <payload_value> and form data
     Then Verify scenario status code <expectedStatus>

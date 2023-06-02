@@ -8,6 +8,8 @@ Feature: Dashboard
       | method | url         | expectedStatus |
       | post   | accessToken | 200            |
 
+
+
   Scenario Outline: ATS, API to get List Of Jobs Along With The Applicant Mapped To Each Jobs And The Interview Aligned For Them
     Given Set the Dashboard endpoint <endpoint> and method <method>
     Then Verify Dashboard status code <expectedStatus>

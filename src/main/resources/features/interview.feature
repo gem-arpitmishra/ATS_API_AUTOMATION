@@ -7,6 +7,8 @@ Feature: Interview
     Examples:
       | method | url         | expectedStatus |
       | post   | accessToken | 200            |
+
+
   Scenario Outline:ATS, API to get list of all interviews
     Given Set the Interview endpoint <endpoint> and method <method>
     Then Verify Interview status code <expectedStatus>

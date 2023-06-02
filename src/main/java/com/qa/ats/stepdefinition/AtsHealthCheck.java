@@ -114,6 +114,8 @@ public class AtsHealthCheck {
     public void settingTheApplicantEndpointEndpointMethodMethodForVetting(String url, String method, String payload) {
         HashMap<String, String> token = new HashMap<String, String>();
         token.put("X-REMOTE-USER-EMAIL", "nipun.jain@geminisolutions.com");
+
+
         token.put("X-REMOTE-USER-OBJECT-ID", "e82f1905-3695-49a6-977e-9712d7f1ece1");
         token.put("X-REMOTE-INTERVIEWER-EMAIL", "nipun.jain@geminisolutions.com");
         String[] checkList;

@@ -9,6 +9,8 @@ Feature: Rejection of an Applicant
       | post   | accessToken | 200            |
 
 
+
+
   Scenario Outline: ATS, <name> an applicant
     Given Set the Applicant endpoint <endpoint> method <method> payload <payload_key> <payload_value> and form data
     Then Verify scenario status code <expectedStatus>

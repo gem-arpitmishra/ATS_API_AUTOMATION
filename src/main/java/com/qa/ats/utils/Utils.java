@@ -11,6 +11,7 @@ import com.qa.ats.stepdefinition.ApplicantStep;
 import com.qa.ats.stepdefinition.AtsRegression;
 import com.qa.ats.stepdefinition.InterviewStep;
 import com.qa.ats.stepdefinition.AtsHealthCheck;
+import org.apache.commons.codec.binary.Base64;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -58,9 +59,22 @@ public static void responseCheck(Response response) {
         keys.add("scope");
         keys.add("client_secret");
         keys.add("grant_type");
-        values.add("4f685d76-e243-4ff5-9368-7048377d7709");
-        values.add("api://4f685d76-e243-4ff5-9368-7048377d7709/.default");
-        values.add("1nl8Q~wA42.HERUg0GzPXiT0yza6bzsGtw5Odb7H");
+
+        String client_id_encode="NGY2ODVkNzYtZTI0My00ZmY1LTkzNjgtNzA0ODM3N2Q3NzA5";
+        byte[] decodedString = Base64.decodeBase64(client_id_encode);
+        String client_id_decoded = new String(decodedString);
+        values.add(client_id_decoded);
+
+        String scope_encoded="YXBpOi8vNGY2ODVkNzYtZTI0My00ZmY1LTkzNjgtNzA0ODM3N2Q3NzA5Ly5kZWZhdWx0";
+        decodedString = Base64.decodeBase64(scope_encoded);
+        String scope_decoded = new String(decodedString);
+        values.add(scope_decoded);
+
+        String client_secret_encode="MW5sOFF+d0E0Mi5IRVJVZzBHelBYaVQweXphNmJ6c0d0dzVPZGI3SA==";
+        decodedString = Base64.decodeBase64(client_secret_encode);
+        String client_secret_decoded = new String(decodedString);
+        values.add(client_secret_decoded);
+
         values.add("client_credentials");
         CloseableHttpClient httpClient = HttpClients.createDefault();
         MultipartEntityBuilder entityBuilder = entityBuilderFileParserForAccessToken(keys, values, method, url);

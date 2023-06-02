@@ -8,6 +8,8 @@ Feature: ATS scenario
       | method | url         | expectedStatus |
       | post   | accessToken | 200            |
 
+
+
   Scenario Outline: ATS , Job using wrong method---><name>
     Given Set the Job endpoint <endpoint> and method <method>
     Then Verify Job status code <expectedStatus>
