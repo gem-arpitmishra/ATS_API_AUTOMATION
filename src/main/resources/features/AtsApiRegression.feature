@@ -1,6 +1,13 @@
 @apiReg
 Feature: ATS scenario
 
+  Scenario Outline: ATS, Run the API to generate access token
+    Given Set the url to generate access token <method> method and url <url>
+    Then Verify scenario status code <expectedStatus>
+    Examples:
+      | method | url         | expectedStatus |
+      | post   | accessToken | 200            |
+
   Scenario Outline: ATS , Job using wrong method---><name>
     Given Set the Job endpoint <endpoint> and method <method>
     Then Verify Job status code <expectedStatus>
@@ -292,27 +299,27 @@ Feature: ATS scenario
     Then Verify scenario status code <expectedStatus>
     Examples:
       | endpoint               | method | expectedStatus | payload_key                | payload_value                                 | name1            | field       |
-      | saveApplicantDetails   | post   | 500            | applicantData,resume,image | applicantTest1.json,Skribbl.pptx,Skribbl.pptx | Create Applicant | Email       |
-      | saveApplicantDetails   | post   | 500            | applicantData,resume,image | applicantTest2.json,Skribbl.pptx,Skribbl.pptx | Create Applicant | Phone no    |
-      | updateApplicantDetails | put    | 400            | applicantData,resume,image | applicant.json,Skribbl.pptx,Skribbl.pptx      | Update Applicant | ApplicantId |
+      | saveApplicantDetails   | post   | 500            | applicantData,resume,image | applicantTest1.json,test.pdf,test.pdf | Create Applicant | Email       |
+      | saveApplicantDetails   | post   | 500            | applicantData,resume,image | applicantTest2.json,test.pdf,test.pdf | Create Applicant | Phone no    |
+      | updateApplicantDetails | put    | 400            | applicantData,resume,image | applicant.json,test.pdf,test.pdf      | Update Applicant | ApplicantId |
 
   Scenario Outline: ATS <name1>,Applicant API using invalid <field>
     Given Set the Job endpoint <endpoint> method <method> payload <payload_key> <payload_value> and form data
     Then Verify scenario status code <expectedStatus>
     Examples:
       | endpoint               | method | expectedStatus | payload_key                | payload_value                                 | name1            | field                 |
-      | saveApplicantDetails   | post   | 400            | applicantData,resume,image | applicantTest4.json,Skribbl.pptx,Skribbl.pptx | Create Applicant | TotalYearOfExperience |
-      | saveApplicantDetails   | post   | 400            | applicantData,resume,image | applicantTest5.json,Skribbl.pptx,Skribbl.pptx | Create Applicant | RelevantExperience    |
-      | saveApplicantDetails   | post   | 400            | applicantData,resume,image | applicantTest6.json,Skribbl.pptx,Skribbl.pptx | Create Applicant | Percentage            |
-      | saveApplicantDetails   | post   | 400            | applicantData,resume,image | applicantTest8.json,Skribbl.pptx,Skribbl.pptx | Create Applicant | FromDate              |
-      | saveApplicantDetails   | post   | 400            | applicantData,resume,image | applicantTest9.json,Skribbl.pptx,Skribbl.pptx | Create Applicant | ToDate                |
-      | updateApplicantDetails | put    | 400            | applicantData,resume,image | applicantTest3.json,Skribbl.pptx,Skribbl.pptx | Update Applicant | ApplicantId           |
-      | updateApplicantDetails | put    | 400            | applicantData,resume,image | applicantTest4.json,Skribbl.pptx,Skribbl.pptx | Update Applicant | TotalYearOfExperience |
-      | updateApplicantDetails | put    | 400            | applicantData,resume,image | applicantTest5.json,Skribbl.pptx,Skribbl.pptx | Update Applicant | RelevantExperience    |
-      | updateApplicantDetails | put    | 400            | applicantData,resume,image | applicantTest6.json,Skribbl.pptx,Skribbl.pptx | Update Applicant | Percentage            |
-      | updateApplicantDetails | put    | 400            | applicantData,resume,image | applicantTest7.json,Skribbl.pptx,Skribbl.pptx | Update Applicant | Phone no              |
-      | updateApplicantDetails | put    | 400            | applicantData,resume,image | applicantTest8.json,Skribbl.pptx,Skribbl.pptx | Update Applicant | FromDate              |
-      | updateApplicantDetails | put    | 400            | applicantData,resume,image | applicantTest9.json,Skribbl.pptx,Skribbl.pptx | Update Applicant | ToDate                |
+      | saveApplicantDetails   | post   | 400            | applicantData,resume,image | applicantTest4.json,test.pdf,test.pdf | Create Applicant | TotalYearOfExperience |
+      | saveApplicantDetails   | post   | 400            | applicantData,resume,image | applicantTest5.json,test.pdf,test.pdf | Create Applicant | RelevantExperience    |
+      | saveApplicantDetails   | post   | 400            | applicantData,resume,image | applicantTest6.json,test.pdf,test.pdf | Create Applicant | Percentage            |
+      | saveApplicantDetails   | post   | 400            | applicantData,resume,image | applicantTest8.json,test.pdf,test.pdf | Create Applicant | FromDate              |
+      | saveApplicantDetails   | post   | 400            | applicantData,resume,image | applicantTest9.json,test.pdf,test.pdf | Create Applicant | ToDate                |
+      | updateApplicantDetails | put    | 400            | applicantData,resume,image | applicantTest3.json,test.pdf,test.pdf | Update Applicant | ApplicantId           |
+      | updateApplicantDetails | put    | 400            | applicantData,resume,image | applicantTest4.json,test.pdf,test.pdf | Update Applicant | TotalYearOfExperience |
+      | updateApplicantDetails | put    | 400            | applicantData,resume,image | applicantTest5.json,test.pdf,test.pdf | Update Applicant | RelevantExperience    |
+      | updateApplicantDetails | put    | 400            | applicantData,resume,image | applicantTest6.json,test.pdf,test.pdf | Update Applicant | Percentage            |
+      | updateApplicantDetails | put    | 400            | applicantData,resume,image | applicantTest7.json,test.pdf,test.pdf | Update Applicant | Phone no              |
+      | updateApplicantDetails | put    | 400            | applicantData,resume,image | applicantTest8.json,test.pdf,test.pdf | Update Applicant | FromDate              |
+      | updateApplicantDetails | put    | 400            | applicantData,resume,image | applicantTest9.json,test.pdf,test.pdf | Update Applicant | ToDate                |
 
   Scenario Outline: ATS ,Job--> <name1>
     Given Set the Job endpoint <endpoint> method <method> payload <payload_key> <payload_value> and form data
@@ -335,8 +342,8 @@ Feature: ATS scenario
     Then Verify scenario status code <expectedStatus>
     Examples:
       | endpoint               | method | expectedStatus | payload_key                | payload_value                            | name   |
-      | saveApplicantDetails   | post   | 201            | applicantData,resume,image | applicant.json,Skribbl.pptx,Skribbl.pptx | Create |
-      | updateApplicantDetails | put    | 201            | applicantData,resume,image | applicant.json,Skribbl.pptx,Skribbl.pptx | Update |
+      | saveApplicantDetails   | post   | 201            | applicantData,resume,image | applicant.json,test.pdf,test.pdf | Create |
+      | updateApplicantDetails | put    | 201            | applicantData,resume,image | applicant.json,test.pdf,test.pdf | Update |
 
   Scenario Outline:ATS , Set the applicant stage to "New"
     Given Set the Applicant endpoint <endpoint> and method <method> with header and stage <stage>

@@ -8,6 +8,7 @@ import io.cucumber.java.en.Then;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.io.IOException;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
@@ -17,6 +18,18 @@ public class AtsHealthCheck {
     public static int jobId = 0;
     public static int applicantId = 0;
     Logger logger = LoggerFactory.getLogger(ApplicantStep.class);
+
+    @Given("^Set the url to generate access token (.+) method and url (.+)$")
+    public void getAccessToken(String method, String url) throws IOException {
+        try {
+           status=Utils.accessToken(method, url);
+        }
+        catch(Exception exception)
+        {
+            logger.info("User not able to fetch the access token", exception);
+            GemTestReporter.addTestStep("Token", "Token couldn't be fetched", STATUS.FAIL);
+        }
+    }
 
     @Given("^Set the Job endpoint (\\w*) method (\\w*) payload (.*) (.*) and form data$")
     public void setTheJobEndpointEndpointMethodMethodPayloadPayloadKeyPayloadValueAndFormData(String url,
@@ -102,6 +115,7 @@ public class AtsHealthCheck {
         HashMap<String, String> token = new HashMap<String, String>();
         token.put("X-REMOTE-USER-EMAIL", "nipun.jain@geminisolutions.com");
         token.put("X-REMOTE-USER-OBJECT-ID", "e82f1905-3695-49a6-977e-9712d7f1ece1");
+        token.put("X-REMOTE-INTERVIEWER-EMAIL", "nipun.jain@geminisolutions.com");
         String[] checkList;
         try {
             String check = Utils.applicantApiForVetting(url, method, payload, token, "");
