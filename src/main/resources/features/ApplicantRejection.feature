@@ -1,6 +1,15 @@
 @hc
 Feature: Rejection of an Applicant
 
+  Scenario Outline: ATS, Run the API to generate access token
+    Given Set the url to generate access token <method> method and url <url>
+    Then Verify scenario status code <expectedStatus>
+    Examples:
+      | method | url         | expectedStatus |
+      | post   | accessToken | 200            |
+
+
+
   Scenario Outline: ATS, <name> an applicant
     Given Set the Applicant endpoint <endpoint> method <method> payload <payload_key> <payload_value> and form data
     Then Verify scenario status code <expectedStatus>

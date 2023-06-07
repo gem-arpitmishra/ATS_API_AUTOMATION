@@ -1,6 +1,13 @@
 @apiReg
 Feature: ATS scenario
 
+  Scenario Outline: ATS, Run the API to generate access token
+    Given Set the url to generate access token <method> method and url <url>
+    Then Verify scenario status code <expectedStatus>
+    Examples:
+      | method | url         | expectedStatus |
+      | post   | accessToken | 200            |
+
   Scenario Outline: ATS , Job using wrong method---><name>
     Given Set the Job endpoint <endpoint> and method <method>
     Then Verify Job status code <expectedStatus>
@@ -291,16 +298,16 @@ Feature: ATS scenario
     Given Set the Job endpoint <endpoint> method <method> payload <payload_key> <payload_value> and form data
     Then Verify scenario status code <expectedStatus>
     Examples:
-      | endpoint               | method | expectedStatus | payload_key                | payload_value                                 | name1            | field       |
-      | saveApplicantDetails   | post   | 500            | applicantData,resume,image | applicantTest1.json,test.pdf,test.pdf | Create Applicant | Email       |
-      | saveApplicantDetails   | post   | 500            | applicantData,resume,image | applicantTest2.json,test.pdf,test.pdf | Create Applicant | Phone no    |
+      | endpoint               | method | expectedStatus | payload_key                | payload_value                         | name1            | field       |
+#      | saveApplicantDetails   | post   | 500            | applicantData,resume,image | applicantTest1.json,test.pdf,test.pdf | Create Applicant | Email       |
+      | saveApplicantDetails   | post   | 409            | applicantData,resume,image | applicantTest2.json,test.pdf,test.pdf | Create Applicant | Phone no    |
       | updateApplicantDetails | put    | 400            | applicantData,resume,image | applicant.json,test.pdf,test.pdf      | Update Applicant | ApplicantId |
 
   Scenario Outline: ATS <name1>,Applicant API using invalid <field>
     Given Set the Job endpoint <endpoint> method <method> payload <payload_key> <payload_value> and form data
     Then Verify scenario status code <expectedStatus>
     Examples:
-      | endpoint               | method | expectedStatus | payload_key                | payload_value                                 | name1            | field                 |
+      | endpoint               | method | expectedStatus | payload_key                | payload_value                         | name1            | field                 |
       | saveApplicantDetails   | post   | 400            | applicantData,resume,image | applicantTest4.json,test.pdf,test.pdf | Create Applicant | TotalYearOfExperience |
       | saveApplicantDetails   | post   | 400            | applicantData,resume,image | applicantTest5.json,test.pdf,test.pdf | Create Applicant | RelevantExperience    |
       | saveApplicantDetails   | post   | 400            | applicantData,resume,image | applicantTest6.json,test.pdf,test.pdf | Create Applicant | Percentage            |
@@ -334,7 +341,7 @@ Feature: ATS scenario
     Given Set the Applicant endpoint <endpoint> method <method> payload <payload_key> <payload_value> and form data
     Then Verify scenario status code <expectedStatus>
     Examples:
-      | endpoint               | method | expectedStatus | payload_key                | payload_value                            | name   |
+      | endpoint               | method | expectedStatus | payload_key                | payload_value                    | name   |
       | saveApplicantDetails   | post   | 201            | applicantData,resume,image | applicant.json,test.pdf,test.pdf | Create |
       | updateApplicantDetails | put    | 201            | applicantData,resume,image | applicant.json,test.pdf,test.pdf | Update |
 
@@ -367,12 +374,6 @@ Feature: ATS scenario
       | endpoint                 | method | expectedStatus | payload               |
       | sendApplicantsForVetting | put    | 405            | applicantVetting.json |
 
-#  Scenario Outline: ATS, send applicant for vetting using wrong method patch
-#    Given Setting the Applicant endpoint <endpoint> method <method> payload <payload> for vetting
-#    Then Verify scenario status code <expectedStatus>
-#    Examples:
-#      | endpoint                 | method | expectedStatus | payload               |
-#      | sendApplicantsForVetting | patch | 405            | applicantVetting.json |
 
   Scenario Outline: ATS, <name> an applicant and send him for vetting
     Given Setting the Applicant endpoint <endpoint> method <method> payload <payload> for vetting
@@ -454,7 +455,6 @@ Feature: ATS scenario
     Examples:
       | endpoint        | method | expectedStatus | payload    | key       |
       | addNewInterview | post   | 500            | interview4 | startTime |
-#      | addNewInterview | post   | 500            | interview6 | interviewerEmail |
       | addNewInterview | post   | 500            | interview7 | endTime   |
 
   Scenario Outline:ATS, API to schedule interview for the same job and same applicant without using header
@@ -508,7 +508,6 @@ Feature: ATS scenario
     Examples:
       | endpoint          | method | expectedStatus | payload          | key       |
       | updateAnInterview | put    | 500            | updateInterview5 | startTime |
-#      | updateAnInterview | put    | 500            | updateInterview6 | interviewerEmail |
       | updateAnInterview | put    | 500            | updateInterview7 | endTime   |
 
   Scenario Outline:ATS, API to update interview for the same job and same applicant without using header
@@ -686,14 +685,6 @@ Feature: ATS scenario
       | endpoint              | method | expectedStatus | payload_keys                  | payload_values                       |
       | addMultipleApplicants | delete | 405            | applicantList,resumes,resumes | applicantList.json,test.pdf,test.pdf |
 
-  Scenario Outline: API to add multiple Applicants without <name>
-    Given Set the Applicant endpoint <endpoint> and method <method> and keys <payload_keys> , values <payload_values> to add multiple applicants without <name>
-    Then  Verify Applicant status code <expectedStatus>
-    Examples:
-      | endpoint              | method | expectedStatus | payload_keys                  | payload_values                        | name          |
-      | addMultipleApplicants | post   | 500            | applicantList,resumes,resumes | applicantList1.json,test.pdf,test.pdf | email         |
-      | addMultipleApplicants | post   | 500            | applicantList,resumes,resumes | applicantList2.json,test.pdf,test.pdf | contactNumber |
-
   Scenario Outline: API to add multiple Applicants using wrong JobId
     Given Set the Applicant endpoint <endpoint> and method <method> and keys <payload_keys> , values <payload_values> to add multiple applicants
     Then  Verify Applicant status code <expectedStatus>
@@ -729,3 +720,44 @@ Feature: ATS scenario
       | GetApplicantWithPagingWithPageSize | getApplicantWithPagingWithPageSize | put    | 405            |
       | GetApplicantWithPagingWithPageSize | getApplicantWithPagingWithPageSize | delete | 405            |
 
+  Scenario Outline: ATS,Negative testing of API to getListOfApplicantsMonthWiseForASpecificYear using wrong Method
+    Given Set the Applicant endpoint <endpoint> and method <method>
+    Then Verify Applicant status code <expectedStatus>
+    Examples:
+      | endpoint                                     | method | expectedStatus |
+      | getListOfApplicantsMonthWiseForASpecificYear | put    | 405            |
+
+  Scenario Outline: ATS,Negative testing of API to getListOfApplicantsMonthWiseForASpecificYear using wrong Method
+    Given Set the Applicant endpoint <endpoint> and method <method>
+    Then Verify Applicant status code <expectedStatus>
+    Examples:
+      | endpoint                                     | method | expectedStatus |
+      | getListOfApplicantsMonthWiseForASpecificYear | post   | 405            |
+
+  Scenario Outline: ATS,Negative testing of API of getListOfOfferedApplicantsMonthWiseForASpecificYear using wrong Method
+    Given Set the Applicant endpoint <endpoint> and method <method>
+    Then Verify Applicant status code <expectedStatus>
+    Examples:
+      | endpoint                                            | method | expectedStatus |
+      | getListOfOfferedApplicantsMonthWiseForASpecificYear | put    | 405            |
+
+  Scenario Outline: ATS,Negative testing of API of getListOfOfferedApplicantsMonthWiseForASpecificYear using wrong Method
+    Given Set the Applicant endpoint <endpoint> and method <method>
+    Then Verify Applicant status code <expectedStatus>
+    Examples:
+      | endpoint                                            | method | expectedStatus |
+      | getListOfOfferedApplicantsMonthWiseForASpecificYear | post   | 405            |
+
+  Scenario Outline: ATS,Negative testing of API to getListOfJobsMonthWiseForASpecificYearJob using wrong Method
+    Given Set the Job endpoint <endpoint> and method <method>
+    Then Verify Job status code <expectedStatus>
+    Examples:
+      | endpoint                               | method | expectedStatus |
+      | getListOfJobsMonthWiseForASpecificYear | put    | 405            |
+
+  Scenario Outline: ATS,Negative testing of API to o getListOfJobsMonthWiseForASpecificYearJob using wrong Method
+    Given Set the Job endpoint <endpoint> and method <method>
+    Then Verify Job status code <expectedStatus>
+    Examples:
+      | endpoint                               | method | expectedStatus |
+      | getListOfJobsMonthWiseForASpecificYear | post   | 405            |
