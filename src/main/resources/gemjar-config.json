@@ -6,7 +6,7 @@
   "sub_id": "test_id",
   "enter_point": "https://apis.gemecosystem.com/enter-point",
   "jewel_user": "t.sahni",
-  "jewel_bridge_token": "936f4fca-e61d-41f8-97fb-4757be7697aa1683889851251",
+  "jewel_bridge_token": "",
   "glueCode": "com.qa.ats.stepdefinition",
   "email_report": "y",
   "email_to":"shruti.kukreja@geminisolutions.com,sajith.j@geminisolutions.com,richa.khatri@geminisolutions.com,harshita.gupta@geminisolutions.com,akshi.khattar@geminisolutions.com,saksham.khanna@geminisolutions.com,nipun.jain@geminisolutions.com,ankita.srivastava@geminisolutions.com,saru.goyal@geminisolutions.com,ritika.jain@geminisolutions.com,vaibhav.oberoi@geminisolutions.com,sumit.parashar@geminisolutions.com,anjali.tripathi@geminisolutions.com",
