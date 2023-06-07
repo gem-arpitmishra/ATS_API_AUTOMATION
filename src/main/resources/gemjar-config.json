@@ -8,9 +8,7 @@
   "jewel_user": "t.sahni",
   "jewel_bridge_token": "936f4fca-e61d-41f8-97fb-4757be7697aa1683889851251",
   "glueCode": "com.qa.ats.stepdefinition",
-  "email_report": "y",
-  "email_to":"shruti.kukreja@geminisolutions.com,sajith.j@geminisolutions.com,richa.khatri@geminisolutions.com,harshita.gupta@geminisolutions.com,akshi.khattar@geminisolutions.com,saksham.khanna@geminisolutions.com,nipun.jain@geminisolutions.com,ankita.srivastava@geminisolutions.com,saru.goyal@geminisolutions.com,ritika.jain@geminisolutions.com,vaibhav.oberoi@geminisolutions.com,sumit.parashar@geminisolutions.com,anjali.tripathi@geminisolutions.com",
-  "email_cc":"charu.garg@geminisolutions.com,tripta.sahni@geminisolutions.com",
+
 
   "beta": {
     "accessToken": "https://login.microsoftonline.com/b9806c7d-9280-4e44-afea-6dc0ff495c2f/oauth2/v2.0/token",
@@ -31,7 +29,6 @@
     "fetchResumeUsingApplicantId": "atsApplicantSvc/applicant/resume/{applicantId}",
     "fetchApplicantPersonalDetails": "atsApplicantSvc/applicant/personal-detail/{applicantId}",
     "fetchApplicantNotAlignedToJob": "atsApplicantSvc/applicant/notAlignedToJob",
-
     "fetchJobOfApplicant": "atsApplicantSvc/applicant/job/{applicantId}",
     "fetchListOfHR": "atsApplicantSvc/applicant/getHrSpoc",
     "fetchApplicantConstants": "atsApplicantSvc/applicant/constants",
