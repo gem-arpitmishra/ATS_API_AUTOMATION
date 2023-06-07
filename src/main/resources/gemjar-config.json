@@ -1,8 +1,8 @@
 {
   "environment": "beta",
   "project_name": "ATS_API",
-  "report_name": "ATS_Health_Check",
-  "tags": "@hc",
+  "report_name": "ATS_Regression",
+  "tags": "@apiReg",
   "sub_id": "test_id",
   "enter_point": "https://apis.gemecosystem.com/enter-point",
   "jewel_user": "t.sahni",
@@ -12,6 +12,9 @@
 
   "beta": {
     "accessToken": "https://login.microsoftonline.com/b9806c7d-9280-4e44-afea-6dc0ff495c2f/oauth2/v2.0/token",
+    "getListOfApplicantsMonthWiseForASpecificYear": "atsApplicantSvc/applicant/monthWise/2023",
+    "getListOfOfferedApplicantsMonthWiseForASpecificYear": "atsApplicantSvc/applicant/offeredMonthWise/2023",
+    "getListOfJobsMonthWiseForASpecificYear": "atsJobSvc/job/monthWise/2023",
     "getConstants": "atsJobSvc/job/all-constants",
     "getAllJobDetails": "atsJobSvc/job/all-job-details",
     "fetchJobUsingSearchKeyword": "atsJobSvc/job/all-job-details/1/1/Developer",

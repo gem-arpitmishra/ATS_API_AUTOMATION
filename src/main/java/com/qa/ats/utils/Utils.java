@@ -694,7 +694,7 @@ public static void responseCheck(Response response) {
             HttpUriRequest multipartRequest = reqBuilder.build();
             multipartRequest.setHeader(new BasicHeader("X-REMOTE-USER-EMAIL", "nipun.jain@geminisolutions.com"));
             multipartRequest.setHeader(new BasicHeader("Authorization", authValue));
-            HttpResponse httpresponse = httpclient.execute(multipartRequest);
+            HttpResponse httpresponse = httpClient.execute(multipartRequest);
             arr[0] = httpresponse.getStatusLine().getStatusCode();
             GemTestReporter.addTestStep("POST Request Verification", "POST request executed Successfully", STATUS.PASS);
             JsonObject js = (JsonObject) JsonParser.parseString(EntityUtils.toString(httpresponse.getEntity()));
@@ -730,7 +730,7 @@ public static void responseCheck(Response response) {
             HttpUriRequest multipartRequest = reqBuilder.build();
             multipartRequest.setHeader(new BasicHeader("X-REMOTE-USER-EMAIL", "nipun.jain@geminisolutions.com"));
             multipartRequest.setHeader(new BasicHeader("Authorization", authValue));
-            HttpResponse httpResponse = httpclient.execute(multipartRequest);
+            HttpResponse httpResponse = httpClient.execute(multipartRequest);
             arr[0] = httpResponse.getStatusLine().getStatusCode();
             GemTestReporter.addTestStep("POST Request Verification", "POST request executed Successfully", STATUS.PASS);
             JsonObject js = (JsonObject) JsonParser.parseString(EntityUtils.toString(httpResponse.getEntity()));
