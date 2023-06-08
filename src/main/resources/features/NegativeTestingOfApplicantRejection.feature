@@ -15,6 +15,7 @@ Feature: Rejection of an Applicant
     Given Set the Applicant endpoint <endpoint> method <method> payload <payload_key> <payload_value> and form data
     Then Verify scenario status code <expectedStatus>
     Examples:
+
       | endpoint             | method | expectedStatus | payload_key                | payload_value                    | name   |
       | saveApplicantDetails | post   | 201            | applicantData,resume,image | applicant.json,test.pdf,test.pdf | Create |
 

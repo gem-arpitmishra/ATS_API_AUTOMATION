@@ -7,9 +7,7 @@
   "sub_id": "test_id",
   "enter_point": "https://apis.gemecosystem.com/enter-point",
   "jewel_user": "t.sahni",
-  "jewel_bridge_token": "936f4fca-e61d-41f8-97fb-4757be7697aa1683889851251",
   "glueCode": "com.qa.ats.stepdefinition",
-
   "beta": {
     "accessToken": "https://login.microsoftonline.com/b9806c7d-9280-4e44-afea-6dc0ff495c2f/oauth2/v2.0/token",
     "dataMaskingForInterview": "atsInterviewSvc/interview/dataMasking",

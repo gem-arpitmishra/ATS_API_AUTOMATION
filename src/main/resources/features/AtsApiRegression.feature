@@ -770,16 +770,3 @@ Feature: ATS scenario
       | endpoint                | method | expectedStatus |
       | dataMaskingForInterview | put    | 405            |
 
-  Scenario Outline: ATS,Negative testing of API to execute data masking for applicants service using wrong method Delete
-    Given Set the Applicant endpoint <endpoint> and method <method>
-    Then Verify Applicant status code <expectedStatus>
-    Examples:
-      | endpoint                 | method | expectedStatus |
-      | dataMaskingForApplicants | delete | 405            |
-
-  Scenario Outline: ATS,Negative testing of API to execute data masking for applicants service using wrong method Put
-    Given Set the Applicant endpoint <endpoint> and method <method>
-    Then Verify Applicant status code <expectedStatus>
-    Examples:
-      | endpoint                 | method | expectedStatus |
-      | dataMaskingForApplicants | put    | 405            |

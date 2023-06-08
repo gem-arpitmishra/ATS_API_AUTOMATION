@@ -311,6 +311,7 @@ Feature: ATS scenario
       | endpoint                | method | expectedStatus |
       | dataMaskingForInterview | post   | 200            |
 
+
   Scenario Outline: ATS,API to execute data masking for applicants service
     Given Set the Applicant endpoint <endpoint> and method <method>
     Then Verify Applicant status code <expectedStatus>
