@@ -761,3 +761,12 @@ Feature: ATS scenario
     Examples:
       | endpoint                               | method | expectedStatus |
       | getListOfJobsMonthWiseForASpecificYear | post   | 405            |
+
+
+  Scenario Outline: ATS,Negative testing of API to execute data masking for interview service using wrong Method Put
+    Given Set the Interview endpoint <endpoint> and method <method>
+    Then Verify Interview status code <expectedStatus>
+    Examples:
+      | endpoint                | method | expectedStatus |
+      | dataMaskingForInterview | put    | 405            |
+
