@@ -8,8 +8,6 @@ Feature: ATS scenario
       | method | url         | expectedStatus |
       | post   | accessToken | 200            |
 
-
-
   Scenario Outline: ATS ,Job--> <name1>
     Given Set the Job endpoint <endpoint> method <method> payload <payload_key> <payload_value> and form data
     Then Verify scenario status code <expectedStatus>
@@ -25,7 +23,8 @@ Feature: ATS scenario
     Examples:
       | endpoint        | method | expectedStatus | name1             |
       | updateJobStatus | put    | 200            | Update Job Status |
-
+#
+#
   Scenario Outline: ATS, HealthCheck of Jobs API - <name>
     Given Set the Job endpoint <endpoint> and method <method>
     Then Verify Job status code <expectedStatus>
@@ -304,3 +303,17 @@ Feature: ATS scenario
     Examples:
       | name                               | endpoint                           | method | expectedStatus |
       | GetApplicantWithPagingWithPageSize | getApplicantWithPagingWithPageSize | get    | 200            |
+
+  Scenario Outline: ATS,API to execute data masking for interview service
+    Given Set the Interview endpoint <endpoint> and method <method>
+    Then Verify Interview status code <expectedStatus>
+    Examples:
+      | endpoint                | method | expectedStatus |
+      | dataMaskingForInterview | post   | 200            |
+
+  Scenario Outline: ATS,API to execute data masking for applicants service
+    Given Set the Applicant endpoint <endpoint> and method <method>
+    Then Verify Applicant status code <expectedStatus>
+    Examples:
+      | endpoint                 | method | expectedStatus |
+      | dataMaskingForApplicants | post   | 200            |

@@ -1,15 +1,22 @@
+
 {
   "environment": "beta",
   "project_name": "ATS_API",
   "report_name": "ATS_Health_Check",
-  "tags": "@hc",
+  "tags": "@apiReg",
   "sub_id": "test_id",
   "enter_point": "https://apis.gemecosystem.com/enter-point",
+  "jewel_user": "t.sahni",
+  "jewel_bridge_token": "936f4fca-e61d-41f8-97fb-4757be7697aa1683889851251",
   "glueCode": "com.qa.ats.stepdefinition",
-
 
   "beta": {
     "accessToken": "https://login.microsoftonline.com/b9806c7d-9280-4e44-afea-6dc0ff495c2f/oauth2/v2.0/token",
+    "dataMaskingForInterview": "atsInterviewSvc/interview/dataMasking",
+    "dataMaskingForApplicants": "atsApplicantSvc/applicant/dataMasking",
+    "getListOfApplicantsMonthWiseForASpecificYear": "atsApplicantSvc/applicant/monthWise/2023",
+    "getListOfOfferedApplicantsMonthWiseForASpecificYear": "atsApplicantSvc/applicant/offeredMonthWise/2023",
+    "getListOfJobsMonthWiseForASpecificYear": "atsJobSvc/job/monthWise/2023",
     "getConstants": "atsJobSvc/job/all-constants",
     "getAllJobDetails": "atsJobSvc/job/all-job-details",
     "fetchJobUsingSearchKeyword": "atsJobSvc/job/all-job-details/1/1/Developer",
@@ -24,7 +31,6 @@
     "fetchResumeUsingApplicantId": "atsApplicantSvc/applicant/resume/{applicantId}",
     "fetchApplicantPersonalDetails": "atsApplicantSvc/applicant/personal-detail/{applicantId}",
     "fetchApplicantNotAlignedToJob": "atsApplicantSvc/applicant/notAlignedToJob",
-
     "fetchJobOfApplicant": "atsApplicantSvc/applicant/job/{applicantId}",
     "fetchListOfHR": "atsApplicantSvc/applicant/getHrSpoc",
     "fetchApplicantConstants": "atsApplicantSvc/applicant/constants",
