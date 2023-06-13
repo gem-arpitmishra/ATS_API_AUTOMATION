@@ -22,7 +22,7 @@ public class AtsHealthCheck {
     @Given("^Set the url to generate access token (.+) method and url (.+)$")
     public void getAccessToken(String method, String url) throws IOException {
         try {
-           status=Utils.accessToken(method, url);
+            status=Utils.accessToken(method, url);
         }
         catch(Exception exception)
         {
@@ -66,6 +66,27 @@ public class AtsHealthCheck {
 
     @Given("^Set the Applicant endpoint (\\w*) method (\\w*) payload (.*) (.*) and form data$")
     public void setTheApplicantEndpointEndpointMethodMethodPayloadPayloadKeyPayloadValueAndFormData(String url, String method, String keys, String values) {
+        List<String> payloadKeys = Arrays.asList(keys.split(","));
+        List<String> payloadValues = Arrays.asList(values.split(","));
+        HashMap<String, String> token = new HashMap<String, String>();
+        token.put("X-REMOTE-USER-EMAIL", "saru.goyal@geminisolutions.com");
+        String checkList[];
+        try {
+            String check = Utils.applicantApiWithFormData(url, method, token, "", payloadKeys, payloadValues);
+            if (method.equals("post") && check.contains(",")) {
+                checkList = check.split(",");
+                status = Integer.parseInt(checkList[0]);
+                applicantId = Integer.parseInt(checkList[1]);
+            } else {
+                status = Integer.parseInt(check);
+            }
+        } catch (Exception exception) {
+            logger.info("User not able set the form data", exception);
+            GemTestReporter.addTestStep("Form-data", "User not able verify the form-data", STATUS.FAIL);
+        }
+    }
+    @Given("^Set the Resume Parser endpoint (\\w*) method (\\w*) payload (.*) (.*) and form data$")
+    public void setTheResumeParserEndpointEndpointMethodMethodPayloadPayloadKeyPayloadValueAndFormData(String url, String method, String keys, String values) {
         List<String> payloadKeys = Arrays.asList(keys.split(","));
         List<String> payloadValues = Arrays.asList(values.split(","));
         HashMap<String, String> token = new HashMap<String, String>();
