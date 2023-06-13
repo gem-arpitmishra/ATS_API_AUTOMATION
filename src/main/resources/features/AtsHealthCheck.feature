@@ -23,8 +23,7 @@ Feature: ATS scenario
     Examples:
       | endpoint        | method | expectedStatus | name1             |
       | updateJobStatus | put    | 200            | Update Job Status |
-#
-#
+
   Scenario Outline: ATS, HealthCheck of Jobs API - <name>
     Given Set the Job endpoint <endpoint> and method <method>
     Then Verify Job status code <expectedStatus>
