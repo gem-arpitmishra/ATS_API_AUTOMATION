@@ -85,7 +85,7 @@ public class AtsHealthCheck {
             GemTestReporter.addTestStep("Form-data", "User not able verify the form-data", STATUS.FAIL);
         }
     }
-    @Given("^Set the Resume Parser endpoint (\\w*) method (\\w*) payload (.*) (.*) and form data$")
+    @Given("^Setting the Resume Parser endpoint (\\w*) method (\\w*) payload (.*) (.*) and form data$")
     public void setTheResumeParserEndpointEndpointMethodMethodPayloadPayloadKeyPayloadValueAndFormData(String url, String method, String keys, String values) {
         List<String> payloadKeys = Arrays.asList(keys.split(","));
         List<String> payloadValues = Arrays.asList(values.split(","));
