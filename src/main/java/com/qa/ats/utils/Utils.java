@@ -540,7 +540,9 @@ public class Utils {
             HttpResponse httpResponse = httpClient.execute(multipartRequest);
             GemTestReporter.addTestStep("POST Request Verification", "POST request executed Successfully", STATUS.PASS);
 
-            if (!url.contains("resume")) {
+
+
+            if (!url.contains("resume") && (httpResponse.getStatusLine().getStatusCode() ==200 || httpResponse.getStatusLine().getStatusCode() ==201 )) {
                 js = (JsonObject) JsonParser.parseString(EntityUtils.toString(httpResponse.getEntity()));
                 GemTestReporter.addTestStep("Response Body", String.valueOf(js), STATUS.INFO);
                 GemTestReporter.addTestStep("Response Message", js.get("message").getAsString(), STATUS.INFO);
