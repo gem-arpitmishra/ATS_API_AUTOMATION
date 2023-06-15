@@ -286,11 +286,9 @@ public class Utils {
                 JsonArray newObject = new JsonArray();
                 JsonParser parser = new JsonParser();
                 newObject = (JsonArray) parser.parse(new FileReader("src/main/resources/" + payloadName));
-
-                    newObject.get(0).getAsJsonObject().addProperty("applicantId", AtsHealthCheck.applicantId);
-                    newObject.get(0).getAsJsonObject().addProperty("currentStageId", 1);
-                    newObject.get(0).getAsJsonObject().addProperty("jobId", AtsHealthCheck.jobId);
-
+                newObject.get(0).getAsJsonObject().addProperty("applicantId", AtsHealthCheck.applicantId);
+                newObject.get(0).getAsJsonObject().addProperty("currentStageId", 1);
+                newObject.get(0).getAsJsonObject().addProperty("jobId", AtsHealthCheck.jobId);
                 Gson gson = new Gson();
                 String jsonOutput = gson.toJson(newObject);
                 FileWriter writer = new FileWriter("src/main/resources/" + payloadName);
@@ -534,22 +532,19 @@ public class Utils {
             GemTestReporter.addTestStep("POST Request Verification", "POST request executed Successfully", STATUS.PASS);
 
 
-
-            if (!url.contains("resume") && (httpResponse.getStatusLine().getStatusCode() ==200 || httpResponse.getStatusLine().getStatusCode() ==201 )) {
+            if (!url.contains("resume") && (httpResponse.getStatusLine().getStatusCode() == 200 || httpResponse.getStatusLine().getStatusCode() == 201)) {
                 js = (JsonObject) JsonParser.parseString(EntityUtils.toString(httpResponse.getEntity()));
                 GemTestReporter.addTestStep("Response Body", String.valueOf(js), STATUS.INFO);
                 GemTestReporter.addTestStep("Response Message", js.get("message").getAsString(), STATUS.INFO);
                 arr[0] = httpResponse.getStatusLine().getStatusCode();
                 arr[1] = Integer.parseInt(String.valueOf(js.get("object").getAsJsonObject().get("applicantId")));
                 return (arr[0] + "," + arr[1]);
-            }
-            else if(url.contains("resume"))
-            {
+            } else if (url.contains("resume")) {
                 js = (JsonObject) JsonParser.parseString(EntityUtils.toString(httpResponse.getEntity()));
                 GemTestReporter.addTestStep("Response Body", String.valueOf(js), STATUS.INFO);
                 arr[0] = httpResponse.getStatusLine().getStatusCode();
                 return String.valueOf(arr[0]);
-            }else {
+            } else {
                 arr[0] = httpResponse.getStatusLine().getStatusCode();
                 return String.valueOf(arr[0]);
             }
