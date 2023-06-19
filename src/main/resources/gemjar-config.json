@@ -93,6 +93,6 @@
     "getApplicantWithPagingWithPageSize": "atsApplicantSvc/applicant/pageNumber/1/pageSize/1",
     "addMultipleApplicants": "atsApplicantSvc/applicant/bulkSave",
     "updateReasonOfRejection": "atsApplicantSvc/applicant/{applicantId}/addReasonOfRejection?reasonOfRejection=nothingPrepared",
-    "getVetterNames": "atsInterviewSvc/interview/getVetterNameForApplicants"
+    "getVetterNames": "atsInterviewSvc/interview/getVetterNameForApplicants?jobId=10"
   }
 }

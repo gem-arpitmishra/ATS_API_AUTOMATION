@@ -73,7 +73,7 @@ public class AtsHealthCheck {
         String checkList[];
         try {
             String check = Utils.applicantApiWithFormData(url, method, token, "", payloadKeys, payloadValues);
-            if (method.equals("post") && check.contains(",")) {
+            if ((method.equals("post") || method.equals("put")) && check.contains(",")) {
                 checkList = check.split(",");
                 status = Integer.parseInt(checkList[0]);
                 applicantId = Integer.parseInt(checkList[1]);
