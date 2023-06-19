@@ -9,7 +9,6 @@ Feature: Dashboard
       | post   | accessToken | 200            |
 
 
-
   Scenario Outline: ATS, API to get List Of Jobs Along With The Applicant Mapped To Each Jobs And The Interview Aligned For Them
     Given Set the Dashboard endpoint <endpoint> and method <method>
     Then Verify Dashboard status code <expectedStatus>
@@ -30,3 +29,24 @@ Feature: Dashboard
     Examples:
       | endpoint                          | method | expectedStatus |
       | getNumberOfApplicantsBasedOnStage | get    | 200            |
+
+  Scenario Outline: API to get list of applicants month wise for a specific year
+    Given Set the Dashboard endpoint <endpoint> and method <method>
+    Then Verify Dashboard status code <expectedStatus>
+    Examples:
+      | endpoint                                     | method | expectedStatus |
+      | getListOfApplicantsMonthWiseForASpecificYear | get    | 200            |
+
+  Scenario Outline: API to  get list of offered applicants month wise for a specific year
+    Given Set the Dashboard endpoint <endpoint> and method <method>
+    Then Verify Dashboard status code <expectedStatus>
+    Examples:
+      | endpoint                                            | method | expectedStatus |
+      | getListOfOfferedApplicantsMonthWiseForASpecificYear | get    | 200            |
+
+  Scenario Outline: API to get list of jobs month wise for a specific year
+    Given Set the Dashboard endpoint <endpoint> and method <method>
+    Then Verify Dashboard status code <expectedStatus>
+    Examples:
+      | endpoint                               | method | expectedStatus |
+      | getListOfJobsMonthWiseForASpecificYear | get    | 200            |

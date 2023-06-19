@@ -2,12 +2,16 @@
 {
   "environment": "beta",
   "project_name": "ATS_API",
-  "report_name": "ATS_Health_Check",
-  "tags": "@apiReg",
+  "report_name": "ATS_RESUME_PARSER_CHECK",
+  "tags": "@resumeParser",
   "sub_id": "test_id",
   "enter_point": "https://apis.gemecosystem.com/enter-point",
-  "jewel_user": "t.sahni",
   "glueCode": "com.qa.ats.stepdefinition",
+  "jewel_user": "t.sahni",
+  "jewel_bridge_token": "",
+  "email_report": "y",
+  "email_to":"harshita.gupta@geminisolutions.com,ankita.srivastava@geminisolutions.com",
+  "email_cc":"satyam.rout@geminisolutions.com,tripta.sahni@geminisolutions.com,shrey.saraswat@geminisolutions.com,charu.garg@geminisolutions.com,rashi.saini@geminisolutions.com",
   "beta": {
     "accessToken": "https://login.microsoftonline.com/b9806c7d-9280-4e44-afea-6dc0ff495c2f/oauth2/v2.0/token",
     "dataMaskingForInterview": "atsInterviewSvc/interview/dataMasking",
@@ -88,6 +92,6 @@
     "getApplicantWithPagingWithPageSize": "atsApplicantSvc/applicant/pageNumber/1/pageSize/1",
     "addMultipleApplicants": "atsApplicantSvc/applicant/bulkSave",
     "updateReasonOfRejection": "atsApplicantSvc/applicant/{applicantId}/addReasonOfRejection?reasonOfRejection=nothingPrepared",
-    "getVetterNames": "atsInterviewSvc/interview/getVetterNameForApplicants"
+    "getVetterNames": "atsInterviewSvc/interview/getVetterNameForApplicants?jobId=10"
   }
 }
