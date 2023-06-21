@@ -1,12 +1,18 @@
 
 {
    "environment": "beta",
-   "project_name": "ATS_API",
-   "report_name": "ATS_Health_Check",
-   "tags": "@hc",
-   "sub_id": "test_id",
-   "enter_point": "https://apis.gemecosystem.com/enter-point",
-   "glueCode": "com.qa.ats.stepdefinition",
+  "project_name": "ATS_API",
+  "report_name": "ATS_RESUME_PARSER_CHECK",
+  "tags": "@resumeParser",
+  "sub_id": "test_id",
+  "enter_point": "https://apis.gemecosystem.com/enter-point",
+  "glueCode": "com.qa.ats.stepdefinition",
+  "jewel_user": "t.sahni",
+  "jewel_bridge_token": "",
+  "email_report": "y",
+  "email_to":"harshita.gupta@geminisolutions.com,ankita.srivastava@geminisolutions.com",
+  "email_cc":"satyam.rout@geminisolutions.com,tripta.sahni@geminisolutions.com,shrey.saraswat@geminisolutions.com,charu.garg@geminisolutions.com,rashi.saini@geminisolutions.com",
+ 
 
    "beta": {
       "resumeParser": "https://eapi.geminisolutions.com/resumeparser",
@@ -93,4 +99,3 @@
       "updateReasonOfRejection": "atsApplicantSvc/applicant/{applicantId}/addReasonOfRejection?reasonOfRejection=nothingPrepared",
       "getVetterNames": "atsInterviewSvc/interview/getVetterNameForApplicants?jobId=10"
    }
-}
