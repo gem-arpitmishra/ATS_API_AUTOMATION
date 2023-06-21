@@ -287,6 +287,11 @@ public class Utils {
                 JsonParser parser = new JsonParser();
                 newObject = (JsonArray) parser.parse(new FileReader("src/main/resources/" + payloadName));
                 newObject.get(0).getAsJsonObject().addProperty("applicantId", AtsHealthCheck.applicantId);
+                if(url.contains("NotificationData")) {
+                    newObject.get(0).getAsJsonObject().addProperty("interviewId", InterviewStep.interviewId);
+                    newObject.get(0).getAsJsonObject().addProperty("notificationRead", true);
+                }
+                else
                 newObject.get(0).getAsJsonObject().addProperty("currentStageId", 1);
                 newObject.get(0).getAsJsonObject().addProperty("jobId", AtsHealthCheck.jobId);
                 Gson gson = new Gson();
@@ -540,8 +545,10 @@ public class Utils {
                 arr[1] = Integer.parseInt(String.valueOf(js.get("object").getAsJsonObject().get("applicantId")));
                 return (arr[0] + "," + arr[1]);
             } else if (url.contains("resume")) {
-                js = (JsonObject) JsonParser.parseString(EntityUtils.toString(httpResponse.getEntity()));
-                GemTestReporter.addTestStep("Response Body", String.valueOf(js), STATUS.INFO);
+                String error="";
+                error=httpResponse.toString();
+//                js= (JsonObject) JsonParser.parseString(EntityUtils.toString(httpResponse.getEntity()));
+                GemTestReporter.addTestStep("Response Body", error, STATUS.INFO);
                 arr[0] = httpResponse.getStatusLine().getStatusCode();
                 return String.valueOf(arr[0]);
             } else {

@@ -124,6 +124,21 @@ public class InterviewStep {
             GemTestReporter.addTestStep("Hit the " + url, "API was not successfully triggered", STATUS.FAIL);
         }
     }
+    @Given("^Setting the Interview endpoint (.+) , method (.+) and payload (.+) for notification Read$")
+    public void readNotifications(String url, String method, String payload)
+    {
+        HashMap<String, String> token = new HashMap<String, String>();
+        token.put("X-REMOTE-USER-EMAIL", "nipun.jain@geminisolutions.com");
+        try {
+            String check = Utils.applicantApiForVetting(url, method, payload, token, "");
+                status = Integer.parseInt(check);
+        } catch (Exception e) {
+            logger.info("API was not hit successfully", e);
+            GemTestReporter.addTestStep("Hit the " + url, "API was not successfully triggered", STATUS.FAIL);
+
+        }
+    }
+
 
     @Given("^Set the Interview endpoint (.+) , method (.+) and payload (.+)$")
     public void setTheEndpointMethodAndPayload(String url, String method, String payload) {

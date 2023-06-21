@@ -98,11 +98,11 @@ Feature: ATS scenario
       | sendApplicantsForVetting | post   | 200            | applicantVetting.json | Create |
 
   Scenario Outline: ATS, Get the Vetter Names for Applicants
-    Given Set the Interview endpoint <endpoint> method <method> payload <payload> for getting vetter names
+    Given Set the Interview endpoint <endpoint> and method <method>
     Then Verify Interview status code <expectedStatus>
     Examples:
-      | endpoint       | method | expectedStatus | payload     |
-      | getVetterNames | post   | 200            | Vetter.json |
+      | endpoint       | method | expectedStatus |
+      | getVetterNames | get    | 200            |
 
   Scenario Outline:ATS, API to post a new feedback for vetting
     Given Set the Feedback endpoint <endpoint> , method <method> and payload <payload>
@@ -139,12 +139,20 @@ Feature: ATS scenario
       | endpoint          | method | expectedStatus | payload    |
       | updateAnInterview | put    | 200            | interview2 |
 
+  Scenario Outline: ATS,API to update the notification data
+    Given Setting the Interview endpoint <endpoint> , method <method> and payload <payload> for notification Read
+    Then Verify Interview status code <expectedStatus>
+    Examples:
+      | endpoint               | method | expectedStatus | payload               |
+      | updateNotificationData | put    | 200            | notificationRead.json |
+
   Scenario Outline: ATS, API to get interviews for a particular job
     Given Set the Interview endpoint <endpoint> and method <method>
     Then Verify Interview status code <expectedStatus>
     Examples:
       | endpoint                    | method | expectedStatus |
       | interviewsForAParticularJob | get    | 200            |
+
 
   Scenario Outline: ATS, API to fetch interview by interview ID
     Given Set the Interview endpoint <endpoint> and method <method>
@@ -245,6 +253,13 @@ Feature: ATS scenario
     Examples:
       | endpoint                          | method | expectedStatus |
       | sendManagementApprovalEmailWithCC | post   | 200            |
+
+  Scenario Outline: ATS, API to get notification data
+    Given Set the Interview endpoint <endpoint> and method <method>
+    Then Verify Interview status code <expectedStatus>
+    Examples:
+      | endpoint            | method | expectedStatus |
+      | getNotificationData | get    | 200            |
 
   Scenario Outline:ATS, API to delete a feedback
     Given Set the Interview endpoint <endpoint> and method <method>
