@@ -19,7 +19,7 @@ public class JobsStep {
     @Given("^Set the Job endpoint (\\w*) and method (\\w*)$")
     public void setThePolicyEndpointAndMethod(String url, String method) {
         HashMap<String, String> header = new HashMap<String, String>();
-        header.put("X-REMOTE-USER-EMAIL", "saru.goyal@geminisolutions.com");
+        header.put("X-REMOTE-USER-EMAIL", "tripta.sahni@geminisolutions.com");
         try {
             status = Utils.apiWithoutPayloads(url, method, header, "").getStatus();
         } catch (Exception exception) {
@@ -54,7 +54,7 @@ public class JobsStep {
     @Given("^Set the endpoint (\\w*) and method (\\w*) using wrong header$")
     public void setTheEndpointEndpointAndMethodMethodUsingWrongHeader(String url,String method) {
         HashMap<String, String> header = new HashMap<String, String>();
-        header.put("X-REMOTE-USER", "saru.goyal@geminisolutions.com");
+        header.put("X-REMOTE-USER", "tripta.sahni@geminisolutions.com");
         try {
             status = Utils.apiWithoutPayloads(url, method, header, "").getStatus();
         } catch (Exception exception) {
