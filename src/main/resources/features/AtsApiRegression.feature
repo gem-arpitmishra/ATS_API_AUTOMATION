@@ -299,7 +299,6 @@ Feature: ATS scenario
     Then Verify scenario status code <expectedStatus>
     Examples:
       | endpoint               | method | expectedStatus | payload_key                | payload_value                         | name1            | field       |
-#      | saveApplicantDetails   | post   | 500            | applicantData,resume,image | applicantTest1.json,test.pdf,test.pdf | Create Applicant | Email       |
       | saveApplicantDetails   | post   | 409            | applicantData,resume,image | applicantTest2.json,test.pdf,test.pdf | Create Applicant | Phone no    |
       | updateApplicantDetails | put    | 400            | applicantData,resume,image | applicant.json,test.pdf,test.pdf      | Update Applicant | ApplicantId |
 
@@ -734,6 +733,13 @@ Feature: ATS scenario
       | endpoint                                     | method | expectedStatus |
       | getListOfApplicantsMonthWiseForASpecificYear | post   | 405            |
 
+  Scenario Outline: ATS,Negative testing of API to getListOfApplicantsMonthWiseForASpecificYear using wrong Method
+    Given Set the Applicant endpoint <endpoint> and method <method>
+    Then Verify Applicant status code <expectedStatus>
+    Examples:
+      | endpoint                                     | method | expectedStatus |
+      | getListOfApplicantsMonthWiseForASpecificYear | delete | 405            |
+
   Scenario Outline: ATS,Negative testing of API of getListOfOfferedApplicantsMonthWiseForASpecificYear using wrong Method
     Given Set the Applicant endpoint <endpoint> and method <method>
     Then Verify Applicant status code <expectedStatus>
@@ -747,6 +753,13 @@ Feature: ATS scenario
     Examples:
       | endpoint                                            | method | expectedStatus |
       | getListOfOfferedApplicantsMonthWiseForASpecificYear | post   | 405            |
+
+  Scenario Outline: ATS,Negative testing of API of getListOfOfferedApplicantsMonthWiseForASpecificYear using wrong Method
+    Given Set the Applicant endpoint <endpoint> and method <method>
+    Then Verify Applicant status code <expectedStatus>
+    Examples:
+      | endpoint                                            | method | expectedStatus |
+      | getListOfOfferedApplicantsMonthWiseForASpecificYear | delete | 405            |
 
   Scenario Outline: ATS,Negative testing of API to getListOfJobsMonthWiseForASpecificYearJob using wrong Method
     Given Set the Job endpoint <endpoint> and method <method>
@@ -762,6 +775,12 @@ Feature: ATS scenario
       | endpoint                               | method | expectedStatus |
       | getListOfJobsMonthWiseForASpecificYear | post   | 405            |
 
+  Scenario Outline: ATS,Negative testing of API to o getListOfJobsMonthWiseForASpecificYearJob using wrong Method
+    Given Set the Job endpoint <endpoint> and method <method>
+    Then Verify Job status code <expectedStatus>
+    Examples:
+      | endpoint                               | method | expectedStatus |
+      | getListOfJobsMonthWiseForASpecificYear | delete | 405            |
 
   Scenario Outline: ATS,Negative testing of API to execute data masking for interview service using wrong Method Put
     Given Set the Interview endpoint <endpoint> and method <method>
@@ -769,4 +788,18 @@ Feature: ATS scenario
     Examples:
       | endpoint                | method | expectedStatus |
       | dataMaskingForInterview | put    | 405            |
+
+  Scenario Outline: ATS,Negative testing of API to execute data masking for applicants service using wrong method Delete
+    Given Set the Applicant endpoint <endpoint> and method <method>
+    Then Verify Applicant status code <expectedStatus>
+    Examples:
+      | endpoint                 | method | expectedStatus |
+      | dataMaskingForApplicants | delete | 405            |
+
+  Scenario Outline: ATS,Negative testing of API to execute data masking for applicants service using wrong method Put
+    Given Set the Applicant endpoint <endpoint> and method <method>
+    Then Verify Applicant status code <expectedStatus>
+    Examples:
+      | endpoint                 | method | expectedStatus |
+      | dataMaskingForApplicants | put    | 405            |
 
