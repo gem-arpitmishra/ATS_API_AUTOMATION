@@ -8,11 +8,19 @@ Feature: ATS scenario
       | method | url         | expectedStatus |
       | post   | accessToken | 200            |
 
+  Scenario Outline: ATS, HealthCheck of GetVetterHistory - <name>
+    Given Set the Applicant endpoint <endpoint> and method <method>
+    Then Verify Applicant status code <expectedStatus>
+    Examples:
+      | name             | endpoint         | method | expectedStatus |
+      | GetVetterHistory | getVetterHistory | get    | 200            |
+
+
   Scenario Outline: ATS ,Job--> <name1>
     Given Set the Job endpoint <endpoint> method <method> payload <payload_key> <payload_value> and form data
     Then Verify scenario status code <expectedStatus>
     Examples:
-      | endpoint            | method | expectedStatus | payload_key | payload_value                 | name1                     |
+      | endpoint            | method | expectedStatus | payload_key | payload_value              | name1                     |
       | postNewJob          | post   | 201            | job,jdFile  | apiCheckJob1.json,new4.doc | Create a job              |
       | updateJob           | put    | 200            | job,jdFile  | apiJobUpdate.json,new4.doc | Update a job              |
       | updateJobUsingJobID | put    | 200            | job,jdFile  | apiJobUpdate.json,new4.doc | Update a job using job ID |
@@ -90,19 +98,13 @@ Feature: ATS scenario
       | endpoint                    | method | expectedStatus |
       | apiToGetApplicantsInVetting | get    | 200            |
 
+
   Scenario Outline: ATS, <name> an applicant and send him for vetting
     Given Setting the Applicant endpoint <endpoint> method <method> payload <payload> for vetting
     Then Verify scenario status code <expectedStatus>
     Examples:
       | endpoint                 | method | expectedStatus | payload               | name   |
       | sendApplicantsForVetting | post   | 200            | applicantVetting.json | Create |
-
-  Scenario Outline: ATS, Get the Vetter Names for Applicants
-    Given Set the Interview endpoint <endpoint> and method <method>
-    Then Verify Interview status code <expectedStatus>
-    Examples:
-      | endpoint       | method | expectedStatus |
-      | getVetterNames | get    | 200            |
 
   Scenario Outline:ATS, API to post a new feedback for vetting
     Given Set the Feedback endpoint <endpoint> , method <method> and payload <payload>
