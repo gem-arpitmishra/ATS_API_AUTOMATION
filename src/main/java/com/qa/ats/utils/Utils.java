@@ -36,14 +36,15 @@ import org.apache.http.message.BasicHeader;
 import org.apache.http.util.EntityUtils;
 import com.gemini.generic.api.utils.ProjectSampleJson;
 import io.restassured.http.ContentType;
-import static io.restassured.RestAssured.given;
 
+import static io.restassured.RestAssured.given;
 
 
 public class Utils {
     static Logger logger = LoggerFactory.getLogger(ApplicantStep.class);
-public static String authValue="";
-public static void responseCheck(Response response) {
+    public static String authValue = "";
+
+    public static void responseCheck(Response response) {
         if ((response.getResponseBody()) != null) {
             GemTestReporter.addTestStep("Response Body", response.getResponseBody(), STATUS.INFO);
         } else {
@@ -51,7 +52,7 @@ public static void responseCheck(Response response) {
         }
     }
 
-    public static int accessToken(String method ,String url) throws IOException {
+    public static int accessToken(String method, String url) throws IOException {
         List<String> keys = new ArrayList<>();
         List<String> values = new ArrayList<>();
         JsonObject js;
@@ -60,17 +61,17 @@ public static void responseCheck(Response response) {
         keys.add("client_secret");
         keys.add("grant_type");
 
-        String client_id_encode="NGY2ODVkNzYtZTI0My00ZmY1LTkzNjgtNzA0ODM3N2Q3NzA5";
+        String client_id_encode = "NGY2ODVkNzYtZTI0My00ZmY1LTkzNjgtNzA0ODM3N2Q3NzA5";
         byte[] decodedString = Base64.decodeBase64(client_id_encode);
         String client_id_decoded = new String(decodedString);
         values.add(client_id_decoded);
 
-        String scope_encoded="YXBpOi8vNGY2ODVkNzYtZTI0My00ZmY1LTkzNjgtNzA0ODM3N2Q3NzA5Ly5kZWZhdWx0";
+        String scope_encoded = "YXBpOi8vNGY2ODVkNzYtZTI0My00ZmY1LTkzNjgtNzA0ODM3N2Q3NzA5Ly5kZWZhdWx0";
         decodedString = Base64.decodeBase64(scope_encoded);
         String scope_decoded = new String(decodedString);
         values.add(scope_decoded);
 
-        String client_secret_encode="MW5sOFF+d0E0Mi5IRVJVZzBHelBYaVQweXphNmJ6c0d0dzVPZGI3SA==";
+        String client_secret_encode = "MW5sOFF+d0E0Mi5IRVJVZzBHelBYaVQweXphNmJ6c0d0dzVPZGI3SA==";
         decodedString = Base64.decodeBase64(client_secret_encode);
         String client_secret_decoded = new String(decodedString);
         values.add(client_secret_decoded);
@@ -80,37 +81,37 @@ public static void responseCheck(Response response) {
         MultipartEntityBuilder entityBuilder = entityBuilderFileParserForAccessToken(keys, values, method, url);
         HttpEntity multiPartHttpEntity = entityBuilder.build();
         RequestBuilder reqBuilder = null;
-        String u=ProjectConfigData.getProperty(url);
+        String u = ProjectConfigData.getProperty(url);
         if (method.equalsIgnoreCase("post")) {
             reqBuilder = RequestBuilder.post(u);
         }
         reqBuilder.setEntity(multiPartHttpEntity);
         HttpUriRequest multipartRequest = reqBuilder.build();
-        multipartRequest.setHeader(new BasicHeader("X-REMOTE-USER-EMAIL", "saru.goyal@geminisolutions.com"));
+        multipartRequest.setHeader(new BasicHeader("X-REMOTE-USER-EMAIL", "tripta.sahni@geminisolutions.com"));
 
         multipartRequest.setHeader(new BasicHeader("Authorization", authValue));
         HttpResponse httpResponse = httpClient.execute(multipartRequest);
         js = (JsonObject) JsonParser.parseString(EntityUtils.toString(httpResponse.getEntity()));
-       String accessToken= String.valueOf(js.get("access_token"));
-       authValue="Bearer "+accessToken;
-       return httpResponse.getStatusLine().getStatusCode();
-}
+        String accessToken = String.valueOf(js.get("access_token"));
+        authValue = "Bearer " + accessToken;
+        return httpResponse.getStatusLine().getStatusCode();
+    }
 
 
-        public static MultipartEntityBuilder entityBuilderFileParserForAccessToken(List<String> keys, List<String> values, String method, String url) throws IOException {
+    public static MultipartEntityBuilder entityBuilderFileParserForAccessToken(List<String> keys, List<String> values, String method, String url) throws IOException {
         MultipartEntityBuilder entityBuilder = MultipartEntityBuilder.create();
         entityBuilder.setMode(HttpMultipartMode.BROWSER_COMPATIBLE);
         for (int i = 0; i < keys.size(); i++) {
-                JsonParser parser = new JsonParser();
-                JsonObject newObject = new JsonObject();
-                Gson gson = new Gson();
-                String jsonOutput = gson.toJson(newObject);
-                entityBuilder.addTextBody((keys.get(i)), values.get(i));
+            JsonParser parser = new JsonParser();
+            JsonObject newObject = new JsonObject();
+            Gson gson = new Gson();
+            String jsonOutput = gson.toJson(newObject);
+            entityBuilder.addTextBody((keys.get(i)), values.get(i));
         }
         return entityBuilder;
     }
 
-        public static Response apiWithoutPayloads(String UrlNameFromConfig, String method, Map<String, String> headers, String step) throws Exception {
+    public static Response apiWithoutPayloads(String UrlNameFromConfig, String method, Map<String, String> headers, String step) throws Exception {
         Response response = new Response();
         try {
             Request request = new Request();
@@ -127,7 +128,7 @@ public static void responseCheck(Response response) {
             GemTestReporter.addTestStep("Url for " + method.toUpperCase() + " Request", url, STATUS.INFO);
             request.setURL(url);
             request.setMethod(method);
-            headers.put("Authorization",authValue);
+            headers.put("Authorization", authValue);
             if (headers != null) {
                 request.setHeaders(headers);
             }
@@ -158,7 +159,7 @@ public static void responseCheck(Response response) {
             GemTestReporter.addTestStep("Url for " + method.toUpperCase() + " Request", url, STATUS.INFO);
             request.setURL(url);
             request.setMethod(method);
-            headers.put("Authorization",authValue);
+            headers.put("Authorization", authValue);
             if (!headers.isEmpty()) {
                 request.setHeaders(headers);
             }
@@ -190,7 +191,7 @@ public static void responseCheck(Response response) {
             GemTestReporter.addTestStep("Url for " + method.toUpperCase() + " Request", url, STATUS.INFO);
             request.setURL(url);
             request.setMethod(method);
-            headers.put("Authorization",authValue);
+            headers.put("Authorization", authValue);
             if (!headers.isEmpty()) {
                 request.setHeaders(headers);
             }
@@ -224,7 +225,7 @@ public static void responseCheck(Response response) {
             GemTestReporter.addTestStep("Url for " + method.toUpperCase() + " Request", url, STATUS.INFO);
             request.setURL(url);
             request.setMethod(method);
-            headers.put("Authorization",authValue);
+            headers.put("Authorization", authValue);
             if (!headers.isEmpty()) {
                 request.setHeaders(headers);
             }
@@ -274,7 +275,7 @@ public static void responseCheck(Response response) {
             GemTestReporter.addTestStep("Url for " + method.toUpperCase() + " Request", url, STATUS.INFO);
             request.setURL(url);
             request.setMethod(method);
-            headers.put("Authorization",authValue);
+            headers.put("Authorization", authValue);
             if (!headers.isEmpty()) {
                 request.setHeaders(headers);
             }
@@ -285,18 +286,13 @@ public static void responseCheck(Response response) {
                 JsonArray newObject = new JsonArray();
                 JsonParser parser = new JsonParser();
                 newObject = (JsonArray) parser.parse(new FileReader("src/main/resources/" + payloadName));
-                if (newObject.get(0).getAsJsonObject().has("applicantId")) {
-                    newObject.get(0).getAsJsonObject().remove("applicantId");
-                    newObject.get(0).getAsJsonObject().addProperty("applicantId", AtsHealthCheck.applicantId);
-                }
-                if (newObject.get(0).getAsJsonObject().has("currentStageId")) {
-                    newObject.get(0).getAsJsonObject().remove("currentStageId");
+                newObject.get(0).getAsJsonObject().addProperty("applicantId", AtsHealthCheck.applicantId);
+                if (url.contains("NotificationData")) {
+                    newObject.get(0).getAsJsonObject().addProperty("interviewId", InterviewStep.interviewId);
+                    newObject.get(0).getAsJsonObject().addProperty("notificationRead", true);
+                } else
                     newObject.get(0).getAsJsonObject().addProperty("currentStageId", 1);
-                }
-                if (newObject.get(0).getAsJsonObject().has("jobId")) {
-                    newObject.get(0).getAsJsonObject().remove("jobId");
-                    newObject.get(0).getAsJsonObject().addProperty("jobId", AtsHealthCheck.jobId);
-                }
+                newObject.get(0).getAsJsonObject().addProperty("jobId", AtsHealthCheck.jobId);
                 Gson gson = new Gson();
                 String jsonOutput = gson.toJson(newObject);
                 FileWriter writer = new FileWriter("src/main/resources/" + payloadName);
@@ -338,7 +334,7 @@ public static void responseCheck(Response response) {
             GemTestReporter.addTestStep("Url for " + method.toUpperCase() + " Request", url, STATUS.INFO);
             request.setURL(url);
             request.setMethod(method);
-            headers.put("Authorization",authValue);
+            headers.put("Authorization", authValue);
             if (!headers.isEmpty()) {
                 request.setHeaders(headers);
             }
@@ -400,6 +396,13 @@ public static void responseCheck(Response response) {
         return saltStr;
     }
 
+    public static MultipartEntityBuilder entityBuilderFileParserForResume(List<String> keys, List<String> values, String method, String url) throws IOException {
+        MultipartEntityBuilder entityBuilder = MultipartEntityBuilder.create();
+        entityBuilder.setMode(HttpMultipartMode.BROWSER_COMPATIBLE);
+        entityBuilder.addBinaryBody(keys.get(0), new File("src/main/resources/" + values.get(0)));
+
+        return entityBuilder;
+    }
 
     public static MultipartEntityBuilder entityBuilderFileParser(List<String> keys, List<String> values, String method, String url) throws IOException {
         MultipartEntityBuilder entityBuilder = MultipartEntityBuilder.create();
@@ -475,7 +478,7 @@ public static void responseCheck(Response response) {
             }
             reqBuilder.setEntity(multiPartHttpEntity);
             HttpUriRequest multipartRequest = reqBuilder.build();
-            multipartRequest.setHeader(new BasicHeader("X-REMOTE-USER-EMAIL", "saru.goyal@geminisolutions.com"));
+            multipartRequest.setHeader(new BasicHeader("X-REMOTE-USER-EMAIL", "tripta.sahni@geminisolutions.com"));
 
             multipartRequest.setHeader(new BasicHeader("Authorization", authValue));
             HttpResponse httpResponse = httpClient.execute(multipartRequest);
@@ -485,7 +488,7 @@ public static void responseCheck(Response response) {
             if (!String.valueOf(js).contains("400"))
                 GemTestReporter.addTestStep("Response Message", js.get("message").getAsString(), STATUS.INFO);
             arr[0] = httpResponse.getStatusLine().getStatusCode();
-            post=method.equals("post") && (arr[0] == 200 || arr[0] == 201);
+            post = method.equals("post") && (arr[0] == 200 || arr[0] == 201);
             if (post) {
                 arr[1] = Integer.parseInt(String.valueOf(js.get("object").getAsJsonObject().get("jobId")));
                 return (arr[0] + "," + arr[1]);
@@ -501,16 +504,26 @@ public static void responseCheck(Response response) {
             return String.valueOf(arr[0]);
     }
 
+
     public static String applicantApiWithFormData(String url, String method, Map<String, String> headers, String step, List<String> keys, List<String> values) throws Exception {
         int[] arr = new int[2];
+        JsonObject js;
+        MultipartEntityBuilder entityBuilder;
         try {
             String u = "";
-            u = GlobalVariable.BASE_URL + ProjectConfigData.getProperty(url);
+            if (url.contains("resume"))
+                u = ProjectConfigData.getProperty(url);
+            else
+                u = GlobalVariable.BASE_URL + ProjectConfigData.getProperty(url);
             if (u.contains("{applicantId}"))
                 u = u.replace("{applicantId}", String.valueOf(AtsHealthCheck.applicantId));
             GemTestReporter.addTestStep("Url of the test case", u, STATUS.INFO);
             CloseableHttpClient httpClient = HttpClients.createDefault();
-            MultipartEntityBuilder entityBuilder = entityBuilderFileParser(keys, values, method, url);
+            if (url.contains("resume")) {
+                u = ProjectConfigData.getProperty(url);
+                entityBuilder = entityBuilderFileParserForResume(keys, values, method, url);
+            } else
+                entityBuilder = entityBuilderFileParser(keys, values, method, url);
             HttpEntity multiPartHttpEntity = entityBuilder.build();
             RequestBuilder reqBuilder = null;
             if (method.equalsIgnoreCase("post")) {
@@ -520,20 +533,30 @@ public static void responseCheck(Response response) {
             }
             reqBuilder.setEntity(multiPartHttpEntity);
             HttpUriRequest multipartRequest = reqBuilder.build();
-            multipartRequest.setHeader(new BasicHeader("X-REMOTE-USER-EMAIL", "saru.goyal@geminisolutions.com"));
+            multipartRequest.setHeader(new BasicHeader("X-REMOTE-USER-EMAIL", "tripta.sahni@geminisolutions.com"));
             multipartRequest.setHeader(new BasicHeader("Authorization", authValue));
             HttpResponse httpResponse = httpClient.execute(multipartRequest);
             GemTestReporter.addTestStep("POST Request Verification", "POST request executed Successfully", STATUS.PASS);
-            JsonObject js = (JsonObject) JsonParser.parseString(EntityUtils.toString(httpResponse.getEntity()));
-            GemTestReporter.addTestStep("Response Body", String.valueOf(js), STATUS.INFO);
-            GemTestReporter.addTestStep("Response Message", js.get("message").getAsString(), STATUS.INFO);
-            arr[0] = httpResponse.getStatusLine().getStatusCode();
-            if (method.equals("post"))
+
+
+            if (!url.contains("resume") && (httpResponse.getStatusLine().getStatusCode() == 200 || httpResponse.getStatusLine().getStatusCode() == 201)) {
+                js = (JsonObject) JsonParser.parseString(EntityUtils.toString(httpResponse.getEntity()));
+                GemTestReporter.addTestStep("Response Body", String.valueOf(js), STATUS.INFO);
+                GemTestReporter.addTestStep("Response Message", js.get("message").getAsString(), STATUS.INFO);
+                arr[0] = httpResponse.getStatusLine().getStatusCode();
                 arr[1] = Integer.parseInt(String.valueOf(js.get("object").getAsJsonObject().get("applicantId")));
-            if (method.equals("post"))
                 return (arr[0] + "," + arr[1]);
-            else
+            } else if (url.contains("resume")) {
+                String error = "";
+                error = httpResponse.toString();
+//                js= (JsonObject) JsonParser.parseString(EntityUtils.toString(httpResponse.getEntity()));
+                GemTestReporter.addTestStep("Response Body", error, STATUS.INFO);
+                arr[0] = httpResponse.getStatusLine().getStatusCode();
                 return String.valueOf(arr[0]);
+            } else {
+                arr[0] = httpResponse.getStatusLine().getStatusCode();
+                return String.valueOf(arr[0]);
+            }
         } catch (Exception exception) {
             logger.info("Request doesn't Executed Successfully ", exception);
             GemTestReporter.addTestStep(method.toUpperCase() + " Request Verification ", method.toUpperCase() + " Request Did not Executed Successfully", STATUS.FAIL);
@@ -563,7 +586,7 @@ public static void responseCheck(Response response) {
             }
             reqBuilder.setEntity(multiPartHttpEntity);
             HttpUriRequest multipartRequest = reqBuilder.build();
-            multipartRequest.setHeader(new BasicHeader("X-REMOTE-USER", "saru.goyal@geminisolutions.com"));
+            multipartRequest.setHeader(new BasicHeader("X-REMOTE-USER", "tripta.sahni@geminisolutions.com"));
             multipartRequest.setHeader(new BasicHeader("Authorization", authValue));
             HttpResponse httpResponse = httpClient.execute(multipartRequest);
             GemTestReporter.addTestStep("POST Request Verification", "POST request executed Successfully", STATUS.PASS);
@@ -612,6 +635,7 @@ public static void responseCheck(Response response) {
         }
         return entityBuilder;
     }
+
     public static MultipartEntityBuilder entityBuilderFileParserForMultipleApplicants(List<String> keys, List<String> values, String method, String url) throws IOException {
         MultipartEntityBuilder entityBuilder = MultipartEntityBuilder.create();
         entityBuilder.setMode(HttpMultipartMode.BROWSER_COMPATIBLE);
@@ -640,7 +664,8 @@ public static void responseCheck(Response response) {
         }
         return entityBuilder;
     }
-    public static MultipartEntityBuilder entityBuilderFileParserForMultipleApplicantsForWrongHeader(List<String> keys, List<String> values, String method, String url,String name) throws IOException {
+
+    public static MultipartEntityBuilder entityBuilderFileParserForMultipleApplicantsForWrongHeader(List<String> keys, List<String> values, String method, String url, String name) throws IOException {
         MultipartEntityBuilder entityBuilder = MultipartEntityBuilder.create();
         entityBuilder.setMode(HttpMultipartMode.BROWSER_COMPATIBLE);
         for (int i = 0; i < keys.size(); i++) {
@@ -649,13 +674,12 @@ public static void responseCheck(Response response) {
                 JsonArray newObject = new JsonArray();
                 newObject = (JsonArray) parser.parse(new FileReader("src/main/resources/" + values.get(i)));
                 for (int j = 0; j <= 1; j++) {
-                    if(name.equalsIgnoreCase("email")) {
+                    if (name.equalsIgnoreCase("email")) {
                         if (newObject.get(j).getAsJsonObject().has("email")) {
                             newObject.get(j).getAsJsonObject().remove("email");
-                            newObject.get(j).getAsJsonObject().addProperty("contactNumber",Utils.generateRandom());
+                            newObject.get(j).getAsJsonObject().addProperty("contactNumber", Utils.generateRandom());
                         }
-                    }
-                    else if(name.equalsIgnoreCase("contactNumber")) {
+                    } else if (name.equalsIgnoreCase("contactNumber")) {
                         if (newObject.get(j).getAsJsonObject().has("contactNumber")) {
                             newObject.get(j).getAsJsonObject().remove("contactNumber");
                             newObject.get(j).getAsJsonObject().addProperty("email", Utils.getSaltString());
@@ -672,34 +696,33 @@ public static void responseCheck(Response response) {
         }
         return entityBuilder;
     }
-   
-    public static String addMultipleApplicantsWithWrongPayload(String url, String method, Map<String, String> headers, List<String> keys, List<String> values,String name) {
+
+    public static String addMultipleApplicantsWithWrongPayload(String url, String method, Map<String, String> headers, List<String> keys, List<String> values, String name) {
         int arr[] = new int[2];
         try {
             String u = "";
             u = GlobalVariable.BASE_URL + ProjectConfigData.getProperty(url);
             GemTestReporter.addTestStep("Url of the test case", u, STATUS.INFO);
             CloseableHttpClient httpClient = HttpClients.createDefault();
-            MultipartEntityBuilder entityBuilder = entityBuilderFileParserForMultipleApplicantsForWrongHeader(keys, values, method, url,name);
+            MultipartEntityBuilder entityBuilder = entityBuilderFileParserForMultipleApplicantsForWrongHeader(keys, values, method, url, name);
             HttpEntity multiPartHttpEntity = entityBuilder.build();
             RequestBuilder reqBuilder = null;
             if (method.equalsIgnoreCase("post")) {
                 reqBuilder = RequestBuilder.post(u);
             } else if (method.equalsIgnoreCase("put")) {
                 reqBuilder = RequestBuilder.put(u);
-            }
-            else if (method.equalsIgnoreCase("delete"))
-                reqBuilder=RequestBuilder.delete(u);
+            } else if (method.equalsIgnoreCase("delete"))
+                reqBuilder = RequestBuilder.delete(u);
             reqBuilder.setEntity(multiPartHttpEntity);
             HttpUriRequest multipartRequest = reqBuilder.build();
-            multipartRequest.setHeader(new BasicHeader("X-REMOTE-USER-EMAIL", "nipun.jain@geminisolutions.com"));
+            multipartRequest.setHeader(new BasicHeader("X-REMOTE-USER-EMAIL", "tripta.sahni@geminisolutions.com"));
             multipartRequest.setHeader(new BasicHeader("Authorization", authValue));
             HttpResponse httpresponse = httpClient.execute(multipartRequest);
             arr[0] = httpresponse.getStatusLine().getStatusCode();
             GemTestReporter.addTestStep("POST Request Verification", "POST request executed Successfully", STATUS.PASS);
             JsonObject js = (JsonObject) JsonParser.parseString(EntityUtils.toString(httpresponse.getEntity()));
             GemTestReporter.addTestStep("Response Body", String.valueOf(js), STATUS.INFO);
-            if(arr[0]==200 || arr[0]==201)
+            if (arr[0] == 200 || arr[0] == 201)
                 GemTestReporter.addTestStep("Response Message", js.get("message").getAsString(), STATUS.INFO);
             return String.valueOf(arr[0]);
         } catch (Exception exception) {
@@ -723,19 +746,18 @@ public static void responseCheck(Response response) {
                 reqBuilder = RequestBuilder.post(u);
             } else if (method.equalsIgnoreCase("put")) {
                 reqBuilder = RequestBuilder.put(u);
-            }
-            else if (method.equalsIgnoreCase("delete"))
-                reqBuilder=RequestBuilder.delete(u);
+            } else if (method.equalsIgnoreCase("delete"))
+                reqBuilder = RequestBuilder.delete(u);
             reqBuilder.setEntity(multiPartHttpEntity);
             HttpUriRequest multipartRequest = reqBuilder.build();
-            multipartRequest.setHeader(new BasicHeader("X-REMOTE-USER-EMAIL", "nipun.jain@geminisolutions.com"));
+            multipartRequest.setHeader(new BasicHeader("X-REMOTE-USER-EMAIL", "tripta.sahni@geminisolutions.com"));
             multipartRequest.setHeader(new BasicHeader("Authorization", authValue));
             HttpResponse httpResponse = httpClient.execute(multipartRequest);
             arr[0] = httpResponse.getStatusLine().getStatusCode();
             GemTestReporter.addTestStep("POST Request Verification", "POST request executed Successfully", STATUS.PASS);
             JsonObject js = (JsonObject) JsonParser.parseString(EntityUtils.toString(httpResponse.getEntity()));
             GemTestReporter.addTestStep("Response Body", String.valueOf(js), STATUS.INFO);
-            if(arr[0]==200 || arr[0]==201)
+            if (arr[0] == 200 || arr[0] == 201)
                 GemTestReporter.addTestStep("Response Message", js.get("message").getAsString(), STATUS.INFO);
             arr[0] = httpResponse.getStatusLine().getStatusCode();
             return String.valueOf(arr[0]);
@@ -751,19 +773,22 @@ public static void responseCheck(Response response) {
         String endpoint = url.replace("{applicantId}", String.valueOf(AtsHealthCheck.applicantId));
         String newUrl = GlobalVariable.BASE_URL + endpoint;
         GemTestReporter.addTestStep("Url of the test case for PATCH request", newUrl, STATUS.INFO);
-        return given().contentType(ContentType.JSON).header("X-REMOTE-USER-EMAIL", "saru.goyal@geminisolutions.com").header("Authorization",authValue).patch(newUrl).statusCode();
+        int a=given().contentType(ContentType.JSON).header("X-REMOTE-USER-EMAIL", "tripta.sahni@geminisolutions.com").header("Authorization", authValue).patch(newUrl).statusCode();
+        return a;
     }
+
     public static int apiForWrongMethods(String url, String method, Map<String, String> token, String step) {
         url = ProjectConfigData.getProperty(url);
         String endpoint = url.replace("{applicantId}", String.valueOf(AtsHealthCheck.applicantId));
         String newUrl = GlobalVariable.BASE_URL + endpoint;
         GemTestReporter.addTestStep("Url of the test case for PATCH request", newUrl, STATUS.INFO);
-        if(method.equalsIgnoreCase("get"))
-            return given().contentType(ContentType.JSON).header("X-REMOTE-USER-EMAIL", "saru.goyal@geminisolutions.com").header("Authorization",authValue).get(newUrl).statusCode();
-        else if(method.equalsIgnoreCase("post"))
-            return given().contentType(ContentType.JSON).header("X-REMOTE-USER-EMAIL", "saru.goyal@geminisolutions.com").header("Authorization",authValue).post(newUrl).statusCode();
-        return given().contentType(ContentType.JSON).header("X-REMOTE-USER-EMAIL", "saru.goyal@geminisolutions.com").header("Authorization",authValue).patch(newUrl).statusCode();
+        if (method.equalsIgnoreCase("get"))
+            return given().contentType(ContentType.JSON).header("X-REMOTE-USER-EMAIL", "tripta.sahni@geminisolutions.com").header("Authorization", authValue).get(newUrl).statusCode();
+        else if (method.equalsIgnoreCase("post"))
+            return given().contentType(ContentType.JSON).header("X-REMOTE-USER-EMAIL", "tripta.sahni@geminisolutions.com").header("Authorization", authValue).post(newUrl).statusCode();
+        return given().contentType(ContentType.JSON).header("X-REMOTE-USER-EMAIL", "tripta.sahni@geminisolutions.com").header("Authorization", authValue).patch(newUrl).statusCode();
     }
+
     public static String getVetterNamesForWrongPayload(String UrlNameFromConfig, String method, String payloadName, Map<String, String> headers, String step) {
         Response response = new Response();
         try {
@@ -773,7 +798,7 @@ public static void responseCheck(Response response) {
             GemTestReporter.addTestStep("Url for " + method.toUpperCase() + " Request", url, STATUS.INFO);
             request.setURL(url);
             request.setMethod(method);
-            headers.put("Authorization",authValue);
+            headers.put("Authorization", authValue);
             if (!headers.isEmpty()) {
                 request.setHeaders(headers);
             }
@@ -834,7 +859,7 @@ public static void responseCheck(Response response) {
             GemTestReporter.addTestStep("Url for " + method.toUpperCase() + " Request", url, STATUS.INFO);
             request.setURL(url);
             request.setMethod(method);
-            headers.put("Authorization",authValue);
+            headers.put("Authorization", authValue);
             if (!headers.isEmpty()) {
                 request.setHeaders(headers);
             }
@@ -847,7 +872,7 @@ public static void responseCheck(Response response) {
                 newObject = (JsonArray) parser.parse(new FileReader("src/main/resources/" + payloadName));
                 if (!newObject.isEmpty()) {
                     int i = 0;
-                    while (newObject.size() != 0){
+                    while (newObject.size() != 0) {
                         newObject.remove(i);
                     }
                     newObject.add(AtsHealthCheck.applicantId);

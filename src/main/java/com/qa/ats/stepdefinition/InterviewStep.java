@@ -21,7 +21,7 @@ public class InterviewStep {
     @Given("^Setting the Interview endpoint (.+) and method (.+) , for getting applicants in Vetting$")
     public void getApplicantsInVetting(String url, String method) {
         HashMap<String, String> token = new HashMap<String, String>();
-        token.put("X-REMOTE-USER-EMAIL", "aditya.shrivastava@geminisolutions.com");
+        token.put("X-REMOTE-USER-EMAIL", "tripta.sahni@geminisolutions.com");
         try {
 
             if (method.equals("post"))
@@ -39,8 +39,8 @@ public class InterviewStep {
     @Given("^Set the Interview endpoint (.+) and method (.+)$")
     public void setThePolicyEndpointAndMethod(String url, String method) {
         HashMap<String, String> token = new HashMap<String, String>();
-        token.put("X-REMOTE-USER-EMAIL", "nipun.jain@geminisolutions.com");
-        token.put("X-REMOTE-USER-OBJECT-ID", "e82f1905-3695-49a6-977e-9712d7f1ece1");
+        token.put("X-REMOTE-USER-EMAIL", "tripta.sahni@geminisolutions.com");
+        token.put("X-REMOTE-USER-OBJECT-ID", "24431885-d574-445a-b66e-42271b7ad459");
         try {
             if (method.equals("post"))
                 status = Utils.apiToSendManagementApprovalEmails(url, method, token, "").getStatus();
@@ -57,9 +57,9 @@ public class InterviewStep {
     public void setTheMethodWithoutHeader(String url, String method, String header) {
         HashMap<String, String> token = new HashMap<String, String>();
         if (header.equals("ObjectID"))
-            token.put("X-REMOTE-USER-EMAIL", "nipun.jain@geminisolutions.com");
+            token.put("X-REMOTE-USER-EMAIL", "tripta.sahni@geminisolutions.com");
         else if (header.equals("Email"))
-            token.put("X-REMOTE-USER-OBJECT-ID", "e82f1905-3695-49a6-977e-9712d7f1ece1");
+            token.put("X-REMOTE-USER-OBJECT-ID", "24431885-d574-445a-b66e-42271b7ad459");
         try {
             if (method.equals("post"))
                 status = Utils.apiToSendManagementApprovalEmails(url, method, token, "").getStatus();
@@ -76,13 +76,13 @@ public class InterviewStep {
     public void setInterviewEndpointWithoutPayloadAndWrongHeader(String url, String method, String header) {
         HashMap<String, String> token = new HashMap<String, String>();
         if (header.equals("ObjectID")) {
-            token.put("X-REMOTE-USER-EMAIL", "nipun.jain@geminisolutions.com");
+            token.put("X-REMOTE-USER-EMAIL", "tripta.sahni@geminisolutions.com");
             token.put("X-REMOTE-USER-OBJECT-ID", "demo");
         } else if (header.equals("Email")) {
-            token.put("X-REMOTE-USER-OBJECT-ID", "e82f1905-3695-49a6-977e-9712d7f1ece1");
+            token.put("X-REMOTE-USER-OBJECT-ID", "24431885-d574-445a-b66e-42271b7ad459");
             token.put("X-REMOTE-USER-EMAIL", "demo");
         } else if (header.equals("Email")) {
-            token.put("X-REMOTE-USER-OBJECT-ID", "e82f1905-3695-49a6-977e-9712d7f1ece1");
+            token.put("X-REMOTE-USER-OBJECT-ID", "24431885-d574-445a-b66e-42271b7ad459");
             token.put("X-REMOTE-USER-EMAIL", "demo");
         }
         try {
@@ -105,7 +105,7 @@ public class InterviewStep {
     @Given("^Set the Interview endpoint (.+) , method (.+) , payload (.+) without using header (.+)$")
     public void setTheInterviewEndpointWithoutUsingHeader(String url, String method, String payload, String header) {
         HashMap<String, String> token = new HashMap<String, String>();
-        token.put("X-REMOTE-USER-EMAIL", "nipun.jain@geminisolutions.com");
+        token.put("X-REMOTE-USER-EMAIL", "tripta.sahni@geminisolutions.com");
 
         try {
             String check = Utils.interviewApiWithPayloads(url, method, payload, token, "");
@@ -124,12 +124,27 @@ public class InterviewStep {
             GemTestReporter.addTestStep("Hit the " + url, "API was not successfully triggered", STATUS.FAIL);
         }
     }
+    @Given("^Setting the Interview endpoint (.+) , method (.+) and payload (.+) for notification Read$")
+    public void readNotifications(String url, String method, String payload)
+    {
+        HashMap<String, String> token = new HashMap<String, String>();
+        token.put("X-REMOTE-USER-EMAIL", "tripta.sahni@geminisolutions.com");
+        try {
+            String check = Utils.applicantApiForVetting(url, method, payload, token, "");
+            status = Integer.parseInt(check);
+        } catch (Exception e) {
+            logger.info("API was not hit successfully", e);
+            GemTestReporter.addTestStep("Hit the " + url, "API was not successfully triggered", STATUS.FAIL);
+
+        }
+    }
+
 
     @Given("^Set the Interview endpoint (.+) , method (.+) and payload (.+)$")
     public void setTheEndpointMethodAndPayload(String url, String method, String payload) {
         HashMap<String, String> token = new HashMap<String, String>();
-        token.put("X-REMOTE-USER-EMAIL", "nipun.jain@geminisolutions.com");
-        token.put("X-REMOTE-USER-OBJECT-ID", "e82f1905-3695-49a6-977e-9712d7f1ece1");
+        token.put("X-REMOTE-USER-EMAIL", "tripta.sahni@geminisolutions.com");
+        token.put("X-REMOTE-USER-OBJECT-ID", "24431885-d574-445a-b66e-42271b7ad459");
         try {
             String check = Utils.interviewApiWithPayloads(url, method, payload, token, "");
             if (method.equals("post") && check.contains(",")) {
@@ -153,7 +168,7 @@ public class InterviewStep {
     public void setTheFeedbackEndpointMethodAndPayload(String url, String method, String payload) {
         HashMap<String, String> token = new HashMap<String, String>();
         token.put("X-REMOTE-USER-EMAIL", "tripta.sahni@geminisolutions.com");
-        token.put("X-REMOTE-USER-OBJECT-ID", "e82f1905-3695-49a6-977e-9712d7f1ece1");
+        token.put("X-REMOTE-USER-OBJECT-ID", "24431885-d574-445a-b66e-42271b7ad459");
         try {
 
             String check = Utils.feedbackApiWithPayloads(url, method, payload, token, "");
@@ -175,11 +190,11 @@ public class InterviewStep {
     public void setTheInterviewEndpointAddNewInterviewMethodPostPayloadInterview1UsingWrongHeaderObjectId(String url, String method, String payload, String header) {
         HashMap<String, String> token = new HashMap<String, String>();
         if (header.equals("ObjectID")) {
-            token.put("X-REMOTE-USER-EMAIL", "nipun.jain@geminisolutions.com");
+            token.put("X-REMOTE-USER-EMAIL", "tripta.sahni@geminisolutions.com");
             token.put("X-REMOTE-USER-OBJECT-ID", "demo");
         } else {
             token.put("X-REMOTE-USER-EMAIL", "demo");
-            token.put("X-REMOTE-USER-OBJECT-ID", "e82f1905-3695-49a6-977e-9712d7f1ece1");
+            token.put("X-REMOTE-USER-OBJECT-ID", "24431885-d574-445a-b66e-42271b7ad459");
         }
         try {
             String check = Utils.interviewApiWithPayloads(url, method, payload, token, "");
@@ -203,8 +218,8 @@ public class InterviewStep {
     @Given("^Set the Interview endpoint (.+) method (.+) payload (.+) for getting vetter names$")
     public void setTheInterviewEndpointEndpointMethodMethodPayloadPayloadForGettingVetterNames(String url, String method, String payload) {
         HashMap<String, String> token = new HashMap<String, String>();
-        token.put("X-REMOTE-USER-EMAIL", "nipun.jain@geminisolutions.com");
-        token.put("X-REMOTE-USER-OBJECT-ID", "e82f1905-3695-49a6-977e-9712d7f1ece1");
+        token.put("X-REMOTE-USER-EMAIL", "tripta.sahni@geminisolutions.com");
+        token.put("X-REMOTE-USER-OBJECT-ID", "24431885-d574-445a-b66e-42271b7ad459");
         String checkList[];
         try {
             String check = Utils.getVetterNames(url, method, payload, token, "");
@@ -224,8 +239,8 @@ public class InterviewStep {
     @Given("^Set the Interview endpoint (.+) method (.+) payload (.+) for getting vetter names using wrong payload$")
     public void setTheInterviewEndpointEndpointMethodForWrongVetterPayload(String url, String method, String payload) {
         HashMap<String, String> token = new HashMap<String, String>();
-        token.put("X-REMOTE-USER-EMAIL", "nipun.jain@geminisolutions.com");
-        token.put("X-REMOTE-USER-OBJECT-ID", "e82f1905-3695-49a6-977e-9712d7f1ece1");
+        token.put("X-REMOTE-USER-EMAIL", "tripta.sahni@geminisolutions.com");
+        token.put("X-REMOTE-USER-OBJECT-ID", "24431885-d574-445a-b66e-42271b7ad459");
         String checkList[];
         try {
             String check = Utils.getVetterNamesForWrongPayload(url, method, payload, token, "");
