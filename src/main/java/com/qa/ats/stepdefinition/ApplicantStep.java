@@ -21,7 +21,7 @@ public class ApplicantStep {
     @Given("^Set the Applicant endpoint (\\w*) and method (\\w*)$")
     public void setThePolicyEndpointAndMethod(String url, String method) {
         HashMap<String, String> token = new HashMap<String, String>();
-        token.put("X-REMOTE-USER-EMAIL", "saru.goyal@geminisolutions.com");
+        token.put("X-REMOTE-USER-EMAIL", "tripta.sahni@geminisolutions.com");
         try {
             status = Utils.apiWithoutPayloads(url, method, token, "").getStatus();
 
@@ -34,7 +34,7 @@ public class ApplicantStep {
     public void setApiForPatch(String url , String method)
     {
         HashMap<String, String> token = new HashMap<String, String>();
-        token.put("X-REMOTE-USER-EMAIL", "saru.goyal@geminisolutions.com");
+        token.put("X-REMOTE-USER-EMAIL", "tripta.sahni@geminisolutions.com");
         try {
             status = Utils.apiForPatch(url, method, token, "");
 
@@ -47,7 +47,7 @@ public class ApplicantStep {
     public void setApiForWrongMethods(String url , String method)
     {
         HashMap<String, String> token = new HashMap<String, String>();
-        token.put("X-REMOTE-USER-EMAIL", "saru.goyal@geminisolutions.com");
+        token.put("X-REMOTE-USER-EMAIL", "tripta.sahni@geminisolutions.com");
         try {
             status = Utils.apiForWrongMethods(url, method, token, "");
 
@@ -70,7 +70,7 @@ public class ApplicantStep {
     @Given("^Set the Applicant endpoint (\\w*) and method (\\w*) with header and stage (\\w*)$")
     public void setTheApplicantEndpointEndpointAndMethodMethodWithHeader(String url,String method,String stage) {
         HashMap<String, String> header = new HashMap<String, String>();
-        header.put("X-REMOTE-USER-EMAIL", "saru.goyal@geminisolutions.com");
+        header.put("X-REMOTE-USER-EMAIL", "tripta.sahni@geminisolutions.com");
         try {
             if (method.equals("put")||method.equals("post"))
                 status = Utils.apiForUpdatingApplicantStage(url, method, header, stage,"").getStatus();
@@ -87,7 +87,7 @@ public class ApplicantStep {
         List<String> payload_keys = Arrays.asList(keys.split(","));
         List<String> payload_values = Arrays.asList(values.split(","));
         HashMap<String, String> token = new HashMap<String, String>();
-        token.put("X-REMOTE-USER-EMAIL", "nipun.jain@geminisolutions.com");
+        token.put("X-REMOTE-USER-EMAIL", "tripta.sahni@geminisolutions.com");
         String checkList[];
         try {
             String check = Utils.addMultipleApplicants(url, method,token, payload_keys,payload_values);
@@ -110,7 +110,7 @@ public class ApplicantStep {
         List<String> payload_keys = Arrays.asList(keys.split(","));
         List<String> payload_values = Arrays.asList(values.split(","));
         HashMap<String, String> token = new HashMap<String, String>();
-        token.put("X-REMOTE-USER-EMAIL", "nipun.jain@geminisolutions.com");
+        token.put("X-REMOTE-USER-EMAIL", "tripta.sahni@geminisolutions.com");
         String checkList[];
         try {
             String check = Utils.addMultipleApplicantsWithWrongPayload(url, method,token, payload_keys,payload_values,name);

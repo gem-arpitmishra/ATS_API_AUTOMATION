@@ -87,7 +87,7 @@ public class Utils {
         }
         reqBuilder.setEntity(multiPartHttpEntity);
         HttpUriRequest multipartRequest = reqBuilder.build();
-        multipartRequest.setHeader(new BasicHeader("X-REMOTE-USER-EMAIL", "saru.goyal@geminisolutions.com"));
+        multipartRequest.setHeader(new BasicHeader("X-REMOTE-USER-EMAIL", "tripta.sahni@geminisolutions.com"));
 
         multipartRequest.setHeader(new BasicHeader("Authorization", authValue));
         HttpResponse httpResponse = httpClient.execute(multipartRequest);
@@ -287,12 +287,11 @@ public class Utils {
                 JsonParser parser = new JsonParser();
                 newObject = (JsonArray) parser.parse(new FileReader("src/main/resources/" + payloadName));
                 newObject.get(0).getAsJsonObject().addProperty("applicantId", AtsHealthCheck.applicantId);
-                if(url.contains("NotificationData")) {
+                if (url.contains("NotificationData")) {
                     newObject.get(0).getAsJsonObject().addProperty("interviewId", InterviewStep.interviewId);
                     newObject.get(0).getAsJsonObject().addProperty("notificationRead", true);
-                }
-                else
-                newObject.get(0).getAsJsonObject().addProperty("currentStageId", 1);
+                } else
+                    newObject.get(0).getAsJsonObject().addProperty("currentStageId", 1);
                 newObject.get(0).getAsJsonObject().addProperty("jobId", AtsHealthCheck.jobId);
                 Gson gson = new Gson();
                 String jsonOutput = gson.toJson(newObject);
@@ -479,7 +478,7 @@ public class Utils {
             }
             reqBuilder.setEntity(multiPartHttpEntity);
             HttpUriRequest multipartRequest = reqBuilder.build();
-            multipartRequest.setHeader(new BasicHeader("X-REMOTE-USER-EMAIL", "saru.goyal@geminisolutions.com"));
+            multipartRequest.setHeader(new BasicHeader("X-REMOTE-USER-EMAIL", "tripta.sahni@geminisolutions.com"));
 
             multipartRequest.setHeader(new BasicHeader("Authorization", authValue));
             HttpResponse httpResponse = httpClient.execute(multipartRequest);
@@ -512,7 +511,10 @@ public class Utils {
         MultipartEntityBuilder entityBuilder;
         try {
             String u = "";
-            u = GlobalVariable.BASE_URL + ProjectConfigData.getProperty(url);
+            if (url.contains("resume"))
+                u = ProjectConfigData.getProperty(url);
+            else
+                u = GlobalVariable.BASE_URL + ProjectConfigData.getProperty(url);
             if (u.contains("{applicantId}"))
                 u = u.replace("{applicantId}", String.valueOf(AtsHealthCheck.applicantId));
             GemTestReporter.addTestStep("Url of the test case", u, STATUS.INFO);
@@ -531,7 +533,7 @@ public class Utils {
             }
             reqBuilder.setEntity(multiPartHttpEntity);
             HttpUriRequest multipartRequest = reqBuilder.build();
-            multipartRequest.setHeader(new BasicHeader("X-REMOTE-USER-EMAIL", "saru.goyal@geminisolutions.com"));
+            multipartRequest.setHeader(new BasicHeader("X-REMOTE-USER-EMAIL", "tripta.sahni@geminisolutions.com"));
             multipartRequest.setHeader(new BasicHeader("Authorization", authValue));
             HttpResponse httpResponse = httpClient.execute(multipartRequest);
             GemTestReporter.addTestStep("POST Request Verification", "POST request executed Successfully", STATUS.PASS);
@@ -545,8 +547,8 @@ public class Utils {
                 arr[1] = Integer.parseInt(String.valueOf(js.get("object").getAsJsonObject().get("applicantId")));
                 return (arr[0] + "," + arr[1]);
             } else if (url.contains("resume")) {
-                String error="";
-                error=httpResponse.toString();
+                String error = "";
+                error = httpResponse.toString();
 //                js= (JsonObject) JsonParser.parseString(EntityUtils.toString(httpResponse.getEntity()));
                 GemTestReporter.addTestStep("Response Body", error, STATUS.INFO);
                 arr[0] = httpResponse.getStatusLine().getStatusCode();
@@ -584,7 +586,7 @@ public class Utils {
             }
             reqBuilder.setEntity(multiPartHttpEntity);
             HttpUriRequest multipartRequest = reqBuilder.build();
-            multipartRequest.setHeader(new BasicHeader("X-REMOTE-USER", "saru.goyal@geminisolutions.com"));
+            multipartRequest.setHeader(new BasicHeader("X-REMOTE-USER", "tripta.sahni@geminisolutions.com"));
             multipartRequest.setHeader(new BasicHeader("Authorization", authValue));
             HttpResponse httpResponse = httpClient.execute(multipartRequest);
             GemTestReporter.addTestStep("POST Request Verification", "POST request executed Successfully", STATUS.PASS);
@@ -713,7 +715,7 @@ public class Utils {
                 reqBuilder = RequestBuilder.delete(u);
             reqBuilder.setEntity(multiPartHttpEntity);
             HttpUriRequest multipartRequest = reqBuilder.build();
-            multipartRequest.setHeader(new BasicHeader("X-REMOTE-USER-EMAIL", "nipun.jain@geminisolutions.com"));
+            multipartRequest.setHeader(new BasicHeader("X-REMOTE-USER-EMAIL", "tripta.sahni@geminisolutions.com"));
             multipartRequest.setHeader(new BasicHeader("Authorization", authValue));
             HttpResponse httpresponse = httpClient.execute(multipartRequest);
             arr[0] = httpresponse.getStatusLine().getStatusCode();
@@ -748,7 +750,7 @@ public class Utils {
                 reqBuilder = RequestBuilder.delete(u);
             reqBuilder.setEntity(multiPartHttpEntity);
             HttpUriRequest multipartRequest = reqBuilder.build();
-            multipartRequest.setHeader(new BasicHeader("X-REMOTE-USER-EMAIL", "nipun.jain@geminisolutions.com"));
+            multipartRequest.setHeader(new BasicHeader("X-REMOTE-USER-EMAIL", "tripta.sahni@geminisolutions.com"));
             multipartRequest.setHeader(new BasicHeader("Authorization", authValue));
             HttpResponse httpResponse = httpClient.execute(multipartRequest);
             arr[0] = httpResponse.getStatusLine().getStatusCode();
@@ -771,7 +773,8 @@ public class Utils {
         String endpoint = url.replace("{applicantId}", String.valueOf(AtsHealthCheck.applicantId));
         String newUrl = GlobalVariable.BASE_URL + endpoint;
         GemTestReporter.addTestStep("Url of the test case for PATCH request", newUrl, STATUS.INFO);
-        return given().contentType(ContentType.JSON).header("X-REMOTE-USER-EMAIL", "saru.goyal@geminisolutions.com").header("Authorization", authValue).patch(newUrl).statusCode();
+        int a=given().contentType(ContentType.JSON).header("X-REMOTE-USER-EMAIL", "tripta.sahni@geminisolutions.com").header("Authorization", authValue).patch(newUrl).statusCode();
+        return a;
     }
 
     public static int apiForWrongMethods(String url, String method, Map<String, String> token, String step) {
@@ -780,10 +783,10 @@ public class Utils {
         String newUrl = GlobalVariable.BASE_URL + endpoint;
         GemTestReporter.addTestStep("Url of the test case for PATCH request", newUrl, STATUS.INFO);
         if (method.equalsIgnoreCase("get"))
-            return given().contentType(ContentType.JSON).header("X-REMOTE-USER-EMAIL", "saru.goyal@geminisolutions.com").header("Authorization", authValue).get(newUrl).statusCode();
+            return given().contentType(ContentType.JSON).header("X-REMOTE-USER-EMAIL", "tripta.sahni@geminisolutions.com").header("Authorization", authValue).get(newUrl).statusCode();
         else if (method.equalsIgnoreCase("post"))
-            return given().contentType(ContentType.JSON).header("X-REMOTE-USER-EMAIL", "saru.goyal@geminisolutions.com").header("Authorization", authValue).post(newUrl).statusCode();
-        return given().contentType(ContentType.JSON).header("X-REMOTE-USER-EMAIL", "saru.goyal@geminisolutions.com").header("Authorization", authValue).patch(newUrl).statusCode();
+            return given().contentType(ContentType.JSON).header("X-REMOTE-USER-EMAIL", "tripta.sahni@geminisolutions.com").header("Authorization", authValue).post(newUrl).statusCode();
+        return given().contentType(ContentType.JSON).header("X-REMOTE-USER-EMAIL", "tripta.sahni@geminisolutions.com").header("Authorization", authValue).patch(newUrl).statusCode();
     }
 
     public static String getVetterNamesForWrongPayload(String UrlNameFromConfig, String method, String payloadName, Map<String, String> headers, String step) {

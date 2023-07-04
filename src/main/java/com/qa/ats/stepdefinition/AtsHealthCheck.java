@@ -37,7 +37,7 @@ public class AtsHealthCheck {
         List<String> payloadKeys = Arrays.asList(keys.split(","));
         List<String> payloadValues = Arrays.asList(values.split(","));
         HashMap<String, String> token = new HashMap<String, String>();
-        token.put("X-REMOTE-USER-EMAIL", "saru.goyal@geminisolutions.com");
+        token.put("X-REMOTE-USER-EMAIL", "tripta.sahni@geminisolutions.com");
         String checkList[];
         try {
             String check = Utils.jobApiWithFormData(url, method, token, "", payloadKeys, payloadValues);
@@ -69,7 +69,7 @@ public class AtsHealthCheck {
         List<String> payloadKeys = Arrays.asList(keys.split(","));
         List<String> payloadValues = Arrays.asList(values.split(","));
         HashMap<String, String> token = new HashMap<String, String>();
-        token.put("X-REMOTE-USER-EMAIL", "saru.goyal@geminisolutions.com");
+        token.put("X-REMOTE-USER-EMAIL", "tripta.sahni@geminisolutions.com");
         String checkList[];
         try {
             String check = Utils.applicantApiWithFormData(url, method, token, "", payloadKeys, payloadValues);
@@ -90,7 +90,7 @@ public class AtsHealthCheck {
         List<String> payloadKeys = Arrays.asList(keys.split(","));
         List<String> payloadValues = Arrays.asList(values.split(","));
         HashMap<String, String> token = new HashMap<String, String>();
-        token.put("X-REMOTE-USER-EMAIL", "saru.goyal@geminisolutions.com");
+        token.put("X-REMOTE-USER-EMAIL", "tripta.sahni@geminisolutions.com");
         String checkList[];
         try {
             String check = Utils.applicantApiWithFormData(url, method, token, "", payloadKeys, payloadValues);
@@ -111,11 +111,11 @@ public class AtsHealthCheck {
     public void settingWrongHeaderForVeeting(String url, String method, String payload, String header) {
         HashMap<String, String> token = new HashMap<String, String>();
         if (header.equals("ObjectID")) {
-            token.put("X-REMOTE-USER-EMAIL", "nipun.jain@geminisolutions.com");
+            token.put("X-REMOTE-USER-EMAIL", "tripta.sahni@geminisolutions.com");
             token.put("X-REMOTE-USER-OBJECT-ID", "hsgdhg");
         } else {
             token.put("X-REMOTE-USER-EMAIL", "nhjk");
-            token.put("X-REMOTE-USER-OBJECT-ID", "e82f1905-3695-49a6-977e-9712d7f1ece1");
+            token.put("X-REMOTE-USER-OBJECT-ID", "24431885-d574-445a-b66e-42271b7ad459");
         }
         String[] checkList;
         try {
@@ -134,9 +134,9 @@ public class AtsHealthCheck {
     @Given("^Setting the Applicant endpoint (.+) method (.+) payload (.+) for vetting$")
     public void settingTheApplicantEndpointEndpointMethodMethodForVetting(String url, String method, String payload) {
         HashMap<String, String> token = new HashMap<String, String>();
-        token.put("X-REMOTE-USER-EMAIL", "nipun.jain@geminisolutions.com");
-        token.put("X-REMOTE-USER-OBJECT-ID", "e82f1905-3695-49a6-977e-9712d7f1ece1");
-        token.put("X-REMOTE-INTERVIEWER-EMAIL","nipun.jain@geminisolutions.com");
+        token.put("X-REMOTE-USER-EMAIL", "tripta.sahni@geminisolutions.com");
+        token.put("X-REMOTE-USER-OBJECT-ID", "24431885-d574-445a-b66e-42271b7ad459");
+        token.put("X-REMOTE-INTERVIEWER-EMAIL","tripta.sahni@geminisolutions.com");
 
         String[] checkList;
         try {

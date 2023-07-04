@@ -13,9 +13,9 @@ Feature: ATS scenario
     Then Verify scenario status code <expectedStatus>
     Examples:
       | endpoint            | method | expectedStatus | payload_key | payload_value                 | name1                     |
-      | postNewJob          | post   | 201            | job,jdFile  | apiCheckJob1.json,sample1.txt | Create a job              |
-      | updateJob           | put    | 200            | job,jdFile  | apiJobUpdate.json,sample1.txt | Update a job              |
-      | updateJobUsingJobID | put    | 200            | job,jdFile  | apiJobUpdate.json,sample1.txt | Update a job using job ID |
+      | postNewJob          | post   | 201            | job,jdFile  | apiCheckJob1.json,new4.doc | Create a job              |
+      | updateJob           | put    | 200            | job,jdFile  | apiJobUpdate.json,new4.doc | Update a job              |
+      | updateJobUsingJobID | put    | 200            | job,jdFile  | apiJobUpdate.json,new4.doc | Update a job using job ID |
 
   Scenario Outline: ATS , Job---><name1>
     Given Set the Job endpoint <endpoint> and method <method>

@@ -44,7 +44,7 @@ public class AtsRegression {
         List<String> payloadKeys = Arrays.asList(keys.split(","));
         List<String> payloadValues = Arrays.asList(values.split(","));
         HashMap<String, String> token = new HashMap<String, String>();
-        token.put("X-REMOTE-USER", "saru.goyal@geminisolutions.com");
+        token.put("X-REMOTE-USER", "tripta.sahni@geminisolutions.com");
         String[] checkList;
         try {
             String check = Utils.applicantApiWithFormDataWrongHeader(url, method, token, "", payloadKeys, payloadValues);
