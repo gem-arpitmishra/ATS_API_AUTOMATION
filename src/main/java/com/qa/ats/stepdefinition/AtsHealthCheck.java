@@ -17,7 +17,7 @@ public class AtsHealthCheck {
     int status = 0;
     public static int jobId = 0;
     public static int applicantId = 0;
-    Logger logger = LoggerFactory.getLogger(ApplicantStep.class);
+    Logger logger = LoggerFactory.getLogger(AtsHealthCheck.class);
 
     @Given("^Set the url to generate access token (.+) method and url (.+)$")
     public void getAccessToken(String method, String url) throws IOException {

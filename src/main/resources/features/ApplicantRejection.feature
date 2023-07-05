@@ -9,7 +9,6 @@ Feature: Rejection of an Applicant
       | post   | accessToken | 200            |
 
 
-
   Scenario Outline: ATS, <name> an applicant
     Given Set the Applicant endpoint <endpoint> method <method> payload <payload_key> <payload_value> and form data
     Then Verify scenario status code <expectedStatus>
@@ -67,16 +66,9 @@ Feature: Rejection of an Applicant
       | endpoint        | method | expectedStatus | payload    |
       | addNewInterview | post   | 201            | interview1 |
 
-  Scenario Outline:ATS , Set the applicant stage to "Rejected"
+  Scenario Outline:ATS , Update the reason of Rejection and stage of the applicant
     Given Set the Applicant endpoint <endpoint> and method <method> with header and stage <stage>
     Then Verify Applicant status code <expectedStatus>
     Examples:
       | endpoint               | method | expectedStatus | stage |
       | updateStageOfApplicant | put    | 200            | 5     |
-
-  Scenario Outline:ATS , Update the reason of Rejection
-    Given Set the Applicant endpoint <endpoint> and method <method> for Patch
-    Then Verify Applicant status code <expectedStatus>
-    Examples:
-      | endpoint                | method | expectedStatus |
-      | updateReasonOfRejection | patch  | 201            |

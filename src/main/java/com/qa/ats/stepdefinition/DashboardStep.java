@@ -12,7 +12,7 @@ import java.util.HashMap;
 
 public class DashboardStep {
     int status = 0;
-    Logger logger = LoggerFactory.getLogger(InterviewStep.class);
+    Logger logger = LoggerFactory.getLogger(DashboardStep.class);
 
     @Given("^Set the Dashboard endpoint (.+) and method (.+)$")
     public void setThePolicyEndpointAndMethod(String url, String method) {
