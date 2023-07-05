@@ -8,7 +8,7 @@
    "glue_code": "com.qa.ats.stepdefinition",
    "jewel_user": "t.sahni",
    "jewel_bridge_token": "ef18abaa-9577-42d6-8e27-a545e6c776ea1687931880930",
-   "email_report": "yhvjvvjk",
+   "email_report": "y",
    "email_to":"harshita.gupta@geminisolutions.com,ankita.srivastava@geminisolutions.com",
    "email_cc":"satyam.rout@geminisolutions.com,tripta.sahni@geminisolutions.com,shrey.saraswat@geminisolutions.com,charu.garg@geminisolutions.com,rashi.saini@geminisolutions.com",
    "beta": {
@@ -16,7 +16,7 @@
       "accessToken": "https://login.microsoftonline.com/b9806c7d-9280-4e44-afea-6dc0ff495c2f/oauth2/v2.0/token",
       "updateNotificationData": "atsInterviewSvc/interview/updateNotificationData",
       "getNotificationData": "atsInterviewSvc/interview/notificationData",
-      "dataMaskingForInterview": "atsInterviewSvc/interview/dataMasking",
+      "dataMaskingForInterview": "atsInterviewSvc/ interview/dataMasking",
       "dataMaskingForApplicants": "atsApplicantSvc/applicant/dataMasking",
       "getListOfApplicantsMonthWiseForASpecificYear": "atsApplicantSvc/applicant/monthWise/2023",
       "getListOfOfferedApplicantsMonthWiseForASpecificYear": "atsApplicantSvc/applicant/offeredMonthWise/2023",
@@ -74,7 +74,7 @@
       "deleteFeedback": "atsInterviewSvc/feedback/{interviewId}",
       "postNewJob": "atsJobSvc/job",
       "saveApplicantDetails": "atsApplicantSvc/applicant",
-      "updateStageOfApplicant": "atsApplicantSvc/applicant/",
+      "updateStageOfApplicant": "atsApplicantSvc/applicant/{applicantId}/",
       "alignToNewJob": "atsApplicantSvc/applicant/",
       "updateJob": "atsJobSvc/job",
       "updateJobUsingJobID": "atsJobSvc/job/update/{jobId}/1",
@@ -93,7 +93,9 @@
       "getApplicantWithPagingWithDaysFilter": "atsApplicantSvc/applicant/days/3",
       "getApplicantWithPagingWithPageSize": "atsApplicantSvc/applicant/pageNumber/1/pageSize/1",
       "addMultipleApplicants": "atsApplicantSvc/applicant/bulkSave",
-      "updateReasonOfRejection": "atsApplicantSvc/applicant/{applicantId}/addReasonOfRejection?reasonOfRejection=nothingPrepared",
-      "getVetterNames": "atsInterviewSvc/interview/getVetterNameForApplicants?jobId=10"
+      "updateStageAndReasonOfRejection": "atsApplicantSvc/applicant/{applicantId}/addReasonOfRejectionAndStage?applicantStageId={stage}&ReasonOfRejection=notGood",
+      "getVetterNames": "atsInterviewSvc/interview/getVetterNameForApplicants?jobId=10",
+      "getVettingHistoryByInterviewer": "atsInterviewSvc/interview/getVettingHistoryByInterviewer/tripta.sahni@geminisolutions.com",
+      "getVetterHistory":"atsApplicantSvc/applicant/applicantsVettingHistoryList"
    }
 }

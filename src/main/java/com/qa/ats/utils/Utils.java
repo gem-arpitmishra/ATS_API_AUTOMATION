@@ -41,7 +41,7 @@ import static io.restassured.RestAssured.given;
 
 
 public class Utils {
-    static Logger logger = LoggerFactory.getLogger(ApplicantStep.class);
+    static Logger logger = LoggerFactory.getLogger(Utils.class);
     public static String authValue = "";
 
     public static void responseCheck(Response response) {
@@ -88,7 +88,6 @@ public class Utils {
         reqBuilder.setEntity(multiPartHttpEntity);
         HttpUriRequest multipartRequest = reqBuilder.build();
         multipartRequest.setHeader(new BasicHeader("X-REMOTE-USER-EMAIL", "tripta.sahni@geminisolutions.com"));
-
         multipartRequest.setHeader(new BasicHeader("Authorization", authValue));
         HttpResponse httpResponse = httpClient.execute(multipartRequest);
         js = (JsonObject) JsonParser.parseString(EntityUtils.toString(httpResponse.getEntity()));
@@ -181,8 +180,16 @@ public class Utils {
         try {
             Request request = new Request();
             String url = ProjectConfigData.getProperty(UrlNameFromConfig);
-            if (method.equals("put"))
-                url = GlobalVariable.BASE_URL + url + AtsHealthCheck.applicantId + "/stage/" + stage;
+            if (method.equals("put") && url.equals("updateStageOfApplicant")) {
+                url=url.replace("{applicantId}",String.valueOf(AtsHealthCheck.applicantId));
+                url = GlobalVariable.BASE_URL + url + "addReasonOfRejectionAndStage?applicantStageId=" + stage;
+            }
+            else if(method.equals("put")&&url.equals("updateStageAndReasonOfRejection"))
+            {
+                url=url.replace("{applicantId}",String.valueOf(AtsHealthCheck.applicantId));
+                url=url.replace("{stage}",stage);
+                url=GlobalVariable.BASE_URL + url;
+            }
             else if (method.equals("post"))
                 url = GlobalVariable.BASE_URL + url + AtsHealthCheck.applicantId + "/align-job/10" + "?jobTitle=QA";
             else if (method.equals("patch")) {

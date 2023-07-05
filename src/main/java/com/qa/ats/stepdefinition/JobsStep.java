@@ -13,7 +13,7 @@ import java.util.HashMap;
 public class JobsStep {
     int status = 0;
     public static int jobID = 0;
-    Logger logger = LoggerFactory.getLogger(ApplicantStep.class);
+    Logger logger = LoggerFactory.getLogger(JobsStep.class);
 
     //setting the endpoint and method for API
     @Given("^Set the Job endpoint (\\w*) and method (\\w*)$")
