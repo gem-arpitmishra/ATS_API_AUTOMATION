@@ -11,6 +11,7 @@
    "email_report": "y",
    "email_to":"harshita.gupta@geminisolutions.com,ankita.srivastava@geminisolutions.com",
    "email_cc":"satyam.rout@geminisolutions.com,tripta.sahni@geminisolutions.com,shrey.saraswat@geminisolutions.com,charu.garg@geminisolutions.com,rashi.saini@geminisolutions.com",
+
    "beta": {
       "resumeParser": "https://eapi.geminisolutions.com/resumeparser",
       "accessToken": "https://login.microsoftonline.com/b9806c7d-9280-4e44-afea-6dc0ff495c2f/oauth2/v2.0/token",

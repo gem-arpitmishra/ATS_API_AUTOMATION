@@ -184,6 +184,7 @@ public class Utils {
             String url = ProjectConfigData.getProperty(UrlNameFromConfig);
             if (method.equals("put") && UrlNameFromConfig.equals("updateStageOfApplicant")) {
                 url=url.replace("{applicantId}",String.valueOf(AtsHealthCheck.applicantId));
+
                 url = GlobalVariable.BASE_URL + url +"stage/" + stage;
             }
             else if(method.equals("put")&&UrlNameFromConfig.equals("updateStageAndReasonOfRejection"))
