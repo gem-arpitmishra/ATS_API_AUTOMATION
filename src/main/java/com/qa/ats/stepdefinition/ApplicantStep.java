@@ -72,10 +72,12 @@ public class ApplicantStep {
         HashMap<String, String> header = new HashMap<String, String>();
         header.put("X-REMOTE-USER-EMAIL", "tripta.sahni@geminisolutions.com");
         try {
+
             if (method.equals("put")||method.equals("post"))
                 status = Utils.apiForUpdatingApplicantStage(url, method, header, stage,"").getStatus();
             else
                 status = Utils.apiWithoutPayloads(url, method, header, "").getStatus();
+
 
         } catch (Exception exception) {
             logger.info("Error - User not able to hit the API", exception);

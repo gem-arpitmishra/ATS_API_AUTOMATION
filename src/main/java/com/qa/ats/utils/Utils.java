@@ -135,6 +135,7 @@ public class Utils {
                 request.setStep(step);
             }
             response = ApiInvocation.handleRequest(request);
+
             GemTestReporter.addTestStep("Response Message", response.getResponseMessage(), STATUS.INFO);
             responseCheck(response);
         } catch (Exception exception) {
@@ -178,18 +179,20 @@ public class Utils {
     public static Response apiForUpdatingApplicantStage(String UrlNameFromConfig, String method, Map<String, String> headers, String stage, String step) throws Exception {
         Response response = new Response();
         try {
+
             Request request = new Request();
             String url = ProjectConfigData.getProperty(UrlNameFromConfig);
-            if (method.equals("put") && url.equals("updateStageOfApplicant")) {
+            if (method.equals("put") && UrlNameFromConfig.equals("updateStageOfApplicant")) {
                 url=url.replace("{applicantId}",String.valueOf(AtsHealthCheck.applicantId));
-                url = GlobalVariable.BASE_URL + url + "addReasonOfRejectionAndStage?applicantStageId=" + stage;
+                url = GlobalVariable.BASE_URL + url +"stage/" + stage;
             }
-            else if(method.equals("put")&&url.equals("updateStageAndReasonOfRejection"))
+            else if(method.equals("put")&&UrlNameFromConfig.equals("updateStageAndReasonOfRejection"))
             {
                 url=url.replace("{applicantId}",String.valueOf(AtsHealthCheck.applicantId));
                 url=url.replace("{stage}",stage);
                 url=GlobalVariable.BASE_URL + url;
             }
+
             else if (method.equals("post"))
                 url = GlobalVariable.BASE_URL + url + AtsHealthCheck.applicantId + "/align-job/10" + "?jobTitle=QA";
             else if (method.equals("patch")) {

@@ -16,7 +16,7 @@
       "accessToken": "https://login.microsoftonline.com/b9806c7d-9280-4e44-afea-6dc0ff495c2f/oauth2/v2.0/token",
       "updateNotificationData": "atsInterviewSvc/interview/updateNotificationData",
       "getNotificationData": "atsInterviewSvc/interview/notificationData",
-      "dataMaskingForInterview": "atsInterviewSvc/ interview/dataMasking",
+      "dataMaskingForInterview": "atsInterviewSvc/interview/dataMasking",
       "dataMaskingForApplicants": "atsApplicantSvc/applicant/dataMasking",
       "getListOfApplicantsMonthWiseForASpecificYear": "atsApplicantSvc/applicant/monthWise/2023",
       "getListOfOfferedApplicantsMonthWiseForASpecificYear": "atsApplicantSvc/applicant/offeredMonthWise/2023",
