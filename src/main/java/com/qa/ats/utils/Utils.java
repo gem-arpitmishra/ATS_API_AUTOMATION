@@ -410,7 +410,9 @@ public class Utils {
     public static MultipartEntityBuilder entityBuilderFileParserForResume(List<String> keys, List<String> values, String method, String url) throws IOException {
         MultipartEntityBuilder entityBuilder = MultipartEntityBuilder.create();
         entityBuilder.setMode(HttpMultipartMode.BROWSER_COMPATIBLE);
-        entityBuilder.addBinaryBody(keys.get(0), new File("src/main/resources/" + values.get(0)));
+        entityBuilder.addBinaryBody(keys.get(0), new File("src/main/resources/" + values.get(0))).setContentType(org.apache.http.entity.ContentType.MULTIPART_FORM_DATA);
+//        entityBuilder.addBinaryBody(keys.get(0), new File("src/main/resources/" + values.get(0)),ContentType.MULTIPART,);
+//        entityBuilder.addBinaryBody(keys.get(0), new File("src/main/resources/" + values.get(0)));
 
         return entityBuilder;
     }
@@ -418,6 +420,7 @@ public class Utils {
     public static MultipartEntityBuilder entityBuilderFileParser(List<String> keys, List<String> values, String method, String url) throws IOException {
         MultipartEntityBuilder entityBuilder = MultipartEntityBuilder.create();
         entityBuilder.setMode(HttpMultipartMode.BROWSER_COMPATIBLE);
+        entityBuilder.setContentType(org.apache.http.entity.ContentType.MULTIPART_FORM_DATA);
         for (int i = 0; i < keys.size(); i++) {
             if (values.get(i).contains("applicant.json") && method.equals("post") && url.contains("sendApplicantsForVetting") == false) {
                 JsonParser parser = new JsonParser();
@@ -463,8 +466,11 @@ public class Utils {
                 writer.write(jsonOutput);
                 writer.close();
             }
-            entityBuilder.addBinaryBody(keys.get(i), new File("src/main/resources/" + values.get(i)));
+            entityBuilder.addBinaryBody(keys.get(i), new File("src/main/resources/" + values.get(i))).setContentType(org.apache.http.entity.ContentType.MULTIPART_FORM_DATA);
+
         }
+
+
         return entityBuilder;
     }
 
@@ -546,6 +552,8 @@ public class Utils {
             HttpUriRequest multipartRequest = reqBuilder.build();
             multipartRequest.setHeader(new BasicHeader("X-REMOTE-USER-EMAIL", "tripta.sahni@geminisolutions.com"));
             multipartRequest.setHeader(new BasicHeader("Authorization", authValue));
+//            multipartRequest.removeHeaders("Content-Type");
+//            multipartRequest.setHeader("Content-Type","multipart/form-data");
             HttpResponse httpResponse = httpClient.execute(multipartRequest);
             GemTestReporter.addTestStep("POST Request Verification", "POST request executed Successfully", STATUS.PASS);
 
