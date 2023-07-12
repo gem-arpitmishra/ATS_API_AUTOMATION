@@ -17,7 +17,6 @@ public class ApplicantStep {
     int status = 0;
     Logger logger = LoggerFactory.getLogger(ApplicantStep.class);
 
-    //setting the endpoint and method for API
     @Given("^Set the Applicant endpoint (\\w*) and method (\\w*)$")
     public void setThePolicyEndpointAndMethod(String url, String method) {
         HashMap<String, String> token = new HashMap<String, String>();
@@ -56,7 +55,7 @@ public class ApplicantStep {
             GemTestReporter.addTestStep("Hit API", "User not able to hit the API", STATUS.FAIL);
         }
     }
-    //Verify the status
+
     @Then("^Verify Applicant status code (\\d+)$")
     public void verifyPolicyStatusCodeExpectedStatus(Integer Expected) {
         try {

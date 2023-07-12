@@ -399,7 +399,7 @@ public class Utils {
         String SALTCHARS = "ABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890";
         StringBuilder salt = new StringBuilder();
         Random rnd = new Random();
-        while (salt.length() < 10) { // length of the random string.
+        while (salt.length() < 10) {
             int index = (int) (rnd.nextFloat() * SALTCHARS.length());
             salt.append(SALTCHARS.charAt(index));
         }
@@ -411,8 +411,6 @@ public class Utils {
         MultipartEntityBuilder entityBuilder = MultipartEntityBuilder.create();
         entityBuilder.setMode(HttpMultipartMode.BROWSER_COMPATIBLE);
         entityBuilder.addBinaryBody(keys.get(0), new File("src/main/resources/" + values.get(0))).setContentType(org.apache.http.entity.ContentType.MULTIPART_FORM_DATA);
-//        entityBuilder.addBinaryBody(keys.get(0), new File("src/main/resources/" + values.get(0)),ContentType.MULTIPART,);
-//        entityBuilder.addBinaryBody(keys.get(0), new File("src/main/resources/" + values.get(0)));
 
         return entityBuilder;
     }
@@ -552,8 +550,6 @@ public class Utils {
             HttpUriRequest multipartRequest = reqBuilder.build();
             multipartRequest.setHeader(new BasicHeader("X-REMOTE-USER-EMAIL", "tripta.sahni@geminisolutions.com"));
             multipartRequest.setHeader(new BasicHeader("Authorization", authValue));
-//            multipartRequest.removeHeaders("Content-Type");
-//            multipartRequest.setHeader("Content-Type","multipart/form-data");
             HttpResponse httpResponse = httpClient.execute(multipartRequest);
             GemTestReporter.addTestStep("POST Request Verification", "POST request executed Successfully", STATUS.PASS);
 
@@ -568,7 +564,6 @@ public class Utils {
             } else if (url.contains("resume")) {
                 String error = "";
                 error = httpResponse.toString();
-//                js= (JsonObject) JsonParser.parseString(EntityUtils.toString(httpResponse.getEntity()));
                 GemTestReporter.addTestStep("Response Body", error, STATUS.INFO);
                 arr[0] = httpResponse.getStatusLine().getStatusCode();
                 return String.valueOf(arr[0]);
