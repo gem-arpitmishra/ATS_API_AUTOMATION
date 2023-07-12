@@ -49,15 +49,14 @@ Feature: ATS scenario
       | GetAllJobDetails                | getAllJobDetails                | get    | 200            |
       | FetchJobUsingJobID              | fetchJobUsingJobID              | get    | 200            |
       | FetchJobDetails                 | fetchJobDetails                 | get    | 200            |
-#      | FetchRecruiterDetailsUsingJobID | fetchRecruiterDetailsUsingJobID | get    | 200            |
 
   Scenario Outline: ATS, <name> an applicant
     Given Set the Applicant endpoint <endpoint> method <method> payload <payload_key> <payload_value> and form data
     Then Verify scenario status code <expectedStatus>
     Examples:
       | endpoint               | method | expectedStatus | payload_key                | payload_value                    | name   |
-      | saveApplicantDetails   | post   | 201            | applicantData,resume,image | applicant.json,test.pdf,test.pdf | Create |
-      | updateApplicantDetails | put    | 201            | applicantData,resume,image | applicant.json,test.pdf,test.pdf | Update |
+      | saveApplicantDetails   | post   | 201            | applicantData,resume,image | applicant.json,resume.pdf,test.pdf | Create |
+      | updateApplicantDetails | put    | 201            | applicantData,resume,image | applicant.json,resume.pdf,test.pdf | Update |
 
   Scenario Outline:ATS , Set the applicant stage to "New"
     Given Set the Applicant endpoint <endpoint> and method <method> with header and stage <stage>
@@ -94,7 +93,6 @@ Feature: ATS scenario
       | FetchResumeUsingApplicantId         | fetchResumeUsingApplicantId         | get    | 200            |
       | FetchApplicantPersonalDetails       | fetchApplicantPersonalDetails       | get    | 200            |
       | FetchJobOfApplicant                 | fetchJobOfApplicant                 | get    | 200            |
-#      | FetchListOfHR                       | fetchListOfHR                       | get    | 200            |
       | FetchApplicantConstants             | fetchApplicantConstants             | get    | 200            |
       | FetchAllApplicantWithPaging         | fetchAllApplicantWithPaging         | get    | 200            |
 

@@ -399,7 +399,7 @@ public class Utils {
         String SALTCHARS = "ABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890";
         StringBuilder salt = new StringBuilder();
         Random rnd = new Random();
-        while (salt.length() < 10) { // length of the random string.
+        while (salt.length() < 10) {
             int index = (int) (rnd.nextFloat() * SALTCHARS.length());
             salt.append(SALTCHARS.charAt(index));
         }
@@ -410,7 +410,7 @@ public class Utils {
     public static MultipartEntityBuilder entityBuilderFileParserForResume(List<String> keys, List<String> values, String method, String url) throws IOException {
         MultipartEntityBuilder entityBuilder = MultipartEntityBuilder.create();
         entityBuilder.setMode(HttpMultipartMode.BROWSER_COMPATIBLE);
-        entityBuilder.addBinaryBody(keys.get(0), new File("src/main/resources/" + values.get(0)));
+        entityBuilder.addBinaryBody(keys.get(0), new File("src/main/resources/" + values.get(0))).setContentType(org.apache.http.entity.ContentType.MULTIPART_FORM_DATA);
 
         return entityBuilder;
     }
@@ -418,6 +418,7 @@ public class Utils {
     public static MultipartEntityBuilder entityBuilderFileParser(List<String> keys, List<String> values, String method, String url) throws IOException {
         MultipartEntityBuilder entityBuilder = MultipartEntityBuilder.create();
         entityBuilder.setMode(HttpMultipartMode.BROWSER_COMPATIBLE);
+        entityBuilder.setContentType(org.apache.http.entity.ContentType.MULTIPART_FORM_DATA);
         for (int i = 0; i < keys.size(); i++) {
             if (values.get(i).contains("applicant.json") && method.equals("post") && url.contains("sendApplicantsForVetting") == false) {
                 JsonParser parser = new JsonParser();
@@ -463,8 +464,11 @@ public class Utils {
                 writer.write(jsonOutput);
                 writer.close();
             }
-            entityBuilder.addBinaryBody(keys.get(i), new File("src/main/resources/" + values.get(i)));
+            entityBuilder.addBinaryBody(keys.get(i), new File("src/main/resources/" + values.get(i))).setContentType(org.apache.http.entity.ContentType.MULTIPART_FORM_DATA);
+
         }
+
+
         return entityBuilder;
     }
 
@@ -560,7 +564,6 @@ public class Utils {
             } else if (url.contains("resume")) {
                 String error = "";
                 error = httpResponse.toString();
-//                js= (JsonObject) JsonParser.parseString(EntityUtils.toString(httpResponse.getEntity()));
                 GemTestReporter.addTestStep("Response Body", error, STATUS.INFO);
                 arr[0] = httpResponse.getStatusLine().getStatusCode();
                 return String.valueOf(arr[0]);
