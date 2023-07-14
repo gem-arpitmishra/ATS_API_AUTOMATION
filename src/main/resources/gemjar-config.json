@@ -1,7 +1,7 @@
 {
    "environment": "beta",
    "project_name": "ATS_API",
-   "report_name": "ATS_Resume_Parser",
+   "report_name": "ATS_Resume_Parser_Check",
    "tags": "@resumeParser",
    "sub_id": "test_id",
    "enter_point": "https://apis.gemecosystem.com/enter-point",
