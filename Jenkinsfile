@@ -11,7 +11,7 @@ node('maven_runner_java11')
       container('maven-runner-11') {
             dir('rpasrer_testing') {
                 sh 'rm -rf target'
-                sh 'mvn clean test'
+                sh 'mvn clean test -Dtags="@resumeParser"'
             }
         }
     }
