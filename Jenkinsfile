@@ -8,11 +8,11 @@ node('maven_runner_java11')
 {
     stage('Maven_Build')
     {
-      // container('maven-runner-11') {
-            // dir('rpasrer_testing') {
+      container('maven-runner-11') {
+            dir('rpasrer_testing') {
                 sh 'rm -rf target'
                 sh 'mvn clean test'
-            // }
-        // }
+            }
+        }
     }
 }
