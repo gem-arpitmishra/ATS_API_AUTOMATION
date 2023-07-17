@@ -35,8 +35,19 @@ import org.apache.http.impl.client.HttpClients;
 import org.apache.http.message.BasicHeader;
 import org.apache.http.util.EntityUtils;
 import com.gemini.generic.api.utils.ProjectSampleJson;
-import io.restassured.http.ContentType;
+//import io.restassured.http.ContentType;
 
+import org.apache.http.HttpEntity;
+import org.apache.http.HttpHeaders;
+import org.apache.http.HttpResponse;
+import org.apache.http.client.methods.HttpPost;
+import org.apache.http.entity.ContentType;
+import org.apache.http.entity.mime.HttpMultipartMode;
+import org.apache.http.entity.mime.MultipartEntityBuilder;
+import org.apache.http.impl.client.CloseableHttpClient;
+import org.apache.http.impl.client.HttpClientBuilder;
+import java.io.File;
+import java.io.IOException;
 import static io.restassured.RestAssured.given;
 
 
@@ -463,9 +474,13 @@ public class Utils {
                 FileWriter writer = new FileWriter("src/main/resources/" + values.get(i));
                 writer.write(jsonOutput);
                 writer.close();
-            }
-            entityBuilder.addBinaryBody(keys.get(i), new File("src/main/resources/" + values.get(i))).setContentType(org.apache.http.entity.ContentType.MULTIPART_FORM_DATA);
 
+            }
+            File file = new File("src/main/resources/" + values.get(i));
+            if(values.get(i).contains(".pdf"))
+                entityBuilder.addBinaryBody(keys.get(i),file, ContentType.create("application/pdf"), file.getName());
+            else
+                entityBuilder.addBinaryBody(keys.get(i), new File("src/main/resources/" + values.get(i)));
         }
 
 
@@ -677,6 +692,7 @@ public class Utils {
             entityBuilder.addBinaryBody(keys.get(i), new File("src/main/resources/" + values.get(i)));
         }
         return entityBuilder;
+
     }
 
     public static MultipartEntityBuilder entityBuilderFileParserForMultipleApplicantsForWrongHeader(List<String> keys, List<String> values, String method, String url, String name) throws IOException {
@@ -782,26 +798,26 @@ public class Utils {
         return String.valueOf(arr[0]);
     }
 
-    public static int apiForPatch(String url, String method, Map<String, String> token, String step) {
-        url = ProjectConfigData.getProperty(url);
-        String endpoint = url.replace("{applicantId}", String.valueOf(AtsHealthCheck.applicantId));
-        String newUrl = GlobalVariable.BASE_URL + endpoint;
-        GemTestReporter.addTestStep("Url of the test case for PATCH request", newUrl, STATUS.INFO);
-        int a=given().contentType(ContentType.JSON).header("X-REMOTE-USER-EMAIL", "tripta.sahni@geminisolutions.com").header("Authorization", authValue).patch(newUrl).statusCode();
-        return a;
-    }
+//    public static int apiForPatch(String url, String method, Map<String, String> token, String step) {
+//        url = ProjectConfigData.getProperty(url);
+//        String endpoint = url.replace("{applicantId}", String.valueOf(AtsHealthCheck.applicantId));
+//        String newUrl = GlobalVariable.BASE_URL + endpoint;
+//        GemTestReporter.addTestStep("Url of the test case for PATCH request", newUrl, STATUS.INFO);
+//        int a=given().contentType(ContentType.JSON).header("X-REMOTE-USER-EMAIL", "tripta.sahni@geminisolutions.com").header("Authorization", authValue).patch(newUrl).statusCode();
+//        return a;
+//    }
 
-    public static int apiForWrongMethods(String url, String method, Map<String, String> token, String step) {
-        url = ProjectConfigData.getProperty(url);
-        String endpoint = url.replace("{applicantId}", String.valueOf(AtsHealthCheck.applicantId));
-        String newUrl = GlobalVariable.BASE_URL + endpoint;
-        GemTestReporter.addTestStep("Url of the test case for PATCH request", newUrl, STATUS.INFO);
-        if (method.equalsIgnoreCase("get"))
-            return given().contentType(ContentType.JSON).header("X-REMOTE-USER-EMAIL", "tripta.sahni@geminisolutions.com").header("Authorization", authValue).get(newUrl).statusCode();
-        else if (method.equalsIgnoreCase("post"))
-            return given().contentType(ContentType.JSON).header("X-REMOTE-USER-EMAIL", "tripta.sahni@geminisolutions.com").header("Authorization", authValue).post(newUrl).statusCode();
-        return given().contentType(ContentType.JSON).header("X-REMOTE-USER-EMAIL", "tripta.sahni@geminisolutions.com").header("Authorization", authValue).patch(newUrl).statusCode();
-    }
+//    public static int apiForWrongMethods(String url, String method, Map<String, String> token, String step) {
+//        url = ProjectConfigData.getProperty(url);
+//        String endpoint = url.replace("{applicantId}", String.valueOf(AtsHealthCheck.applicantId));
+//        String newUrl = GlobalVariable.BASE_URL + endpoint;
+//        GemTestReporter.addTestStep("Url of the test case for PATCH request", newUrl, STATUS.INFO);
+//        if (method.equalsIgnoreCase("get"))
+//            return given().contentType(ContentType.JSON).header("X-REMOTE-USER-EMAIL", "tripta.sahni@geminisolutions.com").header("Authorization", authValue).get(newUrl).statusCode();
+//        else if (method.equalsIgnoreCase("post"))
+//            return given().contentType(ContentType.JSON).header("X-REMOTE-USER-EMAIL", "tripta.sahni@geminisolutions.com").header("Authorization", authValue).post(newUrl).statusCode();
+//        return given().contentType(ContentType.JSON).header("X-REMOTE-USER-EMAIL", "tripta.sahni@geminisolutions.com").header("Authorization", authValue).patch(newUrl).statusCode();
+//    }
 
     public static String getVetterNamesForWrongPayload(String UrlNameFromConfig, String method, String payloadName, Map<String, String> headers, String step) {
         Response response = new Response();
