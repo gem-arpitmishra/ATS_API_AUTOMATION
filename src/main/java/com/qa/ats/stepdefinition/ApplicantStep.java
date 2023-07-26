@@ -29,32 +29,32 @@ public class ApplicantStep {
             GemTestReporter.addTestStep("Hit API", "User not able to hit the API", STATUS.FAIL);
         }
     }
-    @Given(("^Set the Applicant endpoint (\\w*) and method (\\w*) for Patch$"))
-    public void setApiForPatch(String url , String method)
-    {
-        HashMap<String, String> token = new HashMap<String, String>();
-        token.put("X-REMOTE-USER-EMAIL", "tripta.sahni@geminisolutions.com");
-        try {
-            status = Utils.apiForPatch(url, method, token, "");
-
-        } catch (Exception exception) {
-            logger.info("Error - User not able to hit the API", exception);
-            GemTestReporter.addTestStep("Hit API", "User not able to hit the API", STATUS.FAIL);
-        }
-    }
-    @Given(("^Set the Applicant endpoint (\\w*) and method (\\w*) for wrong methods$"))
-    public void setApiForWrongMethods(String url , String method)
-    {
-        HashMap<String, String> token = new HashMap<String, String>();
-        token.put("X-REMOTE-USER-EMAIL", "tripta.sahni@geminisolutions.com");
-        try {
-            status = Utils.apiForWrongMethods(url, method, token, "");
-
-        } catch (Exception exception) {
-            logger.info("Error - User not able to hit the API", exception);
-            GemTestReporter.addTestStep("Hit API", "User not able to hit the API", STATUS.FAIL);
-        }
-    }
+//    @Given(("^Set the Applicant endpoint (\\w*) and method (\\w*) for Patch$"))
+//    public void setApiForPatch(String url , String method)
+//    {
+//        HashMap<String, String> token = new HashMap<String, String>();
+//        token.put("X-REMOTE-USER-EMAIL", "tripta.sahni@geminisolutions.com");
+//        try {
+//            status = Utils.apiForPatch(url, method, token, "");
+//
+//        } catch (Exception exception) {
+//            logger.info("Error - User not able to hit the API", exception);
+//            GemTestReporter.addTestStep("Hit API", "User not able to hit the API", STATUS.FAIL);
+//        }
+//    }
+//    @Given(("^Set the Applicant endpoint (\\w*) and method (\\w*) for wrong methods$"))
+//    public void setApiForWrongMethods(String url , String method)
+//    {
+//        HashMap<String, String> token = new HashMap<String, String>();
+//        token.put("X-REMOTE-USER-EMAIL", "tripta.sahni@geminisolutions.com");
+//        try {
+//            status = Utils.apiForWrongMethods(url, method, token, "");
+//
+//        } catch (Exception exception) {
+//            logger.info("Error - User not able to hit the API", exception);
+//            GemTestReporter.addTestStep("Hit API", "User not able to hit the API", STATUS.FAIL);
+//        }
+//    }
 
     @Then("^Verify Applicant status code (\\d+)$")
     public void verifyPolicyStatusCodeExpectedStatus(Integer Expected) {
