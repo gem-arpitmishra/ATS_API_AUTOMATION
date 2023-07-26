@@ -1,7 +1,7 @@
 {
    "environment": "beta",
    "project_name": "ATS_API",
-   "report_name": "ATS_Resume_Parser_Check",
+   "report_name": "ATS_Resume_Parser",
    "tags": "@resumeParser",
    "sub_id": "test_id",
    "enter_point": "https://apis.gemecosystem.com/enter-point",
@@ -90,7 +90,7 @@
       "sendApplicantsForVetting": "atsInterviewSvc/interview/sendApplicantsForVetting",
       "getJobAllDetails": "atsJobSvc/job/all-job-details/search/Developer",
       "getApplicantWithPaging": "atsApplicantSvc/applicant",
-      "getApplicantWithPagingWithDaysFilter": "atsApplicantSvc/applicant/days/3",
+      "getApplicantWithPagingWithDaysFilter": "atsApplicantSvc/applicant/2023-07-20 00:00/2023-07-25 00:00/3",
       "getApplicantWithPagingWithPageSize": "atsApplicantSvc/applicant/pageNumber/1/pageSize/1",
       "addMultipleApplicants": "atsApplicantSvc/applicant/bulkSave",
       "updateStageAndReasonOfRejection": "atsApplicantSvc/applicant/{applicantId}/addReasonOfRejectionAndStage?applicantStageId={stage}&ReasonOfRejection=notGood",
