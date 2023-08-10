@@ -28,7 +28,7 @@ public class InterviewStep {
 
                 status = Utils.apiToSendManagementApprovalEmails(url, method, token, "").getStatus();
             else
-                status = Utils.apiWithoutPayloads(url, method, token, "").getStatus();
+                status =Integer.parseInt(Utils.apiWithoutPayloads(url, method, token, ""));
             GemTestReporter.addTestStep("Hit the " + url, "API was triggered", STATUS.INFO);
         } catch (Exception e) {
             logger.info("API was not hit successfully", e);
@@ -45,7 +45,7 @@ public class InterviewStep {
             if (method.equals("post"))
                 status = Utils.apiToSendManagementApprovalEmails(url, method, token, "").getStatus();
             else
-                status = Utils.apiWithoutPayloads(url, method, token, "").getStatus();
+                status = Integer.parseInt(Utils.apiWithoutPayloads(url, method, token, ""));
             GemTestReporter.addTestStep("Hit the " + url, "API was triggered", STATUS.INFO);
         } catch (Exception e) {
             logger.info("API was not hit successfully", e);
@@ -64,7 +64,7 @@ public class InterviewStep {
             if (method.equals("post"))
                 status = Utils.apiToSendManagementApprovalEmails(url, method, token, "").getStatus();
             else
-                status = Utils.apiWithoutPayloads(url, method, token, "").getStatus();
+                status = Integer.parseInt(Utils.apiWithoutPayloads(url, method, token, ""));
             GemTestReporter.addTestStep("Hit the " + url, "API was triggered", STATUS.INFO);
         } catch (Exception e) {
             logger.info("API was not hit successfully", e);
@@ -89,7 +89,7 @@ public class InterviewStep {
             if (method.equals("post"))
                 status = Utils.apiToSendManagementApprovalEmails(url, method, token, "").getStatus();
             else
-                status = Utils.apiWithoutPayloads(url, method, token, "").getStatus();
+                status = Integer.parseInt(Utils.apiWithoutPayloads(url, method, token, ""));
             GemTestReporter.addTestStep("Hit the " + url, "API was triggered", STATUS.INFO);
         } catch (Exception e) {
             logger.info("API was not hit successfully", e);

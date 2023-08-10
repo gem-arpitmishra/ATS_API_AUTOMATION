@@ -1,5 +1,11 @@
 {
-  "interviewFeedback": "Bravo!!",
-  "selectionType":true,
-  "overallRating":"Top 10%"
+  "communication": 10,
+  "attitude": 5,
+  "aptitude": 7,
+  "aptitudeDetails": "xyz",
+  "techConcepts": 8,
+  "interviewFeedback": "Did exceptionally well",
+  "selection": "yes",
+  "overallRating": "Top 10%",
+  "selectionDetails": "HOW"
 }

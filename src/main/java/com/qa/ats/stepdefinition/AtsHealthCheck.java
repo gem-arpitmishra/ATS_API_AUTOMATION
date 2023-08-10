@@ -128,7 +128,6 @@ public class AtsHealthCheck {
             logger.info("API was not hit successfully", e);
             GemTestReporter.addTestStep("Hit the " + url, "API was not successfully triggered", STATUS.FAIL);
         }
-
     }
 
     @Given("^Setting the Applicant endpoint (.+) method (.+) payload (.+) for vetting$")

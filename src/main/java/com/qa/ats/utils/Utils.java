@@ -1,6 +1,5 @@
 package com.qa.ats.utils;
 
-
 import com.gemini.generic.api.utils.*;
 import com.gemini.generic.reporting.GemTestReporter;
 import com.gemini.generic.reporting.STATUS;
@@ -46,8 +45,10 @@ import org.apache.http.entity.mime.HttpMultipartMode;
 import org.apache.http.entity.mime.MultipartEntityBuilder;
 import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClientBuilder;
+
 import java.io.File;
 import java.io.IOException;
+
 import static io.restassured.RestAssured.given;
 
 
@@ -121,7 +122,7 @@ public class Utils {
         return entityBuilder;
     }
 
-    public static Response apiWithoutPayloads(String UrlNameFromConfig, String method, Map<String, String> headers, String step) throws Exception {
+    public static String apiWithoutPayloads(String UrlNameFromConfig, String method, Map<String, String> headers, String step) throws Exception {
         Response response = new Response();
         try {
             Request request = new Request();
@@ -135,6 +136,8 @@ public class Utils {
                 url = url.replace("{applicantId}", String.valueOf(AtsHealthCheck.applicantId));
             else if (url.contains("{interviewId}"))
                 url = url.replace("{interviewId}", String.valueOf(InterviewStep.interviewId));
+            else if (url.contains("{uuid}"))
+                url = url.replace("{uuid}", String.valueOf(ApplicantStep.uuid));
             GemTestReporter.addTestStep("Url for " + method.toUpperCase() + " Request", url, STATUS.INFO);
             request.setURL(url);
             request.setMethod(method);
@@ -146,7 +149,8 @@ public class Utils {
                 request.setStep(step);
             }
             response = ApiInvocation.handleRequest(request);
-
+            if (UrlNameFromConfig.equals("fetchApplicantWithId"))
+                return response.getStatus() + "," + response.getJsonObject().get("responseBody").getAsJsonObject().get("object").getAsJsonObject().get("applicant").getAsJsonObject().get("uuid");
             GemTestReporter.addTestStep("Response Message", response.getResponseMessage(), STATUS.INFO);
             responseCheck(response);
         } catch (Exception exception) {
@@ -154,7 +158,7 @@ public class Utils {
 
             GemTestReporter.addTestStep(method.toUpperCase() + " Request Verification ", method.toUpperCase() + " Request Did not Executed Successfully", STATUS.FAIL);
         }
-        return response;
+        return String.valueOf(response.getStatus());
     }
 
     public static Response apiToSendManagementApprovalEmails(String UrlNameFromConfig, String method, Map<String, String> headers, String step) throws Exception {
@@ -178,6 +182,7 @@ public class Utils {
                 request.setStep(step);
             }
             response = ApiInvocation.handleRequest(request);
+
             GemTestReporter.addTestStep("Response Message", response.getResponseMessage(), STATUS.INFO);
             responseCheck(response);
         } catch (Exception exception) {
@@ -194,19 +199,15 @@ public class Utils {
             Request request = new Request();
             String url = ProjectConfigData.getProperty(UrlNameFromConfig);
             if (method.equals("put") && UrlNameFromConfig.equals("updateStageOfApplicant")) {
-                url=url.replace("{applicantId}",String.valueOf(AtsHealthCheck.applicantId));
+                url = url.replace("{applicantId}", String.valueOf(AtsHealthCheck.applicantId));
 
-                url = GlobalVariable.BASE_URL + url +"stage/" + stage;
-            }
-            else if(method.equals("put")&&UrlNameFromConfig.equals("updateStageAndReasonOfRejection"))
-            {
-                url=url.replace("{applicantId}",String.valueOf(AtsHealthCheck.applicantId));
-                url=url.replace("{stage}",stage);
-                url=GlobalVariable.BASE_URL + url;
-            }
-
-            else if (method.equals("post"))
-                url = GlobalVariable.BASE_URL + url + AtsHealthCheck.applicantId + "/align-job/10" + "?jobTitle=QA";
+                url = GlobalVariable.BASE_URL + url + "stage/" + stage;
+            } else if (method.equals("put") && UrlNameFromConfig.equals("updateStageAndReasonOfRejection")) {
+                url = url.replace("{applicantId}", String.valueOf(AtsHealthCheck.applicantId));
+                url = url.replace("{stage}", stage);
+                url = GlobalVariable.BASE_URL + url;
+            } else if (method.equals("post"))
+                url = GlobalVariable.BASE_URL + url + AtsHealthCheck.applicantId + "/align-job/"+AtsHealthCheck.jobId + "?jobTitle=DemoCreated";
             else if (method.equals("patch")) {
             } else
                 url = GlobalVariable.BASE_URL + url;
@@ -259,11 +260,11 @@ public class Utils {
                 JsonParser parser = new JsonParser();
                 JsonObject pay = (JsonObject) parser.parse(payload);
                 if (method.equals("post")) {
-                    pay.addProperty("jobId", 10);
+                    pay.addProperty("jobId", AtsHealthCheck.jobId);
                     pay.addProperty("applicantId", AtsHealthCheck.applicantId);
                 } else if (method.equals("put")) {
                     pay.addProperty("interviewId", InterviewStep.interviewId);
-                    pay.addProperty("jobId", 10);
+                    pay.addProperty("jobId", AtsHealthCheck.jobId);
                     pay.addProperty("applicantId", AtsHealthCheck.applicantId);
                 }
                 String payloads = String.valueOf(ApiHealthCheckUtils.result(pay));
@@ -364,7 +365,7 @@ public class Utils {
                 request.setStep(step);
             }
             if (!payloadName.equals("")) {
-                String payload = ProjectSampleJson.getSampleDataString(payloadName);
+                String payload = String.valueOf(ProjectSampleJson.getSampleData(payloadName));
                 JsonParser parser = new JsonParser();
                 JsonObject pay = (JsonObject) parser.parse(payload);
                 if (method.equals("post")) {
@@ -400,7 +401,7 @@ public class Utils {
         Random random = new Random();
         StringBuilder sb = new StringBuilder();
         sb.append(random.nextInt(9) + 1);
-        for (int i = 0; i < 11; i++) {
+        for (int i = 0; i < 9; i++) {
             sb.append(random.nextInt(10));
         }
         return Long.valueOf(sb.toString()).longValue();
@@ -422,7 +423,6 @@ public class Utils {
         MultipartEntityBuilder entityBuilder = MultipartEntityBuilder.create();
         entityBuilder.setMode(HttpMultipartMode.BROWSER_COMPATIBLE);
         entityBuilder.addBinaryBody(keys.get(0), new File("src/main/resources/" + values.get(0))).setContentType(org.apache.http.entity.ContentType.MULTIPART_FORM_DATA);
-
         return entityBuilder;
     }
 
@@ -435,6 +435,8 @@ public class Utils {
                 JsonParser parser = new JsonParser();
                 JsonObject newObject = new JsonObject();
                 newObject = (JsonObject) parser.parse(new FileReader("src/main/resources/" + values.get(i)));
+                if(newObject.has("uuid"))
+                    newObject.remove("uuid");
                 if (newObject.has("email"))
                     newObject.remove("email");
                 if (newObject.has("contactNumber"))
@@ -461,14 +463,17 @@ public class Utils {
                 writer.write(jsonOutput);
                 writer.close();
 
-            } else if (values.get(i).contains(".json") && method.equals("put") && (!url.contains("JobID"))) {
+            }
+            else if (values.get(i).contains(".json") && method.equals("put") && (!url.contains("JobID"))) {
                 JsonParser parser = new JsonParser();
                 JsonObject newObject = new JsonObject();
                 newObject = (JsonObject) parser.parse(new FileReader("src/main/resources/" + values.get(i)));
                 if (url.contains("Job"))
                     newObject.addProperty("jobId", AtsHealthCheck.jobId);
-                else
+                else {
                     newObject.addProperty("applicantId", AtsHealthCheck.applicantId);
+                    newObject.addProperty("uuid", ApplicantStep.uuid);
+                }
                 Gson gson = new Gson();
                 String jsonOutput = gson.toJson(newObject);
                 FileWriter writer = new FileWriter("src/main/resources/" + values.get(i));
@@ -476,9 +481,10 @@ public class Utils {
                 writer.close();
 
             }
+
             File file = new File("src/main/resources/" + values.get(i));
-            if(values.get(i).contains(".pdf"))
-                entityBuilder.addBinaryBody(keys.get(i),file, ContentType.create("application/pdf"), file.getName());
+            if (values.get(i).contains(".pdf"))
+                entityBuilder.addBinaryBody(keys.get(i), file, ContentType.create("application/pdf"), file.getName());
             else
                 entityBuilder.addBinaryBody(keys.get(i), new File("src/main/resources/" + values.get(i)));
         }
@@ -547,6 +553,8 @@ public class Utils {
                 u = GlobalVariable.BASE_URL + ProjectConfigData.getProperty(url);
             if (u.contains("{applicantId}"))
                 u = u.replace("{applicantId}", String.valueOf(AtsHealthCheck.applicantId));
+            if(u.contains("{uuid}"))
+                u=u.replace("{uuid}",String.valueOf(ApplicantStep.uuid));
             GemTestReporter.addTestStep("Url of the test case", u, STATUS.INFO);
             CloseableHttpClient httpClient = HttpClients.createDefault();
             if (url.contains("resume")) {
