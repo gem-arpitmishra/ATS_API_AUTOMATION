@@ -23,6 +23,13 @@ Feature: Rejection of an Applicant
       | endpoint               | method | expectedStatus | stage |
       | updateStageOfApplicant | put    | 200            | 9     |
 
+  Scenario Outline: ATS ,Job--> <name1>
+    Given Set the Job endpoint <endpoint> method <method> payload <payload_key> <payload_value> and form data
+    Then Verify scenario status code <expectedStatus>
+    Examples:
+      | endpoint            | method | expectedStatus | payload_key | payload_value              | name1                     |
+      | postNewJob          | post   | 201            | job,jdFile  | apiCheckJob1.json,new4.doc | Create a job              |
+
   Scenario Outline: ATS, Align the applicant to that job
 
     Given Set the Applicant endpoint <endpoint> and method <method> with header and stage <stage>

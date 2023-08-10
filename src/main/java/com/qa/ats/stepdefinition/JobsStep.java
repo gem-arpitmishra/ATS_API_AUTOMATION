@@ -21,7 +21,7 @@ public class JobsStep {
         HashMap<String, String> header = new HashMap<String, String>();
         header.put("X-REMOTE-USER-EMAIL", "tripta.sahni@geminisolutions.com");
         try {
-            status = Utils.apiWithoutPayloads(url, method, header, "").getStatus();
+            status = Integer.parseInt(Utils.apiWithoutPayloads(url, method, header, ""));
         } catch (Exception exception) {
             logger.info("Error - User not able to hit the API", exception);
             GemTestReporter.addTestStep("Hit API", "User not able to hit the API", STATUS.FAIL);
@@ -44,7 +44,7 @@ public class JobsStep {
     public void setTheEndpointEndpointAndMethodMethodForWrongHeader(String url,String method) {
         HashMap<String, String> header = new HashMap<String, String>();
         try {
-            status = Utils.apiWithoutPayloads(url, method,null, "").getStatus();
+            status = Integer.parseInt(Utils.apiWithoutPayloads(url, method,null, ""));
         } catch (Exception exception) {
             logger.info("Error - User not able to hit the API", exception);
             GemTestReporter.addTestStep("Hit API", "User not able to hit the API", STATUS.FAIL);
@@ -56,7 +56,7 @@ public class JobsStep {
         HashMap<String, String> header = new HashMap<String, String>();
         header.put("X-REMOTE-USER", "tripta.sahni@geminisolutions.com");
         try {
-            status = Utils.apiWithoutPayloads(url, method, header, "").getStatus();
+            status = Integer.parseInt(Utils.apiWithoutPayloads(url, method, header, ""));
         } catch (Exception exception) {
             logger.info("Error - User not able to hit the API", exception);
             GemTestReporter.addTestStep("Hit API", "User not able to hit the API", STATUS.FAIL);

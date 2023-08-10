@@ -20,7 +20,7 @@ public class DashboardStep {
         token.put("X-REMOTE-USER-EMAIL", "tripta.sahni@geminisolutions.com");
         token.put("X-REMOTE-USER-OBJECT-ID", "24431885-d574-445a-b66e-42271b7ad459");
         try {
-            status = Utils.apiWithoutPayloads(url, method, token, "").getStatus();
+            status = Integer.parseInt(Utils.apiWithoutPayloads(url, method, token, ""));
             GemTestReporter.addTestStep("Hit the " + url, "API was  triggered", STATUS.INFO);
         } catch (Exception e) {
             logger.info("API was not hit successfully", e);

@@ -7,13 +7,6 @@ Feature: ATS scenario
     Examples:
       | method | url         | expectedStatus |
       | post   | accessToken | 200            |
-    
-  Scenario Outline: ATS, HealthCheck of GetVetterHistory - <name>
-    Given Set the Applicant endpoint <endpoint> and method <method>
-    Then Verify Applicant status code <expectedStatus>
-    Examples:
-      | name             | endpoint         | method | expectedStatus |
-      | GetVetterHistory | getVetterHistory | get    | 200            |
 
   Scenario Outline: ATS, HealthCheck of GetVetterHistory - <name>
     Given Set the Applicant endpoint <endpoint> and method <method>
@@ -21,7 +14,6 @@ Feature: ATS scenario
     Examples:
       | name             | endpoint         | method | expectedStatus |
       | GetVetterHistory | getVetterHistory | get    | 200            |
-
 
   Scenario Outline: ATS ,Job--> <name1>
     Given Set the Job endpoint <endpoint> method <method> payload <payload_key> <payload_value> and form data
@@ -43,20 +35,22 @@ Feature: ATS scenario
     Given Set the Job endpoint <endpoint> and method <method>
     Then Verify Job status code <expectedStatus>
     Examples:
-      | name                            | endpoint                        | method | expectedStatus |
-      | FetchJobUsingSearchKeyword      | fetchJobUsingSearchKeyword      | get    | 200            |
-      | GetConstants                    | getConstants                    | get    | 200            |
-      | GetAllJobDetails                | getAllJobDetails                | get    | 200            |
-      | FetchJobUsingJobID              | fetchJobUsingJobID              | get    | 200            |
-      | FetchJobDetails                 | fetchJobDetails                 | get    | 200            |
+      | name                                                   | endpoint                                               | method | expectedStatus |
+      | FetchJobUsingSearchKeyword                             | fetchJobUsingSearchKeyword                             | get    | 200            |
+      | GetConstants                                           | getConstants                                           | get    | 200            |
+      | GetAllJobDetails                                       | getAllJobDetails                                       | get    | 200            |
+      | FetchJobUsingJobID                                     | fetchJobUsingJobID                                     | get    | 200            |
+      | GetAllJobDetailsOnTheBasisOfAppliedSearchFilterAndDate | getAllJobDetailsOnTheBasisOfAppliedSearchFilterAndDate | get    | 200            |
+      | GetAllJobDetailsOnTheBasisOfDate                       | getAllJobDetailsOnTheBasisOfDate                       | get    | 200            |
+      | GetAllJobDetailsOnTheBasisOfSearchAndDate              | getAllJobDetailsOnTheBasisOfSearchAndDate              | get    | 200            |
+      | FetchJobDetails                                        | fetchJobDetails                                        | get    | 200            |
 
   Scenario Outline: ATS, <name> an applicant
     Given Set the Applicant endpoint <endpoint> method <method> payload <payload_key> <payload_value> and form data
     Then Verify scenario status code <expectedStatus>
     Examples:
-      | endpoint               | method | expectedStatus | payload_key                | payload_value                    | name   |
-      | saveApplicantDetails   | post   | 201            | applicantData,resume,image | applicant.json,resume.pdf,test.pdf | Create |
-      | updateApplicantDetails | put    | 201            | applicantData,resume,image | applicant.json,resume.pdf,test.pdf | Update |
+      | endpoint             | method | expectedStatus | payload_key                | payload_value                      | name   |
+      | saveApplicantDetails | post   | 201            | applicantData,resume,image | applicant.json,resume.pdf,test.pdf | Create |
 
   Scenario Outline:ATS , Set the applicant stage to "New"
     Given Set the Applicant endpoint <endpoint> and method <method> with header and stage <stage>
@@ -64,6 +58,23 @@ Feature: ATS scenario
     Examples:
       | endpoint               | method | expectedStatus | stage |
       | updateStageOfApplicant | put    | 200            | 9     |
+
+
+  Scenario Outline: ATS, HealthCheck of Applicants API - <name>
+    Given Set the Applicant endpoint <endpoint> and method <method>
+    Then Verify Applicant status code <expectedStatus>
+    Examples:
+      | name                 | endpoint             | method | expectedStatus |
+      | FetchApplicantWithId | fetchApplicantWithId | get    | 200            |
+
+  Scenario Outline: ATS, <name> an applicant
+    Given Set the Applicant endpoint <endpoint> method <method> payload <payload_key> <payload_value> and form data
+    Then Verify scenario status code <expectedStatus>
+    Examples:
+      | endpoint                        | method | expectedStatus | payload_key                | payload_value                      | name              |
+      | updateApplicantOnTheBasisOfUuid | put    | 201            | applicantData,resume,image | applicant.json,resume.pdf,test.pdf | Update Using UUID |
+      | updateApplicantDetails          | put    | 201            | applicantData,resume,image | applicant.json,resume.pdf,test.pdf | Update            |
+
 
   Scenario Outline: ATS, Align the applicant to that job
 
@@ -84,17 +95,20 @@ Feature: ATS scenario
     Given Set the Applicant endpoint <endpoint> and method <method>
     Then Verify Applicant status code <expectedStatus>
     Examples:
-      | name                                | endpoint                            | method | expectedStatus |
-      | FetchApplicantUsingFilters          | fetchApplicantUsingFilters          | get    | 200            |
-      | FetchApplicantWithId                | fetchApplicantWithId                | get    | 200            |
-      | FetchCurrentStageOfApplicant        | fetchCurrentStageOfApplicant        | get    | 200            |
-      | FetchApplicantOnSearchUsingPagesize | fetchApplicantOnSearchUsingPagesize | get    | 200            |
-      | FetchApplicantOnSearch              | fetchApplicantOnSearch              | get    | 200            |
-      | FetchResumeUsingApplicantId         | fetchResumeUsingApplicantId         | get    | 200            |
-      | FetchApplicantPersonalDetails       | fetchApplicantPersonalDetails       | get    | 200            |
-      | FetchJobOfApplicant                 | fetchJobOfApplicant                 | get    | 200            |
-      | FetchApplicantConstants             | fetchApplicantConstants             | get    | 200            |
-      | FetchAllApplicantWithPaging         | fetchAllApplicantWithPaging         | get    | 200            |
+      | name                                     | endpoint                                 | method | expectedStatus |
+      | FetchApplicantUsingFilters               | fetchApplicantUsingFilters               | get    | 200            |
+      | FetchCurrentStageOfApplicant             | fetchCurrentStageOfApplicant             | get    | 200            |
+      | FetchAParticularApplicantDetail          | fetchAParticularApplicantDetail          | get    | 200            |
+      | FetchApplicantOnSearchUsingPagesize      | fetchApplicantOnSearchUsingPagesize      | get    | 200            |
+      | FetchApplicantOnSearch                   | fetchApplicantOnSearch                   | get    | 200            |
+      | FetchResumeUsingApplicantId              | fetchResumeUsingApplicantId              | get    | 200            |
+      | FetchApplicantPersonalDetails            | fetchApplicantPersonalDetails            | get    | 200            |
+      | FetchJobOfApplicant                      | fetchJobOfApplicant                      | get    | 200            |
+      | FetchApplicantConstants                  | fetchApplicantConstants                  | get    | 200            |
+      | FetchAllApplicantWithPaging              | fetchAllApplicantWithPaging              | get    | 200            |
+      | FetchApplicantUsingPageNumberSizeAndDate | fetchApplicantUsingPageNumberSizeAndDate | get    | 200            |
+      | FetchApplicantUsingDate                  | fetchApplicantUsingDate                  | get    | 200            |
+
 
   Scenario Outline: ATS, API to get applicants in Vetting State
     Given Setting the Interview endpoint <endpoint> and method <method> , for getting applicants in Vetting
