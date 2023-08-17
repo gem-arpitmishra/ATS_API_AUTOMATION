@@ -27,23 +27,8 @@ Feature: Interview
     Given Set the Interview endpoint <endpoint> and method <method>
     Then Verify Interview status code <expectedStatus>
     Examples:
-      | endpoint                               | method | expectedStatus |
-      | getListOfAllInterviewsOnTheBasisOfDays | get    | 200            |
-
-  Scenario Outline: ATS, API to get list of all interviews
-    Given Set the Interview endpoint <endpoint> and method <method>
-    Then Verify Interview status code <expectedStatus>
-    Examples:
       | endpoint               | method | expectedStatus |
       | getListOfAllInterviews | get    | 200            |
-
-
-  Scenario Outline: ATS, API to get list of all interviews
-    Given Set the Interview endpoint <endpoint> and method <method>
-    Then Verify Interview status code <expectedStatus>
-    Examples:
-      | endpoint                                        | method | expectedStatus |
-      | getListOfAllInterviewsOnTheBasisOfDateAndSearch | get    | 200            |
 
 
   Scenario Outline: ATS, API to get list of all interviews on the basis of the applied search filter
@@ -59,13 +44,6 @@ Feature: Interview
     Examples:
       | endpoint                                                         | method | expectedStatus |
       | getListOfAllInterviewsOnTheBasisOfAppliedSearchFilterWithoutDays | get    | 200            |
-
-  Scenario Outline: ATS, API to get list of all interviews on the basis of applied search filter and with days
-    Given Set the Interview endpoint <endpoint> and method <method>
-    Then Verify Interview status code <expectedStatus>
-    Examples:
-      | endpoint                                                | method | expectedStatus |
-      | getListOfAllInterviewsOnTheBasisOfAppliedFilterWithDays | get    | 200            |
 
   Scenario Outline: ATS, API to get feedback list
     Given Set the Interview endpoint <endpoint> and method <method>

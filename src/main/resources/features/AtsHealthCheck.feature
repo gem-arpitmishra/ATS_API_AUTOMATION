@@ -35,15 +35,13 @@ Feature: ATS scenario
     Given Set the Job endpoint <endpoint> and method <method>
     Then Verify Job status code <expectedStatus>
     Examples:
-      | name                                                   | endpoint                                               | method | expectedStatus |
-      | FetchJobUsingSearchKeyword                             | fetchJobUsingSearchKeyword                             | get    | 200            |
-      | GetConstants                                           | getConstants                                           | get    | 200            |
-      | GetAllJobDetails                                       | getAllJobDetails                                       | get    | 200            |
-      | FetchJobUsingJobID                                     | fetchJobUsingJobID                                     | get    | 200            |
-      | GetAllJobDetailsOnTheBasisOfAppliedSearchFilterAndDate | getAllJobDetailsOnTheBasisOfAppliedSearchFilterAndDate | get    | 200            |
-      | GetAllJobDetailsOnTheBasisOfDate                       | getAllJobDetailsOnTheBasisOfDate                       | get    | 200            |
-      | GetAllJobDetailsOnTheBasisOfSearchAndDate              | getAllJobDetailsOnTheBasisOfSearchAndDate              | get    | 200            |
-      | FetchJobDetails                                        | fetchJobDetails                                        | get    | 200            |
+      | name                       | endpoint                   | method | expectedStatus |
+      | FetchJobUsingSearchKeyword | fetchJobUsingSearchKeyword | get    | 200            |
+      | GetConstants               | getConstants               | get    | 200            |
+      | GetAllJobDetails           | getAllJobDetails           | get    | 200            |
+      | FetchJobUsingJobID         | fetchJobUsingJobID         | get    | 200            |
+      | FetchJobDetails            | fetchJobDetails            | get    | 200            |
+
 
   Scenario Outline: ATS, <name> an applicant
     Given Set the Applicant endpoint <endpoint> method <method> payload <payload_key> <payload_value> and form data
@@ -95,19 +93,18 @@ Feature: ATS scenario
     Given Set the Applicant endpoint <endpoint> and method <method>
     Then Verify Applicant status code <expectedStatus>
     Examples:
-      | name                                     | endpoint                                 | method | expectedStatus |
-      | FetchApplicantUsingFilters               | fetchApplicantUsingFilters               | get    | 200            |
-      | FetchCurrentStageOfApplicant             | fetchCurrentStageOfApplicant             | get    | 200            |
-      | FetchAParticularApplicantDetail          | fetchAParticularApplicantDetail          | get    | 200            |
-      | FetchApplicantOnSearchUsingPagesize      | fetchApplicantOnSearchUsingPagesize      | get    | 200            |
-      | FetchApplicantOnSearch                   | fetchApplicantOnSearch                   | get    | 200            |
-      | FetchResumeUsingApplicantId              | fetchResumeUsingApplicantId              | get    | 200            |
-      | FetchApplicantPersonalDetails            | fetchApplicantPersonalDetails            | get    | 200            |
-      | FetchJobOfApplicant                      | fetchJobOfApplicant                      | get    | 200            |
-      | FetchApplicantConstants                  | fetchApplicantConstants                  | get    | 200            |
-      | FetchAllApplicantWithPaging              | fetchAllApplicantWithPaging              | get    | 200            |
-      | FetchApplicantUsingPageNumberSizeAndDate | fetchApplicantUsingPageNumberSizeAndDate | get    | 200            |
-      | FetchApplicantUsingDate                  | fetchApplicantUsingDate                  | get    | 200            |
+      | name                                | endpoint                            | method | expectedStatus |
+      | FetchApplicantUsingFilters          | fetchApplicantUsingFilters          | get    | 200            |
+      | FetchCurrentStageOfApplicant        | fetchCurrentStageOfApplicant        | get    | 200            |
+      | FetchAParticularApplicantDetail     | fetchAParticularApplicantDetail     | get    | 200            |
+      | FetchApplicantOnSearchUsingPagesize | fetchApplicantOnSearchUsingPagesize | get    | 200            |
+      | FetchApplicantOnSearch              | fetchApplicantOnSearch              | get    | 200            |
+      | FetchResumeUsingApplicantId         | fetchResumeUsingApplicantId         | get    | 200            |
+      | FetchApplicantPersonalDetails       | fetchApplicantPersonalDetails       | get    | 200            |
+      | FetchJobOfApplicant                 | fetchJobOfApplicant                 | get    | 200            |
+      | FetchApplicantsInAllTheStages       | fetchApplicantsInAllTheStages       | get    | 200            |
+      | FetchApplicantConstants             | fetchApplicantConstants             | get    | 200            |
+      | FetchAllApplicantWithPaging         | fetchAllApplicantWithPaging         | get    | 200            |
 
 
   Scenario Outline: ATS, API to get applicants in Vetting State
@@ -334,14 +331,6 @@ Feature: ATS scenario
     Given Set the Applicant endpoint <endpoint> and method <method>
     Then Verify Applicant status code <expectedStatus>
     Examples:
-      | name                                 | endpoint                             | method | expectedStatus |
-      | GetApplicantWithPaging               | getApplicantWithPaging               | get    | 200            |
-      | GetApplicantWithPagingWithDaysFilter | getApplicantWithPagingWithDaysFilter | get    | 200            |
-
-  Scenario Outline: ATS, HealthCheck of Applicants Paging API - <name>
-    Given Set the Applicant endpoint <endpoint> and method <method>
-    Then Verify Applicant status code <expectedStatus>
-    Examples:
       | name                               | endpoint                           | method | expectedStatus |
       | GetApplicantWithPagingWithPageSize | getApplicantWithPagingWithPageSize | get    | 200            |
 
@@ -352,9 +341,17 @@ Feature: ATS scenario
       | endpoint                | method | expectedStatus |
       | dataMaskingForInterview | post   | 200            |
 
-  Scenario Outline: ATS,API to execute data masking for applicants service
-    Given Set the Applicant endpoint <endpoint> and method <method>
-    Then Verify Applicant status code <expectedStatus>
+  Scenario Outline: ATS,API to execute data masking for jobs service
+    Given Set the Interview endpoint <endpoint> and method <method>
+    Then Verify Interview status code <expectedStatus>
     Examples:
-      | endpoint                 | method | expectedStatus |
-      | dataMaskingForApplicants | post   | 200            |
+      | endpoint           | method | expectedStatus |
+      | dataMaskingForJobs | post   | 200            |
+
+
+#  Scenario Outline: ATS,API to execute data masking for applicants service
+#    Given Set the Applicant endpoint <endpoint> and method <method>
+#    Then Verify Applicant status code <expectedStatus>
+#    Examples:
+#      | endpoint                 | method | expectedStatus |
+#      | dataMaskingForApplicants | post   | 200            |
