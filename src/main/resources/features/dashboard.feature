@@ -1,4 +1,4 @@
-@hc
+
 Feature: Dashboard
 
   Scenario Outline: ATS, Run the API to generate access token
