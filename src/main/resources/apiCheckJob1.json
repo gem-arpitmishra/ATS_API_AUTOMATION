@@ -6,7 +6,7 @@
   "jobStatus": "Published",
   "minExp": 7,
   "maxExp": 50,
-  "jobPriority": "L",
+  "priority": "L",
   "clientName": "PIMCO",
   "primarySkills": "Java",
   "reqQuantity": 7,

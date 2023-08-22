@@ -93,18 +93,19 @@ Feature: ATS scenario
     Given Set the Applicant endpoint <endpoint> and method <method>
     Then Verify Applicant status code <expectedStatus>
     Examples:
-      | name                                | endpoint                            | method | expectedStatus |
-      | FetchApplicantUsingFilters          | fetchApplicantUsingFilters          | get    | 200            |
-      | FetchCurrentStageOfApplicant        | fetchCurrentStageOfApplicant        | get    | 200            |
-      | FetchAParticularApplicantDetail     | fetchAParticularApplicantDetail     | get    | 200            |
-      | FetchApplicantOnSearchUsingPagesize | fetchApplicantOnSearchUsingPagesize | get    | 200            |
-      | FetchApplicantOnSearch              | fetchApplicantOnSearch              | get    | 200            |
-      | FetchResumeUsingApplicantId         | fetchResumeUsingApplicantId         | get    | 200            |
-      | FetchApplicantPersonalDetails       | fetchApplicantPersonalDetails       | get    | 200            |
-      | FetchJobOfApplicant                 | fetchJobOfApplicant                 | get    | 200            |
-      | FetchApplicantsInAllTheStages       | fetchApplicantsInAllTheStages       | get    | 200            |
-      | FetchApplicantConstants             | fetchApplicantConstants             | get    | 200            |
-      | FetchAllApplicantWithPaging         | fetchAllApplicantWithPaging         | get    | 200            |
+      | name                                       | endpoint                                   | method | expectedStatus |
+      | FetchApplicantUsingFilters                 | fetchApplicantUsingFilters                 | get    | 200            |
+      | FetchCurrentStageOfApplicant               | fetchCurrentStageOfApplicant               | get    | 200            |
+      | FetchAParticularApplicantDetail            | fetchAParticularApplicantDetail            | get    | 200            |
+      | FetchApplicantOnSearchUsingPagesize        | fetchApplicantOnSearchUsingPagesize        | get    | 200            |
+      | FetchApplicantOnSearch                     | fetchApplicantOnSearch                     | get    | 200            |
+      | FetchResumeUsingApplicantId                | fetchResumeUsingApplicantId                | get    | 200            |
+      | FetchApplicantPersonalDetails              | fetchApplicantPersonalDetails              | get    | 200            |
+      | FetchHrWithTheirRespectiveApplicantCreated | fetchHrWithTheirRespectiveApplicantCreated | get    | 200            |
+      | FetchJobOfApplicant                        | fetchJobOfApplicant                        | get    | 200            |
+      | FetchApplicantsInAllTheStages              | fetchApplicantsInAllTheStages              | get    | 200            |
+      | FetchApplicantConstants                    | fetchApplicantConstants                    | get    | 200            |
+      | FetchAllApplicantWithPaging                | fetchAllApplicantWithPaging                | get    | 200            |
 
 
   Scenario Outline: ATS, API to get applicants in Vetting State
