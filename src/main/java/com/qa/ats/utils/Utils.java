@@ -481,7 +481,20 @@ public class Utils {
                 writer.close();
 
             }
+            else if (values.get(i).contains("applicantOnBoarding.json") && method.equals("post") && (!url.contains("JobID"))) {
+                JsonParser parser = new JsonParser();
+                JsonObject newObject = new JsonObject();
+                newObject = (JsonObject) parser.parse(new FileReader("src/main/resources/" + values.get(i)));
 
+                    newObject.addProperty("applicantId", AtsHealthCheck.applicantId);
+
+                Gson gson = new Gson();
+                String jsonOutput = gson.toJson(newObject);
+                FileWriter writer = new FileWriter("src/main/resources/" + values.get(i));
+                writer.write(jsonOutput);
+                writer.close();
+
+            }
             File file = new File("src/main/resources/" + values.get(i));
             if (values.get(i).contains(".pdf"))
                 entityBuilder.addBinaryBody(keys.get(i), file, ContentType.create("application/pdf"), file.getName());

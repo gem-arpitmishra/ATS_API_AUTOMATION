@@ -41,6 +41,7 @@ Feature: ATS scenario
       | GetAllJobDetails           | getAllJobDetails           | get    | 200            |
       | FetchJobUsingJobID         | fetchJobUsingJobID         | get    | 200            |
       | FetchJobDetails            | fetchJobDetails            | get    | 200            |
+      | UpdateHiredQuantity        | updateHiredQuantity        | post   | 200            |
 
 
   Scenario Outline: ATS, <name> an applicant
@@ -93,19 +94,21 @@ Feature: ATS scenario
     Given Set the Applicant endpoint <endpoint> and method <method>
     Then Verify Applicant status code <expectedStatus>
     Examples:
-      | name                                       | endpoint                                   | method | expectedStatus |
-      | FetchApplicantUsingFilters                 | fetchApplicantUsingFilters                 | get    | 200            |
-      | FetchCurrentStageOfApplicant               | fetchCurrentStageOfApplicant               | get    | 200            |
-      | FetchAParticularApplicantDetail            | fetchAParticularApplicantDetail            | get    | 200            |
-      | FetchApplicantOnSearchUsingPagesize        | fetchApplicantOnSearchUsingPagesize        | get    | 200            |
-      | FetchApplicantOnSearch                     | fetchApplicantOnSearch                     | get    | 200            |
-      | FetchResumeUsingApplicantId                | fetchResumeUsingApplicantId                | get    | 200            |
-      | FetchApplicantPersonalDetails              | fetchApplicantPersonalDetails              | get    | 200            |
-      | FetchHrWithTheirRespectiveApplicantCreated | fetchHrWithTheirRespectiveApplicantCreated | get    | 200            |
-      | FetchJobOfApplicant                        | fetchJobOfApplicant                        | get    | 200            |
-      | FetchApplicantsInAllTheStages              | fetchApplicantsInAllTheStages              | get    | 200            |
-      | FetchApplicantConstants                    | fetchApplicantConstants                    | get    | 200            |
-      | FetchAllApplicantWithPaging                | fetchAllApplicantWithPaging                | get    | 200            |
+      | name                                                    | endpoint                                                | method | expectedStatus |
+      | FetchApplicantUsingFilters                              | fetchApplicantUsingFilters                              | get    | 200            |
+      | FetchCurrentStageOfApplicant                            | fetchCurrentStageOfApplicant                            | get    | 200            |
+      | FetchAParticularApplicantDetail                         | fetchAParticularApplicantDetail                         | get    | 200            |
+      | FetchApplicantOnSearchUsingPagesize                     | fetchApplicantOnSearchUsingPagesize                     | get    | 200            |
+      | FetchApplicantOnSearch                                  | fetchApplicantOnSearch                                  | get    | 200            |
+      | FetchResumeUsingApplicantId                             | fetchResumeUsingApplicantId                             | get    | 200            |
+      | FetchApplicantPersonalDetails                           | fetchApplicantPersonalDetails                           | get    | 200            |
+      | FetchHrWithTheirRespectiveApplicantCreated              | fetchHrWithTheirRespectiveApplicantCreated              | get    | 200            |
+      | FetchJobOfApplicant                                     | fetchJobOfApplicant                                     | get    | 200            |
+      | FetchApplicantsInAllTheStages                           | fetchApplicantsInAllTheStages                           | get    | 200            |
+      | FetchApplicantConstants                                 | fetchApplicantConstants                                 | get    | 200            |
+      | FetchAllApplicantWithPaging                             | fetchAllApplicantWithPaging                             | get    | 200            |
+      | GetTheApplicantsOnBoarding                              | getTheApplicantsOnBoarding                              | get    | 200            |
+      | GetTheApplicantsOnBoardingOnTheBasisOfPageSizeAndNumber | getTheApplicantsOnBoardingOnTheBasisOfPageSizeAndNumber | get    | 200            |
 
 
   Scenario Outline: ATS, API to get applicants in Vetting State
@@ -279,6 +282,14 @@ Feature: ATS scenario
       | endpoint                          | method | expectedStatus |
       | sendManagementApprovalEmailWithCC | post   | 200            |
 
+  Scenario Outline: ATS, <name>
+    Given Set the Applicant endpoint <endpoint> method <method> payload <payload_key> <payload_value> and form data
+    Then Verify scenario status code <expectedStatus>
+    Examples:
+      | endpoint                   | method | expectedStatus | payload_key         | payload_value            | name                           |
+      | saveTheApplicantOnBoarding | post   | 200            | applicantOnBoarding | applicantOnBoarding.json | Save the applicant on boarding |
+
+
   Scenario Outline: ATS, API to get notification data
     Given Set the Interview endpoint <endpoint> and method <method>
     Then Verify Interview status code <expectedStatus>
@@ -300,6 +311,21 @@ Feature: ATS scenario
       | endpoint          | method | expectedStatus |
       | deleteAnInterview | delete | 200            |
 
+  Scenario Outline:ATS, API to delete an interview from all the repositories
+    Given Set the Interview endpoint <endpoint> and method <method>
+    Then Verify Interview status code <expectedStatus>
+    Examples:
+      | endpoint                           | method | expectedStatus |
+      | deleteInterviewFromAllRepositories | delete | 200            |
+
+  Scenario Outline:ATS, API to delete an interview by a particular created by
+    Given Set the Interview endpoint <endpoint> and method <method>
+    Then Verify Interview status code <expectedStatus>
+    Examples:
+      | endpoint                              | method | expectedStatus |
+      | deleteInterviewByAParticularCreatedBy | delete | 200            |
+
+
   Scenario Outline: ATS,API to delete the applicant
     Given Set the Applicant endpoint <endpoint> and method <method>
     Then Verify Applicant status code <expectedStatus>
@@ -307,12 +333,44 @@ Feature: ATS scenario
       | endpoint          | method | expectedStatus |
       | deleteAnApplicant | delete | 200            |
 
+  Scenario Outline: ATS,API to delete the applicant from all the repositories
+    Given Set the Applicant endpoint <endpoint> and method <method>
+    Then Verify Applicant status code <expectedStatus>
+    Examples:
+      | endpoint                              | method | expectedStatus |
+      | deleteApplicantFromAllTheRepositories | delete | 200            |
+
+
+  Scenario Outline: ATS,API to delete the applicant with a particular created By Email
+    Given Set the Applicant endpoint <endpoint> and method <method>
+    Then Verify Applicant status code <expectedStatus>
+    Examples:
+      | endpoint                                              | method | expectedStatus |
+      | deleteAllTheApplicantsWithTheParticularCreatedByEmail | delete | 200            |
+
+
   Scenario Outline: ATS,API to delete the job
     Given Set the Job endpoint <endpoint> and method <method>
     Then Verify Job status code <expectedStatus>
     Examples:
       | endpoint   | method | expectedStatus |
       | deleteAJob | delete | 200            |
+
+  Scenario Outline: ATS,API to delete the job from all repositories
+    Given Set the Job endpoint <endpoint> and method <method>
+    Then Verify Job status code <expectedStatus>
+    Examples:
+      | endpoint                     | method | expectedStatus |
+      | deleteJobFromAllRepositories | delete | 200            |
+
+
+  Scenario Outline: ATS,API to delete the job from a particular created By
+    Given Set the Job endpoint <endpoint> and method <method>
+    Then Verify Job status code <expectedStatus>
+    Examples:
+      | endpoint                          | method | expectedStatus |
+      | deleteJobWithAParticularCreatedBy | delete | 200            |
+
 
   Scenario Outline: API to add multiple Applicants
     Given Set the Applicant endpoint <endpoint> and method <method> and keys <payload_keys> , values <payload_values> to add multiple applicants
